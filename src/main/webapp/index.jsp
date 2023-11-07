@@ -9,10 +9,10 @@
             <div class="ms-slide slide-1" data-delay="9">
                 <div class="slide-pattern"></div>
 
-                <img src="js/masterslider/blank.gif" data-src="http://placehold.it/1920x660" alt=""/>
+                <img src="images/sliders/masterslider/master1.jpg" alt=""/>
 
                 <h3 class="ms-layer text34"
-                    style="top: 210px;"
+                    style="top: 400px;"
                     data-type="text"
                     data-delay="500"
                     data-ease="easeOutExpo"
@@ -39,15 +39,14 @@
 
             </div>
             <!-- end slide 1 -->
-
             <!-- slide 2 -->
             <div class="ms-slide slide-2" data-delay="9">
                 <div class="slide-pattern"></div>
 
-                <img src="js/masterslider/blank.gif" data-src="http://placehold.it/1920x660" alt=""/>
+                <img src="images/sliders/masterslider/master2.avif" alt=""/>
 
                 <h3 class="ms-layer text34"
-                    style="top: 210px;"
+                    style="top: 400px;"
                     data-type="text"
                     data-delay="500"
                     data-ease="easeOutExpo"
@@ -74,15 +73,14 @@
 
             </div>
             <!-- end slide 2 -->
-
             <!-- slide 3 -->
             <div class="ms-slide slide-3" data-delay="9">
                 <div class="slide-pattern"></div>
 
-                <img src="js/masterslider/blank.gif" data-src="http://placehold.it/1920x660" alt=""/>
+                <img src="images/sliders/masterslider/master3.avif" alt=""/>
 
                 <h3 class="ms-layer text34"
-                    style="top: 210px;"
+                    style="top: 400px;"
                     data-type="text"
                     data-delay="500"
                     data-ease="easeOutExpo"
@@ -109,6 +107,7 @@
 
             </div>
             <!-- end slide 3 -->
+
 
         </div>
         <!-- end of masterslider -->
@@ -211,88 +210,286 @@
         <!-- end section -->
         <div class="clearfix"></div>
 
-        <section class="sec-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="feature-box-65 bmargin">
-                            <div class="iconbox-xtiny left round"><i class="fa fa-users"></i></div>
-                            <div class="text-box-right">
-                                <h5 class="uppercase font-weight-4">Maecenas sed nisl</h5>
-                                <p> Consectetuer adipiscing elit sit amet Lorem ipsum dolor sit amet</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-4">
-                        <div class="feature-box-65 bmargin">
-                            <div class="iconbox-xtiny left round"><i class="fa fa-briefcase"></i></div>
-                            <div class="text-box-right">
-                                <h5 class="uppercase font-weight-4">Aliquam ut leo </h5>
-                                <p> Consectetuer adipiscing elit sit amet Lorem ipsum dolor sit amet</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-4">
-                        <div class="feature-box-65 bmargin">
-                            <div class="iconbox-xtiny left round"><i class="fa fa-car"></i></div>
-                            <div class="text-box-right">
-                                <h5 class="uppercase font-weight-4">Etiam porttitor turpis </h5>
-                                <p> Consectetuer adipiscing elit sit amet Lorem ipsum dolor sit amet</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end item-->
-
-                    <div class="clearfix"></div>
-                    <div class="col-divider-margin-4"></div>
-                    <div class="col-md-4">
-                        <div class="feature-box-65 bmargin">
-                            <div class="iconbox-xtiny left round"><i class="fa fa-book"></i></div>
-                            <div class="text-box-right">
-                                <h5 class="uppercase font-weight-4">Aliquam ut leo </h5>
-                                <p> Consectetuer adipiscing elit sit amet Lorem ipsum dolor sit amet</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-4">
-                        <div class="feature-box-65 bmargin">
-                            <div class="iconbox-xtiny left round"><i class="fa fa-gift"></i></div>
-                            <div class="text-box-right">
-                                <h5 class="uppercase font-weight-4">Etiam porttitor turpis </h5>
-                                <p> Consectetuer adipiscing elit sit amet Lorem ipsum dolor sit amet</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-4">
-                        <div class="feature-box-65 bmargin">
-                            <div class="iconbox-xtiny left round"><i class="fa fa-home"></i></div>
-                            <div class="text-box-right">
-                                <h5 class="uppercase font-weight-4">Maecenas sed nisl</h5>
-                                <p> Consectetuer adipiscing elit sit amet Lorem ipsum dolor sit amet</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end item-->
-
-                </div>
-            </div>
-        </section>
-        <!--end section-->
-        <div class="clearfix"></div>
 
         <section class=" sec-padding section-light">
             <div class="container">
                 <div class="row slide-nextprev-but-1">
                     <div class="col-xs-12 text-center">
-                        <h3 class="uppercase font-weight-5">RECENT PROPERTIES </h3>
+                        <h3 class="uppercase font-weight-5">SPECIAL OFFERS </h3>
+                        <div class="title-line-4 green align-center"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div id="owl-demo7" class="owl-carousel">
+                        <div class="item">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="feature-box-66">
+                                    <div class="image-holder"> <a href="#">
+                                        <div class="status">For Rent</div>
+                                        <div class="price">$ 11,000 <span>/ Month</span></div>
+                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
+                                    <div class="text-box-inner">
+                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
+                                        <span>New York City</span>
+                                        <div class="clearfix"></div>
+                                        <br/>
+                                        <div class="property-info">
+                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
+                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end column-->
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="feature-box-66">
+                                    <div class="image-holder"> <a href="#">
+                                        <div class="status">For Rent</div>
+                                        <div class="price">$ 11,000 <span>/ Month</span></div>
+                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
+                                    <div class="text-box-inner">
+                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
+                                        <span>New York City</span>
+                                        <div class="clearfix"></div>
+                                        <br/>
+                                        <div class="property-info">
+                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
+                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end column-->
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="feature-box-66">
+                                    <div class="image-holder"> <a href="#">
+                                        <div class="status">For Rent</div>
+                                        <div class="price">$ 11,000 <span>/ Month</span></div>
+                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
+                                    <div class="text-box-inner">
+                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
+                                        <span>New York City</span>
+                                        <div class="clearfix"></div>
+                                        <br/>
+                                        <div class="property-info">
+                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
+                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end column-->
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="feature-box-66">
+                                    <div class="image-holder"> <a href="#">
+                                        <div class="status">For Rent</div>
+                                        <div class="price">$ 11,000 <span>/ Month</span></div>
+                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
+                                    <div class="text-box-inner">
+                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
+                                        <span>New York City</span>
+                                        <div class="clearfix"></div>
+                                        <br/>
+                                        <div class="property-info">
+                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
+                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end column-->
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="feature-box-66">
+                                    <div class="image-holder"> <a href="#">
+                                        <div class="status">For Rent</div>
+                                        <div class="price">$ 11,000 <span>/ Month</span></div>
+                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
+                                    <div class="text-box-inner">
+                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
+                                        <span>New York City</span>
+                                        <div class="clearfix"></div>
+                                        <br/>
+                                        <div class="property-info">
+                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
+                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end column-->
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="feature-box-66">
+                                    <div class="image-holder"> <a href="#">
+                                        <div class="status">For Rent</div>
+                                        <div class="price">$ 11,000 <span>/ Month</span></div>
+                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
+                                    <div class="text-box-inner">
+                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
+                                        <span>New York City</span>
+                                        <div class="clearfix"></div>
+                                        <br/>
+                                        <div class="property-info">
+                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
+                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end column-->
+                        </div>
+                        <!--end item-->
+
+                    </div>
+                    <!--end carousel-->
+
+                </div>
+                <div class="row slide-nextprev-but-1">
+                    <div class="col-xs-12 text-center">
+                        <h3 class="uppercase font-weight-5">TRENDING NEWS </h3>
+                        <div class="title-line-4 green align-center"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div id="owl-demo6" class="owl-carousel">
+                        <div class="item">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="feature-box-66">
+                                    <div class="image-holder"> <a href="#">
+                                        <div class="status">For Rent</div>
+                                        <div class="price">$ 11,000 <span>/ Month</span></div>
+                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
+                                    <div class="text-box-inner">
+                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
+                                        <span>New York City</span>
+                                        <div class="clearfix"></div>
+                                        <br/>
+                                        <div class="property-info">
+                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
+                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end column-->
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="feature-box-66">
+                                    <div class="image-holder"> <a href="#">
+                                        <div class="status">For Rent</div>
+                                        <div class="price">$ 11,000 <span>/ Month</span></div>
+                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
+                                    <div class="text-box-inner">
+                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
+                                        <span>New York City</span>
+                                        <div class="clearfix"></div>
+                                        <br/>
+                                        <div class="property-info">
+                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
+                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end column-->
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="feature-box-66">
+                                    <div class="image-holder"> <a href="#">
+                                        <div class="status">For Rent</div>
+                                        <div class="price">$ 11,000 <span>/ Month</span></div>
+                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
+                                    <div class="text-box-inner">
+                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
+                                        <span>New York City</span>
+                                        <div class="clearfix"></div>
+                                        <br/>
+                                        <div class="property-info">
+                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
+                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end column-->
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="feature-box-66">
+                                    <div class="image-holder"> <a href="#">
+                                        <div class="status">For Rent</div>
+                                        <div class="price">$ 11,000 <span>/ Month</span></div>
+                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
+                                    <div class="text-box-inner">
+                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
+                                        <span>New York City</span>
+                                        <div class="clearfix"></div>
+                                        <br/>
+                                        <div class="property-info">
+                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
+                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end column-->
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="feature-box-66">
+                                    <div class="image-holder"> <a href="#">
+                                        <div class="status">For Rent</div>
+                                        <div class="price">$ 11,000 <span>/ Month</span></div>
+                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
+                                    <div class="text-box-inner">
+                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
+                                        <span>New York City</span>
+                                        <div class="clearfix"></div>
+                                        <br/>
+                                        <div class="property-info">
+                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
+                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end column-->
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="feature-box-66">
+                                    <div class="image-holder"> <a href="#">
+                                        <div class="status">For Rent</div>
+                                        <div class="price">$ 11,000 <span>/ Month</span></div>
+                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
+                                    <div class="text-box-inner">
+                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
+                                        <span>New York City</span>
+                                        <div class="clearfix"></div>
+                                        <br/>
+                                        <div class="property-info">
+                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
+                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end column-->
+                        </div>
+                        <!--end item-->
+
+                    </div>
+                    <!--end carousel-->
+
+                </div>
+                <div class="row slide-nextprev-but-1">
+                    <div class="col-xs-12 text-center">
+                        <h3 class="uppercase font-weight-5">FEATURED EVENTS </h3>
                         <div class="title-line-4 green align-center"></div>
                     </div>
                     <div class="clearfix"></div>
@@ -427,26 +624,12 @@
                     <!--end carousel-->
 
                 </div>
+
             </div>
         </section>
         <!-- end section -->
         <div class="clearfix"></div>
 
-        <section class="section-green-2 section-less-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-9">
-                        <h3 class="less-mar3 uppercase text-white">Our Best RealEstate Deals</h3>
-                        <p class="text-white">Lorem ipsum dolor sit amet consectetuer adipiscing elit Suspendisse et justo Praesent mattis commodo augue Aliquam ornare.</p>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="margin-top2"></div>
-                        <a class="btn btn-border white-2 btn-large pull-right" href="#">Read more</a> </div>
-                </div>
-            </div>
-        </section>
-        <!--end section-->
-        <div class="clearfix"></div>
 
         <section class="sec-padding">
             <div class="container">
@@ -543,124 +726,6 @@
         <!--end section-->
         <div class="clearfix"></div>
 
-        <section class="parallax-section47">
-            <div class="section-overlay bg-opacity-7">
-                <div class="container sec-tpadding-3 sec-bpadding-3">
-                    <div class="row">
-                        <div class="col-md-8 col-centered text-center">
-                            <h2 class="text-white uppercase font-weight-4 less-mar1">parallax background</h2>
-                            <h6 class="text-green-3 uppercase">Suspendisse imperdiet cursus nisi</h6>
-                            <br/>
-                            <p class="text-light">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <span class="text-green-3">Suspendisse et justo.</span> Praesent mattis commodo augue. Aliquam ornare hendrerit augue. Cras tellus. In pulvinar lectus a est. Curabitur eget orci. Cras laoreet ligula. Etiam sit amet dolor. hendrerit augue. Cras tellus. In pulvinar lectus a est. </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--end section-->
-        <div class="clearfix"></div>
-
-        <section class="sec-padding section-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 text-center">
-                        <h3 class="uppercase font-weight-5">Meet Our Agents</h3>
-                        <div class="title-line-4 green align-center"></div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="team-holder13 bmargin">
-                            <div class="img-holder">
-                                <div class="icon-box text-center">
-                                    <ul class="social-icons-1">
-                                        <li><a href="https://twitter.com/codelayers"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="https://www.facebook.com/codelayers"><i class="fa fa-facebook"></i></a></li>
-
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img src="http://placehold.it/450x550" alt="" class="img-responsive"/> </div>
-                            <div class="content-box less-pading text-center">
-                                <h5 class="nomargin title">Michael</h5>
-                                <h6 class="text-green-3 nopadding">Senior Agent</h6>
-                                <br/>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-3 col-sm-6">
-                        <div class="team-holder13 bmargin active">
-                            <div class="img-holder">
-                                <div class="icon-box text-center">
-                                    <ul class="social-icons-1">
-                                        <li><a href="https://twitter.com/codelayers"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="https://www.facebook.com/codelayers"><i class="fa fa-facebook"></i></a></li>
-
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img src="http://placehold.it/450x550" alt="" class="img-responsive"/> </div>
-                            <div class="content-box less-pading text-center">
-                                <h5 class="nomargin title">Elizabeth</h5>
-                                <h6 class="text-green-3 nopadding">Agent</h6>
-                                <br/>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-3 col-sm-6">
-                        <div class="team-holder13 bmargin">
-                            <div class="img-holder">
-                                <div class="icon-box text-center">
-                                    <ul class="social-icons-1">
-                                        <li><a href="https://twitter.com/codelayers"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="https://www.facebook.com/codelayers"><i class="fa fa-facebook"></i></a></li>
-
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img src="http://placehold.it/450x550" alt="" class="img-responsive"/> </div>
-                            <div class="content-box less-pading text-center">
-                                <h5 class="nomargin title">Benjamin</h5>
-                                <h6 class="text-green-3 nopadding">Senior Agent</h6>
-                                <br/>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-3 col-sm-6">
-                        <div class="team-holder13 bmargin">
-                            <div class="img-holder">
-                                <div class="icon-box text-center">
-                                    <ul class="social-icons-1">
-                                        <li><a href="https://twitter.com/codelayers"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="https://www.facebook.com/codelayers"><i class="fa fa-facebook"></i></a></li>
-
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img src="http://placehold.it/450x550" alt="" class="img-responsive"/> </div>
-                            <div class="content-box less-pading text-center">
-                                <h5 class="nomargin title">Christopher</h5>
-                                <h6 class="text-green-3 nopadding">Agent</h6>
-                                <br/>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end item-->
-
-                </div>
-            </div>
-        </section>
-        <!-- end section -->
-        <div class="clearfix"></div>
 
         <section class="sec-padding">
             <div class="container">
@@ -757,21 +822,4 @@
         <!--end section-->
         <div class="clearfix"></div>
 
-        <section class="section-green-3 section-less-padding clearfix">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul class="clientlogo-list">
-                            <li><img src="http://placehold.it/170x80" alt=""/></li>
-                            <li><img src="http://placehold.it/170x80" alt=""/></li>
-                            <li><img src="http://placehold.it/170x80" alt=""/></li>
-                            <li><img src="http://placehold.it/170x80" alt=""/></li>
-                            <li><img src="http://placehold.it/170x80" alt=""/></li>
-                            <li><img src="http://placehold.it/170x80" alt=""/></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--end section -->
 <jsp:include page="master/foot.jsp"/>

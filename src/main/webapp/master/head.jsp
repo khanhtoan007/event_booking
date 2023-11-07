@@ -11,7 +11,7 @@
 
 
 <head>
-    <title>Hasta - Responsive MultiPurpose HTML5 Template</title>
+    <title>Event Booking Platform</title>
     <meta charset="utf-8">
     <!-- Meta -->
     <meta name="keywords" content="" />
@@ -42,11 +42,13 @@
     <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" media="screen" href="css/responsive-leyouts.css" type="text/css" />
     <link rel="stylesheet" href="js/masterslider/style/masterslider.css" />
+
     <link rel="stylesheet" type="text/css" href="css/Simple-Line-Icons-Webfont/simple-line-icons.css" media="screen" />
     <link rel="stylesheet" href="css/et-line-font/et-line-font.css">
     <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link rel="stylesheet" href="js/jFlickrFeed/style.css" />
     <link rel="stylesheet" type="text/css" href="js/tabs/assets/css/responsive-tabs.css">
+
 
     <!-- Remove the below comments to use your color option -->
     <!--<link rel="stylesheet" href="css/colors/lightblue.css" />-->
@@ -57,7 +59,7 @@
     <!--<link rel="stylesheet" href="css/colors/purple.css" />-->
     <!--<link rel="stylesheet" href="css/colors/bridge.css" />-->
     <!--<link rel="stylesheet" href="css/colors/yellow.css" />-->
-    <link rel="stylesheet" href="css/colors/violet.css" />
+<%--    <link rel="stylesheet" href="css/colors/violet.css" />--%>
     <!--<link rel="stylesheet" href="css/colors/cyan.css" />-->
     <!--<link rel="stylesheet" href="css/colors/mossgreen.css" />-->
 
@@ -67,7 +69,7 @@
     <!--<link rel="stylesheet" href="css/bg-patterns/pattern-2.css" />-->
     <!--<link rel="stylesheet" href="css/bg-patterns/pattern-3.css" />-->
     <!--<link rel="stylesheet" href="css/bg-patterns/pattern-4.css" />-->
-    <link rel="stylesheet" href="css/bg-patterns/pattern-5.css" />
+<%--    <link rel="stylesheet" href="css/bg-patterns/pattern-5.css" />--%>
     <!--<link rel="stylesheet" href="css/bg-patterns/pattern-6.css" />-->
     <!--<link rel="stylesheet" href="css/bg-patterns/pattern-7.css" />-->
     <!--<link rel="stylesheet" href="css/bg-patterns/pattern-8.css" />-->
@@ -75,8 +77,6 @@
     <!--<link rel="stylesheet" href="css/bg-patterns/pattern-10.css" />-->
     <!--<link rel="stylesheet" href="css/bg-patterns/pattern-11.css" />-->
     <!--<link rel="stylesheet" href="css/bg-patterns/pattern-12.css" />-->
-
-
 
 </head>
 
@@ -105,7 +105,7 @@
                 <div class="navbar green navbar-default yamm">
                     <div class="navbar-header">
                         <button type="button" data-toggle="collapse" data-target="#navbar-collapse-grid" class="navbar-toggle two three"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                        <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt=""/></a> </div>
+                        <a href="${pageContext.request.contextPath}/index.jsp" class="navbar-brand fa-bold">Event Booking</a> </div>
                     <div id="navbar-collapse-grid" class="navbar-collapse collapse pull-right">
                         <ul class="nav green navbar-nav">
                             <li><a href="${pageContext.request.contextPath}/index.jsp" class="dropdown-toggle active">Home</a></li>
