@@ -236,7 +236,7 @@
                                             <div class="clearfix"></div>
                                             <br/>
                                             <div class="property-info">
-                                                <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.post_date}</span></div>
+                                                <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.start_date}</span></div>
                                             </div>
                                         </div>
                                     </div>

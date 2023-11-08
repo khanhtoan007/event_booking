@@ -33,7 +33,8 @@ public class EventDAO {
                         rs.getString(6),
                         rs.getString(7),
                         rs.getString(8),
-                        rs.getString(9)
+                        rs.getString(9),
+                        rs.getString(10)
                 ));
             }
         } catch (Exception e) {
@@ -58,7 +59,9 @@ public class EventDAO {
                         rs.getString(6),
                         rs.getString(7),
                         rs.getString(8),
-                        rs.getString(9)
+                        rs.getString(9),
+                        rs.getString(10)
+
                 ));
             }
         } catch (Exception e) {
@@ -82,7 +85,9 @@ public class EventDAO {
                         rs.getString(6),
                         rs.getString(7),
                         rs.getString(8),
-                        rs.getString(9)
+                        rs.getString(9),
+                        rs.getString(10)
+
                 );
             }
         } catch (Exception e) {

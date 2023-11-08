@@ -6,18 +6,20 @@ public class EventPost {
     private String content;
     private String image;
     private String category;
-    private String post_date;
+    private String start_date;
+    private String end_date;
     private String state;
     private String author;
     private String location;
 
-    public EventPost(String id, String title, String content, String image, String category, String post_date, String state, String author, String location) {
+    public EventPost(String id, String title, String content, String image, String category, String start_date, String end_date, String state, String author, String location) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.image = image;
         this.category = category;
-        this.post_date = post_date;
+        this.start_date = start_date;
+        this.end_date = end_date;
         this.state = state;
         this.author = author;
         this.location = location;
@@ -54,6 +56,22 @@ public class EventPost {
         return image;
     }
 
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public String getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
+    }
+
     public void setImage(String image) {
         this.image = image;
     }
@@ -67,11 +85,11 @@ public class EventPost {
     }
 
     public String getPost_date() {
-        return post_date;
+        return start_date;
     }
 
-    public void setPost_date(String post_date) {
-        this.post_date = post_date;
+    public void setPost_date(String start_date) {
+        this.start_date = start_date;
     }
 
     public String getState() {
@@ -106,7 +124,8 @@ public class EventPost {
                 ", content='" + content + '\'' +
                 ", image='" + image + '\'' +
                 ", category='" + category + '\'' +
-                ", post_date='" + post_date + '\'' +
+                ", start_date='" + start_date + '\'' +
+                ", end_date='" + end_date + '\'' +
                 ", state='" + state + '\'' +
                 ", author='" + author + '\'' +
                 ", location='" + location + '\'' +
