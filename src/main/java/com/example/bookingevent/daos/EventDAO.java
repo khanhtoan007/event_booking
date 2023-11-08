@@ -153,6 +153,7 @@ public class EventDAO {
     public static void main(String[] args) {
         EventDAO dao = new EventDAO();
         List<EventPost> list = dao.getEventPostByCategory("Activity");
+        list = dao.getEventPostList();
         System.out.println(list.toString());
     }
 }

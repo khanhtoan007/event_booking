@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="master/head.jsp"/>
+
         <div class="clearfix"></div>
 
         <!-- masterslider -->
@@ -221,127 +223,51 @@
                     <div class="clearfix"></div>
                     <div id="owl-demo7" class="owl-carousel">
                         <div class="item">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                            <c:forEach items="${list}" var="list">
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="feature-box-66">
+                                        <div class="image-holder"> <a href="#">
+                                            <div class="status">${list.state == "1" ? "Available" : "Expired"}</div>
+                                            <div class="price">${list.author}</div>
+                                            <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
+                                        <div class="text-box-inner">
+                                            <h5 class="less-mar1"><a href="#">${list.title}</a></h5>
+                                            <span>${list.location}</span>
+                                            <div class="clearfix"></div>
+                                            <br/>
+                                            <div class="property-info">
+                                                <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.post_date}</span></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--end column-->
+                            </c:forEach>
 
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
 
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
+
                         </div>
                         <!--end item-->
 
                         <div class="item">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                            <c:forEach items="${list}" var="list">
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="feature-box-66">
+                                        <div class="image-holder"> <a href="#">
+                                            <div class="status">${list.state == "1" ? "Available" : "Expired"}</div>
+                                            <div class="price">${list.author}</div>
+                                            <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
+                                        <div class="text-box-inner">
+                                            <h5 class="less-mar1"><a href="#">${list.title}</a></h5>
+                                            <span>${list.location}</span>
+                                            <div class="clearfix"></div>
+                                            <br/>
+                                            <div class="property-info">
+                                                <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.post_date}</span></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--end column-->
-
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
-
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </c:forEach>
                             <!--end column-->
                         </div>
                         <!--end item-->
@@ -358,128 +284,51 @@
                     <div class="clearfix"></div>
                     <div id="owl-demo6" class="owl-carousel">
                         <div class="item">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                            <c:forEach items="${list}" var="list">
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="feature-box-66">
+                                        <div class="image-holder"> <a href="#">
+                                            <div class="status">${list.state == "1" ? "Available" : "Expired"}</div>
+                                            <div class="price">${list.author}</div>
+                                            <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
+                                        <div class="text-box-inner">
+                                            <h5 class="less-mar1"><a href="#">${list.title}</a></h5>
+                                            <span>${list.location}</span>
+                                            <div class="clearfix"></div>
+                                            <br/>
+                                            <div class="property-info">
+                                                <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.post_date}</span></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--end column-->
-
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
-
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </c:forEach>
                             <!--end column-->
                         </div>
                         <!--end item-->
 
                         <div class="item">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
+                            <c:forEach items="${list}" var="list">
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="feature-box-66">
+                                        <div class="image-holder"> <a href="#">
+                                            <div class="status">${list.state == "1" ? "Available" : "Expired"}</div>
+                                            <div class="price">${list.author}</div>
+                                            <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
+                                        <div class="text-box-inner">
+                                            <h5 class="less-mar1"><a href="#">${list.title}</a></h5>
+                                            <span>${list.location}</span>
+                                            <div class="clearfix"></div>
+                                            <br/>
+                                            <div class="property-info">
+                                                <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.post_date}</span></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </c:forEach>
                             <!--end column-->
 
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
-
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
                         </div>
                         <!--end item-->
 
@@ -487,144 +336,6 @@
                     <!--end carousel-->
 
                 </div>
-                <div class="row slide-nextprev-but-1">
-                    <div class="col-xs-12 text-center">
-                        <h3 class="uppercase font-weight-5">FEATURED EVENTS </h3>
-                        <div class="title-line-4 green align-center"></div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div id="owl-demo4" class="owl-carousel">
-                        <div class="item">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
-
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
-
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
-                        </div>
-                        <!--end item-->
-
-                        <div class="item">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
-
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
-
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                        <div class="status">For Rent</div>
-                                        <div class="price">$ 11,000 <span>/ Month</span></div>
-                                        <img src="http://placehold.it/390x230" alt="" class="img-responsive"/></a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br/>
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span> <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
-                        </div>
-                        <!--end item-->
-
-                    </div>
-                    <!--end carousel-->
-
-                </div>
-
             </div>
         </section>
         <!-- end section -->
