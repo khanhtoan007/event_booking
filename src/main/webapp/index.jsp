@@ -9,7 +9,7 @@
             <div class="ms-slide slide-1" data-delay="9">
                 <div class="slide-pattern"></div>
 
-                <img src="images/sliders/masterslider/master1.jpg" alt=""/>
+                <img src="images/sliders/masterslider/slide1.jpg" alt=""/>
 
                 <h3 class="ms-layer text34"
                     style="top: 400px;"
@@ -17,7 +17,7 @@
                     data-delay="500"
                     data-ease="easeOutExpo"
                     data-duration="1230"
-                    data-effect="scale(1.5,1.6)"> find the property of your dreams</h3>
+                    data-effect="scale(1.5,1.6)"> SONY M.A.G MUSIC AND GAME SHOW</h3>
 
                 <h3 class="ms-layer text6"
                     style="top: 260px;"
@@ -25,9 +25,9 @@
                     data-effect="top(45)"
                     data-duration="2000"
                     data-delay="1500"
-                    data-ease="easeOutExpo"> Lorem ipsum dolor sit amet consectetuer adipiscing elit<br/>
-                    Suspendisse et justo
-                    Praesent mattis commodo augue Aliquam ornare. </h3>
+                    data-ease="easeOutExpo"> Sony M.A.G Show (Sony Music And Game Show), là siêu sự<br/>
+                    kiện hoành tráng dành
+                    cho các tín đồ âm nhạc trẻ Sài Thành...</h3>
 
                 <a class="ms-layer sbut13"
                    style="left: 730px; top: 340px;"
@@ -43,7 +43,7 @@
             <div class="ms-slide slide-2" data-delay="9">
                 <div class="slide-pattern"></div>
 
-                <img src="images/sliders/masterslider/master2.avif" alt=""/>
+                <img src="images/sliders/masterslider/slide2.jpg" alt=""/>
 
                 <h3 class="ms-layer text34"
                     style="top: 400px;"
@@ -51,7 +51,7 @@
                     data-delay="500"
                     data-ease="easeOutExpo"
                     data-duration="1230"
-                    data-effect="scale(1.5,1.6)"> find the property of your dreams</h3>
+                    data-effect="scale(1.5,1.6)"> SONY M.A.G MUSIC AND GAME SHOW</h3>
 
                 <h3 class="ms-layer text6"
                     style="top: 260px;"
@@ -59,9 +59,9 @@
                     data-effect="top(45)"
                     data-duration="2000"
                     data-delay="1500"
-                    data-ease="easeOutExpo"> Lorem ipsum dolor sit amet consectetuer adipiscing elit<br/>
-                    Suspendisse et justo
-                    Praesent mattis commodo augue Aliquam ornare. </h3>
+                    data-ease="easeOutExpo"> Sony M.A.G Show (Sony Music And Game Show), là siêu sự<br/>
+                    kiện hoành tráng dành
+                    cho các tín đồ âm nhạc trẻ Sài Thành... </h3>
 
                 <a class="ms-layer sbut13"
                    style="left: 730px; top: 340px;"
@@ -77,7 +77,7 @@
             <div class="ms-slide slide-3" data-delay="9">
                 <div class="slide-pattern"></div>
 
-                <img src="images/sliders/masterslider/master3.avif" alt=""/>
+                <img src="images/sliders/masterslider/slide3.jpg" alt=""/>
 
                 <h3 class="ms-layer text34"
                     style="top: 400px;"
@@ -85,7 +85,7 @@
                     data-delay="500"
                     data-ease="easeOutExpo"
                     data-duration="1230"
-                    data-effect="scale(1.5,1.6)"> find the property of your dreams</h3>
+                    data-effect="scale(1.5,1.6)"> SONY M.A.G MUSIC AND GAME SHOW</h3>
 
                 <h3 class="ms-layer text6"
                     style="top: 260px;"
@@ -93,9 +93,9 @@
                     data-effect="top(45)"
                     data-duration="2000"
                     data-delay="1500"
-                    data-ease="easeOutExpo"> Lorem ipsum dolor sit amet consectetuer adipiscing elit<br/>
-                    Suspendisse et justo
-                    Praesent mattis commodo augue Aliquam ornare. </h3>
+                    data-ease="easeOutExpo"> Sony M.A.G Show (Sony Music And Game Show), là siêu sự<br/>
+                    kiện hoành tráng dành
+                    cho các tín đồ âm nhạc trẻ Sài Thành... </h3>
 
                 <a class="ms-layer sbut13"
                    style="left: 730px; top: 340px;"

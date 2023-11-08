@@ -1,0 +1,300 @@
+/* Reset CSS */
+* {
+    margin: var(--margin_0);
+    padding: var(--padding_0);
+    box-sizing: border-box;
+}
+
+body {
+    margin: var(--margin_0);
+    font-family: var(--font_family);
+    font-size: var(--font_14);
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+}
+b, strong {
+    font-weight: bolder;
+}
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+body, html {
+    height: 100%;
+    font-family:Arial, sans-serif;
+    background: #FFF;
+}
+html {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -ms-overflow-style: scrollbar;
+    -webkit-tap-highlight-color: transparent;
+}
+.container-login100 {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--p_wrap_login);
+    background: var(--login_bg);
+    border-bottom-left-radius: 100%;
+    background-size: cover;
+    box-shadow: var(--shadow_login);
+}
+.wrap-login100 {
+    width: 960px;
+    background: #FFF;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.login100-pic {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login100-pic img {
+    max-width: 100%;
+    height: auto;
+}
+
+.login100-form {
+    width: 50%;
+    padding: 50px;
+}
+
+.login100-form-title {
+    font-size: 30px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+input[type=button] {
+    font-size: var(--font_17);
+    background: var(--main_bg);
+    border: var(--px_1) solid var(--main_bg);
+    color: var(--black_color);
+    font-weight: var(--w_500);
+    cursor: var(--cursor_pointer);
+    width: var(--onehundred_percent);
+    border-radius: var(--radius_5px);
+    padding: 10px 0;
+    outline: var(--none);
+    font-family: var(--font_family);
+}
+.bx {
+    font-weight: 400;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+    display: inline-block;
+    text-transform: none;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.wrap-input100 {
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.input100 {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.2;
+    width: 100%;
+    display: block;
+    height: 40px;
+    padding: 0 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+}
+
+.focus-input100::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #5a68e5;
+    transition: all 0.4s;
+    transform: scaleX(0);
+}
+
+.input100:focus + .focus-input100::before {
+    transform: scaleX(1);
+}
+
+.focus-input100::before {
+    color: #5a68e5;
+}
+.input100 {
+    font-family: var(--font_family);
+    font-size: var(--font_15);
+    line-height: 1.5;
+    color: var(--back_bg);
+    display: block;
+    width: var(--onehundred_percent);
+    background: #f5f5f5;
+    height: var(--h_45);
+    border-radius: 0.375rem;
+    padding: 0 30px 0 68px;
+    border: 1px solid #d4d4d4;
+}
+.symbol-input100 {
+    font-size: var(--font_15);
+    display: var(--flex-element);
+    align-items: var(--center);
+    position: absolute;
+    border-radius: 25px;
+    bottom: 0;
+    left: 0;
+    width: var(--onehundred_percent);
+    height: var(--onehundred_percent);
+    padding-left: 25px;
+    pointer-events: var(--none);
+    color: var(--black_color);
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.container-login100-form-btn {
+    width: var(--onehundred_percent);
+    display: var(--flex-element);
+    flex-wrap: var(--wrap-element);
+    justify-content: var(--center);
+    padding-top: 20px;
+}
+
+.login100-form-btn {
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    background: #5a68e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+.login100-form-btn:hover {
+    background: #434378;
+}
+.fa-fw {
+    text-align: center;
+    width: 1.25em;
+}
+.bx-hide:before {
+    content: "\eb0e";
+}
+.text-right {
+    text-align: right;
+}
+
+.p-t-12 {
+    padding-top: 12px;
+}
+
+.txt2 {
+    font-size: 15px;
+    color: #999;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.txt2:hover {
+    color: #5a68e5;
+}
+
+.p-t-70 {
+    padding-top: 70px;
+}
+
+.txt2 a {
+    color: #5a68e5;
+}
+
+.txt2 a:hover {
+    color: #434378;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .login100-pic {
+        display: none;
+    }
+
+    .login100-form {
+        width: 100%;
+    }
+
+    .container-login100-form-btn {
+        padding-top: 20px;
+    }
+}
+:root {
+    --font_family: 'Roboto', sans-serif;
+    --main_color: #001C40;
+    --main_bg: #FFD43B;
+    --login_bg: #001C40;
+    --white_bg: #ffffff;
+    --onehundred_percent: 100%;
+    --black_color: #000;
+    --back_bg: #000000;
+    --margin_0: 0px;
+    --padding_0: 0px;
+    --none: none;
+    --transparent: transparent;
+    --font_14: 14px;
+    --font_13: 13px;
+    --font_15: 15px;
+    --font_17: 17px;
+    --font-22: 22px;
+    --nine-900: 900;
+    --center: center;
+    --one_five: 1.5;
+    --radius_5px: .357rem;
+    --vh_100: 100vh;
+    --h_45: 45px;
+    --auto: auto;
+    --w_960px: 960px;
+    --w_316: 316px;
+    --w_500: 500;
+    --w300: 300px;
+    --flex-element: flex;
+    --wrap-element: wrap;
+    --radius_10: 10px;
+    --px_1: 1px;
+    --e_flex: flex;
+    --shadow-form: 1px 1px 10px #00000070;
+    --hidden-element: hidden;
+    --bg-cover: cover;
+    --cursor_pointer: pointer;
+    --p_wrap_login: 100px 100px 50px 100px;
+    --shadow_login: 0px 0px 20px 0px #0000003b;
+}
