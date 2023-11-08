@@ -4,25 +4,25 @@ public class EventPost {
     private String id;
     private String title;
     private String content;
-    private String image;
-    private String category;
     private String start_date;
     private String end_date;
+    private String location;
     private String state;
     private String author;
-    private String location;
+    private String image;
+    private String category;
 
-    public EventPost(String id, String title, String content, String image, String category, String start_date, String end_date, String state, String author, String location) {
+    public EventPost(String id, String title, String content, String start_date, String end_date, String location, String state, String author, String image, String category) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.image = image;
-        this.category = category;
         this.start_date = start_date;
         this.end_date = end_date;
+        this.location = location;
         this.state = state;
         this.author = author;
-        this.location = location;
+        this.image = image;
+        this.category = category;
     }
 
     public EventPost() {
