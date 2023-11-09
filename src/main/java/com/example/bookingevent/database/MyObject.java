@@ -15,4 +15,6 @@ public class MyObject {
     public String user_id;
     public String image;
     public String category;
+    public String password;
+    public String is_verify;
 }

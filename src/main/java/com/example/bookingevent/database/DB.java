@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 public class DB {
     public static Connection getConnection() {
         try {

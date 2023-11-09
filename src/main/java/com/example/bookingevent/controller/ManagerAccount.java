@@ -17,6 +17,11 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "ManagerAccount", urlPatterns = {"/admin/load-account"})
 public class  ManagerAccount extends HttpServlet {
 
+    protected void processRequest()
+            throws ServletException, IOException {
+        processRequest(null, null);
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
