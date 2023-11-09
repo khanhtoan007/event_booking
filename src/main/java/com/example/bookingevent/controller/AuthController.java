@@ -60,6 +60,7 @@ public class AuthController {
             }
         }
     }
+
     @WebServlet("/logout")
     public static class Logout extends HttpServlet{
         @Override
