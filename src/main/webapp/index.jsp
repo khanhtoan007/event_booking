@@ -1,7 +1,10 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.bookingevent.database.MyObject" %>
+<%@ page import="com.example.bookingevent.database.DB" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="master/head.jsp"/>
-
+<% ArrayList<MyObject> cates = DB.getData("select distinct category from Event", new String[]{"category"}); %>
         <div class="clearfix"></div>
 
         <!-- masterslider -->
@@ -118,94 +121,45 @@
         <section class="property-search">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <label>Keyword</label>
-                        <br/>
-                        <input type="text" placeholder="Any" value="" name="keyword">
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-3 col-sm-6">
-                        <label>Location</label>
-                        <select>
-                            <option value="" selected="selected"> Any </option>
-                            <option value="" > consectetur </option>
-                            <option value="" > Suspendisse </option>
-                        </select>
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-3 col-sm-6">
-                        <label>Property Type</label>
-                        <select>
-                            <option value="" selected="selected"> Any </option>
-                            <option value="" > Commercial </option>
-                            <option value="" > Office </option>
-                            <option value="" > Rent </option>
-                            <option value="" > Residential </option>
-                            <option value="" > Apartment</option>
-                            <option value="" > Villa </option>
-                        </select>
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-3 col-sm-6">
-                        <label>Property Status</label>
-                        <select>
-                            <option value="" selected="selected"> Any </option>
-                            <option value="" > For Rent </option>
-                            <option value="" > For Sale </option>
-                        </select>
-                    </div>
-                    <!--end item-->
-
-                    <div class="clearfix"></div>
-                    <div class="col-divider-margin-1"></div>
-
-                    <div class="col-md-2 col-sm-6">
-                        <label>Minimum Price</label>
-                        <select>
-                            <option value="" selected="selected"> Any </option>
-                            <option value="" > $1000 </option>
-                            <option value="" > $5000 </option>
-                            <option value="" > $10,000 </option>
-                            <option value="" > $15,000 </option>
-                            <option value="" > $20,000 </option>
-                            <option value="" > $25,000 </option>
-                            <option value="" > $30,000 </option>
-                            <option value="" > $35,000 </option>
-                        </select>
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-2 col-sm-6">
-                        <label>Maximum Price</label>
-                        <select>
-                            <option value="" selected="selected"> Any </option>
-                            <option value="" > $1000 </option>
-                            <option value="" > $5000 </option>
-                            <option value="" > $10,000 </option>
-                            <option value="" > $15,000 </option>
-                            <option value="" > $20,000 </option>
-                            <option value="" > $25,000 </option>
-                            <option value="" > $30,000 </option>
-                            <option value="" > $35,000 </option>
-                        </select>
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-2 col-sm-6">
-                        <label>Area (Sq Ft)</label>
-                        <br/>
-                        <input type="text" value="" name="Area">
-                    </div>
-                    <!--end item-->
-
-                    <div class="col-md-2 col-sm-6"> <br/>
-                        <input class="search-btn" type="submit" value="Search">
-                    </div>
-                    <!--end item-->
-
+                    <form action="${pageContext.request.contextPath}/search" method="post">
+                        <div class="col-md-3 col-sm-6">
+                            <label>Location</label>
+                            <select name="location">
+                                <option value="0" selected="selected"> Any </option>
+                                <c:forEach items="${list}" var="list">
+                                    <option value="${list.id}">${list.location}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <label>Event Type</label>
+                            <select name="category">
+                                <option value="0" selected="selected"> Any </option>
+                                <% for (int i = 0; i < cates.size(); i++) { %>
+                                <option value="<%=cates.get(i).category%>"><%=cates.get(i).category%></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <label>Event Status</label>
+                            <select name="state">
+                                <option value="0" selected="selected"> Any </option>
+                                <c:forEach items="${state}" var="list">
+                                    <option value="${state.id}">${state.state = "1" ? "Available":"Expired"}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <label for="title">Event Status</label>
+                            <input class="form-control" name="title" id="title" />
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-divider-margin-1"></div>
+                        <div class="col-md-2 col-sm-6"> <br/>
+                            <input class="search-btn" type="submit" value="Search">
+                        </div>
+                        <!--end item-->
+                    </form>
                 </div>
             </div>
         </section>
@@ -226,7 +180,7 @@
                             <c:forEach items="${list}" var="list">
                                 <div class="col-md-4 col-sm-6">
                                     <div class="feature-box-66">
-                                        <div class="image-holder"> <a href="#">
+                                        <div class="image-holder"> <a href="${pageContext.request.contextPath}/event-detail?id=${list.id}">
                                             <div class="status">${list.state == "0" ? "Available" : "Expired"}</div>
                                             <div class="price">${list.category}</div>
                                             <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
@@ -242,7 +196,6 @@
                                     </div>
                                 </div>
                             </c:forEach>
-
 
 
                         </div>

@@ -4,7 +4,6 @@ import com.example.bookingevent.database.DBContext;
 import com.example.bookingevent.models.EventPost;
 
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -68,6 +67,48 @@ public class EventDAO {
         }
         return list;
     }
+    public List<EventPost> getEventByState(String state) {
+        List<EventPost> list = new ArrayList<>();
+        String query = "SELECT * from Event where state = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, state);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add( new EventPost(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10)
+
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+//    public String getState() throws Exception {
+//        EventPost eventPost = new EventPost();
+//        String query = "SELECT DISTINCT state FROM Event";
+//        List<String> states = new ArrayList<>();
+//        try {
+//            conn = new DBContext().getConnection();
+//            ps = conn.prepareStatement(query);
+//            rs = ps.executeQuery();
+//            s
+//
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//        return eventPost.getState();
+//    }
     public EventPost getEventPostByID(int contentID) {
         String query = "SELECT * from Event where id = ?";
         try {
@@ -94,6 +135,7 @@ public class EventDAO {
         }
         return null;
     }
+
     public boolean addEventPost(String contentType, String contentName, String label,  String secondLabel,int likeHit, String image, String description, String comment) {
         String query = "INSERT INTO Event VALUES (?,?,?,?,?,?,?,?)";
 
@@ -159,6 +201,7 @@ public class EventDAO {
         EventDAO dao = new EventDAO();
         List<EventPost> list = dao.getEventPostByCategory("Activity");
         list = dao.getEventPostList();
-        System.out.println(list.toString());
+
+        System.out.println(list);
     }
 }

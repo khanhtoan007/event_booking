@@ -109,8 +109,8 @@
                         <a href="${pageContext.request.contextPath}/index.jsp" class="navbar-brand fa-bold">Event Booking</a> </div>
                     <div id="navbar-collapse-grid" class="navbar-collapse collapse pull-right">
                         <ul class="nav green navbar-nav">
-                            <li><a href="${pageContext.request.contextPath}/index.jsp" class="dropdown-toggle active">Home</a></li>
-                            <li><a href="${pageContext.request.contextPath}/listings.jsp" class="dropdown-toggle">Event</a></li>
+                            <li><a href="${pageContext.request.contextPath}/event" class="dropdown-toggle active">Home</a></li>
+                            <li><a href="${pageContext.request.contextPath}/event-listing" class="dropdown-toggle">Event</a></li>
                             <!-- <li><a href="${pageContext.request.contextPath}/properties.jsp" class="dropdown-toggle">Properties</a></li> -->
                             <li><a href="${pageContext.request.contextPath}/gallery.jsp" class="dropdown-toggle">Gallery</a></li>
                             <li><a href="${pageContext.request.contextPath}/agents.jsp" class="dropdown-toggle">Agents</a></li>

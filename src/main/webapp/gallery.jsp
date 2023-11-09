@@ -104,8 +104,8 @@
             <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt=""/></a> </div>
           <div id="navbar-collapse-grid" class="navbar-collapse collapse pull-right">
             <ul class="nav green navbar-nav">
-              <li><a href="${pageContext.request.contextPath}/index.jsp" class="dropdown-toggle active">Home</a></li>
-              <li><a href="${pageContext.request.contextPath}/listings.jsp" class="dropdown-toggle">Event</a></li>
+              <li><a href="${pageContext.request.contextPath}/event" class="dropdown-toggle active">Home</a></li>
+              <li><a href="${pageContext.request.contextPath}/event-listing" class="dropdown-toggle">Event</a></li>
               <!-- <li><a href="${pageContext.request.contextPath}/properties.jsp" class="dropdown-toggle">Properties</a></li> -->
               <li><a href="${pageContext.request.contextPath}/gallery.jsp" class="dropdown-toggle">Gallery</a></li>
               <li><a href="${pageContext.request.contextPath}/agents.jsp" class="dropdown-toggle">Agents</a></li>
@@ -121,11 +121,11 @@
     <section>
       <div class="header-inner two">
         <div class="inner text-center">
-          <h4 class="title text-white uppercase">Properties Gallery</h4>
+          <h4 class="title text-white uppercase">Event Gallery</h4>
           <h5 class="text-white uppercase">Get many More Features</h5>
         </div>
         <div class="overlay bg-opacity-5"></div>
-        <img src="http://placehold.it/1920x800" alt="" class="img-responsive"/> </div>
+        <img src="images/sliders/masterslider/master1.jpg" alt="" class="img-responsive"/> </div>
     </section>
     <!-- end header inner -->
     <div class="clearfix"></div>
