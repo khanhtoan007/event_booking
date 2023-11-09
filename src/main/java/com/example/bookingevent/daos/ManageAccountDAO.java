@@ -37,6 +37,8 @@ public class ManageAccountDAO {
         return list;
     }
 
+
+
     public static void main(String[] args) {
         ManageAccountDAO dao = new ManageAccountDAO();
         List<Account> test = dao.getAllAccount();

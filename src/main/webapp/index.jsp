@@ -226,6 +226,7 @@
                         </c:if>
                     </div>
                 </div>
+            <c:if test="${not empty list}">
                 <div class="row slide-nextprev-but-1">
                     <div class="col-xs-12 text-center">
                         <h3 class="uppercase font-weight-5">TRENDING NEWS </h3>
@@ -286,6 +287,7 @@
                     <!--end carousel-->
 
                 </div>
+            </c:if>
             </div>
         </section>
         <!-- end section -->
