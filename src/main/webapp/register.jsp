@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,11 +48,11 @@
                     <span class="login100-form-title">
                         <b>ĐĂNG KÝ TÀI KHOẢN</b>
                     </span>
-                <form >
+                <form action="${pageContext.request.contextPath}/register" method="POST">
                     <div class="wrap-input100 validate-input"
                          data-validate="Bạn cần nhập đúng thông tin như: ex@abc.xyz">
                         <input class="input100" type="text" placeholder="Nhập email" name="emailInput"
-                               id="emailInput" value="" />
+                               id="emailInput" value="${email}" />
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                                 <i class='bx bx-mail-send' ></i>
@@ -94,11 +95,11 @@
                             </span>
                     </div>
                     <div class="container-login100-form-btn">
-                        <input type="button" onclick="return RegexEmail('emailInput')" value="Đăng Ký" />
+                        <input type="submit" onclick=" value="Đăng Ký" />
                     </div>
 
                     <div class="text-center p-t-12">
-                        <a class="txt2" href="login.html">
+                        <a class="txt2" href="login.jsp">
                             Trở về đăng nhập
                         </a>
                     </div>

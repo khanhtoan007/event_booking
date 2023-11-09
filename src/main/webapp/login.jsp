@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -72,14 +73,14 @@
                 <img src="team.jpg" alt="IMG">
             </div>
             <!--=====TIÊU ĐỀ======-->
-            <form class="login100-form validate-form">
+            <form class="login100-form validate-form" action="${pageContext.request.contextPath}/login" method="POST">
                     <span class="login100-form-title">
                         <b>ĐĂNG NHẬP HỆ THỐNG</b>
                     </span>
                 <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
-                <form action="">
+<%--                <form >--%>
                     <div class="wrap-input100 validate-input">
-                        <input class="input100" type="text" placeholder="Tài khoản" name="username"
+                        <input class="input100" type="text" placeholder="Tài khoản" name="name"
                                id="username">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
@@ -88,7 +89,7 @@
                     </div>
                     <div class="wrap-input100 validate-input">
                         <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu"
-                               name="current-password" id="password-field">
+                               name="password" id="password-field">
                             </span>
                         <span class="symbol-input100">
                                 <i class="bx bx-key"></i>
@@ -97,15 +98,15 @@
 
                     <!--=====ĐĂNG NHẬP======-->
                     <div class="container-login100-form-btn" >
-                        <input type="button" value="Đăng nhập" id="submit" onclick="validate()" />
+                        <input type="submit" value="Đăng nhập" id="submit" onclick="validate()" />
                     </div>
 
                     <div class="text-right p-t-12">
-                        <a class="txt2" href="register.html">
+                        <a class="txt2" href="register.jsp">
                             Đăng ký tài khoản
                         </a>
                     </div>
-                </form>
+<%--                </form>--%>
                 <!--=====FOOTER======-->
             </form>
         </div>
