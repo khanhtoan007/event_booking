@@ -1,72 +1,117 @@
 package com.example.bookingevent.controller;
 
+import com.example.bookingevent.daos.AuthDAO;
 import com.example.bookingevent.database.DB;
 import com.example.bookingevent.database.MyObject;
+import com.example.bookingevent.models.Account;
+import com.example.bookingevent.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.mindrot.jbcrypt.BCrypt;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class AuthController {
-    @WebServlet("/login")
-    public static class LoginController extends HttpServlet {
+
+
+    @WebServlet("/register")
+    public static class RegisterController extends HttpServlet {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            if (req.getSession().getAttribute("username") != null) {
-                req.setAttribute("username", req.getSession().getAttribute("username"));
-                req.getSession().removeAttribute("username");
-            }
-            if (req.getSession().getAttribute("password") != null) {
-                req.setAttribute("password", req.getSession().getAttribute("password"));
-                req.getSession().removeAttribute("password");
-            }
-            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+            resp.setContentType("text/html;charset=UTF-8");
+            req.setCharacterEncoding("utf-8");
+
+            req.getRequestDispatcher("register.jsp").forward(req, resp);
         }
 
         @Override
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            String email = req.getParameter("name");
+            resp.setContentType("text/html;charset=UTF-8");
+            req.setCharacterEncoding("utf-8");
+
+            String email = req.getParameter("email");
+            String name = req.getParameter("name");
+            String username = req.getParameter("username");
             String password = req.getParameter("password");
-            String sql = "select * from [User] where username = ? and password = ?";
-            String[] fields = new String[]{"user_id","username", "email", "phone", "role"};
-            String[] vars = new String[]{email, password};
-            ArrayList<MyObject> user = DB.getData(sql, vars, fields);
-            boolean login_status;
-            if (user.size() == 0) {
-                req.getSession().setAttribute("mess", "error|Tài khoản hoặc mật khẩu không đúng.");
-                login_status = false;
-            } else if (user.get(0).is_verify.equals("0")) {
-                req.getSession().setAttribute("mess", "warning|Bạn chưa xác nhận email của bạn, vui lòng kiểm tra email.");
-                login_status = false;
-            } else if (!BCrypt.checkpw(password, user.get(0).password)) {
-                req.getSession().setAttribute("mess", "error|Tài khoản hoặc mật khẩu không đúng.");
-                login_status = false;
-            } else {
-                login_status = true;
-                req.getSession().setAttribute("mess", "success|Đăng nhập thành công.");
-            }
-            if (login_status){
-                req.getSession().setAttribute("login", user.get(0));
-                resp.sendRedirect(req.getContextPath() + "/homepage");
-            } else {
-                req.getSession().setAttribute("email",email);
-                req.getSession().setAttribute("password", password);
-                resp.sendRedirect(req.getContextPath() + "/login");
-            }
+            String repassword = req.getParameter("repassword");
+            String phone = req.getParameter("phone");
+
+            // Tạo salt ngẫu nhiên
+            String salt = BCrypt.gensalt();
+            // Mã hóa mật khẩu với salt
+            String hashedPassword = BCrypt.hashpw(password, salt);
+
+            AuthDAO dao = new AuthDAO();
+            dao.register(username, hashedPassword, name, phone, email, "User");
+
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+
+
+            System.out.println("email: " + email);
+            System.out.println("name: " + name);
+            System.out.println("username: " + username);
+            System.out.println("password: " + password);
+            System.out.println("repassword: " + hashedPassword);
+            System.out.println("phone: " + phone);
+
+
         }
     }
+
+    @WebServlet("/login")
+    public static class LoginController extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            resp.setContentType("text/html;charset=UTF-8");
+            req.setCharacterEncoding("utf-8");
+
+            HttpSession session = req.getSession();
+            if (session.getAttribute("user") == null)
+                req.getRequestDispatcher("login.jsp").forward(req, resp);
+            else resp.sendRedirect("homepage");
+        }
+
+        @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String username = req.getParameter("username");
+            String password = req.getParameter("password");
+
+            System.out.println("username: " + username);
+            System.out.println("password: " + password);
+
+            AuthDAO dao = new AuthDAO();
+            User user = (User) dao.login(username);
+
+            if (user != null && BCrypt.checkpw(password, user.getPassword()))
+            {
+                System.out.println(user.toString());
+                HttpSession session = req.getSession();
+                session.setAttribute("user", user);
+            }
+            else {
+                String message = "Wrong username or password";
+                req.setAttribute("message", message);
+                req.getRequestDispatcher("login.jsp").forward(req, resp);
+            }
+
+        }
+    }
+
+
 
     @WebServlet("/logout")
     public static class Logout extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            req.getSession().removeAttribute("login");
-            resp.sendRedirect(req.getContextPath());
+            HttpSession session = req.getSession();
+            req.removeAttribute("user");
+            resp.sendRedirect("homepage");
         }
     }
 }
