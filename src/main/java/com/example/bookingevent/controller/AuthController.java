@@ -32,8 +32,8 @@ public class AuthController {
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String email = req.getParameter("name");
             String password = req.getParameter("password");
-            String sql = "select * from User where name = ? and password = ?";
-            String[] fields = new String[]{"id","name", "email", "phone", "role_id"};
+            String sql = "select * from [User] where name = ? and password = ?";
+            String[] fields = new String[]{"user_id","username", "email", "phone", "role"};
             String[] vars = new String[]{email, password};
             ArrayList<MyObject> user = DB.getData(sql, vars, fields);
             boolean login_status;
