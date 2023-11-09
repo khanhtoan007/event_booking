@@ -11,10 +11,11 @@ import java.io.IOException;
 
 public class PosterController extends HttpServlet {
 
-    @WebServlet(name = "EventPost", value = "/my-event")
-    public class EventPost extends HttpServlet {
+    @WebServlet(name = "PosterEventPost", value = "/my-event")
+    public class ViewPosterEventPost extends HttpServlet {
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
         }
 
