@@ -13,17 +13,12 @@ public class Account {
     private int id;
     private String user;
     private String pass;
-    private int isSell;
-    public int isAdmin;
+    private String name;
+    private String phone;
+    private String email;
+    public String role;
     public Account(){
         
-    }
-    public Account(int id, String user, String pass, int isSell, int isAdmin){
-        this.id = id;
-        this.user = user;
-        this.pass = pass;
-        this.isSell= isSell;
-        this.isAdmin = isAdmin;
     }
 
     public int getId() {
@@ -50,27 +45,60 @@ public class Account {
         this.pass = pass;
     }
 
-    public int getIsSell() {
-        return isSell;
+    public String getName() {
+        return name;
     }
 
-    public void setIsSell(int isSell) {
-        this.isSell = isSell;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getIsAdmin() {
-        return isAdmin;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setIsAdmin(int isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Account(int id, String user, String pass, String name, String phone, String email, String role) {
+        this.id = id;
+        this.user = user;
+        this.pass = pass;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.role = role;
     }
 
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", user=" + user + ", pass=" + pass + ", isSell=" + isSell + ", isAdmin=" + isAdmin + '}';
+        return "Account{" +
+                "id=" + id +
+                ", user='" + user + '\'' +
+                ", pass='" + pass + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                '}';
     }
-    
 }
 
 

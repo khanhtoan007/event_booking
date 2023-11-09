@@ -106,11 +106,11 @@
                 <div class="navbar green navbar-default yamm">
                     <div class="navbar-header">
                         <button type="button" data-toggle="collapse" data-target="#navbar-collapse-grid" class="navbar-toggle two three"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                        <a href="${pageContext.request.contextPath}/index.jsp" class="navbar-brand fa-bold">Event Booking</a> </div>
+                        <a href="${pageContext.request.contextPath}/homepage" class="navbar-brand"><img src="images/logo.png" alt=""/></a> </div>
                     <div id="navbar-collapse-grid" class="navbar-collapse collapse pull-right">
                         <ul class="nav green navbar-nav">
-                            <li><a href="${pageContext.request.contextPath}/index.jsp" class="dropdown-toggle active">Home</a></li>
-                            <li><a href="${pageContext.request.contextPath}/listings.jsp" class="dropdown-toggle">Event</a></li>
+                            <li><a href="${pageContext.request.contextPath}/homepage" class="dropdown-toggle active">Home</a></li>
+                            <li><a href="${pageContext.request.contextPath}/event-listing" class="dropdown-toggle">Event</a></li>
                             <!-- <li><a href="${pageContext.request.contextPath}/properties.jsp" class="dropdown-toggle">Properties</a></li> -->
                             <li><a href="${pageContext.request.contextPath}/gallery.jsp" class="dropdown-toggle">Gallery</a></li>
                             <li><a href="${pageContext.request.contextPath}/agents.jsp" class="dropdown-toggle">Agents</a></li>
