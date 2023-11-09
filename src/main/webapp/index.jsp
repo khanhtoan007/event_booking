@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="master/head.jsp"/>
 <% ArrayList<MyObject> cates = DB.getData("select distinct category from Event", new String[]{"category"}); %>
+<% ArrayList<MyObject> locations = DB.getData("select distinct location from Event", new String[]{"location"}); %>
         <div class="clearfix"></div>
 
         <!-- masterslider -->
@@ -126,9 +127,9 @@
                             <label>Location</label>
                             <select name="location">
                                 <option value="0" selected="selected"> Any </option>
-                                <c:forEach items="${list}" var="list">
-                                    <option value="${list.id}">${list.location}</option>
-                                </c:forEach>
+                                <% for (int i = 0; i < locations.size(); i++) { %>
+                                    <option value="<%=locations.get(i).location%>"><%=locations.get(i).location%></option>
+                                <% } %>
                             </select>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -141,16 +142,7 @@
                             </select>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <label>Event Status</label>
-                            <select name="state">
-                                <option value="0" selected="selected"> Any </option>
-                                <c:forEach items="${state}" var="list">
-                                    <option value="${state.id}">${state.state = "1" ? "Available":"Expired"}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <label for="title">Event Status</label>
+                            <label for="title">Event Title</label>
                             <input class="form-control" name="title" id="title" />
                         </div>
                         <div class="clearfix"></div>
@@ -171,63 +163,68 @@
             <div class="container">
                 <div class="row slide-nextprev-but-1">
                     <div class="col-xs-12 text-center">
-                        <h3 class="uppercase font-weight-5">SPECIAL OFFERS </h3>
+                        <h3 class="uppercase font-weight-5">
+                            <c:if test="${not empty events_search}">
+                                Search result
+                            </c:if>
+                            <c:if test="${empty events_search}">
+                                SPECIAL OFFERS
+                            </c:if>
+                        </h3>
                         <div class="title-line-4 green align-center"></div>
                     </div>
                     <div class="clearfix"></div>
                     <div id="owl-demo7" class="owl-carousel">
-                        <div class="item">
-                            <c:forEach items="${list}" var="list">
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="feature-box-66">
-                                        <div class="image-holder"> <a href="${pageContext.request.contextPath}/event-detail?id=${list.id}">
-                                            <div class="status">${list.state == "0" ? "Available" : "Expired"}</div>
-                                            <div class="price">${list.category}</div>
-                                            <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
-                                        <div class="text-box-inner">
-                                            <h5 class="less-mar1"><a href="#">${list.title}</a></h5>
-                                            <span>${list.location}</span>
-                                            <div class="clearfix"></div>
-                                            <br/>
-                                            <div class="property-info">
-                                                <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.start_date}</span></div>
+                        <c:choose>
+                            <c:when test=""></c:when>
+                        </c:choose>
+                        <c:if test="${not empty list}">
+                            <div class="item">
+                                <c:forEach items="${list}" var="list">
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="feature-box-66">
+                                            <div class="image-holder"> <a href="${pageContext.request.contextPath}/event-detail?id=${list.id}">
+                                                <div class="status">${list.state == "0" ? "Available" : "Expired"}</div>
+                                                <div class="price">${list.category}</div>
+                                                <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
+                                            <div class="text-box-inner">
+                                                <h5 class="less-mar1"><a href="#">${list.title}</a></h5>
+                                                <span>${list.location}</span>
+                                                <div class="clearfix"></div>
+                                                <br/>
+                                                <div class="property-info">
+                                                    <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.start_date}</span></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </c:forEach>
-
-
-                        </div>
-                        <!--end item-->
-
-                        <div class="item">
-                            <c:forEach items="${list}" var="list">
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="feature-box-66">
-                                        <div class="image-holder"> <a href="#">
-                                            <div class="status">${list.state == "1" ? "Available" : "Expired"}</div>
-                                            <div class="price">${list.author}</div>
-                                            <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
-                                        <div class="text-box-inner">
-                                            <h5 class="less-mar1"><a href="#">${list.title}</a></h5>
-                                            <span>${list.location}</span>
-                                            <div class="clearfix"></div>
-                                            <br/>
-                                            <div class="property-info">
-                                                <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.post_date}</span></div>
+                                </c:forEach>
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty events_search}">
+                            <div class="item">
+                                <c:forEach items="${events_search}" var="event">
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="feature-box-66">
+                                            <div class="image-holder"> <a href="${pageContext.request.contextPath}/event-detail?id=${event.getEvent_id()}">
+                                                <div class="status">${event.getState() == "0" ? "Available" : "Expired"}</div>
+                                                <div class="price">${event.getCategory()}</div>
+                                                <img src="${event.getImage()}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
+                                            <div class="text-box-inner">
+                                                <h5 class="less-mar1"><a href="#">${event.getTitle()}</a></h5>
+                                                <span>${event.getLocation()}</span>
+                                                <div class="clearfix"></div>
+                                                <br/>
+                                                <div class="property-info">
+                                                    <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${event.getStart_date()}</span></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </c:forEach>
-                            <!--end column-->
-                        </div>
-                        <!--end item-->
-
+                                </c:forEach>
+                            </div>
+                        </c:if>
                     </div>
-                    <!--end carousel-->
-
                 </div>
                 <div class="row slide-nextprev-but-1">
                     <div class="col-xs-12 text-center">

@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.bookingevent.database.MyObject" %>
 <%@ page import="com.example.bookingevent.database.DB" %>
+<% ArrayList<MyObject> cates = DB.getData("select distinct category from Event", new String[]{"category"}); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="master/head.jsp"/>
@@ -76,11 +77,11 @@
           <div class="col-md-6 col-sm-6">
             <div class="feature-box-66 border">
               <div class="image-holder"> <a href="${pageContext.request.contextPath}/event-detail?id=${list.id}">
-                <div class="status">${list.state}</div>
+                <div class="status">${list.state = "0" ? "Available":"Expired"}</div>
                 <div class="price">${list.category}</div>
                 <img src="${list.image}" alt="" class="img-responsive"/></a> </div>
               <div class="text-box-inner">
-                <h5 class="less-mar1"><a href="#">${list.title}</a></h5>
+                <h5 class="less-mar1"><a href="${pageContext.request.contextPath}/event-detail?id=${list.id}">${list.title}</a></h5>
                 <span>${list.location}</span>
                 <div class="clearfix"></div>
                 <br/>
