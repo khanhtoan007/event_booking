@@ -17,4 +17,8 @@ public class MyObject {
     public String category_id;
     public String name;
     public String cate_name;
+
+    public String category;
+    public String password;
+    public String is_verify;
 }

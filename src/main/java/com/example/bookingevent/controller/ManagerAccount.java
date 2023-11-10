@@ -18,21 +18,22 @@ import jakarta.servlet.http.HttpServletResponse;
 public class  ManagerAccount  {
 
     @WebServlet("/load-account")
-    public static class LoadAccount extends HttpServlet{
+    public static class LoadAccount extends HttpServlet {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             List<Account> list = new ManageAccountDAO().getAllAccount();
-            req.setAttribute("listP",list);
+            req.setAttribute("listP", list);
             System.out.println(list);
-            req.getRequestDispatcher("ManagerAccount.jsp").forward(req,resp);
+            req.getRequestDispatcher("ManagerAccount.jsp").forward(req, resp);
         }
+
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
 
         }
-
     }
+
     @WebServlet("/edit-account")
     public static class EditAccount extends HttpServlet{
         @Override

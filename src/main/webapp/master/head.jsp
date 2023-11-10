@@ -88,9 +88,9 @@
             <div class="container">
                 <div class="topbar-right-items pull-right">
                     <ul class="toplist toppadding">
-                        <li><a href="${pageContext.request.contextPath}/login.html">Admin</a></li>
-                        <li><a href="${pageContext.request.contextPath}/login.html">Login</a></li>
-                        <li><a href="${pageContext.request.contextPath}/register.html">Register</a></li>
+                        <li><a href="${pageContext.request.contextPath}/login.jsp">Admin</a></li>
+                        <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+                        <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
                         <li><select>
                             <option value="">Vietnamese</option>
                             <option value="">English</option>
