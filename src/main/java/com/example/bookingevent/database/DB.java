@@ -98,6 +98,26 @@ public class DB {
         }
     }
 
+    public static int insertGetLastId(String sql, String[] fields){
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            for (int i = 0; i < fields.length; i++) {
+                preparedStatement.setString(i + 1, fields[i]);
+            }
+            preparedStatement.executeUpdate();
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()){
+                return (int) generatedKeys.getLong(1);
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 
     public static void main(String[] args) throws Exception{
         System.out.println(getConnection().getCatalog());

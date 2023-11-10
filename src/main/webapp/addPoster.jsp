@@ -1,5 +1,9 @@
+<%@ page import="com.example.bookingevent.models.User" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% User user = (User) session.getAttribute("user"); %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <title>Thêm nhân viên | Quản trị Admin</title>
@@ -190,7 +194,7 @@
 
             <div class="tile">
 
-                <h3 class="tile-title">Tạo mới Poster</h3>
+                <h3 class="tile-title">Đăng ký Poster</h3>
                 <div class="tile-body">
                     <div class="row element-button">
                         <div class="col-sm-2">
@@ -199,67 +203,24 @@
                         </div>
 
                     </div>
-                    <form class="row">
+                    <form class="row" action="${pageContext.request.contextPath}/poster-register" method="post">
                         <div class="form-group col-md-4">
-                            <label class="control-label">ID nhân viên</label>
-                            <input class="form-control" type="text">
+                            <label class="control-label">ID</label>
+                            <input class="form-control" name="user_id" type="text" value="<%=user.getId()%>" disabled>
                         </div>
                         <div class="form-group col-md-4">
-                            <label class="control-label">Họ và tên</label>
-                            <input class="form-control" type="text" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Địa chỉ email</label>
-                            <input class="form-control" type="text" required>
+                            <label class="control-label">Tên Doanh Nghiệp</label>
+                            <input class="form-control" name="businessName" type="text" required>
                         </div>
 
                         <div class="form-group  col-md-4">
-                            <label class="control-label">Số điện thoại</label>
-                            <input class="form-control" type="number" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Ngày sinh</label>
-                            <input class="form-control" type="date">
-                        </div>
-                        <div class="form-group  col-md-3">
-                            <label class="control-label">Công ty</label>
-                            <input class="form-control" type="text" required>
+                            <label class="control-label">Mã Số Thuế</label>
+                            <input class="form-control" type="number" name="mst" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Địa chỉ công ty</label>
-                            <input class="form-control" type="text" required>
+                            <input class="form-control" name="address" type="text" required>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Số CMND</label>
-                            <input class="form-control" type="number" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Ngày cấp</label>
-                            <input class="form-control" type="date" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Nơi cấp</label>
-                            <input class="form-control" type="text" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Giới tính</label>
-                            <select class="form-control" id="exampleSelect2" required>
-                                <option>-- Chọn giới tính --</option>
-                                <option>Nam</option>
-                                <option>Nữ</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group  col-md-3">
-                            <label for="exampleSelect1" class="control-label">Chức năng</label>
-                            <select class="form-control" id="exampleSelect1">
-                                <option>-- Chọn chức năng --</option>
-                                <option>Poster</option>
-                                <option>Người dùng</option>
-
-                            </select>
-                        </div>
-
                         <div class="form-group col-md-12">
                             <label class="control-label">Ảnh 3x4 nhân viên</label>
                             <div id="myfileupload">
@@ -273,16 +234,14 @@
                                 <a href="javascript:" class="Choicefile"><i class='bx bx-upload'></i></a>
                                 <p style="clear:both"></p>
                             </div>
-
                         </div>
-
-
-
-                </div>
-                <button class="btn btn-save" type="button">Lưu lại</button>
-                <a class="btn btn-cancel" href="/doc/table-data-table.html">Hủy bỏ</a>
+                        <button class="btn btn-save" type="submit">Lưu lại</button>
+                        <a class="btn btn-cancel" href="${pageContext.request.contextPath}/homepage">Hủy bỏ</a>
+                </form>
             </div>
-
+            </div>
+        </div>
+    </div>
 </main>
 
 

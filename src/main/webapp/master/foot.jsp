@@ -128,5 +128,37 @@
 <script src="js/mainmenu/jquery.sticky.js"></script>
 
 <script src="js/scripts/functions.js" type="text/javascript"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.10/vue.min.js" integrity="sha512-H8u5mlZT1FD7MRlnUsODppkKyk+VEiCmncej8yZW1k/wUT90OQon0F9DSf/2Qh+7L/5UHd+xTLrMszjHEZc2BA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.js" integrity="sha512-RjvSEaeDqPCfUVQ9kna2/2OqHz/7F04IOl1/66LmQjB/lOeAzwq7LrbTzDbz5cJzlPNJ5qteNtHR56XaJSTNWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data:{
+      socket : new WebSocket((window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host + '${pageContext.request.contextPath}/my-websocket'),
+      notification_list : [],
+      test : 1
+    },
+    created(){
+      setTimeout(() => {
+        this.socket.send("subscribe:" + 0);
+      }, 1000);
+      this.getAllNotifications()
+      this.socket.onmessage = (event) => {
+        this.notification_list.push({'request_id' : event.data.split(",")[0], 'username' : event.data.split(",")[1]})
+        console.log(this.notification_list)
+      }
+    },
+    methods:{
+      getAllNotifications(){
+        axios.get("${pageContext.request.contextPath}/get-all-notifications")
+                .then((res) => {
+                  this.notification_list = JSON.parse(res.data.data)
+                  console.log(this.notification_list)
+                })
+      }
+    }
+  })
+</script>
 </body>
 </html>

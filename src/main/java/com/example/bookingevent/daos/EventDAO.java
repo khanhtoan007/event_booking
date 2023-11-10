@@ -3,6 +3,7 @@ package com.example.bookingevent.daos;
 import com.example.bookingevent.database.DBContext;
 import com.example.bookingevent.models.Category;
 import com.example.bookingevent.models.EventPost;
+import com.example.bookingevent.models.EventPostDTO;
 
 
 import java.sql.Connection;
@@ -18,7 +19,7 @@ public class EventDAO {
 
     public List<EventPost> getEventPostList() {
         List<EventPost> list = new ArrayList<>();
-        String query = "SELECT * from Event";
+        String query = "SELECT Event.*, Category.name as Category_name, U.name as U_name  from Event inner join Category on Event.category_id = Category.category_id inner join [User] U on U.user_id = Event.user_id";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -32,18 +33,21 @@ public class EventDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getString(8),
+                        rs.getInt(8),
+                        rs.getInt(9),
                         rs.getString(10),
-                        rs.getString(9)
+                        rs.getString(11),
+                        rs.getString(12)
                 ));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
     }
 
-    public List<EventPost> getEventPostListByUsername(int user_id) {
-        List<EventPost> list = new ArrayList<>();
+    public List<EventPostDTO> getEventPostListById(int user_id) {
+        List<EventPostDTO> list = new ArrayList<>();
         String query = "select * from Event join Category C on Event.category_id = C.category_id where user_id = ?;";
         try {
             conn = new DBContext().getConnection();
@@ -51,7 +55,7 @@ public class EventDAO {
             ps.setInt(1, user_id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new EventPost(
+                list.add(new EventPostDTO(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -65,6 +69,7 @@ public class EventDAO {
                 ));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
     }
@@ -86,9 +91,11 @@ public class EventDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getString(10)
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12)
 
                 ));
             }
@@ -113,9 +120,11 @@ public class EventDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getString(10)
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12)
 
                 ));
             }
@@ -154,10 +163,11 @@ public class EventDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getString(10)
-
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12)
                 );
             }
         } catch (Exception e) {
@@ -249,9 +259,7 @@ public class EventDAO {
 
     public static void main(String[] args) {
         EventDAO dao = new EventDAO();
-        List<EventPost> list = dao.getEventPostByCategory("Activity");
-        list = dao.getEventPostList();
-
+        List<EventPostDTO> list = dao.getEventPostListById(1);
         System.out.println(list);
     }
 }
