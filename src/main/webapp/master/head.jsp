@@ -24,11 +24,11 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="images/favicon.ico">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Google fonts - witch you want to use - (rest you can just remove) -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
-
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -77,7 +77,46 @@
     <!--<link rel="stylesheet" href="css/bg-patterns/pattern-10.css" />-->
     <!--<link rel="stylesheet" href="css/bg-patterns/pattern-11.css" />-->
     <!--<link rel="stylesheet" href="css/bg-patterns/pattern-12.css" />-->
+    <style>
+        .notification {
+            position: relative;
+            display: inline-block;
+        }
 
+        .notification-icon {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .notification-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            min-width: 200px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            display: none;
+            z-index: 99999;
+            width: 500px;
+        }
+
+        .notification-dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .notification-dropdown-item i {
+            margin-right: 10px;
+        }
+
+        .notification:hover .notification-dropdown {
+            display: block;
+        }
+    </style>
 </head>
 
 
@@ -87,15 +126,9 @@
         <div class="topbar light topbar-padding">
             <div class="container" >
                 <div class="pull-right">
+
                     <ul class="toplist toppadding" id="app">
-                        <li>
-                            <select class="form-control text-center">
-                                <option value="">Notifications <span id="new_noti_number" style="color: red">({{notification_list.length}})</span></option>
-                                <template v-for="(value, key) in notification_list">
-                                        <option value=""><a v-bind:href="'${pageContext.request.contextPath}/mana-poster-request-status-id=' + value.request_id">{{value.username}} yêu cầu trở thành poster</a></option>
-                                </template>
-                            </select>
-                        </li>
+
                         <li><a href="${pageContext.request.contextPath}/login.jsp">Admin</a></li>
                         <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
                         <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
@@ -103,6 +136,20 @@
                             <option value="">Vietnamese</option>
                             <option value="">English</option>
                         </select></li>
+                        <li>
+                            <div class="notification">
+                                <i class="fas fa-bell notification-icon"></i>  <span id="new_noti_number"  style="color: red">({{notification_list.length}})</span>
+                                <div class="notification-dropdown">
+                                    <div class="notification-dropdown-item" v-for="(value, key) in notification_list" :key="key">
+                                        <i class="fas fa-envelope"></i>
+                                        <a :href="'${pageContext.request.contextPath}/mana-poster-request-status-id=' + value.request_id">{{value.username}} yêu cầu trở thành poster</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="">
+                            <i class="fas fa-user notification-icon"></i>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -179,13 +179,16 @@
                     <div class="item">
                         <c:forEach items="${list}" var="i">
                             <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
+                                <div class="feature-box-66 container-product " >
                                     <div class="image-holder"> <a href="${pageContext.request.contextPath}/event-detail?id=${i.getId()}">
                                         <div class="status">${i.getState() == "0" ? "Available" : "Expired"}</div>
                                         <div class="price">${i.getCategory_name()}</div>
                                         <img src="${i.getImage()}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
                                     <div class="text-box-inner">
+                                        <div class="title-product">
                                         <h5 class="less-mar1"><a href="#">${i.getTitle()}</a></h5>
+                                        <i style='color: red ;' class="fas fa-heart"></i>
+                                    </div>
                                         <span>${i.getLocation()}</span>
                                         <div class="clearfix"></div>
                                         <br/>
@@ -202,7 +205,7 @@
                     <div class="item">
                         <c:forEach items="${events_search}" var="event">
                             <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
+                                <div class="feature-box-66 ">
                                     <div class="image-holder"> <a href="${pageContext.request.contextPath}/event-detail?id=${event.getEvent_id()}">
                                         <div class="status">${event.getState() == "0" ? "Available" : "Expired"}</div>
                                         <div class="price">${event.getCate_name()}</div>

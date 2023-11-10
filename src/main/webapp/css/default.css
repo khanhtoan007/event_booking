@@ -230,8 +230,17 @@ h5 {
 h5.nomargin {
 	margin-bottom: 0px;
 }
+.title-product{
+	display: flex;
+	align-items: center;
+}
+{}
+.container-product {
+	height: 520px;
+}
 h5.less-mar1 {
 	margin-bottom: 3px;
+	margin-right: 100px;
 }
 h5.less-mar2 {
 	margin-bottom: 5px;
