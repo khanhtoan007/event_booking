@@ -25,11 +25,9 @@ public class HomeController {
     public static class Home extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            List<EventPost> eventPosts = new EventDAO().getEventPostList();
-            req.setAttribute("list", eventPosts);
-            EventDAO getCategory = new EventDAO();
-            String sql = "SELECT DISTINCT state FROM Event";
-            String[] field = new String[]{"state"};
+            EventDAO dao = new EventDAO();
+            List<EventPost> list = dao.getEventPostList();
+            req.setAttribute("list", list);
             req.getRequestDispatcher("index.jsp").forward(req,resp);
         }
     }
@@ -70,20 +68,32 @@ public class HomeController {
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String location = req.getParameter("location");
             String category = req.getParameter("category");
-            String title = req.getParameter("title");
-            String sql = "select * from Event where title like ?";
-            ArrayList<String> paras = new ArrayList<>();
-            paras.add("%" + title + "%");
-            if (!location.equals("0")){
-                sql += " and location = ?";
-                paras.add(location);
+            String title = "%" +  req.getParameter("title") + "%";
+            String[] vars = new String[]{"event_id", "title", "description", "start_date", "end_date", "location", "state", "user_id", "category_id", "image", "cate_name"};
+            String sql;
+            String[] para;
+            if (location.equals("0") && category.equals("0")){
+                System.out.println("k search theo cate and location");
+                sql = "select Event.*, Category.name as cate_name from Event inner join Category on Event.category_id = Category.category_id where title like ?";
+                para = new String[]{title};
+            } else {
+                if (!location.equals("0") && !category.equals("0")){
+                    System.out.println("search theo cate va locaiton");
+                    sql = "select Event.*, Category.name as cate_name from Event inner join Category on Event.category_id = Category.category_id where title like ? and location = ? and Category.category_id = ?";
+                    para = new String[]{title, location, category};
+                } else {
+                    if (location.equals("0")){
+                        System.out.println("search theo moi cate");
+                        sql = "select Event.*, Category.name as cate_name from Event inner join Category on Event.category_id = Category.category_id where title like ? and Category.category_id = ?";
+                        para = new String[]{title, category};
+                    }else {
+                        System.out.println("search theo moi location");
+                        sql = "select Event.*, Category.name as cate_name from Event inner join Category on Event.category_id = Category.category_id where title like ? and location = ?";
+                        para = new String[]{title, location};
+                    }
+                }
             }
-            if (!category.equals("0")){
-                sql += " and category = ?";
-                paras.add(category);
-            }
-            String[] para_arr = new String[paras.size()];
-            ArrayList<MyObject> events_search = DB.getData(sql, paras.toArray(para_arr), new String[]{"event_id", "title", "description", "start_date", "end_date", "location", "state", "user_id", "image", "category"});
+            ArrayList<MyObject> events_search = DB.getData(sql, para, vars);
             req.setAttribute("events_search", events_search);
             req.getRequestDispatcher("index.jsp").forward(req,resp);
         }

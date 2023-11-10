@@ -14,5 +14,7 @@ public class MyObject {
     public String state;
     public String user_id;
     public String image;
-    public String category;
+    public String category_id;
+    public String name;
+    public String cate_name;
 }
