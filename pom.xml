@@ -31,9 +31,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.formcept</groupId>
-            <artifactId>sqljdbc42</artifactId>
-            <version>4.2</version>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>7.0.0.jre8</version>
         </dependency>
         <dependency>
             <groupId>jakarta.websocket</groupId>
