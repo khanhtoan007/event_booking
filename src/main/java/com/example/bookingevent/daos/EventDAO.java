@@ -118,7 +118,7 @@ public class EventDAO {
 //        return eventPost.getState();
 //    }
     public ArrayList<EventPost> getEventPostByID(int eventID) {
-        String query = "SELECT * from Event SELECT Event.*, Category.name as Category_name  from Event inner join Category on Event.category_id = Category.category_id  where event_id = ?";
+        String query = "SELECT Event.*, Category.name as Category_name, U.name as U_name  from Event inner join Category on Event.category_id = Category.category_id inner join [User] U on U.user_id = Event.user_id  where event_id = ?";
         ArrayList<EventPost> list = new ArrayList<>();
         try {
             conn = new DBContext().getConnection();
@@ -136,7 +136,9 @@ public class EventDAO {
                         rs.getString(7),
                         rs.getInt(8),
                         rs.getInt(9),
-                        rs.getString(10)
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12)
                 ));
             }
         } catch (Exception e) {
