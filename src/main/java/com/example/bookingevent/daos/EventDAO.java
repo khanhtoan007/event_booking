@@ -1,6 +1,7 @@
 package com.example.bookingevent.daos;
 
 import com.example.bookingevent.database.DBContext;
+import com.example.bookingevent.models.Category;
 import com.example.bookingevent.models.EventPost;
 
 
@@ -136,27 +137,31 @@ public class EventDAO {
         return null;
     }
 
-    public boolean addEventPost(String contentType, String contentName, String label,  String secondLabel,int likeHit, String image, String description, String comment) {
-        String query = "INSERT INTO Event VALUES (?,?,?,?,?,?,?,?)";
+    public boolean addEventPost(String title, String description, String start_date,  String end_date, String location, String state, String user_id, String category_id, String image) {
+        String query = "INSERT INTO Event VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            ps.setString(1,contentType);
-            ps.setString(2, contentName);
-            ps.setString(3, label);
-            ps.setString(4, secondLabel);
-            ps.setInt(5, likeHit);
-            ps.setString(6, image);
-            ps.setString(7, description);
-            ps.setString(8, comment);
+            ps.setString(1, title);
+            ps.setString(2, description);
+            ps.setString(3, start_date);
+            ps.setString(4, end_date);
+            ps.setString(5, location);
+            ps.setString(6, state);
+            ps.setString(7, user_id);
+            ps.setString(8, category_id);
+            ps.setString(9, image);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("add event ok");
             return false;
         }
+        System.out.println("add event ok");
         return true;
     }  //done
+
     public boolean deleteEventPost(String contentID) {
         String query = "delete from Event\n"
                 + "where EventPostID = ?";
@@ -197,6 +202,23 @@ public class EventDAO {
         } catch (Exception e) {
         }
     }
+
+    public ArrayList<Category> getAllCategory()
+    {
+        ArrayList<Category> list = new ArrayList<>();
+        String query = "SELECT * from Category";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Category(rs.getString(1), rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         EventDAO dao = new EventDAO();
         List<EventPost> list = dao.getEventPostByCategory("Activity");
