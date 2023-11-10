@@ -33,14 +33,42 @@ public class EventDAO {
                         rs.getString(6),
                         rs.getString(7),
                         rs.getString(8),
-                        rs.getString(9),
-                        rs.getString(10)
+                        rs.getString(10),
+                        rs.getString(9)
                 ));
             }
         } catch (Exception e) {
         }
         return list;
     }
+
+    public List<EventPost> getEventPostListByUsername(int user_id) {
+        List<EventPost> list = new ArrayList<>();
+        String query = "select * from Event join Category C on Event.category_id = C.category_id where user_id = ?;";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, user_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new EventPost(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(10),
+                        rs.getString(12)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     public List<EventPost> getEventPostByCategory(String category) {
         List<EventPost> list = new ArrayList<>();
         String query = "SELECT * from Event where category = ?";

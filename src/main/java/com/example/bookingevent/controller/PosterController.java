@@ -2,19 +2,22 @@ package com.example.bookingevent.controller;
 
 import com.example.bookingevent.daos.EventDAO;
 import com.example.bookingevent.models.Category;
+import com.example.bookingevent.models.EventPost;
+import com.example.bookingevent.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 public class PosterController {
@@ -30,6 +33,7 @@ public class PosterController {
             EventDAO dao = new EventDAO();
             ArrayList<Category> list = dao.getAllCategory();
             System.out.println("Category list: " + list);
+
             request.setAttribute("cateList", list);
 
             request.getRequestDispatcher("/createPost.jsp").forward(request, response);
@@ -97,8 +101,43 @@ public class PosterController {
     public static class ViewPosterEventPost extends HttpServlet {
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("utf-8");
+
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            if ( user == null)
+                response.sendRedirect("login");
+            else {
 
 
+                EventDAO dao = new EventDAO();
+                dao.getEventPostList();
+                List<EventPost> eventList = new ArrayList<EventPost>();
+                eventList = dao.getEventPostListByUsername(user.getId());
+
+                // Định dạng ngày hiện tại
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+                for (int i=0; i<eventList.size(); i++) {
+                    try {
+                        // Chuyển đổi start_date thành đối tượng Date
+                        Date startDate = inputFormat.parse(eventList.get(i).getStart_date());
+                        Date endDate = inputFormat.parse(eventList.get(i).getEnd_date());
+
+                        // Chuyển đổi đối tượng Date thành định dạng mới
+                        eventList.get(i).setStart_date(outputFormat.format(startDate));
+                        eventList.get(i).setEnd_date(outputFormat.format(endDate));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                request.setAttribute("eventList", eventList);
+                System.out.println("eventList: " + eventList);
+                request.getRequestDispatcher("/myPost.jsp").forward(request, response);
+            }
         }
 
         @Override
