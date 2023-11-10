@@ -9,7 +9,7 @@ public class DBContext {
          String url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName + ";trustServerCertificate=true;";
         if(instance == null || instance.trim().isEmpty())
             url = "jdbc:sqlserver://"+serverName+":"+portNumber +";databaseName="+dbName;
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         return DriverManager.getConnection(url, userID, password);
     }
     /*Insert your other code right after this comment*/
