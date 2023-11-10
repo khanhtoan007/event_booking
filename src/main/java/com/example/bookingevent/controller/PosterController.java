@@ -120,7 +120,6 @@ public class PosterController {
 
 
                 EventDAO dao = new EventDAO();
-                dao.getEventPostList();
                 List<EventPostDTO> eventList = dao.getEventPostListById(user.getId());
 
 
@@ -141,10 +140,40 @@ public class PosterController {
                         e.printStackTrace();
                     }
                 }
-
                 request.setAttribute("eventList", eventList);
                 System.out.println("eventList: " + eventList);
                 request.getRequestDispatcher("myPost.jsp").forward(request, response);
+            }
+        }
+
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        }
+    }
+
+
+    @WebServlet(name = "PosterUpdateEvent", value = "/update-event")
+    public static class PosterUpdateEvent extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("utf-8");
+
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            if ( user == null)
+                response.sendRedirect("login");
+            else {
+                int id = Integer.parseInt(request.getParameter("id"));
+                System.out.println("id: " + id);
+                EventPostDTO eventPost = new EventDAO().getEventPostByEventId(id);
+                ArrayList<Category> list = new EventDAO().getAllCategory();
+
+                request.setAttribute("cateList", list);
+                request.setAttribute("eventPost", eventPost);
+                System.out.println("eventPost: " + eventPost);
+                request.getRequestDispatcher("PosterUpdateEvent.jsp").forward(request, response);
             }
         }
 
