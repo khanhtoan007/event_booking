@@ -124,7 +124,7 @@
                 <div class="row">
                     <form action="${pageContext.request.contextPath}/search" method="post">
                         <div class="col-md-3 col-sm-6">
-                            <label>Location</label>  <span class="fa-bell-o"></span>
+                            <label>Location</label>
                             <select class="form-control" name="location">
                                 <option value="0" selected="selected"> Any </option>
                                 <% for (int i = 0; i < locations.size(); i++) { %>

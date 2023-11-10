@@ -42,9 +42,9 @@ public class HomeController {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             int id = Integer.parseInt(req.getParameter("id"));
-            EventPost eventPosts = new EventDAO().getEventPostByID(id);
-            req.setAttribute("list", eventPosts);
-            req.getRequestDispatcher("event-detail.jsp").forward(req,resp);
+            ArrayList<EventPost> eventPosts = new EventDAO().getEventPostByID(id);
+            req.setAttribute("event", eventPosts);
+            req.getRequestDispatcher("Detail.jsp").forward(req,resp);
         }
     }
     @WebServlet("/event-listing")
@@ -56,6 +56,7 @@ public class HomeController {
     public static class EventListing extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String id = req.getParameter("id");
             List<EventPost> eventPosts = new EventDAO().getEventPostList();
             req.setAttribute("list", eventPosts);
             req.getRequestDispatcher("listings.jsp").forward(req,resp);

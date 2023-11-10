@@ -1,9 +1,11 @@
-
+<%@ page import="com.example.bookingevent.models.EventPost" %>
+<%@ page import="com.example.bookingevent.daos.EventDAO" %>
+<%@ page import="java.util.ArrayList" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="master/head.jsp"/>
-
+<%ArrayList<EventPost> eventPosts = (ArrayList<EventPost>) request.getAttribute("event");%>
 <section class="py-5">
 
     <div class="container">
@@ -38,7 +40,7 @@
             <main class="col-lg-6">
                 <div class="ps-lg-3">
                     <h4 class="title text-dark">
-                        PEPSI presents RAVOLUTION Music Festival (Sunday, 03 December 2023 (03:00 PM - 11:00 PM))
+                        <%= eventPosts.get(0).getTitle()%>
                     </h4>
                     <div class="d-flex flex-row my-3">
                         <div class="text-warning mb-1 me-2">
@@ -48,31 +50,23 @@
                             <i class="fa fa-star"></i>
                             <i class="fas fa-star-half-alt"></i>
                             <span class="ms-1">
-                                Đà Nẵng
               </span>
                         </div>
                         <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>200 người tham dự</span>
-                        <span class="text-success ms-2">Đà Nẵng</span>
+                        <span class="text-success ms-2"><%= eventPosts.get(0).getLocation()%></span>
                     </div>
 
-                    <div class="mb-3">
-                        <span class="h5">200.000 VND</span>
-                        <span class="text-muted">/vé</span>
-                    </div>
-
-                    <p>
-                        Trong kỳ tiếp theo của Ravolution Music Festival sẽ diễn ra vào tháng 12 năm nay tại TP.HCM - kỷ niệm phiên bản thứ 10 mang tên “RAVO-X”, hứa hẹn sẽ mang đến những trải nghiệm và cách tiếp cận đại chúng mới như một lời tri ân suốt quãng thời gian 7 năm vừa qua.
-                    </p>
+                    <p><%= eventPosts.get(0).getContent()%></p>
 
                     <div class="row">
                         <dt class="col-3">Thời gian:</dt>
-                        <dd class="col-9">03:00 PM - 11:00 PM</dd>
+                        <dd class="col-9"><%= eventPosts.get(0).getStart_date()%></dd>
 
                         <dt class="col-3">Địa điểm</dt>
-                        <dd class="col-9">Đà Nẵng</dd>
+                        <dd class="col-9"><%= eventPosts.get(0).getLocation()%></dd>
 
                         <dt class="col-3">Type</dt>
-                        <dd class="col-9">Music Festival</dd>
+                        <dd class="col-9"><%= eventPosts.get(0).getCategory_name()%></dd>
 
                         <dt class="col-3">Nhà tổ chức</dt>
                         <dd class="col-9">ANTERNATION JSC - RAVOLUTION ASIA</dd>

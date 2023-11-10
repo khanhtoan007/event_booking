@@ -29,6 +29,19 @@ public class EventPost {
         U_name = u_name;
     }
 
+    public EventPost(String id, String title, String content, String start_date, String end_date, String location, String state, int author_id, int category_id, String image) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.location = location;
+        this.state = state;
+        this.author_id = author_id;
+        this.category_id = category_id;
+        this.image = image;
+    }
+
     public String getId() {
         return id;
     }
