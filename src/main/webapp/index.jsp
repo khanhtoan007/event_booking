@@ -4,7 +4,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="master/head.jsp"/>
-<% ArrayList<MyObject> cates = DB.getData("select distinct category from Event", new String[]{"category"}); %>
+<% ArrayList<MyObject> cates = DB.getData("select * from Category", new String[]{"category_id","name"}); %>
 <% ArrayList<MyObject> locations = DB.getData("select distinct location from Event", new String[]{"location"}); %>
 <div class="clearfix"></div>
 
@@ -124,8 +124,8 @@
         <div class="row">
             <form action="${pageContext.request.contextPath}/search" method="post">
                 <div class="col-md-3 col-sm-6">
-                    <label>Location</label>
-                    <select name="location">
+                    <label>Location</label>  <span class="fa-bell-o"></span>
+                    <select class="form-control" name="location">
                         <option value="0" selected="selected"> Any </option>
                         <% for (int i = 0; i < locations.size(); i++) { %>
                         <option value="<%=locations.get(i).location%>"><%=locations.get(i).location%></option>
@@ -134,10 +134,10 @@
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <label>Event Type</label>
-                    <select name="category">
+                    <select class="form-control" name="category">
                         <option value="0" selected="selected"> Any </option>
                         <% for (int i = 0; i < cates.size(); i++) { %>
-                        <option value="<%=cates.get(i).category%>"><%=cates.get(i).category%></option>
+                        <option value="<%=cates.get(i).category_id%>"><%=cates.get(i).name%></option>
                         <% } %>
                     </select>
                 </div>
@@ -175,25 +175,22 @@
             </div>
             <div class="clearfix"></div>
             <div id="owl-demo7" class="owl-carousel">
-                <c:choose>
-                    <c:when test=""></c:when>
-                </c:choose>
                 <c:if test="${not empty list}">
                     <div class="item">
-                        <c:forEach items="${list}" var="list">
+                        <c:forEach items="${list}" var="i">
                             <div class="col-md-4 col-sm-6">
                                 <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="${pageContext.request.contextPath}/event-detail?id=${list.id}">
-                                        <div class="status">${list.state == "0" ? "Available" : "Expired"}</div>
-                                        <div class="price">${list.category}</div>
-                                        <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
+                                    <div class="image-holder"> <a href="${pageContext.request.contextPath}/event-detail?id=${i.getId()}">
+                                        <div class="status">${i.getState() == "0" ? "Available" : "Expired"}</div>
+                                        <div class="price">${i.getCategory_name()}</div>
+                                        <img src="${i.getImage()}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
                                     <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">${list.title}</a></h5>
-                                        <span>${list.location}</span>
+                                        <h5 class="less-mar1"><a href="#">${i.getTitle()}</a></h5>
+                                        <span>${i.getLocation()}</span>
                                         <div class="clearfix"></div>
                                         <br/>
                                         <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.start_date}</span></div>
+                                            <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${i.getStart_date()}</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -208,7 +205,7 @@
                                 <div class="feature-box-66">
                                     <div class="image-holder"> <a href="${pageContext.request.contextPath}/event-detail?id=${event.getEvent_id()}">
                                         <div class="status">${event.getState() == "0" ? "Available" : "Expired"}</div>
-                                        <div class="price">${event.getCategory()}</div>
+                                        <div class="price">${event.getCate_name()}</div>
                                         <img src="${event.getImage()}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
                                     <div class="text-box-inner">
                                         <h5 class="less-mar1"><a href="#">${event.getTitle()}</a></h5>
@@ -226,66 +223,68 @@
                 </c:if>
             </div>
         </div>
-        <div class="row slide-nextprev-but-1">
-            <div class="col-xs-12 text-center">
-                <h3 class="uppercase font-weight-5">TRENDING NEWS </h3>
-                <div class="title-line-4 green align-center"></div>
-            </div>
-            <div class="clearfix"></div>
-            <div id="owl-demo6" class="owl-carousel">
-                <div class="item">
-                    <c:forEach items="${list}" var="list">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="feature-box-66">
-                                <div class="image-holder"> <a href="#">
-                                    <div class="status">${list.state == "1" ? "Available" : "Expired"}</div>
-                                    <div class="price">${list.author}</div>
-                                    <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
-                                <div class="text-box-inner">
-                                    <h5 class="less-mar1"><a href="#">${list.title}</a></h5>
-                                    <span>${list.location}</span>
-                                    <div class="clearfix"></div>
-                                    <br/>
-                                    <div class="property-info">
-                                        <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.post_date}</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-                    <!--end column-->
-                </div>
-                <!--end item-->
+        <%--            <c:if test="${not empty list}">--%>
+        <%--                <div class="row slide-nextprev-but-1">--%>
+        <%--                    <div class="col-xs-12 text-center">--%>
+        <%--                        <h3 class="uppercase font-weight-5">TRENDING NEWS </h3>--%>
+        <%--                        <div class="title-line-4 green align-center"></div>--%>
+        <%--                    </div>--%>
+        <%--                    <div class="clearfix"></div>--%>
+        <%--                    <div id="owl-demo6" class="owl-carousel">--%>
+        <%--                        <div class="item">--%>
+        <%--                            <c:forEach items="${list}" var="list">--%>
+        <%--                                <div class="col-md-4 col-sm-6">--%>
+        <%--                                    <div class="feature-box-66">--%>
+        <%--                                        <div class="image-holder"> <a href="#">--%>
+        <%--                                            <div class="status">${list.state == "1" ? "Available" : "Expired"}</div>--%>
+        <%--                                            <div class="price">${list.U_name}</div>--%>
+        <%--                                            <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>--%>
+        <%--                                        <div class="text-box-inner">--%>
+        <%--                                            <h5 class="less-mar1"><a href="#">${list.title}</a></h5>--%>
+        <%--                                            <span>${list.location}</span>--%>
+        <%--                                            <div class="clearfix"></div>--%>
+        <%--                                            <br/>--%>
+        <%--                                            <div class="property-info">--%>
+        <%--                                                <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.post_date}</span></div>--%>
+        <%--                                            </div>--%>
+        <%--                                        </div>--%>
+        <%--                                    </div>--%>
+        <%--                                </div>--%>
+        <%--                            </c:forEach>--%>
+        <%--                            <!--end column-->--%>
+        <%--                        </div>--%>
+        <%--                        <!--end item-->--%>
 
-                <div class="item">
-                    <c:forEach items="${list}" var="list">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="feature-box-66">
-                                <div class="image-holder"> <a href="#">
-                                    <div class="status">${list.state == "1" ? "Available" : "Expired"}</div>
-                                    <div class="price">${list.author}</div>
-                                    <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>
-                                <div class="text-box-inner">
-                                    <h5 class="less-mar1"><a href="#">${list.title}</a></h5>
-                                    <span>${list.location}</span>
-                                    <div class="clearfix"></div>
-                                    <br/>
-                                    <div class="property-info">
-                                        <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.post_date}</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-                    <!--end column-->
+        <%--                        <div class="item">--%>
+        <%--                            <c:forEach items="${list}" var="list">--%>
+        <%--                                <div class="col-md-4 col-sm-6">--%>
+        <%--                                    <div class="feature-box-66">--%>
+        <%--                                        <div class="image-holder"> <a href="#">--%>
+        <%--                                            <div class="status">${list.state == "1" ? "Available" : "Expired"}</div>--%>
+        <%--                                            <div class="price">${list.U_name}</div>--%>
+        <%--                                            <img src="${list.image}" alt="" class="img-responsive" style='height:230px; width:390px;'/></a> </div>--%>
+        <%--                                        <div class="text-box-inner">--%>
+        <%--                                            <h5 class="less-mar1"><a href="#">${list.title}</a></h5>--%>
+        <%--                                            <span>${list.location}</span>--%>
+        <%--                                            <div class="clearfix"></div>--%>
+        <%--                                            <br/>--%>
+        <%--                                            <div class="property-info">--%>
+        <%--                                                <div class="pull-left"><span><i class="fa fa-times-circle-o"></i> ${list.post_date}</span></div>--%>
+        <%--                                            </div>--%>
+        <%--                                        </div>--%>
+        <%--                                    </div>--%>
+        <%--                                </div>--%>
+        <%--                            </c:forEach>--%>
+        <%--                            <!--end column-->--%>
 
-                </div>
-                <!--end item-->
+        <%--                        </div>--%>
+        <%--                        <!--end item-->--%>
 
-            </div>
-            <!--end carousel-->
+        <%--                    </div>--%>
+        <%--                    <!--end carousel-->--%>
 
-        </div>
+        <%--                </div>--%>
+        <%--            </c:if>--%>
     </div>
 </section>
 <!-- end section -->

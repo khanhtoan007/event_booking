@@ -17,7 +17,7 @@ public class EventDAO {
 
     public List<EventPost> getEventPostList() {
         List<EventPost> list = new ArrayList<>();
-        String query = "SELECT * from Event";
+        String query = "SELECT Event.*, Category.name as Category_name, U.name as U_name  from Event inner join Category on Event.category_id = Category.category_id inner join [User] U on U.user_id = Event.user_id";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -31,12 +31,16 @@ public class EventDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getString(10)
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12)
+
                 ));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
     }
@@ -57,9 +61,11 @@ public class EventDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getString(10)
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12)
 
                 ));
             }
@@ -84,9 +90,11 @@ public class EventDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getString(10)
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12)
 
                 ));
             }
@@ -125,10 +133,11 @@ public class EventDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getString(10)
-
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12)
                 );
             }
         } catch (Exception e) {

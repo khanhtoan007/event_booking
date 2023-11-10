@@ -14,5 +14,16 @@ public class MyObject {
     public String state;
     public String user_id;
     public String image;
+    public String category_id;
+    public String name;
+    public String cate_name;
     public String category;
+    public String password;
+    public String is_verify;
+    public String request_id;
+    public String businessName;
+    public String mst;
+    public String address;
+    public String is_accepted;
+    public String username;
 }
