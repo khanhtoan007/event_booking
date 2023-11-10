@@ -93,6 +93,7 @@ public class AuthController {
                 System.out.println(user.toString());
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
+                resp.sendRedirect("homepage");
             }
             else {
                 String message = "Wrong username or password";
