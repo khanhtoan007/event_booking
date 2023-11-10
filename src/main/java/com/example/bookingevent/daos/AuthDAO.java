@@ -30,7 +30,8 @@ public class AuthDAO {
                 return (User) new User(rs.getInt(1),
                                             rs.getString(2),
                                             rs.getString(3),
-                                            rs.getString(4));
+                                            rs.getString(4),
+                                            rs.getString(7));
             }
         }
         catch (Exception e) {

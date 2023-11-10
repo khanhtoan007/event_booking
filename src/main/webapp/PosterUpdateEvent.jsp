@@ -7,11 +7,11 @@
         <section>
             <div class="header-inner two">
                 <div class="inner text-center">
-                    <h4 class="title text-white uppercase">Create new Post</h4>
+                    <h4 class="title text-white uppercase">Update Post</h4>
                     <h5 class="text-white uppercase"></h5>
                 </div>
                 <div class="overlay bg-opacity-5"></div>
-                <img src="http://placehold.it/1920x800" alt="" class="img-responsive" />
+                <img src="images/placeholder.png" alt="" class="img-responsive" />
             </div>
         </section>
         <!-- end header inner -->

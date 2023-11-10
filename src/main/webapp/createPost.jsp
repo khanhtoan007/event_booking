@@ -11,7 +11,7 @@
                <h5 class="text-white uppercase"></h5>
             </div>
             <div class="overlay bg-opacity-5"></div>
-            <img src="http://placehold.it/1920x800" alt="" class="img-responsive" />
+            <img src="images/placeholder.png" alt="" class="img-responsive" />
          </div>
       </section>
       <!-- end header inner -->
@@ -78,7 +78,7 @@
                   <div class="col-md-3"></div>
                   <div class="col-md-3">
                      <button type="submit" class="btn btn-primary">Add</button>
-                     <button type="button" class="btn btn-dark">Cancel</button>
+                     <a class="btn btn-dark" href="/booking/homepage">Cancel</a>
                   </div>
                </div>
 

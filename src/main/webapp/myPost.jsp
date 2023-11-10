@@ -18,7 +18,7 @@
                             <c:forEach items="${eventList}" var="i">
                                 <div class="col-md-4 col-sm-6">
                                     <div class="feature-box-66">
-                                        <div class="image-holder" style="max-width: 390px; max-height: 230px; object-fit: cover;"> <a href="#">
+                                        <div class="image-holder" style="max-width: 390px; max-height: 230px; object-fit: cover;"> <a href="/booking/update-event?id=${i.id}">
                                                 <c:if test="${i.state == 0}" >
                                                     <div class="status">Expired</div>
                                                 </c:if>
@@ -29,7 +29,7 @@
                                                 <img src="${i.image}" alt="" style="max-width: 390px; object-fit: cover;"/>
                                             </a> </div>
                                         <div class="text-box-inner">
-                                            <h5 class="less-mar1"><a href="#">${i.title}</a></h5>
+                                            <h5 class="less-mar1"><a href="/booking/update-event?id=${i.id}">${i.title}</a></h5>
                                             <span>${i.location}</span>
                                             <div class="clearfix"></div>
                                             <br />
@@ -46,74 +46,6 @@
                         </div>
                         <!--end item-->
 
-                        <div class="item">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                            <div class="status">For Rent</div>
-                                            <div class="price">$ 11,000 <span>/ Month</span></div>
-                                            <img src="http://placehold.it/390x230" alt="" class="img-responsive" />
-                                        </a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br />
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span>
-                                                <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
-
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                            <div class="status">For Rent</div>
-                                            <div class="price">$ 11,000 <span>/ Month</span></div>
-                                            <img src="http://placehold.it/390x230" alt="" class="img-responsive" />
-                                        </a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br />
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span>
-                                                <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
-
-                            <div class="col-md-4 col-sm-6">
-                                <div class="feature-box-66">
-                                    <div class="image-holder"> <a href="#">
-                                            <div class="status">For Rent</div>
-                                            <div class="price">$ 11,000 <span>/ Month</span></div>
-                                            <img src="http://placehold.it/390x230" alt="" class="img-responsive" />
-                                        </a> </div>
-                                    <div class="text-box-inner">
-                                        <h5 class="less-mar1"><a href="#">268 Green Hills Lane</a></h5>
-                                        <span>New York City</span>
-                                        <div class="clearfix"></div>
-                                        <br />
-                                        <div class="property-info">
-                                            <div class="pull-left"><span><i class="fa fa-bed"></i> 100 ft2</span></div>
-                                            <div class="pull-right"><span><i class="fa fa-tasks"></i> 100 ft2</span>
-                                                <span><i class="fa fa-car"></i> 100 ft2</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end column-->
-                        </div>
-                        <!--end item-->
 
                     </div>
                     <!--end carousel-->
