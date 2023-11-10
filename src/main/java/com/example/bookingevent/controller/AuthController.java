@@ -86,11 +86,11 @@ public class AuthController {
             System.out.println("password: " + password);
 
             AuthDAO dao = new AuthDAO();
-            User user = (User) dao.login(username);
+            User user = dao.login(username);
 
             if (user != null && BCrypt.checkpw(password, user.getPassword()))
             {
-                System.out.println(user.toString());
+                System.out.println(user.getName());
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
                 resp.sendRedirect("homepage");
@@ -110,9 +110,8 @@ public class AuthController {
     public static class Logout extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            HttpSession session = req.getSession();
-            req.removeAttribute("user");
-            resp.sendRedirect("homepage");
+            req.getSession().removeAttribute("login");
+            resp.sendRedirect(req.getContextPath());
         }
     }
 }

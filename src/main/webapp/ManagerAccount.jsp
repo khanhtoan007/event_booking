@@ -41,7 +41,6 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
-                        <th scope="col">Password</th>
                         <th scope="col">Name</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Email</th>
@@ -54,7 +53,6 @@
                         <tr>
                             <td>${user.id}</td>
                             <td>${user.user}</td>
-                            <td>${user.pass}</td>
                             <td>${user.name}</td>
                             <td>${user.phone}</td>
                             <td>${user.email}</td>
@@ -75,7 +73,7 @@ min-width: 70px;">Xóa
                                         </a>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" onclick="showMyModal('${user.id}', '${user.name}', '${user.email}', '${user.pass}', '${user.phone}', '${user.role}')" data-toggle="modal" data-target="#editModal" class="btn btn-warning btn-block" style="
+                                        <button type="button" onclick="showMyModal('${user.id}', '${user.name}', '${user.email}', '${user.phone}', '${user.role}')" data-toggle="modal" data-target="#editModal" class="btn btn-warning btn-block" style="
     border-top-width: 0;
     border-left-width: 0;
     border-right-width: 0;
@@ -132,14 +130,6 @@ min-width: 70px;">Sửa
                                     </div>
                                 </div>
                                 <div class="form-group row align-items-center ">
-                                    <label class="col-md-12 form-control-label required" for="password_update">
-                                        Password
-                                    </label>
-                                    <div class="col-md-12">
-                                        <input class="form-control" name="password_update" id="password_update" rows="8" style="width: 100%" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row align-items-center ">
                                     <label class="col-md-12 form-control-label required" for="role_update">
                                         Role
                                     </label>
@@ -173,11 +163,10 @@ min-width: 70px;">Sửa
     </body>
 </html>
 <script>
-    function showMyModal(id, name, email, pass, phone, role) {
+    function showMyModal(id, name, email, phone, role) {
         $("#name_update").val(name)
         $("#id").val(id)
         $("#email_update").val(email)
-        $("#password_update").val(pass)
         $("#phone_update").val(phone)
         $("#role_update").val(role)
     }
@@ -203,7 +192,6 @@ min-width: 70px;">Sửa
         $("#name_update").val("")
         $("#id").val("")
         $("#email_update").val("")
-        $("#password_update").val("")
         $("#phone_update").val("")
         $("#role_update").val("")
     });

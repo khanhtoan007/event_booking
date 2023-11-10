@@ -82,19 +82,26 @@
 
 
 <body>
-<div class="wrapper-boxed">
+<div class="wrapper-boxed" >
     <div class="site_wrapper">
         <div class="topbar light topbar-padding">
-            <div class="container">
-                <div class="topbar-right-items pull-right">
-                    <ul class="toplist toppadding">
+            <div class="container" >
+                <div class="pull-right">
+                    <ul class="toplist toppadding" id="app">
+                        <li>
+                            <select class="form-control text-center">
+                                <option value="">Notifications <span id="new_noti_number" style="color: red">({{notification_list.length}})</span></option>
+                                <template v-for="(value, key) in notification_list">
+                                        <option value=""><a v-bind:href="'${pageContext.request.contextPath}/mana-poster-request-status-id=' + value.request_id">{{value.username}} yêu cầu trở thành poster</a></option>
+                                </template>
+                            </select>
+                        </li>
                         <li><a href="${pageContext.request.contextPath}/login.jsp">Admin</a></li>
                         <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
                         <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
-                        <li><select>
+                        <li><select class="form-control">
                             <option value="">Vietnamese</option>
                             <option value="">English</option>
-
                         </select></li>
                     </ul>
                 </div>
@@ -121,3 +128,4 @@
             </div>
         </div>
         <!--end menu-->
+
