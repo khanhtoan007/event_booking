@@ -230,6 +230,39 @@ public class EventDAO {
         return true;
     }  //done
 
+    public boolean updateEventPost(String title, String description, String start_date,  String end_date, String location, String state, int event_id, String category_id, String image) {
+        String query = "UPDATE Event SET title = ?,\n" +
+                        "    description = ?,\n" +
+                        "    start_date = ?,\n" +
+                        "    end_date = ?,\n" +
+                        "    location = ?,\n" +
+                        "    state = ?,\n" +
+                        "    category_id = ?,\n" +
+                        "    image = ?\n" +
+                        "WHERE event_id = ?;";
+
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, title);
+            ps.setString(2, description);
+            ps.setString(3, start_date);
+            ps.setString(4, end_date);
+            ps.setString(5, location);
+            ps.setString(6, state);
+            ps.setString(7, category_id);
+            ps.setString(8, image);
+            ps.setInt(9, event_id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("update event not ok");
+            return false;
+        }
+        System.out.println("update event ok");
+        return true;
+    }  //done
+
     public boolean deleteEventPost(String contentID) {
         String query = "delete from Event\n"
                 + "where EventPostID = ?";
@@ -291,7 +324,7 @@ public class EventDAO {
         EventDAO dao = new EventDAO();
 
         ArrayList<EventPost> list = dao.getEventPostByID(1);
-        
+
         System.out.println(list);
     }
 }

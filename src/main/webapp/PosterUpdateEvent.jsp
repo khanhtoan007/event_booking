@@ -19,9 +19,12 @@
 
         <section class="sec-padding">
             <div class="container">
-                <form action="new-post" method="post" enctype="multipart/form-data">
+                <form action="update-event" method="post" enctype="multipart/form-data">
+                    <input type="text" name="id" value="${eventPost.id}" hidden>
 
                     <div class="form-row">
+
+                        
                         <div class="col-md-9">
                             <div class="form-group">
                                 <label for="title">Title</label>
@@ -32,7 +35,7 @@
                         <div class="col-md-3">
                             <label for="formFile" class="form-label">Image</label>
                             <img src="${eventPost.image}" style="width: 250px; height: 150px;">
-                            <input class="form-control margin-top2" name="image" type="file" id="formFile">
+                            <input class="form-control margin-top2" name="image" type="file" id="formFile" value="${eventPost.image}">
 
                         </div>
                     </div>
@@ -49,6 +52,12 @@
 
                             <label for="end_date" class="form-label margin-top3">End date:</label>
                             <input type="date" class="form-control" id="end_date" name="end_date" value="${eventPost.end_date}">
+
+                            <label for="state">State</label>
+                            <select class="form-control" name="state" id="state">
+                                <option value="0" ${eventPost.state == 0 ? 'selected' : ''}>Expired</option>
+                                <option value="1" ${eventPost.state == 1 ? 'selected' : ''}>Available</option>
+                            </select>
                         </div>
                         <!-- <div class="col-md-3">
                      
@@ -66,9 +75,8 @@
                     <div class="col-md-3">
                         <label for="category">Category</label>
                         <select class="form-control" name="category" id="category">
-                            <option selected value="0">Choose one</option>
                             <c:forEach items="${cateList}" var="i">
-                                <option value="${i.category_id}" >${i.name}</option>
+                                <option value="${i.category_id}" ${i.category_id == eventPost.category ? 'selected' : ''}>${i.name}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -79,8 +87,8 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-3"></div>
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-primary">Add</button>
-                    <button type="button" class="btn btn-dark">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a class="btn btn-dark" href="/booking/my-event">Cancel</a>
                 </div>
             </div>
 
@@ -223,6 +231,23 @@
         <script src="js/mainmenu/jquery.sticky.js"></script>
 
         <script src="js/scripts/functions.js" type="text/javascript"></script>
+
+        <script> 
+            // Lấy giá trị start_date từ eventPost
+            var start_date = '${eventPost.start_date}';
+
+            // Gán giá trị start_date cho trường input
+            document.getElementById('start_date').value = start_date;
+
+
+            // Lấy giá trị end_date từ eventPost
+            var end_date = '${eventPost.end_date}';
+
+            // Gán giá trị end_date cho trường input
+            document.getElementById('end_date').value = end_date;
+
+        </script>
+
         </body>
 
         </html>

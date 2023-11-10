@@ -84,14 +84,6 @@ public class EventPostDTO {
         this.category = category;
     }
 
-    public String getPost_date() {
-        return start_date;
-    }
-
-    public void setPost_date(String start_date) {
-        this.start_date = start_date;
-    }
-
     public String getState() {
         return state;
     }
