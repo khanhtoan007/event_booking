@@ -147,15 +147,17 @@ public class EventDAO {
 //        }
 //        return eventPost.getState();
 //    }
-    public EventPostDTO getEventPostByID(int contentID) {
-        String query = "SELECT * from Event where event_id = ?";
+
+    public ArrayList<EventPost> getEventPostByID(int eventID) {
+        String query = "SELECT Event.*, Category.name as Category_name, U.name as U_name  from Event inner join Category on Event.category_id = Category.category_id inner join [User] U on U.user_id = Event.user_id  where event_id = ?";
+        ArrayList<EventPost> list = new ArrayList<>();
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            ps.setInt(1, contentID);
+            ps.setInt(1, eventID);
             rs = ps.executeQuery();
             if (rs.next()) {
-                return new EventPostDTO(
+                list.add(new EventPost(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -163,14 +165,17 @@ public class EventDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getString(8),
+                        rs.getInt(8),
+                        rs.getInt(9),
                         rs.getString(10),
-                        rs.getString(9)
-                );
+                        rs.getString(11),
+                        rs.getString(12)
+                ));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        return null;
+        return list;
     }
 
 
@@ -284,7 +289,9 @@ public class EventDAO {
 
     public static void main(String[] args) {
         EventDAO dao = new EventDAO();
-        List<EventPostDTO> list = dao.getEventPostListById(1);
+
+        ArrayList<EventPost> list = dao.getEventPostByID(1);
+        
         System.out.println(list);
     }
 }

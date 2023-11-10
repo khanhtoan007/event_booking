@@ -158,20 +158,40 @@
 <!-- end section -->
 <div class="clearfix"></div>
 
-
-<section class=" sec-padding section-light">
-    <div class="container">
-        <div class="row slide-nextprev-but-1">
-            <div class="col-xs-12 text-center">
-                <h3 class="uppercase font-weight-5">
-                    <c:if test="${not empty events_search}">
-                        Search result
-                    </c:if>
-                    <c:if test="${empty events_search}">
-                        SPECIAL OFFERS
-                    </c:if>
-                </h3>
-                <div class="title-line-4 green align-center"></div>
+        <section class="property-search">
+            <div class="container">
+                <div class="row">
+                    <form action="${pageContext.request.contextPath}/search" method="post">
+                        <div class="col-md-3 col-sm-6">
+                            <label>Location</label>
+                            <select class="form-control" name="location">
+                                <option value="0" selected="selected"> Any </option>
+                                <% for (int i = 0; i < locations.size(); i++) { %>
+                                    <option value="<%=locations.get(i).location%>"><%=locations.get(i).location%></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <label>Event Type</label>
+                            <select class="form-control" name="category">
+                                <option value="0" selected="selected"> Any </option>
+                                <% for (int i = 0; i < cates.size(); i++) { %>
+                                <option value="<%=cates.get(i).category_id%>"><%=cates.get(i).name%></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <label for="title">Event Title</label>
+                            <input class="form-control" name="title" id="title" />
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-divider-margin-1"></div>
+                        <div class="col-md-2 col-sm-6"> <br/>
+                            <input class="search-btn" type="submit" value="Search">
+                        </div>
+                        <!--end item-->
+                    </form>
+                </div>
             </div>
             <div class="clearfix"></div>
             <div id="owl-demo7" class="owl-carousel">

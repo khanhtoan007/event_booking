@@ -26,17 +26,6 @@
                 console.log("username", username);
                 console.log("password: ", password);
 
-                // Đặt 1 Admin ảo để đăng nhập quản trị
-                if (username == "admin" && password == "123456") {
-                    alert("Xin chào Tiến Dũng");
-                    window.location.assign("/booking/index.html");
-                    return true;
-                }
-                if (username == "event" && password == "1234567") {
-                    alert("Xin chào Dũng");
-                    window.location.assign("/booking");
-                    return true;
-                }
 
                 // Nếu không nhập gì mà nhấn đăng nhập thì sẽ báo lỗi
                 if (username == "" || password == "") {
