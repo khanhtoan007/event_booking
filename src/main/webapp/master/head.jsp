@@ -2,6 +2,7 @@
 <%@ page import="com.example.bookingevent.models.User" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%  session = request.getSession(); %>
 <% User user = (User) session.getAttribute("user"); %>
 
         <!doctype html>
@@ -138,7 +139,7 @@
 
                                 <ul class="toplist toppadding" id="app">
                                     <% if (user != null) { %>
-                                    <% if (user.role.equals("Admin")) {%>
+                                    <% if (user.getRole().equals("Admin")) {%>
                                     <li><a href="${pageContext.request.contextPath}/load-account">Admin</a></li>
                                     <li>
                                         <div class="notification">
@@ -155,20 +156,22 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="">
+
+                                    <li>
                                         <i class="fas fa-user notification-icon"></i>
-                                        <a>Logout</a>
+                                        <a href="#">Manage Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/logout">Logout</a>
                                     </li>
                                     <% } else {%>
                                     <li><a href="${pageContext.request.contextPath}/login.jsp">Welcome, <%=user.getName()%></a></li>
-                                    <li class="notification-dropdown">
+                                    <li>
                                         <i class="fas fa-user notification-icon"></i>
-                                        <div class="notification-dropdown-item">
-                                            <a href="#">Manage Profile</a>
-                                        </div>
-                                        <div class="notification-dropdown-item">
-                                            <a href="${pageContext.request.contextPath}/logout">Logout</a>
-                                        </div>
+                                        <a href="#">Manage Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/logout">Logout</a>
                                     </li>
                                     <%}%>
                                     <%} else {%>
