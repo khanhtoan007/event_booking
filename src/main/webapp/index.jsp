@@ -172,7 +172,7 @@
                     </c:if>
                 </h3>
                 <div class="title-line-4 green align-center"></div>
-            </div>
+
             <div class="clearfix"></div>
             <div id="owl-demo7" class="owl-carousel">
                 <c:if test="${not empty list}">
@@ -288,6 +288,7 @@
 
         <%--                </div>--%>
         <%--            </c:if>--%>
+    </div>
     </div>
 </section>
 <!-- end section -->

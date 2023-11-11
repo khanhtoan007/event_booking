@@ -26,8 +26,6 @@
                 console.log("username", username);
                 console.log("password: ", password);
 
-                // Đặt 1 Admin ảo để đăng nhập quản trị
-
 
                 // Nếu không nhập gì mà nhấn đăng nhập thì sẽ báo lỗi
                 if (username == "" || password == "") {
