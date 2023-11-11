@@ -90,10 +90,13 @@ public class AuthController {
 
             if (user != null && BCrypt.checkpw(password, user.getPassword()))
             {
-                System.out.println(user.getName());
+                System.out.println(user);
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
-                resp.sendRedirect("homepage");
+                if (user.getRole().equals("User") || user.getRole().equals("Poster"))
+                    resp.sendRedirect("homepage");
+                else if (user.getRole().equals("Admin"))
+                    resp.sendRedirect("?");
             }
             else {
                 String message = "Wrong username or password";

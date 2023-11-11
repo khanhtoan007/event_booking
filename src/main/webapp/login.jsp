@@ -26,7 +26,6 @@
                 console.log("username", username);
                 console.log("password: ", password);
 
-
                 // Nếu không nhập gì mà nhấn đăng nhập thì sẽ báo lỗi
                 if (username == "" || password == "") {
                     alert("Bạn chưa điền đầy đủ thông tin đăng nhập...");

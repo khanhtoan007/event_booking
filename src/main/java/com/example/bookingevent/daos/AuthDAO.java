@@ -30,7 +30,8 @@ public class AuthDAO {
                 return (User) new User(rs.getInt(1),
                                             rs.getString(2),
                                             rs.getString(3),
-                                            rs.getString(4));
+                                            rs.getString(4),
+                                            rs.getString(7));
             }
         }
         catch (Exception e) {
@@ -55,7 +56,7 @@ public class AuthDAO {
             stm.setString(6, role);
             int row = stm.executeUpdate();
             if (row > 0) {
-                System.out.println("add ok");
+                System.out.println("add user ok");
                 return true;
             }
         } catch (SQLException e) {
@@ -63,7 +64,7 @@ public class AuthDAO {
         } catch (Exception e) {
             System.out.println("SQL error in DAO " + e.getMessage());
         }
-        System.out.println("add not ok");
+        System.out.println("add user not ok");
         return false;
     }
 
