@@ -1,5 +1,9 @@
+<%@ page import="com.example.bookingevent.database.MyObject" %>
+<%@ page import="com.example.bookingevent.models.User" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% User user = (User) session.getAttribute("user"); %>
+
         <!doctype html>
         <!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
         <!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
@@ -133,28 +137,19 @@
                             <div class="pull-right">
 
                                 <ul class="toplist toppadding" id="app">
-
-                                    <c:if test="${sessionScope.user.role.equals('Admin')}">
-                                        <li><a href="${pageContext.request.contextPath}/login.jsp">Admin</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.user == null}">
-                                        <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-                                        <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
-                                    </c:if>
-                                    <li><select class="form-control">
-                                            <option value="">Vietnamese</option>
-                                            <option value="">English</option>
-                                        </select></li>
+                                    <% if (user != null) { %>
+                                    <% if (user.role.equals("Admin")) {%>
+                                    <li><a href="${pageContext.request.contextPath}/load-account">Admin</a></li>
                                     <li>
                                         <div class="notification">
                                             <i class="fas fa-bell notification-icon"></i> <span id="new_noti_number"
-                                                style="color: red">({{notification_list.length}})</span>
+                                                                                                style="color: red">({{notification_list.length}})</span>
                                             <div class="notification-dropdown">
                                                 <div class="notification-dropdown-item"
-                                                    v-for="(value, key) in notification_list" :key="key">
+                                                     v-for="(value, key) in notification_list" :key="key">
                                                     <i class="fas fa-envelope"></i>
                                                     <a
-                                                        :href="'${pageContext.request.contextPath}/mana-poster-request-status-id=' + value.request_id">{{value.username}}
+                                                            :href="'${pageContext.request.contextPath}/mana-poster-request-status-id=' + value.request_id">{{value.username}}
                                                         yêu cầu trở thành poster</a>
                                                 </div>
                                             </div>
@@ -162,7 +157,24 @@
                                     </li>
                                     <li class="">
                                         <i class="fas fa-user notification-icon"></i>
+                                        <a>Logout</a>
                                     </li>
+                                    <% } else {%>
+                                    <li><a href="${pageContext.request.contextPath}/login.jsp">Welcome, <%=user.getName()%></a></li>
+                                    <li class="notification-dropdown">
+                                        <i class="fas fa-user notification-icon"></i>
+                                        <div class="notification-dropdown-item">
+                                            <a href="#">Manage Profile</a>
+                                        </div>
+                                        <div class="notification-dropdown-item">
+                                            <a href="${pageContext.request.contextPath}/logout">Logout</a>
+                                        </div>
+                                    </li>
+                                    <%}%>
+                                    <%} else {%>
+                                    <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+                                    <%}%>
                                 </ul>
                             </div>
                         </div>

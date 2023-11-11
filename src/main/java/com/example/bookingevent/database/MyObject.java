@@ -26,4 +26,5 @@ public class MyObject {
     public String address;
     public String is_accepted;
     public String username;
+    public String role;
 }

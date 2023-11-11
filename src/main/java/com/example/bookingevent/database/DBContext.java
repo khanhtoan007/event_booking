@@ -25,7 +25,6 @@ public class DBContext {
         try {
             System.out.println(new DBContext().getConnection().getCatalog());
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
