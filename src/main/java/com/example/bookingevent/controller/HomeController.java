@@ -25,10 +25,10 @@ public class HomeController {
     public static class Home extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            EventDAO dao = new EventDAO();
-            List<EventPost> list = dao.getEventPostList();
-            req.setAttribute("list", list);
-            req.getRequestDispatcher("index.jsp").forward(req,resp);
+//            EventDAO dao = new EventDAO();
+//            List<EventPost> list = dao.getEventPostList();
+//            req.setAttribute("list", list);
+            req.getRequestDispatcher("views/index.jsp").forward(req,resp);
         }
     }
 
@@ -44,7 +44,7 @@ public class HomeController {
             int id = Integer.parseInt(req.getParameter("id"));
             ArrayList<EventPost> eventPosts = new EventDAO().getEventPostByID(id);
             req.setAttribute("event", eventPosts);
-            req.getRequestDispatcher("Detail.jsp").forward(req,resp);
+            req.getRequestDispatcher("views/Detail.jsp").forward(req,resp);
         }
     }
     @WebServlet("/event-listing")
@@ -59,7 +59,7 @@ public class HomeController {
             String id = req.getParameter("id");
             List<EventPost> eventPosts = new EventDAO().getEventPostList();
             req.setAttribute("list", eventPosts);
-            req.getRequestDispatcher("listings.jsp").forward(req,resp);
+            req.getRequestDispatcher("views/listings.jsp").forward(req,resp);
         }
     }
 
@@ -96,7 +96,7 @@ public class HomeController {
             }
             ArrayList<MyObject> events_search = DB.getData(sql, para, vars);
             req.setAttribute("events_search", events_search);
-            req.getRequestDispatcher("index.jsp").forward(req,resp);
+            req.getRequestDispatcher("views/index.jsp").forward(req,resp);
         }
     }
 }

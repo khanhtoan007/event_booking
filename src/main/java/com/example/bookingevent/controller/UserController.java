@@ -64,12 +64,7 @@ public class UserController {
     public static class RegisterPoster extends HttpServlet{
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//            String sql = "select * from [User]";
-//
-//
-//            String[] var = new String[]{"id"};
-//            ArrayList<MyObject> user = DB.getData(sql,var);
-//            req.setAttribute("users",user);
+
             req.getRequestDispatcher("addPoster.jsp").forward(req,resp);
         }
         @Override

@@ -25,6 +25,8 @@ public class  ManagerAccount  {
             req.setAttribute("listP", list);
             System.out.println(list);
             req.getRequestDispatcher("ManagerAccount.jsp").forward(req, resp);
+//            req.getRequestDispatcher("manageUser.jsp").forward(req, resp);
+
         }
 
         @Override
@@ -62,11 +64,11 @@ public class  ManagerAccount  {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String id = req.getParameter("id");
-            String sql = "delete from [User] where user_id = ?";
-            String[] vars = new String[]{id};
+            String sql = "UPDATE PosterRequest SET user_id = NULL WHERE user_id = ?;\n" +
+                         "DELETE FROM [User] WHERE user_id = ?;";
+            String[] vars = new String[]{id,id};
             System.out.println(DB.executeUpdate(sql,vars));
             resp.sendRedirect(req.getContextPath() + "/load-account");
         }
     }
-
 }
