@@ -59,27 +59,30 @@
     </div>
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            <a href="../index.jsp" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+            <a href="${pageContext.request.contextPath}/views/index.jsp" class="navbar-brand"><h1 class="text-primary display-6">Event</h1></a>
             <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars text-primary"></span>
             </button>
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
-                    <a href="index.jsp" class="nav-item nav-link active">Home</a>
-                    <a href="products/shop.jsp" class="nav-item nav-link">Shop</a>
-                    <a href="products/shop-detail.jsp" class="nav-item nav-link">Shop Detail</a>
+                    <a href="${pageContext.request.contextPath}/views/index.jsp" class="nav-item nav-link active">Home</a>
+                    <a href="${pageContext.request.contextPath}/views/products/shop.jsp" class="nav-item nav-link">Shop</a>
+                    <a href="${pageContext.request.contextPath}/views/products/shop-detail.html" class="nav-item nav-link">Shop Detail</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                            <a href="cart.jsp" class="dropdown-item">Cart</a>
-                            <a href="products/chackout.jsp" class="dropdown-item">Chackout</a>
-                            <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
-                            <a href="404.jsp" class="dropdown-item">404 Page</a>
+                            <a href="${pageContext.request.contextPath}/views/cart.html" class="dropdown-item">Cart</a>
+                            <a href="${pageContext.request.contextPath}/views/products/chackout.html" class="dropdown-item">Chackout</a>
+                            <a href="${pageContext.request.contextPath}/views/testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="${pageContext.request.contextPath}/views/404.html" class="dropdown-item">404 Page</a>
                         </div>
                     </div>
-                    <a href="contact.jsp" class="nav-item nav-link">Contact</a>
+                    <a href="${pageContext.request.contextPath}/views/contact.html" class="nav-item nav-link">Contact</a>
                 </div>
                 <div class="d-flex m-3 me-0">
+                    <a href="#" class="my-auto">
+                        <i class="fas fa-user fa-2x"></i>
+                    </a>
                     <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
                     <a href="#" class="position-relative me-4 my-auto">
                         <i class="fa fa-shopping-bag fa-2x"></i>
