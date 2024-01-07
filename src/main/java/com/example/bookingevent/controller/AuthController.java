@@ -27,7 +27,7 @@ public class AuthController {
             resp.setContentType("text/html;charset=UTF-8");
             req.setCharacterEncoding("utf-8");
 
-            req.getRequestDispatcher("register.jsp").forward(req, resp);
+            req.getRequestDispatcher("views/Login_v18/register.jsp").forward(req, resp);
         }
 
         @Override
@@ -47,10 +47,10 @@ public class AuthController {
             // Mã hóa mật khẩu với salt
             String hashedPassword = BCrypt.hashpw(password, salt);
 
-            AuthDAO dao = new AuthDAO();
-            dao.register(username, hashedPassword, name, phone, email, "User");
-
-            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+//            AuthDAO dao = new AuthDAO();
+//            dao.register(username, hashedPassword, name, phone, email, "User");
+//
+//            req.getRequestDispatcher("views/Login_v18/login.jsp").forward(req, resp);
 
 
             System.out.println("email: " + email);
@@ -73,7 +73,7 @@ public class AuthController {
 
             HttpSession session = req.getSession();
             if (session.getAttribute("user") == null)
-                req.getRequestDispatcher("login.jsp").forward(req, resp);
+                req.getRequestDispatcher("views/Login_v18/login.jsp").forward(req, resp);
             else resp.sendRedirect("homepage");
         }
 
@@ -86,22 +86,23 @@ public class AuthController {
             System.out.println("password: " + password);
 
             AuthDAO dao = new AuthDAO();
-            User user = dao.login(username);
+            Account account = null;
+//            account = dao.login(username);
 
-            if (user != null && BCrypt.checkpw(password, user.getPassword()))
+            if (account != null && BCrypt.checkpw(password, account.getPass()))
             {
-                System.out.println(user);
+                System.out.println(account);
                 HttpSession session = req.getSession();
-                session.setAttribute("user", user);
-                if (user.getRole().equals("User") || user.getRole().equals("Poster"))
+                session.setAttribute("user", account);
+                if (account.getRole().equals("User") || account.getRole().equals("Poster"))
                     resp.sendRedirect("homepage");
-                else if (user.getRole().equals("Admin"))
+                else if (account.getRole().equals("Admin"))
                     resp.sendRedirect("?");
             }
             else {
                 String message = "Wrong username or password";
                 req.setAttribute("message", message);
-                req.getRequestDispatcher("login.jsp").forward(req, resp);
+                req.getRequestDispatcher("views/Login_v18/login.jsp").forward(req, resp);
             }
 
         }

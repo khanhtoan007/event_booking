@@ -15,9 +15,9 @@ public class AuthDAO {
     PreparedStatement stm = null;
     ResultSet rs = null;
 
-    public User login(String username)
+    public Account login(String username)
     {
-        String sql = "select * from [User] where username = ?";
+        String sql = "select * from [Account] where username = ?";
         try
         {
             con = new DBContext().getConnection();
@@ -27,10 +27,12 @@ public class AuthDAO {
             while (rs.next())
             {
                 System.out.println("found");
-                return (User) new User(rs.getInt(1),
+                return (Account) new Account(rs.getInt(1),
                                             rs.getString(2),
                                             rs.getString(3),
                                             rs.getString(4),
+                                            rs.getString(5),
+                                            rs.getString(6),
                                             rs.getString(7));
             }
         }
@@ -45,7 +47,7 @@ public class AuthDAO {
                                       String phone, String email, String role)
     {
         try {
-            String sql = "insert into [User] values(?, ?, ?, ?, ?, ?)";
+            String sql = "insert into [Account] values(?, ?, ?, ?, ?, ?)";
             con = new DBContext().getConnection();
             stm = con.prepareStatement(sql);
             stm.setString(1, username);
