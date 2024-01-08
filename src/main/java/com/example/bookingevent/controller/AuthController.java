@@ -1,10 +1,7 @@
 package com.example.bookingevent.controller;
 
 import com.example.bookingevent.daos.AuthDAO;
-import com.example.bookingevent.database.DB;
-import com.example.bookingevent.database.MyObject;
 import com.example.bookingevent.models.Account;
-import com.example.bookingevent.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,7 +12,6 @@ import org.mindrot.jbcrypt.BCrypt;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class AuthController {
 

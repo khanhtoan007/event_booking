@@ -2,7 +2,6 @@ package com.example.bookingevent.daos;
 
 import com.example.bookingevent.database.DBContext;
 import com.example.bookingevent.models.Account;
-import com.example.bookingevent.models.User;
 
 
 import java.sql.Connection;

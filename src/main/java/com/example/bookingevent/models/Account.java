@@ -5,10 +5,7 @@
  */
 package com.example.bookingevent.models;
 
-/**
- *
- * @author phamtiendung
- */
+
 public class Account {
     private int id;
     private String user;

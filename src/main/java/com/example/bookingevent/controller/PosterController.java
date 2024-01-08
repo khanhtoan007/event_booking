@@ -4,7 +4,6 @@ import com.example.bookingevent.daos.EventDAO;
 //import com.example.bookingevent.models.Category;
 //import com.example.bookingevent.models.EventPost;
 //import com.example.bookingevent.models.EventPostDTO;
-import com.example.bookingevent.models.User;
 import com.example.bookingevent.database.DB;
 import com.example.bookingevent.database.MyObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,13 +17,8 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
