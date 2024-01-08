@@ -62,7 +62,7 @@ public class PosterController {
             request.setCharacterEncoding("utf-8");
 
             String title = request.getParameter("title");
-            String description = request.getParameter("description");
+            String description = request.getParameter("content");
             String start_date = request.getParameter("start_date");
             String end_date = request.getParameter("end_date");
             String location = request.getParameter("location");
@@ -93,7 +93,7 @@ public class PosterController {
 
 
             System.out.println("title: "+  title);
-            System.out.println("description: "+  description);
+            System.out.println("content: "+  description);
             System.out.println("start_date: "+  start_date);
             System.out.println("end_date: "+  end_date);
             System.out.println("location: "+  location);
@@ -196,7 +196,7 @@ public class PosterController {
 //            System.out.println("eventPost: " + eventPost);
 //
 //            String title = request.getParameter("title");
-//            String description = request.getParameter("description");
+//            String content = request.getParameter("content");
 //            String start_date = request.getParameter("start_date");
 //            String end_date = request.getParameter("end_date");
 //            String location = request.getParameter("location");
@@ -231,7 +231,7 @@ public class PosterController {
 //
 //
 //            System.out.println("title: "+  title);
-//            System.out.println("description: "+  description);
+//            System.out.println("content: "+  content);
 //            System.out.println("start_date: "+  start_date);
 //            System.out.println("end_date: "+  end_date);
 //            System.out.println("location: "+  location);
@@ -240,7 +240,7 @@ public class PosterController {
 //            System.out.println("image: "+  image);
 //            System.out.println("category: "+  category);
 //
-//            dao.updateEventPost(title, description, start_date, end_date, location, state, id, category, image);
+//            dao.updateEventPost(title, content, start_date, end_date, location, state, id, category, image);
 //
 //            response.sendRedirect("event-detail?id=" + id);
 //

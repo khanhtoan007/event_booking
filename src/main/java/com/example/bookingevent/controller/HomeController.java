@@ -70,7 +70,7 @@ public class HomeController {
             String location = req.getParameter("location");
             String category = req.getParameter("category");
             String title = "%" +  req.getParameter("title") + "%";
-            String[] vars = new String[]{"event_id", "title", "description", "start_date", "end_date", "location", "state", "user_id", "category_id", "image", "cate_name"};
+            String[] vars = new String[]{"event_id", "title", "content", "start_date", "end_date", "location", "state", "user_id", "category_id", "image", "cate_name"};
             String sql;
             String[] para;
             if (location.equals("0") && category.equals("0")){

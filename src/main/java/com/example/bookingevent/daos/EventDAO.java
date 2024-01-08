@@ -32,9 +32,7 @@ public class EventDAO {
                         rs.getString(7),
                         rs.getInt(8),
                         rs.getInt(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12)
+                        rs.getString(10)
                 ));
             }
         } catch (Exception e) {
@@ -90,9 +88,7 @@ public class EventDAO {
                         rs.getString(7),
                         rs.getInt(8),
                         rs.getInt(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12)
+                        rs.getString(10)
 
                 ));
             }
@@ -119,9 +115,7 @@ public class EventDAO {
                         rs.getString(7),
                         rs.getInt(8),
                         rs.getInt(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12)
+                        rs.getString(10)
 
                 ));
             }
@@ -164,9 +158,7 @@ public class EventDAO {
                         rs.getString(7),
                         rs.getInt(8),
                         rs.getInt(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12)
+                        rs.getString(10)
                 ));
             }
         } catch (Exception e) {

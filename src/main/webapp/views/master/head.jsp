@@ -67,12 +67,12 @@
                 <div class="navbar-nav mx-auto">
                     <a href="${pageContext.request.contextPath}/views/index.jsp" class="nav-item nav-link active">Home</a>
                     <a href="${pageContext.request.contextPath}/views/products/shop.jsp" class="nav-item nav-link">Shop</a>
-                    <a href="${pageContext.request.contextPath}/views/products/shop-detail.html" class="nav-item nav-link">Shop Detail</a>
+                    <a href="${pageContext.request.contextPath}/views/products/product-detail.jsp" class="nav-item nav-link">Shop Detail</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">
                             <a href="${pageContext.request.contextPath}/views/cart.html" class="dropdown-item">Cart</a>
-                            <a href="${pageContext.request.contextPath}/views/products/chackout.html" class="dropdown-item">Chackout</a>
+                            <a href="${pageContext.request.contextPath}/views/products/checkout.jsp" class="dropdown-item">Chackout</a>
                             <a href="${pageContext.request.contextPath}/views/testimonial.html" class="dropdown-item">Testimonial</a>
                             <a href="${pageContext.request.contextPath}/views/404.html" class="dropdown-item">404 Page</a>
                         </div>
