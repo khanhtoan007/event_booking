@@ -3,6 +3,7 @@ package com.example.bookingevent.controller;
 import com.example.bookingevent.controller.Chat.MyWebSocket;
 import com.example.bookingevent.database.DB;
 import com.example.bookingevent.database.MyObject;
+import com.example.bookingevent.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -60,7 +61,7 @@ public class UserController {
             String[] var = new String[]{user_id,businessName,mst,address};
             int id =  DB.insertGetLastId(sql,var);
             System.out.println("send socket");
-            MyWebSocket.broadcastToChannel("0", id + "," +user.getUsername());
+            MyWebSocket.broadcastToChannel("0", id + "," +user.getUser());
             if (id > 0) {
                 System.out.println("request success!!!!");
                 resp.sendRedirect(req.getContextPath());

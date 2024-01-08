@@ -6,6 +6,7 @@ import com.example.bookingevent.daos.EventDAO;
 //import com.example.bookingevent.models.EventPostDTO;
 import com.example.bookingevent.database.DB;
 import com.example.bookingevent.database.MyObject;
+import com.example.bookingevent.models.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;

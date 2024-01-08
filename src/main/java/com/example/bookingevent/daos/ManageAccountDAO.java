@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.bookingevent.database.DBContext;
-import com.example.bookingevent.models.Account;
+import com.example.bookingevent.models.User;
 
 public class ManageAccountDAO {
 
@@ -14,15 +14,15 @@ public class ManageAccountDAO {
     ResultSet rs = null;
 
 
-    public List<Account> getAllAccount() {
-        List<Account> list = new ArrayList<>();
+    public List<User> getAllAccount() {
+        List<User> list = new ArrayList<>();
         String query = "select * from [User]";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Account(rs.getInt(1),
+                list.add(new User(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
@@ -41,7 +41,7 @@ public class ManageAccountDAO {
 
     public static void main(String[] args) {
         ManageAccountDAO dao = new ManageAccountDAO();
-        List<Account> test = dao.getAllAccount();
+        List<User> test = dao.getAllAccount();
         System.out.println(test);
     }
 }

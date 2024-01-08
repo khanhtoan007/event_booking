@@ -175,7 +175,7 @@
                             </div>
                             <div class="form-check my-3">
                                 <input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts">
-                                <label class="form-check-label" for="Account-1">Create an account?</label>
+                                <label class="form-check-label" for="Account-1">Create an user?</label>
                             </div>
                             <hr>
                             <div class="form-check my-3">
@@ -290,7 +290,7 @@
                                         <input type="checkbox" class="form-check-input bg-primary border-0" id="Transfer-1" name="Transfer" value="Transfer">
                                         <label class="form-check-label" for="Transfer-1">Direct Bank Transfer</label>
                                     </div>
-                                    <p class="text-start text-dark">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
+                                    <p class="text-start text-dark">Make your payment directly into our bank user. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our user.</p>
                                 </div>
                             </div>
                             <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">

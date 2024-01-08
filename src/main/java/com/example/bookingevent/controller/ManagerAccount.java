@@ -2,12 +2,11 @@ package com.example.bookingevent.controller;
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import com.example.bookingevent.daos.ManageAccountDAO;
 import com.example.bookingevent.database.DB;
-import com.example.bookingevent.models.Account;
+import com.example.bookingevent.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,7 +20,7 @@ public class  ManagerAccount  {
     public static class LoadAccount extends HttpServlet {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            List<Account> list = new ManageAccountDAO().getAllAccount();
+            List<User> list = new ManageAccountDAO().getAllAccount();
             req.setAttribute("listP", list);
             System.out.println(list);
             req.getRequestDispatcher("ManagerAccount.jsp").forward(req, resp);

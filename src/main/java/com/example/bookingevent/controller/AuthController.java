@@ -1,7 +1,7 @@
 package com.example.bookingevent.controller;
 
 import com.example.bookingevent.daos.AuthDAO;
-import com.example.bookingevent.models.Account;
+import com.example.bookingevent.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -82,17 +82,17 @@ public class AuthController {
             System.out.println("password: " + password);
 
             AuthDAO dao = new AuthDAO();
-            Account account = null;
+            User user = null;
 //            account = dao.login(username);
 
-            if (account != null && BCrypt.checkpw(password, account.getPass()))
+            if (user != null && BCrypt.checkpw(password, user.getPass()))
             {
-                System.out.println(account);
+                System.out.println(user);
                 HttpSession session = req.getSession();
-                session.setAttribute("user", account);
-                if (account.getRole().equals("User") || account.getRole().equals("Poster"))
+                session.setAttribute("user", user);
+                if (user.getRole().equals("User") || user.getRole().equals("Poster"))
                     resp.sendRedirect("homepage");
-                else if (account.getRole().equals("Admin"))
+                else if (user.getRole().equals("Admin"))
                     resp.sendRedirect("?");
             }
             else {

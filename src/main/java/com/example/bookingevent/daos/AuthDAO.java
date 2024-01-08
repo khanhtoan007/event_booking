@@ -1,7 +1,7 @@
 package com.example.bookingevent.daos;
 
 import com.example.bookingevent.database.DBContext;
-import com.example.bookingevent.models.Account;
+import com.example.bookingevent.models.User;
 
 
 import java.sql.Connection;
@@ -14,7 +14,7 @@ public class AuthDAO {
     PreparedStatement stm = null;
     ResultSet rs = null;
 
-    public Account login(String username)
+    public User login(String username)
     {
         String sql = "select * from [Account] where username = ?";
         try
@@ -26,7 +26,7 @@ public class AuthDAO {
             while (rs.next())
             {
                 System.out.println("found");
-                return (Account) new Account(rs.getInt(1),
+                return (User) new User(rs.getInt(1),
                                             rs.getString(2),
                                             rs.getString(3),
                                             rs.getString(4),

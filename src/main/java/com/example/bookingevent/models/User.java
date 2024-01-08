@@ -6,7 +6,7 @@
 package com.example.bookingevent.models;
 
 
-public class Account {
+public class User {
     private int id;
     private String user;
     private String pass;
@@ -15,7 +15,7 @@ public class Account {
     private String email;
     public String role;
 
-    public Account(){
+    public User(){
         
     }
 
@@ -75,7 +75,7 @@ public class Account {
         this.role = role;
     }
 
-    public Account(int id, String user, String pass, String name, String phone, String email, String role) {
+    public User(int id, String user, String pass, String name, String phone, String email, String role) {
         this.id = id;
         this.user = user;
         this.pass = pass;
