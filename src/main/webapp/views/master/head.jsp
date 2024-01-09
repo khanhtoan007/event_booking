@@ -1,9 +1,14 @@
+<%@ page import="com.example.bookingevent.database.MyObject" %>
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="com.example.bookingevent.Init.Config" %>
+<%@ page import="com.example.bookingevent.database.DB" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
+<% String user_id = (String) session.getAttribute("login"); %>
+<%MyObject user = DB.getUser(user_id);%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="utf-8">
     <title>Fruitables - Vegetable Website Template</title>
@@ -31,10 +36,11 @@
 
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+          integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
-
 <body>
-
 <!-- Spinner Start -->
 <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-primary" role="status"></div>
@@ -59,7 +65,7 @@
     </div>
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            <a href="${pageContext.request.contextPath}/views/index.jsp" class="navbar-brand"><h1 class="text-primary display-6">Event</h1></a>
+            <a href="${pageContext.request.contextPath}/" class="navbar-brand"><h1 class="text-primary display-6"><%=Config.app_name%></h1></a>
             <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars text-primary"></span>
             </button>
@@ -80,17 +86,36 @@
                     <a href="${pageContext.request.contextPath}/views/contact.html" class="nav-item nav-link">Contact</a>
                 </div>
                 <div class="d-flex m-3 me-0">
-                    <a href="#" class="my-auto">
-                        <i class="fas fa-user fa-2x"></i>
-                    </a>
-                    <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+<%--                    <div class="my-auto">--%>
+                        <form class="position-relative me-4 my-auto" action="${pageContext.request.contextPath}/change-language" onchange="submit()" method="post">
+                            <input type="hidden" name="current_uri" value="<%=request.getAttribute("uri")%>">
+                            <select class="form-control" name="lang" id="lang">
+                                    <option <%=language.getLocale().getLanguage().equals("en") ? "selected" : ""%> value="en"><%=language.getString("english")%></option>
+                                    <option <%=language.getLocale().getLanguage().equals("vi") ? "selected" : ""%> value="vi"><%=language.getString("vietnamese")%></option>
+                            </select>
+                        </form>
+<%--                    </div>--%>
+                    <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4 ml-2" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
                     <a href="#" class="position-relative me-4 my-auto">
                         <i class="fa fa-shopping-bag fa-2x"></i>
                         <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                     </a>
-                    <a href="#" class="my-auto">
-                        <i class="fas fa-user fa-2x"></i>
-                    </a>
+                    <% if (user_id == null) { %>
+                        <div class="row">
+                            <div class="col-md-6 p-0 d-flex">
+                                <a class="m-auto" href="${pageContext.request.contextPath}/register"><span class="text-nowrap"><%=language.getString("register")%></span></a>
+                            </div>
+                            <div class="col-md-6 p-0 d-flex">
+                                <a class="m-auto" href="${pageContext.request.contextPath}/login"><span class="text-nowrap"><%=language.getString("login")%></span></a>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <a href="${pageContext.request.contextPath}/user/profile" class="my-auto">
+                            <% if (user != null) { %>
+                                <img src="${pageContext.request.contextPath}<%=user.avatar%>" alt="" style="width: 44px; height: 44px;border-radius: 50%; object-fit: cover">
+                            <% } %>
+                        </a>
+                    <% } %>
                 </div>
             </div>
         </nav>

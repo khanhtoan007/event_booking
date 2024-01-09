@@ -7,6 +7,7 @@ import com.example.bookingevent.models.EventPost;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,10 +26,18 @@ public class HomeController {
     public static class Home extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//            EventDAO dao = new EventDAO();
-//            List<EventPost> list = dao.getEventPostList();
-//            req.setAttribute("list", list);
             req.getRequestDispatcher("views/index.jsp").forward(req,resp);
+        }
+    }
+
+    @WebServlet("/change-language")
+    public static class ChangeLanguage extends HttpServlet{
+
+        @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String lang = req.getParameter("lang");
+            resp.addCookie(new Cookie("lang", lang));
+            resp.sendRedirect(req.getParameter("current_uri"));
         }
     }
 
