@@ -1,6 +1,7 @@
 package com.example.bookingevent.controller.Event;
 
 import com.example.bookingevent.daos.EventDAO;
+import com.example.bookingevent.models.Category;
 import com.example.bookingevent.models.EventPost;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -20,11 +21,13 @@ public class EventController {
             EventDAO dao = new EventDAO();
             List<EventPost> list = dao.getEventPostList();
             req.setAttribute("list", list);
+            List<Category> categories = dao.getAllCategory();
+            req.setAttribute("categories", categories);
             req.getRequestDispatcher("views/products/shop.jsp").forward(req,resp);
         }
     }
 
-    @WebServlet("/events")
+    @WebServlet("/event-detail")
     public static class EventDetail extends HttpServlet {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

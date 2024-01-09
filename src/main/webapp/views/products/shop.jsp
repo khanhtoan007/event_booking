@@ -178,8 +178,8 @@
                             <div class="col-lg-9">
                                 <div class="row g-4 justify-content-center">
                                     <c:forEach items="${list}" var="list" >
-                                        <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="rounded position-relative fruite-item">
+                                        <a href="/event-detail/${list.id}" class="col-md-6 col-lg-6 col-xl-4">
+                                            <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
                                                 <img src="${list.image}" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
@@ -193,7 +193,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        </a>
                                     </c:forEach>
                                     <div class="col-12">
                                         <div class="pagination d-flex justify-content-center mt-5">

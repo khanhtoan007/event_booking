@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="EventBooking@minh.database.windows.net" uuid="873d2c4a-7a67-4423-9a81-59f75f2b08b9">
+    <data-source source="LOCAL" name="EventBooking@minh.database.windows.net" uuid="2c102a77-bbb5-47e4-8d32-f16599bc6c2e">
       <driver-ref>azure.ms</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>

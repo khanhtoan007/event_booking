@@ -1,5 +1,6 @@
 package com.example.bookingevent.daos;
 import com.example.bookingevent.database.DBContext;
+import com.example.bookingevent.models.Category;
 import com.example.bookingevent.models.EventPost;
 
 
@@ -268,21 +269,23 @@ public class EventDAO {
         }
     }
 
-//    public ArrayList<Category> getAllCategory()
-//    {
-//        ArrayList<Category> list = new ArrayList<>();
-//        String query = "SELECT * from Category";
-//        try {
-//            conn = new DBContext().getConnection();
-//            ps = conn.prepareStatement(query);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                list.add(new Category(rs.getString(1), rs.getString(2)));
-//            }
-//        } catch (Exception e) {
-//        }
-//        return list;
-//    }
+
+
+    public ArrayList<Category> getAllCategory()
+    {
+        ArrayList<Category> list = new ArrayList<>();
+        String query = "SELECT * from Category";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Category(rs.getString(1), rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 
     public static void main(String[] args) {
         EventDAO dao = new EventDAO();
