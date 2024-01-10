@@ -24,15 +24,16 @@ public class EventController {
         }
     }
 
-    @WebServlet("/events")
+    @WebServlet("/event")
     public static class EventDetail extends HttpServlet {
         @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             EventDAO dao = new EventDAO();
-            int id = Integer.parseInt(req.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id"));
             List<EventPost> eventDetail = dao.getEventPostByID(id);
-            req.setAttribute("eventDetail", eventDetail);
-            req.getRequestDispatcher("views/products/product-detail.jsp").forward(req,resp);
+            request.setAttribute("eventPost", eventDetail);
+            request.getRequestDispatcher("views/products/product-detail.jsp").forward(request,response);
         }
+
     }
 }
