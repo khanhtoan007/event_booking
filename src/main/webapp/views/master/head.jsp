@@ -86,7 +86,6 @@
                     <a href="${pageContext.request.contextPath}/views/contact.html" class="nav-item nav-link">Contact</a>
                 </div>
                 <div class="d-flex m-3 me-0">
-<%--                    <div class="my-auto">--%>
                         <form class="position-relative me-4 my-auto" action="${pageContext.request.contextPath}/change-language" onchange="submit()" method="post">
                             <input type="hidden" name="current_uri" value="<%=request.getAttribute("uri")%>">
                             <select class="form-control" name="lang" id="lang">
@@ -94,7 +93,6 @@
                                     <option <%=language.getLocale().getLanguage().equals("vi") ? "selected" : ""%> value="vi"><%=language.getString("vietnamese")%></option>
                             </select>
                         </form>
-<%--                    </div>--%>
                     <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4 ml-2" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
                     <a href="#" class="position-relative me-4 my-auto">
                         <i class="fa fa-shopping-bag fa-2x"></i>
@@ -102,19 +100,33 @@
                     </a>
                     <% if (user_id == null) { %>
                         <div class="row">
-                            <div class="col-md-6 p-0 d-flex">
-                                <a class="m-auto" href="${pageContext.request.contextPath}/register"><span class="text-nowrap"><%=language.getString("register")%></span></a>
+                            <div class="col-6 d-flex flex-column align-content-center">
+                                <a style="margin-top: 8px;" href="${pageContext.request.contextPath}/register"><span class=""><%=language.getString("register")%></span></a>
                             </div>
-                            <div class="col-md-6 p-0 d-flex">
-                                <a class="m-auto" href="${pageContext.request.contextPath}/login"><span class="text-nowrap"><%=language.getString("login")%></span></a>
+                            <div class="col-6 d-flex flex-column align-content-center">
+                                <a style="margin-top: 8px;" href="${pageContext.request.contextPath}/login"><span class=""><%=language.getString("login")%></span></a>
                             </div>
+<%--                            <div class="col-md-6 p-0 d-flex">--%>
+<%--                                <a class="m-auto" href="${pageContext.request.contextPath}/register"><span class="text-nowrap"><%=language.getString("register")%></span></a>--%>
+<%--                            </div>--%>
+<%--                            &nbsp;&nbsp;--%>
+<%--                            <div class="col-md-6 p-0 d-flex">--%>
+<%--                                <a class="m-auto" href="${pageContext.request.contextPath}/login"><span class="text-nowrap"><%=language.getString("login")%></span></a>--%>
+<%--                            </div>--%>
                         </div>
                     <% } else { %>
-                        <a href="${pageContext.request.contextPath}/user/profile" class="my-auto">
-                            <% if (user != null) { %>
-                                <img src="${pageContext.request.contextPath}<%=user.avatar%>" alt="" style="width: 44px; height: 44px;border-radius: 50%; object-fit: cover">
-                            <% } %>
-                        </a>
+                        <% if (user != null) { %>
+                            <a href="${pageContext.request.contextPath}/user/profile" class="mr-1">
+                                <img src="<%=user.avatar.startsWith("http") ? user.avatar : request.getContextPath() + user.avatar%>" alt="" style="width: 44px; height: 44px;border-radius: 50%; object-fit: cover">
+                            </a>
+                            <div class="dropdown d-flex flex-column justify-content-center">
+                                <p class="dropdown-toggle align-items-center m-0 ml-1" id="dropdownMenuButton1" data-bs-toggle="dropdown"><%=user.name%></p>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/profile"><%=language.getString("profile")%></a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout"><%=language.getString("logout")%></a></li>
+                                </ul>
+                            </div>
+                        <% } %>
                     <% } %>
                 </div>
             </div>

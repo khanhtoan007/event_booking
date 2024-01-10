@@ -2,7 +2,7 @@
 <div class="container-fluid py-5 mb-5 hero-header">
   <div class="container py-5">
     <div class="row g-5 align-items-center">
-      <h1 class="mb-5 display-3 text-primary"><%= language.getString("register") %></h1>
+      <h3 class="mb-5 display-3 text-primary"><%= language.getString("register") %></h3>
       <form action="${pageContext.request.contextPath}/register" method="post">
         <div class="row">
           <div class="col-6">
@@ -53,6 +53,7 @@
         </div>
         <div class="d-grid gap-2 mt-2">
           <button type="submit" class="btn btn-primary"><%= language.getString("register").toUpperCase() %></button>
+          <p><%=language.getString("already_have_account").replace("url", request.getContextPath() + "/login")%></p><br>
         </div>
       </form>
     </div>

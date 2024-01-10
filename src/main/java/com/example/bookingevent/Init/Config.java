@@ -20,4 +20,7 @@ public class Config {
     public static String app_name = "Event Booking";
     public static String email_address = "tranquangminh116@gmail.com";
     public static String email_password = "iahskjpdwuvcyzym";
+    public static String redirect_uri = "http://localhost:8080/event_booking/login-google";
+    public static String client_id="950893291709-9rqulakhl78cnlejkuofncru62p49epo.apps.googleusercontent.com";
+    public static String client_secret="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";
 }
