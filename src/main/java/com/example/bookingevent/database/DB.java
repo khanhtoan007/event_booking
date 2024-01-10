@@ -9,7 +9,7 @@ import java.util.List;
 public class DB {
     public static Connection getConnection() {
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName(Config.db_class_name);
             String serverName = Config.db_server;
             String port = Config.db_port;
             String databaseName = Config.db_name;
@@ -118,6 +118,16 @@ public class DB {
         }
     }
 
+    public static MyObject getUser(String id){
+        if (id == null){
+            return null;
+        }
+        if (id.equals("")){
+            return null;
+        }
+        ArrayList<MyObject> users = DB.getData("select * from users where id = ?", new String[]{id}, new String[]{"id", "name", "email", "phone", "password", "avatar", "gender", "token", "is_verified", "role_id"});
+        return users.size() == 0 ? null : users.get(0);
+    }
 
     public static void main(String[] args) throws Exception{
         System.out.println(getConnection().getCatalog());
