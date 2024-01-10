@@ -23,7 +23,7 @@
 
 
         <!-- Single Page Header start -->
-        <div class="container-fluid page-header py-5">
+        <div class="container-fluid page-header py-5" style="background: url('../../assets/img/cart-page-header-img.jpg')">
             <h1 class="text-center text-white display-6">Shop</h1>
             <ol class="breadcrumb justify-content-center mb-0">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -62,118 +62,120 @@
                         </div>
                         <div class="row g-4">
                             <div class="col-lg-3">
-                                <div class="row g-4">
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <h4>Categories</h4>
-                                            <ul class="list-unstyled fruite-categorie">
-                                                <c:forEach items="${categories}" var="cate">
-                                                    <li>
-                                                        <div class="d-flex justify-content-between fruite-name">
-                                                            <a href="#"><i class="fas fa-window-minimize me-2"></i>${cate.name}</a>
-                                                        </div>
-                                                    </li>
-                                                </c:forEach>
+                                <form action="search">
+                                    <div class="row g-4">
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <h4>Categories</h4>
+                                                <ul class="list-unstyled fruite-categorie">
+                                                    <c:forEach items="${categories}" var="cate">
+                                                        <li>
+                                                            <div class="d-flex justify-content-between fruite-name">
+                                                                <a href="${pageContext.request.contextPath}/category?cateID=${cate.category_id}"><i class="fas fa-window-minimize me-2"></i>${cate.name}</a>
+                                                            </div>
+                                                        </li>
+                                                    </c:forEach>
 
-                                            </ul>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <h4 class="mb-2">Price</h4>
+                                                <input type="range" class="form-range w-100" id="rangeInput" name="rangeInput" min="0" max="1000000" value="0" oninput="amount.value=rangeInput.value">
+                                                <output id="amount" name="amount" min-value="0" max-value="1000000" for="rangeInput">0</output>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <h4>Additional</h4>
+                                                <div class="mb-2">
+                                                    <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
+                                                    <label for="Categories-1"> Most favorite</label>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
+                                                    <label for="Categories-2"> Lowest</label>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
+                                                    <label for="Categories-3"> Highest</label>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <input type="radio" class="me-2" id="Categories-4" name="Categories-1" value="Beverages">
+                                                    <label for="Categories-4"> Long-term</label>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <input type="radio" class="me-2" id="Categories-5" name="Categories-1" value="Beverages">
+                                                    <label for="Categories-5"> Short-term</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <h4 class="mb-3">Featured products</h4>
+                                            <div class="d-flex align-items-center justify-content-start">
+                                                <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                                    <img src="img/featur-1.jpg" class="img-fluid rounded" alt="">
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-2">Big Banana</h6>
+                                                    <div class="d-flex mb-2">
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="d-flex mb-2">
+                                                        <h5 class="fw-bold me-2">2.99 $</h5>
+                                                        <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-start">
+                                                <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                                    <img src="img/featur-2.jpg" class="img-fluid rounded" alt="">
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-2">Big Banana</h6>
+                                                    <div class="d-flex mb-2">
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="d-flex mb-2">
+                                                        <h5 class="fw-bold me-2">2.99 $</h5>
+                                                        <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-start">
+                                                <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                                    <img src="img/featur-3.jpg" class="img-fluid rounded" alt="">
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-2">Big Banana</h6>
+                                                    <div class="d-flex mb-2">
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="d-flex mb-2">
+                                                        <h5 class="fw-bold me-2">2.99 $</h5>
+                                                        <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-center my-4">
+                                                <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <h4 class="mb-2">Price</h4>
-                                            <input type="range" class="form-range w-100" id="rangeInput" name="rangeInput" min="0" max="1000000" value="0" oninput="amount.value=rangeInput.value">
-                                            <output id="amount" name="amount" min-value="0" max-value="1000000" for="rangeInput">0</output>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <h4>Additional</h4>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                                                <label for="Categories-1"> Most favorite</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                                                <label for="Categories-2"> Lowest</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
-                                                <label for="Categories-3"> Highest</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-4" name="Categories-1" value="Beverages">
-                                                <label for="Categories-4"> Long-term</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-5" name="Categories-1" value="Beverages">
-                                                <label for="Categories-5"> Short-term</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <h4 class="mb-3">Featured products</h4>
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                                <img src="img/featur-1.jpg" class="img-fluid rounded" alt="">
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-2">Big Banana</h6>
-                                                <div class="d-flex mb-2">
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                    <h5 class="fw-bold me-2">2.99 $</h5>
-                                                    <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                                <img src="img/featur-2.jpg" class="img-fluid rounded" alt="">
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-2">Big Banana</h6>
-                                                <div class="d-flex mb-2">
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                    <h5 class="fw-bold me-2">2.99 $</h5>
-                                                    <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                                <img src="img/featur-3.jpg" class="img-fluid rounded" alt="">
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-2">Big Banana</h6>
-                                                <div class="d-flex mb-2">
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                    <h5 class="fw-bold me-2">2.99 $</h5>
-                                                    <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-center my-4">
-                                            <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                             <div class="col-lg-9">
                                 <div class="row g-4 justify-content-center">
