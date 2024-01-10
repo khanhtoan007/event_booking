@@ -1,4 +1,4 @@
--Hướng dẫn sử dụng multi-lang
+- Hướng dẫn sử dụng multi-lang
   + ở file jsp: <%=language.getString("key")%> // cặp key=value sẽ được khai báo ở file .properties ở thư mục resouce, nếu cần tạo thêm thì tạo file language_<language_code>.properties, sau đó vào file head.jsp tìm form thay đổi ngôn ngữ thêm option là xong
   + ở trong servlet thì thêm dòng "ResourceBundle language = (ResourceBundle) req.getAttribute("language");" rồi dùng như ở jsp
 - Lấy user_id đang login: String user_id = (String) req.getSession().getAttribute("login");
