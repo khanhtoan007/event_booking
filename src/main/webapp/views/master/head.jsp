@@ -26,7 +26,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="${pageContext.request.contextPath}/assets/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+<%--    <link href="${pageContext.request.contextPath}/assets/lib/lightbox/css/lightbox.min.css" rel="stylesheet">--%>
 
     <link href="${pageContext.request.contextPath}/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
@@ -100,11 +100,15 @@
                     </a>
                     <% if (user_id == null) { %>
                         <div class="row">
-                            <div class="col-6 d-flex flex-column align-content-center">
-                                <a style="margin-top: 8px;" href="${pageContext.request.contextPath}/register"><span class=""><%=language.getString("register")%></span></a>
+                            <div class="col-6 p-0" >
+                                <a href="${pageContext.request.contextPath}/register"><span class="">
+                                    <button class="btn btn-warning"><%=language.getString("register")%></button>
+                                </span></a>
                             </div>
-                            <div class="col-6 d-flex flex-column align-content-center">
-                                <a style="margin-top: 8px;" href="${pageContext.request.contextPath}/login"><span class=""><%=language.getString("login")%></span></a>
+                            <div class="col-6 p-0" >
+                                <a href="${pageContext.request.contextPath}/login"><span class="">
+                                    <button class="btn btn-primary"><span class="text-nowrap"><%=language.getString("login")%></span></button>
+                                </span></a>
                             </div>
                         </div>
                     <% } else { %>
