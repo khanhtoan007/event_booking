@@ -14,8 +14,11 @@ public class EventPost {
     private String start_date;
     private String end_date;
     private String location;
-    private String state;
+    private boolean is_verified;
     private int author_id;
     private int category_id;
+    private int tickets;
+    private int price;
     private String image;
+    private String category_name;
 }

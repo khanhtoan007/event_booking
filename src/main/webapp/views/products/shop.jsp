@@ -180,22 +180,22 @@
                             <div class="col-lg-9">
                                 <div class="row g-4 justify-content-center">
                                     <c:forEach items="${list}" var="list" >
-                                        <a href="/event-detail/${list.id}" class="col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item">
-                                            <div class="fruite-img">
-                                                <img src="${list.image}" class="img-fluid w-100 rounded-top" alt="">
-                                            </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">${list.Category_name}</div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>${list.title}</h4>
-                                                <p>${list.content}</p>
-                                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">${list.price}</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                        <div href="/event-detail/${list.id}" class=" col-md-6 col-lg-6 col-xl-4">
+                                            <div class="card-body rounded position-relative fruite-item">
+                                                <div class="fruite-img">
+                                                    <img src="${pageContext.request.contextPath}${list.image}" class="img-fluid w-100 rounded-top" alt="https://images.tkbcdn.com/1/780/300/Upload/eventcover/2023/12/05/BD6288.jpg">
+                                                </div>
+                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">${list.category_name}</div>
+                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                    <h4 class="card-title">${list.title}</h4>
+                                                    <p class="card-text">${list.content}</p>
+                                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                                        <p class="text-dark fs-5 fw-bold mb-0">${list.price}VND/person</p>
+                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        </a>
                                     </c:forEach>
                                     <div class="col-12">
                                         <div class="pagination d-flex justify-content-center mt-5">

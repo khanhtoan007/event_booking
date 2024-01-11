@@ -17,7 +17,7 @@ public class Config {
     public static String db_name = "event";*/
     public static String app_url = "http://localhost:8080";
     public static String context_path = "/event_booking";
-    public static String app_name = "Event Booking";
+    public static String app_name = "Local Xplorer";
     public static String email_address = "tranquangminh116@gmail.com";
     public static String email_password = "iahskjpdwuvcyzym";
     public static String redirect_uri = "http://localhost:8080/event_booking/login-google";

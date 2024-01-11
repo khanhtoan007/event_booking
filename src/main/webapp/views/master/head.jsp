@@ -106,13 +106,6 @@
                             <div class="col-6 d-flex flex-column align-content-center">
                                 <a style="margin-top: 8px;" href="${pageContext.request.contextPath}/login"><span class=""><%=language.getString("login")%></span></a>
                             </div>
-<%--                            <div class="col-md-6 p-0 d-flex">--%>
-<%--                                <a class="m-auto" href="${pageContext.request.contextPath}/register"><span class="text-nowrap"><%=language.getString("register")%></span></a>--%>
-<%--                            </div>--%>
-<%--                            &nbsp;&nbsp;--%>
-<%--                            <div class="col-md-6 p-0 d-flex">--%>
-<%--                                <a class="m-auto" href="${pageContext.request.contextPath}/login"><span class="text-nowrap"><%=language.getString("login")%></span></a>--%>
-<%--                            </div>--%>
                         </div>
                     <% } else { %>
                         <% if (user != null) { %>

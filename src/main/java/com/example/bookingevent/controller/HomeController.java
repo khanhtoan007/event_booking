@@ -52,7 +52,7 @@ public class HomeController {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String id = req.getParameter("id");
-            List<EventPost> eventPosts = new EventDAO().getEventPostList();
+            List<EventPost> eventPosts = new EventDAO().getEvent();
             req.setAttribute("list", eventPosts);
             req.getRequestDispatcher("views/index.jsp").forward(req,resp);
         }
