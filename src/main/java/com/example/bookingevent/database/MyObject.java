@@ -15,5 +15,6 @@ public class MyObject {
     public String token;
     public String is_verified;
     public String role_id;
+    public String count;
 
 }

@@ -26,7 +26,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="${pageContext.request.contextPath}/assets/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+<%--    <link href="${pageContext.request.contextPath}/assets/lib/lightbox/css/lightbox.min.css" rel="stylesheet">--%>
 
     <link href="${pageContext.request.contextPath}/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
@@ -72,7 +72,7 @@
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
                     <a href="${pageContext.request.contextPath}/views/index.jsp" class="nav-item nav-link active">Home</a>
-                    <a href="${pageContext.request.contextPath}/views/products/shop.jsp" class="nav-item nav-link">Shop</a>
+                    <a href="${pageContext.request.contextPath}/events" class="nav-item nav-link">Shop</a>
                     <a href="${pageContext.request.contextPath}/views/products/shop-detail.html" class="nav-item nav-link">Shop Detail</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -100,19 +100,16 @@
                     </a>
                     <% if (user_id == null) { %>
                         <div class="row">
-                            <div class="col-6 d-flex flex-column align-content-center">
-                                <a style="margin-top: 8px;" href="${pageContext.request.contextPath}/register"><span class=""><%=language.getString("register")%></span></a>
+                            <div class="col-6 p-0" >
+                                <a href="${pageContext.request.contextPath}/register"><span class="">
+                                    <button class="btn btn-warning"><%=language.getString("register")%></button>
+                                </span></a>
                             </div>
-                            <div class="col-6 d-flex flex-column align-content-center">
-                                <a style="margin-top: 8px;" href="${pageContext.request.contextPath}/login"><span class=""><%=language.getString("login")%></span></a>
+                            <div class="col-6 p-0" >
+                                <a href="${pageContext.request.contextPath}/login"><span class="">
+                                    <button class="btn btn-primary"><span class="text-nowrap"><%=language.getString("login")%></span></button>
+                                </span></a>
                             </div>
-<%--                            <div class="col-md-6 p-0 d-flex">--%>
-<%--                                <a class="m-auto" href="${pageContext.request.contextPath}/register"><span class="text-nowrap"><%=language.getString("register")%></span></a>--%>
-<%--                            </div>--%>
-<%--                            &nbsp;&nbsp;--%>
-<%--                            <div class="col-md-6 p-0 d-flex">--%>
-<%--                                <a class="m-auto" href="${pageContext.request.contextPath}/login"><span class="text-nowrap"><%=language.getString("login")%></span></a>--%>
-<%--                            </div>--%>
                         </div>
                     <% } else { %>
                         <% if (user != null) { %>

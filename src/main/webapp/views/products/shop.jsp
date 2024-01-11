@@ -1,6 +1,4 @@
-<jsp:include page="../master/head.jsp"/>
-
-
+<%@ include file="../master/head.jsp" %>
         <!-- Modal Search Start -->
         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
@@ -34,7 +32,7 @@
 
 
         <!-- Fruits Shop Start-->
-        <div class="container-fluid fruite py-5">
+        <div id="app" class="container-fluid fruite py-5">
             <div class="container py-5">
                 <h1 class="mb-4">Event</h1>
                 <div class="row g-4">
@@ -65,71 +63,34 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <h4>Categories</h4>
-                                            <ul class="list-unstyled fruite-categorie">
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Outdoor</a>
-                                                        <span>(3)</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Indoor</a>
-                                                        <span>(5)</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Design</a>
-                                                        <span>(2)</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Traditional Culture</a>
-                                                        <span>(8)</span>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                            <template v-for="(value, key) in categories">
+                                                <div class="form-check">
+                                                    <input v-model="categories_selection[key]" class="form-check-input" type="checkbox" value="" :id="value.id">
+                                                    <label class="form-check-label" :for="value.id">
+                                                        {{value.name}}({{value.count}})
+                                                    </label>
+                                                </div>
+                                            </template>
+                                            <button v-on:click="check">check</button>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <h4 class="mb-2">Price</h4>
-                                            <input type="range" class="form-range w-100" id="rangeInput" name="rangeInput" min="0" max="1000000" value="0" oninput="amount.value=rangeInput.value">
-                                            <output id="amount" name="amount" min-value="0" max-value="1000000" for="rangeInput">0</output>
+                                            <h4 class="mb-2">Min price</h4>
+                                            <input type="range" class="form-range w-100" id="rangeInput_min" name="rangeInput_min" min="30000" max="100000" value="0" oninput="amount_min.value=rangeInput_min.value">
+                                            <input class="form-control" type="number" id="amount_min" name="amount_min" min="30000" max="100000" value="0">
                                         </div>
-                                    </div>
-                                    <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <h4>Additional</h4>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                                                <label for="Categories-1"> Most favorite</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                                                <label for="Categories-2"> Lowest</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
-                                                <label for="Categories-3"> Highest</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-4" name="Categories-1" value="Beverages">
-                                                <label for="Categories-4"> Long-term</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-5" name="Categories-1" value="Beverages">
-                                                <label for="Categories-5"> Short-term</label>
-                                            </div>
+                                            <h4 class="mb-2">Max price</h4>
+                                            <input type="range" class="form-range w-100" id="rangeInput_max" name="rangeInput_max" min="30000" max="100000" value="0" oninput="amount_max.value=rangeInput_max.value">
+                                            <input class="form-control" id="amount_max" name="amount_max" min="30000" max="100000" type="text" value="0">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <h4 class="mb-3">Featured products</h4>
                                         <div class="d-flex align-items-center justify-content-start">
                                             <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                                <img src="img/featur-1.jpg" class="img-fluid rounded" alt="">
+                                                <img src="${pageContext.request.contextPath}/assets/img/featur-1.jpg" class="img-fluid rounded" alt="">
                                             </div>
                                             <div>
                                                 <h6 class="mb-2">Big Banana</h6>
@@ -148,7 +109,7 @@
                                         </div>
                                         <div class="d-flex align-items-center justify-content-start">
                                             <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                                <img src="img/featur-2.jpg" class="img-fluid rounded" alt="">
+                                                <img src="${pageContext.request.contextPath}/assets/img/featur-2.jpg" class="img-fluid rounded" alt="">
                                             </div>
                                             <div>
                                                 <h6 class="mb-2">Big Banana</h6>
@@ -167,7 +128,7 @@
                                         </div>
                                         <div class="d-flex align-items-center justify-content-start">
                                             <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                                <img src="img/featur-3.jpg" class="img-fluid rounded" alt="">
+                                                <img src="${pageContext.request.contextPath}/assets/img/featur-3.jpg" class="img-fluid rounded" alt="">
                                             </div>
                                             <div>
                                                 <h6 class="mb-2">Big Banana</h6>
@@ -195,7 +156,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -211,7 +172,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -227,7 +188,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -243,7 +204,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="img/fruite-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -259,7 +220,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="img/fruite-item-3.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-3.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -275,7 +236,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -291,7 +252,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -307,7 +268,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -323,7 +284,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -356,6 +317,43 @@
             </div>
         </div>
         <!-- Fruits Shop End-->
-
-
-<jsp:include page="../master/foot.jsp"/>
+<%@ include file="../master/foot.jsp" %>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            categories: [],
+            categories_selection: [],
+        },
+        created() {
+            this.getCategories()
+        },
+        methods: {
+            getCategories(){
+                axios.get('<%=request.getContextPath()%>/get-categories')
+                    .then((res)=>{
+                        this.categories = JSON.parse(res.data.categories)
+                        let sum = 0;
+                        for (let i = 0; i < this.categories.length; i++) {
+                            sum += parseInt(this.categories[i].count)
+                        }
+                        this.categories.unshift({id: "0", name: "<%=language.getString("all_cate")%>", count: sum.toString()})
+                    })
+            },
+            check(){
+                for (let i = 0; i < this.categories_selection.length; i++) {
+                    console.log(this.categories_selection[i])
+                }
+            }
+            // selectCategory(selected_category){
+            //     if (this.categories_selection.indexOf(selected_category) === -1){
+            //         this.categories_selection.push(selected_category)
+            //     } else {
+            //         var index = this.categories.indexOf(selected_category)
+            //         this.categories_selection.splice(index, 1)
+            //     }
+            //     console.log(this.categories_selection)
+            // }
+        }
+    })
+</script>

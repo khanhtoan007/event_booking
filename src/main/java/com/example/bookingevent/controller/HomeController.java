@@ -4,6 +4,10 @@ import com.example.bookingevent.daos.EventDAO;
 import com.example.bookingevent.database.DB;
 import com.example.bookingevent.database.MyObject;
 import com.example.bookingevent.models.EventPost;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -40,7 +44,47 @@ public class HomeController {
             resp.sendRedirect(req.getParameter("current_uri"));
         }
     }
-
+    @WebServlet("/events")
+    public static class ShowEvents extends HttpServlet{
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            req.getRequestDispatcher("/views/products/shop.jsp").forward(req, resp);
+        }
+    }
+    @WebServlet("/get-categories")
+    public static class GetCategories extends HttpServlet{
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String sql = "select categories.*, count(events.id) as count from categories left join events on categories.id = events.category_id group by categories.id, name";
+            String[] fields = new String[]{"id", "name", "count"};
+            ArrayList<MyObject> categories = DB.getData(sql, fields);
+            com.google.gson.JsonObject job = new JsonObject();
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+            String categories_json_string = objectMapper.writeValueAsString(categories);
+            job.addProperty("categories", categories_json_string);
+            Gson gson = new Gson();
+            resp.getWriter().write(gson.toJson(job));
+        }
+    }
+    @WebServlet("/get-locations")
+    public static class GetLocations extends HttpServlet{
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String sql = "select location from events group by location";
+            String[] fields = new String[]{"location"};
+            ArrayList<MyObject> locations = DB.getData(sql, fields);
+            com.google.gson.JsonObject job = new JsonObject();
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+            String locations_json_string = objectMapper.writeValueAsString(locations);
+            job.addProperty("locations", locations_json_string);
+            Gson gson = new Gson();
+            resp.getWriter().write(gson.toJson(job));
+        }
+    }
     @WebServlet("/event-detail")
     @MultipartConfig(
             fileSizeThreshold = 1024 * 1024, // 1 MB
