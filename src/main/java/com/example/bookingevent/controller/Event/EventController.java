@@ -24,11 +24,7 @@ public class EventController {
     public static class LoadEvent extends HttpServlet {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-                EventDAO dao = new EventDAO();
-                List<EventPost> list = dao.getEvent();
-                req.setAttribute("list", list);
-                List<Category> categories = dao.getAllCategory();
-                req.setAttribute("categories", categories);
+
                 req.getRequestDispatcher("views/events/shop.jsp").forward(req,resp);
         }
     }
