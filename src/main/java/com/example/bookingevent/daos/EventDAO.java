@@ -1,11 +1,13 @@
 package com.example.bookingevent.daos;
 import com.example.bookingevent.database.DBContext;
+import com.example.bookingevent.models.Category;
 import com.example.bookingevent.models.EventPost;
 
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +16,38 @@ public class EventDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public List<EventPost> getEventPostList() {
+//    public List<EventPost> getEventPostList() {
+//        List<EventPost> list = new ArrayList<>();
+//        String query = "SELECT Event.*, Category.name as Category_name, U.name as U_name  from Event inner join Category on Event.category_id = Category.category_id inner join [User] U on U.user_id = Event.user_id";
+//        try {
+//            conn = new DBContext().getConnection();
+//            ps = conn.prepareStatement(query);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                list.add(new EventPost(
+//                        rs.getString(1),
+//                        rs.getString(2),
+//                        rs.getString(3),
+//                        rs.getString(4),
+//                        rs.getString(5),
+//                        rs.getString(6),
+//                        rs.getString(7),
+//                        rs.getInt(8),
+//                        rs.getInt(9),
+//                        rs.getString(10)
+//                ));
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return list;
+//    }
+
+    public List<EventPost> getEvent() {
         List<EventPost> list = new ArrayList<>();
-        String query = "SELECT Event.*, Category.name as Category_name, U.name as U_name  from Event inner join Category on Event.category_id = Category.category_id inner join [User] U on U.user_id = Event.user_id";
+        String query = "select e.*, c.name as category_name\n" +
+                "FROM events e\n" +
+                "JOIN categories c ON e.category_id = c.id";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -29,10 +60,14 @@ public class EventDAO {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getString(7),
+                        rs.getBoolean(7),
                         rs.getInt(8),
                         rs.getInt(9),
-                        rs.getString(10)
+                        rs.getInt(10),
+                        rs.getInt(11),
+                        rs.getString(12),
+                        rs.getString(13)
+
                 ));
             }
         } catch (Exception e) {
@@ -41,16 +76,18 @@ public class EventDAO {
         return list;
     }
 
-//    public List<EventPostDTO> getEventPostListById(int user_id) {
-//        List<EventPostDTO> list = new ArrayList<>();
-//        String query = "select * from Event join Category C on Event.category_id = C.category_id where user_id = ?;";
+
+
+//    public List<EventPost> getEventPostByCategory(String category) {
+//        List<EventPost> list = new ArrayList<>();
+//        String query = "SELECT * from Event where category = ?";
 //        try {
 //            conn = new DBContext().getConnection();
 //            ps = conn.prepareStatement(query);
-//            ps.setInt(1, user_id);
+//            ps.setString(1, category);
 //            rs = ps.executeQuery();
 //            while (rs.next()) {
-//                list.add(new EventPostDTO(
+//                list.add( new EventPost(
 //                        rs.getString(1),
 //                        rs.getString(2),
 //                        rs.getString(3),
@@ -58,71 +95,43 @@ public class EventDAO {
 //                        rs.getString(5),
 //                        rs.getString(6),
 //                        rs.getString(7),
-//                        rs.getString(8),
-//                        rs.getString(10),
-//                        rs.getString(12)
+//                        rs.getInt(8),
+//                        rs.getInt(9),
+//                        rs.getString(10)
+//
 //                ));
 //            }
 //        } catch (Exception e) {
-//            e.printStackTrace();
 //        }
 //        return list;
 //    }
-
-    public List<EventPost> getEventPostByCategory(String category) {
-        List<EventPost> list = new ArrayList<>();
-        String query = "SELECT * from Event where category = ?";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, category);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add( new EventPost(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getString(10)
-
-                ));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
-    public List<EventPost> getEventByState(String state) {
-        List<EventPost> list = new ArrayList<>();
-        String query = "SELECT * from Event where state = ?";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, state);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add( new EventPost(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getString(10)
-
-                ));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
+//    public List<EventPost> getEventByState(String state) {
+//        List<EventPost> list = new ArrayList<>();
+//        String query = "SELECT * from Event where state = ?";
+//        try {
+//            conn = new DBContext().getConnection();
+//            ps = conn.prepareStatement(query);
+//            ps.setString(1, state);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                list.add( new EventPost(
+//                        rs.getString(1),
+//                        rs.getString(2),
+//                        rs.getString(3),
+//                        rs.getString(4),
+//                        rs.getString(5),
+//                        rs.getString(6),
+//                        rs.getString(7),
+//                        rs.getInt(8),
+//                        rs.getInt(9),
+//                        rs.getString(10)
+//
+//                ));
+//            }
+//        } catch (Exception e) {
+//        }
+//        return list;
+//    }
 //    public String getState() throws Exception {
 //        EventPost eventPost = new EventPost();
 //        String query = "SELECT DISTINCT state FROM Event";
@@ -155,10 +164,13 @@ public class EventDAO {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getString(7),
+                        rs.getBoolean(7),
                         rs.getInt(8),
                         rs.getInt(9),
-                        rs.getString(10)
+                        rs.getInt(10),
+                        rs.getInt(11),
+                        rs.getString(12),
+                        rs.getString(13)
                 ));
             }
         } catch (Exception e) {
@@ -268,27 +280,61 @@ public class EventDAO {
         }
     }
 
-//    public ArrayList<Category> getAllCategory()
-//    {
-//        ArrayList<Category> list = new ArrayList<>();
-//        String query = "SELECT * from Category";
-//        try {
-//            conn = new DBContext().getConnection();
-//            ps = conn.prepareStatement(query);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                list.add(new Category(rs.getString(1), rs.getString(2)));
-//            }
-//        } catch (Exception e) {
-//        }
-//        return list;
-//    }
+
+
+    public ArrayList<Category> getAllCategory()
+    {
+        ArrayList<Category> list = new ArrayList<>();
+        String query = "SELECT * from categories";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Category(rs.getString(1), rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    //get event by price
+    public List<EventPost> getEventByPrice(int minPrice, int maxPrice) {
+        List<EventPost> list = new ArrayList<>();
+        String query = "SELECT * FROM events WHERE price BETWEEN ? AND ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, minPrice);
+            ps.setInt(2, maxPrice);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new EventPost(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getBoolean(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getInt(11),
+                        rs.getString(12),
+                        rs.getString(13)
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 
     public static void main(String[] args) {
         EventDAO dao = new EventDAO();
-
-        ArrayList<EventPost> list = dao.getEventPostByID(1);
-
+        List<EventPost> list = dao.getEvent();
         System.out.println(list);
     }
 }

@@ -1,8 +1,12 @@
+<%@ page import="com.example.bookingevent.database.MyObject" %>
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="com.example.bookingevent.Init.Config" %>
+<%@ page import="com.example.bookingevent.database.DB" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-
-
-
+<% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
+<% String user_id = (String) session.getAttribute("login"); %>
+<%MyObject user = DB.getUser(user_id);%>
 
 <!-- Spinner Start -->
 <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
@@ -28,15 +32,15 @@
     </div>
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            <a href="${pageContext.request.contextPath}/views/index.jsp" class="navbar-brand"><h1 class="text-primary display-6">Event</h1></a>
+            <a href="${pageContext.request.contextPath}/" class="navbar-brand"><h1 class="text-primary display-6"><%=Config.app_name%></h1></a>
             <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars text-primary"></span>
             </button>
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
                     <a href="${pageContext.request.contextPath}/views/index.jsp" class="nav-item nav-link active">Home</a>
-                    <a href="${pageContext.request.contextPath}/views/products/shop.jsp" class="nav-item nav-link">Shop</a>
-                    <a href="${pageContext.request.contextPath}/views/products/product-detail.jsp" class="nav-item nav-link">Shop Detail</a>
+                    <a href="${pageContext.request.contextPath}/events" class="nav-item nav-link">Shop</a>
+                    <a href="${pageContext.request.contextPath}/event-detail" class="nav-item nav-link">Shop Detail</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">
@@ -49,17 +53,45 @@
                     <a href="${pageContext.request.contextPath}/views/contact.html" class="nav-item nav-link">Contact</a>
                 </div>
                 <div class="d-flex m-3 me-0">
-                    <a href="#" class="my-auto">
-                        <i class="fas fa-user fa-2x"></i>
-                    </a>
-                    <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                        <form class="position-relative me-4 my-auto" action="${pageContext.request.contextPath}/change-language" onchange="submit()" method="post">
+                            <input type="hidden" name="current_uri" value="<%=request.getAttribute("uri")%>">
+                            <select class="form-control" name="lang" id="lang">
+                                    <option <%=language.getLocale().getLanguage().equals("en") ? "selected" : ""%> value="en"><%=language.getString("english")%></option>
+                                    <option <%=language.getLocale().getLanguage().equals("vi") ? "selected" : ""%> value="vi"><%=language.getString("vietnamese")%></option>
+                            </select>
+                        </form>
+                    <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4 ml-2" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
                     <a href="#" class="position-relative me-4 my-auto">
                         <i class="fa fa-shopping-bag fa-2x"></i>
                         <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                     </a>
-                    <a href="${pageContext.request.contextPath}/login" class="my-auto">
-                        <i class="fas fa-user fa-2x"></i>
-                    </a>
+                    <% if (user_id == null) { %>
+                        <div class="row">
+                            <div class="col-6 p-0" >
+                                <a href="${pageContext.request.contextPath}/register"><span class="">
+                                    <button class="btn btn-warning"><%=language.getString("register")%></button>
+                                </span></a>
+                            </div>
+                            <div class="col-6 p-0" >
+                                <a href="${pageContext.request.contextPath}/login"><span class="">
+                                    <button class="btn btn-primary"><span class="text-nowrap"><%=language.getString("login")%></span></button>
+                                </span></a>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <% if (user != null) { %>
+                            <a href="${pageContext.request.contextPath}/user/profile" class="mr-1">
+                                <img src="<%=user.avatar.startsWith("http") ? user.avatar : request.getContextPath() + user.avatar%>" alt="" style="width: 44px; height: 44px;border-radius: 50%; object-fit: cover">
+                            </a>
+                            <div class="dropdown d-flex flex-column justify-content-center">
+                                <p class="dropdown-toggle align-items-center m-0 ml-1" id="dropdownMenuButton1" data-bs-toggle="dropdown"><%=user.name%></p>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/profile"><%=language.getString("profile")%></a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout"><%=language.getString("logout")%></a></li>
+                                </ul>
+                            </div>
+                        <% } %>
+                    <% } %>
                 </div>
             </div>
         </nav>

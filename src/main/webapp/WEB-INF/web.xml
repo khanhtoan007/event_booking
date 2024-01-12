@@ -4,7 +4,14 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
 
-
+    <filter>
+        <filter-name>AllRouteFilter</filter-name>
+        <filter-class>com.example.bookingevent.Filter.AllRouteFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AllRouteFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <welcome-file-list>
         <welcome-file>homepage</welcome-file>
     </welcome-file-list>
