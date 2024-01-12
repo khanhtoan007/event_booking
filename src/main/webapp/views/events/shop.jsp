@@ -157,7 +157,7 @@
                             <div class="col-lg-9">
                                 <div class="row g-4 justify-content-center">
                                     <c:forEach items="${list}" var="list" >
-                                        <div href="/event-detail/${list.id}" class=" col-md-6 col-lg-6 col-xl-4">
+                                        <a href="${pageContext.request.contextPath}/event-detail?event_id=${list.id}" class=" col-md-6 col-lg-6 col-xl-4">
                                             <div class="card-body rounded position-relative fruite-item">
                                                 <div class="fruite-img">
                                                     <img src="${pageContext.request.contextPath}${list.image}" class="img-fluid w-100 rounded-top" alt="https://images.tkbcdn.com/1/780/300/Upload/eventcover/2023/12/05/BD6288.jpg">
@@ -168,11 +168,11 @@
                                                     <p class="card-text">${list.content}</p>
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
                                                         <p class="text-dark fs-5 fw-bold mb-0">${list.price}VND/person</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                        <a href="${pageContext.request.contextPath}/add_to_cart?event_id=${event.id}" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </c:forEach>
                                 </div>
                             </div>

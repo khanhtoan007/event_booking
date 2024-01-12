@@ -79,37 +79,8 @@ public class HomeController {
             resp.getWriter().write(gson.toJson(job));
         }
     }
-    @WebServlet("/event-detail")
-    @MultipartConfig(
-            fileSizeThreshold = 1024 * 1024, // 1 MB
-            maxFileSize = 1024 * 1024 * 10,      // 10 MB
-            maxRequestSize = 1024 * 1024 * 10  // 10 MB
-    )
-    public static class EventDetail extends HttpServlet{
-        @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            int id = Integer.parseInt(req.getParameter("id"));
-            ArrayList<EventPost> eventPosts = new EventDAO().getEventPostByID(id);
-            req.setAttribute("event", eventPosts);
-            req.getRequestDispatcher("views/Detail.jsp").forward(req,resp);
-        }
-    }
 
-    @WebServlet("/event-listing")
-    @MultipartConfig(
-            fileSizeThreshold = 1024 * 1024, // 1 MB
-            maxFileSize = 1024 * 1024 * 10,      // 10 MB
-            maxRequestSize = 1024 * 1024 * 10  // 10 MB
-    )
-    public static class EventListing extends HttpServlet{
-        @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            String id = req.getParameter("id");
-            List<EventPost> eventPosts = new EventDAO().getEvent();
-            req.setAttribute("list", eventPosts);
-            req.getRequestDispatcher("views/index.jsp").forward(req,resp);
-        }
-    }
+
 
 
 }

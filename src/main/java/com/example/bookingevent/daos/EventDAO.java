@@ -1,5 +1,6 @@
 package com.example.bookingevent.daos;
 import com.example.bookingevent.database.DBContext;
+import com.example.bookingevent.models.Cart;
 import com.example.bookingevent.models.Category;
 import com.example.bookingevent.models.EventPost;
 
@@ -78,86 +79,19 @@ public class EventDAO {
 
 
 
-//    public List<EventPost> getEventPostByCategory(String category) {
-//        List<EventPost> list = new ArrayList<>();
-//        String query = "SELECT * from Event where category = ?";
-//        try {
-//            conn = new DBContext().getConnection();
-//            ps = conn.prepareStatement(query);
-//            ps.setString(1, category);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                list.add( new EventPost(
-//                        rs.getString(1),
-//                        rs.getString(2),
-//                        rs.getString(3),
-//                        rs.getString(4),
-//                        rs.getString(5),
-//                        rs.getString(6),
-//                        rs.getString(7),
-//                        rs.getInt(8),
-//                        rs.getInt(9),
-//                        rs.getString(10)
-//
-//                ));
-//            }
-//        } catch (Exception e) {
-//        }
-//        return list;
-//    }
-//    public List<EventPost> getEventByState(String state) {
-//        List<EventPost> list = new ArrayList<>();
-//        String query = "SELECT * from Event where state = ?";
-//        try {
-//            conn = new DBContext().getConnection();
-//            ps = conn.prepareStatement(query);
-//            ps.setString(1, state);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                list.add( new EventPost(
-//                        rs.getString(1),
-//                        rs.getString(2),
-//                        rs.getString(3),
-//                        rs.getString(4),
-//                        rs.getString(5),
-//                        rs.getString(6),
-//                        rs.getString(7),
-//                        rs.getInt(8),
-//                        rs.getInt(9),
-//                        rs.getString(10)
-//
-//                ));
-//            }
-//        } catch (Exception e) {
-//        }
-//        return list;
-//    }
-//    public String getState() throws Exception {
-//        EventPost eventPost = new EventPost();
-//        String query = "SELECT DISTINCT state FROM Event";
-//        List<String> states = new ArrayList<>();
-//        try {
-//            conn = new DBContext().getConnection();
-//            ps = conn.prepareStatement(query);
-//            rs = ps.executeQuery();
-//            s
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//        return eventPost.getState();
-//    }
 
-    public ArrayList<EventPost> getEventPostByID(int eventID) {
-        String query = "SELECT Event.*, Category.name as Category_name, U.name as U_name  from Event inner join Category on Event.category_id = Category.category_id inner join [User] U on U.user_id = Event.user_id  where event_id = ?";
-        ArrayList<EventPost> list = new ArrayList<>();
+    public EventPost getEventPostByID(int eventID) {
+        EventPost list = new EventPost();
+        String query = "select e.*, c.name as category_name\n" +
+                "FROM events e\n" +
+                "JOIN categories c ON e.category_id = c.id where e.id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            ps.setInt(1, eventID);
+            ps.setInt(1,eventID);
             rs = ps.executeQuery();
             if (rs.next()) {
-                list.add(new EventPost(
+                list = new EventPost(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -171,12 +105,55 @@ public class EventDAO {
                         rs.getInt(11),
                         rs.getString(12),
                         rs.getString(13)
-                ));
+                );
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public boolean addItemToCart(int user_id, int event_id,int quantity,int price, String note){
+        String query = "INSERT INTO carts values (?,?,?,?,?)";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1,user_id);
+            ps.setInt(2,event_id);
+            ps.setInt(3,quantity);
+            ps.setInt(4,price);
+            ps.setString(5,note);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("add to cart");
+            return false;
+        }
+        return true;
+    }
+
+
+    public List<Cart> viewCart(){
+        List<Cart> cartList = new ArrayList<>();
+        String query = "select * from carts";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cartList.add(new Cart(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getString(6)
+
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cartList;
     }
 
 
@@ -334,7 +311,7 @@ public class EventDAO {
 
     public static void main(String[] args) {
         EventDAO dao = new EventDAO();
-        List<EventPost> list = dao.getEvent();
-        System.out.println(list);
+
+        System.out.println(dao.getEventPostByID(2));
     }
 }
