@@ -1,4 +1,5 @@
 <%@ include file="../master/head.jsp" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
         <!-- Modal Search Start -->
         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
@@ -40,15 +41,15 @@
                         <div class="row g-4">
                             <div class="col-xl-3">
                                 <div class="input-group w-100 mx-auto d-flex">
-                                    <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                                    <input v-model="keywords" type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                                    <span class="input-group-text p-3 btn btn-primary"><i class="fa fa-search"></i></span>
                                 </div>
                             </div>
                             <div class="col-6"></div>
                             <div class="col-xl-3">
                                 <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
                                     <label for="fruits">Default Sorting:</label>
-                                    <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
+                                    <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3">
                                         <option value="volvo">Nothing</option>
                                         <option value="saab">Popularity</option>
                                         <option value="opel">Organic</option>
@@ -62,7 +63,7 @@
                                 <div class="row g-4">
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <h4>Categories</h4>
+                                            <h4><%=language.getString("category")%></h4>
                                             <template v-for="(value, key) in categories">
                                                 <div class="form-check">
                                                     <input v-model="categories_selection[key]" class="form-check-input" type="checkbox" value="" :id="value.id">
@@ -71,244 +72,58 @@
                                                     </label>
                                                 </div>
                                             </template>
-                                            <button v-on:click="check">check</button>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <h4 class="mb-2">Min price</h4>
-                                            <input type="range" class="form-range w-100" id="rangeInput_min" name="rangeInput_min" min="30000" max="100000" value="0" oninput="amount_min.value=rangeInput_min.value">
-                                            <input class="form-control" type="number" id="amount_min" name="amount_min" min="30000" max="100000" value="0">
+                                            <h4 class="mb-2"><%=language.getString("min_price")%></h4>
+                                            <input v-model="min_price" type="range" class="form-range w-100" id="rangeInput_min" name="rangeInput_min" min="30000" max="100000" value="30000">
+                                            <input v-model="min_price" class="form-control" type="number" id="amount_min" name="amount_min" min="30000" max="100000" value="30000">
                                         </div>
                                         <div class="mb-3">
-                                            <h4 class="mb-2">Max price</h4>
-                                            <input type="range" class="form-range w-100" id="rangeInput_max" name="rangeInput_max" min="30000" max="100000" value="0" oninput="amount_max.value=rangeInput_max.value">
-                                            <input class="form-control" id="amount_max" name="amount_max" min="30000" max="100000" type="text" value="0">
+                                            <h4 class="mb-2"><%=language.getString("max_price")%></h4>
+                                            <input v-model="max_price" type="range" class="form-range w-100" id="rangeInput_max" name="rangeInput_max" min="30000" max="100000" value="30000">
+                                            <input v-model="max_price" class="form-control" id="amount_max" name="amount_max" min="30000" max="100000" type="text" value="30000">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <h4 class="mb-3">Featured products</h4>
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                                <img src="${pageContext.request.contextPath}/assets/img/featur-1.jpg" class="img-fluid rounded" alt="">
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-2">Big Banana</h6>
-                                                <div class="d-flex mb-2">
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star"></i>
+                                        <div class="mb-3">
+                                            <h4><%=language.getString("location")%></h4>
+                                            <template v-for="(value, key) in locations">
+                                                <div class="form-check">
+                                                    <input v-model="locations_selection[key]" class="form-check-input" type="checkbox" value="" :id="'location_' + key">
+                                                    <label class="form-check-label" :for="'location_' + key">
+                                                        {{value.location}}({{value.count}})
+                                                    </label>
                                                 </div>
-                                                <div class="d-flex mb-2">
-                                                    <h5 class="fw-bold me-2">2.99 $</h5>
-                                                    <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                                <img src="${pageContext.request.contextPath}/assets/img/featur-2.jpg" class="img-fluid rounded" alt="">
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-2">Big Banana</h6>
-                                                <div class="d-flex mb-2">
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                    <h5 class="fw-bold me-2">2.99 $</h5>
-                                                    <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                                <img src="${pageContext.request.contextPath}/assets/img/featur-3.jpg" class="img-fluid rounded" alt="">
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-2">Big Banana</h6>
-                                                <div class="d-flex mb-2">
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="d-flex mb-2">
-                                                    <h5 class="fw-bold me-2">2.99 $</h5>
-                                                    <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-center my-4">
-                                            <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
+                                            </template>
+                                            <button v-on:click="check()">check</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-9">
                                 <div class="row g-4 justify-content-center">
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="rounded position-relative fruite-item">
-                                            <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                            </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                    <template v-for="(value, key) in view_list">
+                                        <div class="col-md-6 col-lg-6 col-xl-4">
+                                            <div class="rounded position-relative fruite-item">
+                                                <div class="fruite-img">
+                                                    <img :src="'${pageContext.request.contextPath}' + value.image" class="img-fluid w-100 rounded-top" alt="">
+                                                </div>
+                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{value.category_name}}</div>
+                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                    <h4>{{value.title}}</h4>
+                                                    <p>{{value.description}}</p>
+                                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                                        <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%"><%=language.getString("price")%></p>
+                                                        <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%"><%=language.getString("sold")%></p>
+                                                        <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%"><%=language.getString("interested")%></p>
+                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary mt-2" style="width: 100%"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="rounded position-relative fruite-item">
-                                            <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                            </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="rounded position-relative fruite-item">
-                                            <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                            </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Raspberries</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="rounded position-relative fruite-item">
-                                            <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                            </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Apricots</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="rounded position-relative fruite-item">
-                                            <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-3.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                            </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Banana</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="rounded position-relative fruite-item">
-                                            <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                            </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Oranges</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="rounded position-relative fruite-item">
-                                            <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                            </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Raspberries</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="rounded position-relative fruite-item">
-                                            <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                            </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="rounded position-relative fruite-item">
-                                            <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/assets/img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                            </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Oranges</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="pagination d-flex justify-content-center mt-5">
-                                            <a href="#" class="rounded">&laquo;</a>
-                                            <a href="#" class="active rounded">1</a>
-                                            <a href="#" class="rounded">2</a>
-                                            <a href="#" class="rounded">3</a>
-                                            <a href="#" class="rounded">4</a>
-                                            <a href="#" class="rounded">5</a>
-                                            <a href="#" class="rounded">6</a>
-                                            <a href="#" class="rounded">&raquo;</a>
-                                        </div>
-                                    </div>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -324,9 +139,18 @@
         data: {
             categories: [],
             categories_selection: [],
+            locations_selection: [],
+            min_price: 0,
+            max_price: 0,
+            keywords: '',
+            locations: [],
+            events: [],
+            view_list: []
         },
         created() {
             this.getCategories()
+            this.getLocations()
+            this.getEvents()
         },
         methods: {
             getCategories(){
@@ -338,22 +162,123 @@
                             sum += parseInt(this.categories[i].count)
                         }
                         this.categories.unshift({id: "0", name: "<%=language.getString("all_cate")%>", count: sum.toString()})
+                        for (let i = 0; i < this.categories.length; i++) {
+                            this.categories_selection[i] = false
+                        }
+                    })
+            },
+            getLocations(){
+                axios.get('<%=request.getContextPath()%>/get-locations')
+                    .then((res)=>{
+                        this.locations = JSON.parse(res.data.locations)
+                        let sum = 0;
+                        for (let i = 0; i < this.locations.length; i++) {
+                            sum += parseInt(this.locations[i].count)
+                        }
+                        this.locations.unshift({location: "<%=language.getString("all_locations")%>", count: sum})
+                        for (let i = 0; i < this.locations.length; i++) {
+                            this.locations_selection[i] = false
+                        }
+                    })
+
+            },
+            getEvents(){
+                axios.get('<%=request.getContextPath()%>/all-events')
+                    .then((res)=>{
+                        this.events = JSON.parse(res.data.events)
                     })
             },
             check(){
-                for (let i = 0; i < this.categories_selection.length; i++) {
-                    console.log(this.categories_selection[i])
-                }
+                // console.log(this.categories_selection)
+                // console.log(this.locations_selection)
+                // console.log(this.keywords)
+                // console.log(this.min_price)
+                // console.log(this.max_price)
+
+                // let temp = ""
+                // for (let i = 0; i < this.categories_selection.length; i++) {
+                //     if (this.categories_selection[i] === true){
+                //         temp += this.categories[i].id.toString() + "|"
+                //     }
+                // }
+
+                // let temp = ""
+                // for (let i = 0; i < this.locations_selection.length; i++) {
+                //     if (this.locations_selection[i] === true){
+                //         temp += this.locations[i].location + "|"
+                //     }
+                // }
+            },
+            removeDiacritics(str){
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            },
+            updatedList(){
+                this.view_list = this.events.filter( item => {
+                    if (this.keywords !== ''){
+                        if ( this.removeDiacritics(item.title.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase())) || this.removeDiacritics(item.description.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase()))){
+                            return true;
+                        }
+                    }
+                    if (this.categories_selection[0] === true){
+                        return true;
+                    } else {
+                        for (let i = 0; i < this.categories_selection.length; i++) {
+                            if (this.categories_selection[i] === true){
+                                if (this.categories[i].id.toString() === item.category_id){
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                    if (this.locations_selection[0] === true){
+                        return true;
+                    } else {
+                        for (let i = 0; i < this.locations_selection.length; i++) {
+                            if (this.locations_selection[i] === true){
+                                if (this.locations[i].location === item.location){
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                    let temp_min = parseInt(this.min_price)
+                    let temp_max = parseInt(this.max_price)
+                    if (temp_min !== 0 && temp_max !== 0){
+                        if (temp_min < parseInt(item.price) && temp_max > parseInt(item.price)){
+                            return true;
+                        }
+                    } else {
+                        if (temp_min !== 0){
+                            if (temp_min < parseInt(item.price)){
+                                return true
+                            }
+                        }
+                        if (temp_max !== 0){
+                            if (temp_max > parseInt(item.price)){
+                                return true
+                            }
+                        }
+                    }
+                    return false
+                })
             }
-            // selectCategory(selected_category){
-            //     if (this.categories_selection.indexOf(selected_category) === -1){
-            //         this.categories_selection.push(selected_category)
-            //     } else {
-            //         var index = this.categories.indexOf(selected_category)
-            //         this.categories_selection.splice(index, 1)
-            //     }
-            //     console.log(this.categories_selection)
-            // }
+        },
+        watch: {
+            categories_selection(newValue, oldValue) {
+                this.updatedList()
+            },
+            locations_selection(newValue, oldValue) {
+                this.updatedList()
+            },
+            min_price(newValue, oldValue) {
+                this.updatedList()
+            },
+            max_price(newValue, oldValue) {
+                this.updatedList()
+            },
+            keywords(newValue, oldValue) {
+                this.updatedList()
+            },
         }
     })
 </script>

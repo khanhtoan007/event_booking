@@ -72,8 +72,8 @@ public class HomeController {
     public static class GetLocations extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            String sql = "select location from events group by location";
-            String[] fields = new String[]{"location"};
+            String sql = "select location, count(location) as count from events group by location";
+            String[] fields = new String[]{"location", "count"};
             ArrayList<MyObject> locations = DB.getData(sql, fields);
             com.google.gson.JsonObject job = new JsonObject();
             ObjectMapper objectMapper = new ObjectMapper();
@@ -83,6 +83,13 @@ public class HomeController {
             job.addProperty("locations", locations_json_string);
             Gson gson = new Gson();
             resp.getWriter().write(gson.toJson(job));
+        }
+    }
+    @WebServlet("/search")
+    public static class Search extends HttpServlet{
+        @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         }
     }
     @WebServlet("/event-detail")
@@ -116,7 +123,7 @@ public class HomeController {
         }
     }
 
-    @WebServlet("/search")
+    /*@WebServlet("/search")
     public static class Search extends HttpServlet{
         @Override
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -150,6 +157,24 @@ public class HomeController {
             ArrayList<MyObject> events_search = DB.getData(sql, para, vars);
             req.setAttribute("events_search", events_search);
             req.getRequestDispatcher("views/index.jsp").forward(req,resp);
+        }
+    }*/
+
+    @WebServlet("/all-events")
+    public static class AllEvents extends HttpServlet{
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String sql = "select events.*, categories.name as category_name, users.name as username from events inner join categories on events.category_id = categories.id inner join users on events.user_id = users.id where events.is_verified = 'true'";
+            String[] fields = new String[]{"id", "title", "description", "start_date", "end_date", "location", "is_verified", "user_id", "category_id", "tickets", "price", "image", "category_name", "username"};
+            ArrayList<MyObject> events = DB.getData(sql, fields);
+            com.google.gson.JsonObject job = new JsonObject();
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+            String events_json_string = objectMapper.writeValueAsString(events);
+            job.addProperty("events", events_json_string);
+            Gson gson = new Gson();
+            resp.getWriter().write(gson.toJson(job));
         }
     }
 }

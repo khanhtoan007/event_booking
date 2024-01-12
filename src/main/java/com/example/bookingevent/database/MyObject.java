@@ -16,5 +16,16 @@ public class MyObject {
     public String is_verified;
     public String role_id;
     public String count;
-
+    public String location;
+    public String category_name;
+    public String username;
+    public String image;
+    public String title;
+    public String description;
+    public String start_date;
+    public String end_date;
+    public String user_id;
+    public String category_id;
+    public String tickets;
+    public String price;
 }
