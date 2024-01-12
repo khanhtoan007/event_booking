@@ -116,18 +116,18 @@
                     <div class="col-lg-4 col-xl-3 mx-auto" >
                         <div class="bg-light rounded border border-dark d-flex flex-column align-items-center" style="position: sticky; top: 120px; z-index: 99;">
                             <div class="m-3">
-                                <h4 class="fw-bold mb-3 mt-3 ml-2 border-bottom border-secondary pb-4 text-left">[Nhà Hát Kịch IDECAF] Chuyện Thần Tiên 5: CUỘC PHIÊU LƯU CỦA CẬU BÉ BÚP BÊ</h4>
+                                <h4 class="fw-bold mb-3 mt-3 ml-2 border-bottom border-secondary pb-4 text-left">${eventPost.title}</h4>
                                 <div class="d-flex align-items-center mb-2">
                                     <i class="far fa-clock me-2"></i>
                                     <span>03:00 PM - 06:00 PM</span>
                                 </div>
                                 <div class="d-flex align-items-start mb-2 border-bottom border-secondary pb-4 text-left">
                                     <i class="fas fa-map-marker-alt me-2 mt-1"></i>
-                                    <span>Nhà Văn hoá Thanh niên Thành phố Hồ Chí Minh</span>
+                                    <span>${eventPost.location}</span>
                                 </div>
                     
                                 <div class="d-flex justify-content-center align-items-center flex-column">
-                                    <h5 class="fw-bold mb-3">3,35 $</h5>
+                                    <h5 class="fw-bold mb-3">PRICE</h5>
                     
                                     <div class="input-group quantity mb-3" style="width: 100px;">
                                         <div class="input-group-btn">
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                 </div>
-                <h1 class="fw-bold mb-0">Related products</h1>
+                <h1 class="fw-bold mb-0">Các sự kiện khác</h1>
                 <div class="vesitable">
                     <div class="owl-carousel vegetable-carousel justify-content-center">
                         <div class="border border-primary rounded position-relative vesitable-item">

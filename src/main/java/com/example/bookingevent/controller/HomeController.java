@@ -45,13 +45,6 @@ public class HomeController {
         }
     }
 
-    @WebServlet("/events")
-    public static class ShowEvents extends HttpServlet{
-        @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            req.getRequestDispatcher("/views/products/shop.jsp").forward(req, resp);
-        }
-    }
     @WebServlet("/get-categories")
     public static class GetCategories extends HttpServlet{
         @Override
