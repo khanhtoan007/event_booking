@@ -34,7 +34,9 @@ public class CartController {
     public static class ViewCartServlet extends HttpServlet {
         protected void doGet(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
-            List<Cart> list = new EventDAO().viewCart();
+            HttpSession session = request.getSession();
+            int user_id = (int) session.getAttribute("login");
+            List<Cart> list = new EventDAO().viewCart(user_id);
             request.setAttribute("cartItem",list);
             request.getRequestDispatcher("/views/cart.jsp").forward(request, response);
         }

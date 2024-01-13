@@ -123,6 +123,7 @@ public class EventDAO {
             ps.setInt(3,quantity);
             ps.setInt(4,price);
             ps.setString(5,note);
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("add to cart");
@@ -132,12 +133,13 @@ public class EventDAO {
     }
 
 
-    public List<Cart> viewCart(){
+    public List<Cart> viewCart(int id){
         List<Cart> cartList = new ArrayList<>();
-        String query = "select * from carts";
+        String query = "select * from carts where user_id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
                 cartList.add(new Cart(
@@ -312,6 +314,8 @@ public class EventDAO {
     public static void main(String[] args) {
         EventDAO dao = new EventDAO();
 
-        System.out.println(dao.getEventPostByID(2));
+//        System.out.println(dao.addItemToCart(2,2,3,30000,"new cart"));
+        System.out.println(dao.viewCart(2));
     }
+
 }

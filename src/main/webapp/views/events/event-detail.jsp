@@ -38,7 +38,7 @@
         <div class="container-fluid py-5 mt-5">
             <div class="container py-5">
                 <div class="row g-4 mb-5">
-                    <div class="col-lg-8 col-xl-9">
+                    <div class="col-lg-8 col-xl-9" id="eventDetails" data-userid="<%= session.getAttribute("user_id") %>" data-eventid="${event.id}" data-price="${event.price}">
                         <div class="row g-4">
                             <div class="col-lg-6">
                                 <div class="border rounded">
@@ -72,7 +72,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <a href="${pageContext.request.contextPath}/add_to_cart?event_id=${event.id}" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                <a onclick="addToCart()" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                             </div>
                             <div class="col-lg-12">
                                 <nav>
@@ -468,6 +468,39 @@
         </div>
         <!-- Single Product End -->
 
+<script>
+    let quantityValue = 1; // initial value
 
+    function incrementQuantity() {
+        quantityValue++;
+        updateQuantityDisplay();
+    }
+
+    function decrementQuantity() {
+        if (quantityValue > 1) {
+            quantityValue--;
+            updateQuantityDisplay();
+        }
+    }
+
+    function updateQuantityDisplay() {
+        document.getElementById("quantityValue").innerText = quantityValue;
+    }
+
+    function addToCart() {
+        // Retrieve data values from the HTML
+        const userId = document.getElementById("eventDetails").getAttribute("data-userid");
+        const eventId = document.getElementById("eventDetails").getAttribute("data-eventid");
+        const price = document.getElementById("eventDetails").getAttribute("data-price");
+
+        // Use these values as needed (e.g., send them in an AJAX request or construct a URL)
+        console.log("User ID:", userId);
+        console.log("Event ID:", eventId);
+        console.log("Quantity:", quantityValue);
+        console.log("Price:", price);
+
+        // Add your logic to send the data to the server (e.g., AJAX request or form submission)
+    }
+</script>
 
 <%@ include file="../master/foot.jsp" %>

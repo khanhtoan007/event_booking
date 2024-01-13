@@ -105,7 +105,7 @@
                             <div class="col-lg-9">
                                 <div class="row g-4 justify-content-center">
                                     <template v-for="(value, key) in view_list">
-                                        <div href="${pageContext.request.contextPath}/event-detail?event_id=${list.id}" class="card-link col-md-6 col-lg-6 col-xl-4">
+                                        <a :href="'${pageContext.request.contextPath}/event-detail?event_id=' + value.id" class="card-link col-md-6 col-lg-6 col-xl-4">
                                             <div class="rounded position-relative fruite-item">
                                                 <div class="fruite-img">
                                                     <img :src="'${pageContext.request.contextPath}' + value.image" class="img-fluid w-100 rounded-top" alt="">
@@ -122,7 +122,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </template>
                                 </div>
                             </div>
