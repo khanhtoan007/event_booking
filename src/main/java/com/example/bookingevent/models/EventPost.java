@@ -21,4 +21,19 @@ public class EventPost {
     private int price;
     private String image;
     private String category_name;
+
+    public EventPost(String id, String title, String content, String start_date, String end_date, String location, boolean is_verified, int author_id, int category_id, int tickets, int price, String image) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.location = location;
+        this.is_verified = is_verified;
+        this.author_id = author_id;
+        this.category_id = category_id;
+        this.tickets = tickets;
+        this.price = price;
+        this.image = image;
+    }
 }

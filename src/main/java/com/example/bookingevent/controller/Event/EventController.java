@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventController {
@@ -23,20 +24,10 @@ public class EventController {
     public static class LoadEvent extends HttpServlet {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            try {
-                EventDAO dao = new EventDAO();
-                List<EventPost> list = dao.getEvent();
-                req.setAttribute("list", list);
-                List<Category> categories = dao.getAllCategory();
-                req.setAttribute("categories", categories);
-                req.getRequestDispatcher("views/products/shop.jsp").forward(req,resp);
-            }catch (ServletException e){
-                e.printStackTrace();
-            }
 
+                req.getRequestDispatcher("views/events/shop.jsp").forward(req,resp);
         }
     }
-
 
 
     @WebServlet("/event")
@@ -45,7 +36,7 @@ public class EventController {
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             EventDAO dao = new EventDAO();
             int id = Integer.parseInt(request.getParameter("id"));
-            List<EventPost> eventDetail = dao.getEventPostByID(id);
+//            List<EventPost> eventDetail = dao.getEventPostByID(id);
 
             EventPost event = new EventPost();
             event.setTitle("TEST TITLE");
@@ -53,7 +44,7 @@ public class EventController {
 
             System.out.println("Event detail: "+ event);
             request.setAttribute("eventPost", event);
-            request.getRequestDispatcher("views/products/product-detail.jsp").forward(request,response);
+            request.getRequestDispatcher("views/events/event-detail.jsp").forward(request,response);
         }
     }
 
@@ -74,28 +65,6 @@ public class EventController {
     }
 
 
-    @WebServlet("/load-filter")
-    public static class test extends HttpServlet {
-        @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//            EventDAO dao = new EventDAO();
-//            List<EventPost> list = dao.getEventPostList();
-//            req.setAttribute("list", list);
-//            List<Category> categories = dao.getAllCategory();
-//            req.setAttribute("categories", categories);
-//            req.getRequestDispatcher("views/testFilter.jsp").forward(req,resp);
-        }
-    }
 
-    @WebServlet("/filter-product")
-    public static class filter extends HttpServlet {
-        @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//            EventDAO dao = new EventDAO();
-//            String id = req.getParameter("id");
-//            List<EventPost> list = dao.getEventPostByCategory(id);
-//            req.setAttribute("list", list);
-//            req.getRequestDispatcher("views/testFilter.jsp").forward(req,resp);
-        }
-    }
+
 }
