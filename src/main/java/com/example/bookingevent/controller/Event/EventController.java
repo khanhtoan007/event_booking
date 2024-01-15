@@ -48,6 +48,16 @@ public class EventController {
         }
     }
 
+    @WebServlet("/new-event")
+    public static class CreateEvent extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            EventDAO dao = new EventDAO();
+
+            request.getRequestDispatcher("views/events/create-event.jsp").forward(request,response);
+        }
+    }
+
     @WebServlet("/search-event")
     public static class Search extends HttpServlet {
         @Override
