@@ -28,4 +28,9 @@ public class MyObject {
     public String category_id;
     public String tickets;
     public String price;
+    public String event_id;
+    public String quantity;
+    public String note;
+    public String event_title;
+    public String interested;
 }

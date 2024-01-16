@@ -97,7 +97,6 @@
                                                     </label>
                                                 </div>
                                             </template>
-                                            <button v-on:click="check()">check</button>
                                         </div>
                                     </div>
                                 </div>
@@ -115,10 +114,11 @@
                                                     <h4>{{value.title}}</h4>
                                                     <p>{{value.description}}</p>
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%"><%=language.getString("price")%></p>
+                                                        <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%"><%=language.getString("added_by")%>: {{value.username}}</p>
+                                                        <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%">{{ '<%=language.getString("price")%>'.replace('xx', value.price) }}</p>
                                                         <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%"><%=language.getString("sold")%></p>
-                                                        <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%"><%=language.getString("interested")%></p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary mt-2" style="width: 100%"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
+                                                        <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%">{{ '<%=language.getString("interested")%>'.replace('xx', value.interested) }}</p>
+                                                        <a :href="'${pageContext.request.contextPath}/event-detail?event_id=' + value.id" class="btn border border-secondary rounded-pill px-3 text-primary mt-2" style="width: 100%"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -186,6 +186,7 @@
                 axios.get('<%=request.getContextPath()%>/all-events')
                     .then((res)=>{
                         this.events = JSON.parse(res.data.events)
+                        this.view_list = this.events
                     })
             },
             check(){
