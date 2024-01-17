@@ -219,7 +219,11 @@
 
 .page-header {
     position: relative;
+<<<<<<< HEAD
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../assets/img/cart-page-header-img.jpg);
+=======
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/Kimmoc.png);
+>>>>>>> Tony
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

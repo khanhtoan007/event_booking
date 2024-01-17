@@ -8,6 +8,7 @@
 <% String user_id = (String) session.getAttribute("login"); %>
 <%MyObject user = DB.getUser(user_id);%>
 
+
 <!-- Spinner Start -->
 <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-primary" role="status"></div>
@@ -38,7 +39,7 @@
             </button>
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
-                    <a href="${pageContext.request.contextPath}/views/index.jsp" class="nav-item nav-link active">Home</a>
+                    <a href="${pageContext.request.contextPath}/" class="nav-item nav-link active">Home</a>
                     <a href="${pageContext.request.contextPath}/events" class="nav-item nav-link">Shop</a>
                     <a href="${pageContext.request.contextPath}/event-detail" class="nav-item nav-link">Shop Detail</a>
                     <div class="nav-item dropdown">
@@ -61,9 +62,13 @@
                             </select>
                         </form>
                     <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4 ml-2" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                    <a href="${pageContext.request.contextPath}/viewCart" class="position-relative me-4 my-auto">
+                    <a href="${pageContext.request.contextPath}/user/viewCart" class="position-relative me-4 my-auto">
                         <i class="fa fa-shopping-bag fa-2x"></i>
-                        <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                        <%if (user_id != null) { %>
+                            <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;"><%=user.count%></span>
+                        <% } else { %>
+                            <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">0</span>
+                         <% } %>
                     </a>
                     <% if (user_id == null) { %>
                         <div class="row">
