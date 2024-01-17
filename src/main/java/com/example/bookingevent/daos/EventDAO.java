@@ -17,32 +17,7 @@ public class EventDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-//    public List<EventPost> getEventPostList() {
-//        List<EventPost> list = new ArrayList<>();
-//        String query = "SELECT Event.*, Category.name as Category_name, U.name as U_name  from Event inner join Category on Event.category_id = Category.category_id inner join [User] U on U.user_id = Event.user_id";
-//        try {
-//            conn = new DBContext().getConnection();
-//            ps = conn.prepareStatement(query);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                list.add(new EventPost(
-//                        rs.getString(1),
-//                        rs.getString(2),
-//                        rs.getString(3),
-//                        rs.getString(4),
-//                        rs.getString(5),
-//                        rs.getString(6),
-//                        rs.getString(7),
-//                        rs.getInt(8),
-//                        rs.getInt(9),
-//                        rs.getString(10)
-//                ));
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return list;
-//    }
+
 
     public List<EventPost> getEvent() {
         List<EventPost> list = new ArrayList<>();
@@ -277,45 +252,14 @@ public class EventDAO {
         return list;
     }
 
-    //get event by price
-    public List<EventPost> getEventByPrice(int minPrice, int maxPrice) {
-        List<EventPost> list = new ArrayList<>();
-        String query = "SELECT * FROM events WHERE price BETWEEN ? AND ?";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, minPrice);
-            ps.setInt(2, maxPrice);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new EventPost(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getBoolean(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getInt(10),
-                        rs.getInt(11),
-                        rs.getString(12),
-                        rs.getString(13)
-                ));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
+
 
 
     public static void main(String[] args) {
         EventDAO dao = new EventDAO();
 
 //        System.out.println(dao.addItemToCart(2,2,3,30000,"new cart"));
-        System.out.println(dao.viewCart(2));
+        System.out.println(dao.getEvent());
     }
 
 }

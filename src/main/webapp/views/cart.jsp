@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ include file="master/head.jsp" %>
 <% ArrayList<MyObject> cart = (ArrayList<MyObject>) request.getAttribute("carts");%>
+<%@ page contentType="text/html; charset=UTF-8" %>
     <div class="container py-5">
         <div class="row g-5 align-items-center py-5">
             <h3 class="mb-5 display-3 text-primary mt-5  py-5"><%= language.getString("cart") %></h3>
@@ -17,7 +18,7 @@
                 <tbody>
                 <% for (int i = 0; i < cart.size(); i++) { %>
                     <tr>
-                        <td><%=cart.get(i).event_title%></td>
+                        <td><a href="${pageContext.request.contextPath}/event-detail?event_id=<%=cart.get(i).id%>"><%=cart.get(i).event_title%></a> </td>
                         <td><%=cart.get(i).quantity%></td>
                         <td><%=cart.get(i).price%></td>
                         <td><%=cart.get(i).note%></td>

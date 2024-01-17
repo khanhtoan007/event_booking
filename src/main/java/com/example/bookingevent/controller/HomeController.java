@@ -3,6 +3,7 @@ package com.example.bookingevent.controller;
 import com.example.bookingevent.daos.EventDAO;
 import com.example.bookingevent.database.DB;
 import com.example.bookingevent.database.MyObject;
+import com.example.bookingevent.models.Category;
 import com.example.bookingevent.models.EventPost;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,7 +31,10 @@ public class HomeController {
     public static class Home extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            req.getRequestDispatcher("views/index.jsp").forward(req,resp);
+                List<EventPost> eventPosts = new EventDAO().getEvent();
+                req.setAttribute("listEvent", eventPosts);
+                System.out.println(eventPosts);
+                req.getRequestDispatcher("views/index.jsp").forward(req,resp);
         }
     }
 
