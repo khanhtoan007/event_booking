@@ -10,8 +10,8 @@
             <div class="row g-4">
                 <div class="col-lg-3">
                     <a href="#">
-                        <h1 class="text-primary mb-0">Fruitables</h1>
-                        <p class="text-secondary mb-0">Fresh products</p>
+                        <h1 class="text-primary mb-0"><%=Config.app_name%></h1>
+                        <p class="text-secondary mb-0">Development Stage</p>
                     </a>
                 </div>
                 <div class="col-lg-6">
@@ -64,9 +64,9 @@
             <div class="col-lg-3 col-md-6">
                 <div class="footer-item">
                     <h4 class="text-light mb-3">Contact</h4>
-                    <p>Address: 1429 Netus Rd, NY 48247</p>
-                    <p>Email: Example@gmail.com</p>
-                    <p>Phone: +0123 4567 8910</p>
+                    <p>Address: Da Nang</p>
+                    <p>Email: localxplorer@gmail.com</p>
+                    <p>Phone: 0913827180</p>
                     <p>Payment Accepted</p>
                     <img src="${pageContext.request.contextPath}/assets/img/payment.png" class="img-fluid" alt="">
                 </div>
