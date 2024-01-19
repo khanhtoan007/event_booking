@@ -40,7 +40,6 @@ public class HomeController {
 
     @WebServlet("/change-language")
     public static class ChangeLanguage extends HttpServlet{
-
         @Override
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String lang = req.getParameter("lang");
@@ -121,6 +120,23 @@ public class HomeController {
             ArrayList<MyObject> events_search = DB.getData(sql, para, vars);
             req.setAttribute("events_search", events_search);
             req.getRequestDispatcher("views/index.jsp").forward(req,resp);
+        }
+    }
+
+
+    @WebServlet("/event-detail")
+    @MultipartConfig(
+            fileSizeThreshold = 1024 * 1024, // 1 MB
+            maxFileSize = 1024 * 1024 * 10,      // 10 MB
+            maxRequestSize = 1024 * 1024 * 10  // 10 MB
+    )
+    public static class EventDetail extends HttpServlet{
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            int id = Integer.parseInt(req.getParameter("event_id"));
+            EventPost eventPosts = new EventDAO().getEventPostByID(id);
+            req.setAttribute("event", eventPosts);
+            req.getRequestDispatcher("views/events/event-detail.jsp").forward(req,resp);
         }
     }
 
