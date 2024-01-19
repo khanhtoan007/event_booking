@@ -1,23 +1,47 @@
-<%@ include file="../master/head.jsp" %>
+<%@ page import="com.example.bookingevent.database.MyObject" %>
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="com.example.bookingevent.Init.Config" %>
+<%@ page import="com.example.bookingevent.database.DB" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-        <!-- Modal Search Start -->
-        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content rounded-0">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body d-flex align-items-center">
-                        <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal Search End -->
+<% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
+<% String user_id = (String) session.getAttribute("login"); %>
+<%MyObject user = DB.getUser(user_id);%>
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Event Detail</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="assets/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link href="assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="assets/css/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <%@ include file="../master/head.jsp" %>
 
 
         <!-- Single Page Header start -->
@@ -132,154 +156,156 @@
             </div>
         </div>
         <!-- Fruits Shop End-->
-<%@ include file="../master/foot.jsp" %>
-<script>
-    var app = new Vue({
-        el: "#app",
-        data: {
-            categories: [],
-            categories_selection: [],
-            locations_selection: [],
-            min_price: 0,
-            max_price: 0,
-            keywords: '',
-            locations: [],
-            events: [],
-            view_list: []
-        },
-        created() {
-            this.getCategories()
-            this.getLocations()
-            this.getEvents()
-        },
-        methods: {
-            getCategories(){
-                axios.get('<%=request.getContextPath()%>/get-categories')
-                    .then((res)=>{
-                        this.categories = JSON.parse(res.data.categories)
-                        let sum = 0;
-                        for (let i = 0; i < this.categories.length; i++) {
-                            sum += parseInt(this.categories[i].count)
-                        }
-                        this.categories.unshift({id: "0", name: "<%=language.getString("all_cate")%>", count: sum.toString()})
-                        for (let i = 0; i < this.categories.length; i++) {
-                            this.categories_selection[i] = false
-                        }
-                    })
-            },
-            getLocations(){
-                axios.get('<%=request.getContextPath()%>/get-locations')
-                    .then((res)=>{
-                        this.locations = JSON.parse(res.data.locations)
-                        let sum = 0;
-                        for (let i = 0; i < this.locations.length; i++) {
-                            sum += parseInt(this.locations[i].count)
-                        }
-                        this.locations.unshift({location: "<%=language.getString("all_locations")%>", count: sum})
-                        for (let i = 0; i < this.locations.length; i++) {
-                            this.locations_selection[i] = false
-                        }
-                    })
+        <%@ include file="../master/foot.jsp" %>
+        <script>
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    categories: [],
+                    categories_selection: [],
+                    locations_selection: [],
+                    min_price: 0,
+                    max_price: 0,
+                    keywords: '',
+                    locations: [],
+                    events: [],
+                    view_list: []
+                },
+                created() {
+                    this.getCategories()
+                    this.getLocations()
+                    this.getEvents()
+                },
+                methods: {
+                    getCategories(){
+                        axios.get('<%=request.getContextPath()%>/get-categories')
+                            .then((res)=>{
+                                this.categories = JSON.parse(res.data.categories)
+                                let sum = 0;
+                                for (let i = 0; i < this.categories.length; i++) {
+                                    sum += parseInt(this.categories[i].count)
+                                }
+                                this.categories.unshift({id: "0", name: "<%=language.getString("all_cate")%>", count: sum.toString()})
+                                for (let i = 0; i < this.categories.length; i++) {
+                                    this.categories_selection[i] = false
+                                }
+                            })
+                    },
+                    getLocations(){
+                        axios.get('<%=request.getContextPath()%>/get-locations')
+                            .then((res)=>{
+                                this.locations = JSON.parse(res.data.locations)
+                                let sum = 0;
+                                for (let i = 0; i < this.locations.length; i++) {
+                                    sum += parseInt(this.locations[i].count)
+                                }
+                                this.locations.unshift({location: "<%=language.getString("all_locations")%>", count: sum})
+                                for (let i = 0; i < this.locations.length; i++) {
+                                    this.locations_selection[i] = false
+                                }
+                            })
 
-            },
-            getEvents(){
-                axios.get('<%=request.getContextPath()%>/all-events')
-                    .then((res)=>{
-                        this.events = JSON.parse(res.data.events)
-                        this.view_list = this.events
-                    })
-            },
-            check(){
-                // console.log(this.categories_selection)
-                // console.log(this.locations_selection)
-                // console.log(this.keywords)
-                // console.log(this.min_price)
-                // console.log(this.max_price)
+                    },
+                    getEvents(){
+                        axios.get('<%=request.getContextPath()%>/all-events')
+                            .then((res)=>{
+                                this.events = JSON.parse(res.data.events)
+                                this.view_list = this.events
+                            })
+                    },
+                    check(){
+                        // console.log(this.categories_selection)
+                        // console.log(this.locations_selection)
+                        // console.log(this.keywords)
+                        // console.log(this.min_price)
+                        // console.log(this.max_price)
 
-                // let temp = ""
-                // for (let i = 0; i < this.categories_selection.length; i++) {
-                //     if (this.categories_selection[i] === true){
-                //         temp += this.categories[i].id.toString() + "|"
-                //     }
-                // }
+                        // let temp = ""
+                        // for (let i = 0; i < this.categories_selection.length; i++) {
+                        //     if (this.categories_selection[i] === true){
+                        //         temp += this.categories[i].id.toString() + "|"
+                        //     }
+                        // }
 
-                // let temp = ""
-                // for (let i = 0; i < this.locations_selection.length; i++) {
-                //     if (this.locations_selection[i] === true){
-                //         temp += this.locations[i].location + "|"
-                //     }
-                // }
-            },
-            removeDiacritics(str){
-                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            },
-            updatedList(){
-                this.view_list = this.events.filter( item => {
-                    if (this.keywords !== ''){
-                        if ( this.removeDiacritics(item.title.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase())) || this.removeDiacritics(item.description.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase()))){
-                            return true;
-                        }
-                    }
-                    if (this.categories_selection[0] === true){
-                        return true;
-                    } else {
-                        for (let i = 0; i < this.categories_selection.length; i++) {
-                            if (this.categories_selection[i] === true){
-                                if (this.categories[i].id.toString() === item.category_id){
+                        // let temp = ""
+                        // for (let i = 0; i < this.locations_selection.length; i++) {
+                        //     if (this.locations_selection[i] === true){
+                        //         temp += this.locations[i].location + "|"
+                        //     }
+                        // }
+                    },
+                    removeDiacritics(str){
+                        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    },
+                    updatedList(){
+                        this.view_list = this.events.filter( item => {
+                            if (this.keywords !== ''){
+                                if ( this.removeDiacritics(item.title.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase())) || this.removeDiacritics(item.description.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase()))){
                                     return true;
                                 }
                             }
-                        }
-                    }
-                    if (this.locations_selection[0] === true){
-                        return true;
-                    } else {
-                        for (let i = 0; i < this.locations_selection.length; i++) {
-                            if (this.locations_selection[i] === true){
-                                if (this.locations[i].location === item.location){
-                                    return true;
+                            if (this.categories_selection[0] === true){
+                                return true;
+                            } else {
+                                for (let i = 0; i < this.categories_selection.length; i++) {
+                                    if (this.categories_selection[i] === true){
+                                        if (this.categories[i].id.toString() === item.category_id){
+                                            return true;
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    }
-                    let temp_min = parseInt(this.min_price)
-                    let temp_max = parseInt(this.max_price)
-                    if (temp_min !== 0 && temp_max !== 0){
-                        if (temp_min < parseInt(item.price) && temp_max > parseInt(item.price)){
-                            return true;
-                        }
-                    } else {
-                        if (temp_min !== 0){
-                            if (temp_min < parseInt(item.price)){
-                                return true
+                            if (this.locations_selection[0] === true){
+                                return true;
+                            } else {
+                                for (let i = 0; i < this.locations_selection.length; i++) {
+                                    if (this.locations_selection[i] === true){
+                                        if (this.locations[i].location === item.location){
+                                            return true;
+                                        }
+                                    }
+                                }
                             }
-                        }
-                        if (temp_max !== 0){
-                            if (temp_max > parseInt(item.price)){
-                                return true
+                            let temp_min = parseInt(this.min_price)
+                            let temp_max = parseInt(this.max_price)
+                            if (temp_min !== 0 && temp_max !== 0){
+                                if (temp_min < parseInt(item.price) && temp_max > parseInt(item.price)){
+                                    return true;
+                                }
+                            } else {
+                                if (temp_min !== 0){
+                                    if (temp_min < parseInt(item.price)){
+                                        return true
+                                    }
+                                }
+                                if (temp_max !== 0){
+                                    if (temp_max > parseInt(item.price)){
+                                        return true
+                                    }
+                                }
                             }
-                        }
+                            return false
+                        })
                     }
-                    return false
-                })
-            }
-        },
-        watch: {
-            categories_selection(newValue, oldValue) {
-                this.updatedList()
-            },
-            locations_selection(newValue, oldValue) {
-                this.updatedList()
-            },
-            min_price(newValue, oldValue) {
-                this.updatedList()
-            },
-            max_price(newValue, oldValue) {
-                this.updatedList()
-            },
-            keywords(newValue, oldValue) {
-                this.updatedList()
-            },
-        }
-    })
-</script>
+                },
+                watch: {
+                    categories_selection(newValue, oldValue) {
+                        this.updatedList()
+                    },
+                    locations_selection(newValue, oldValue) {
+                        this.updatedList()
+                    },
+                    min_price(newValue, oldValue) {
+                        this.updatedList()
+                    },
+                    max_price(newValue, oldValue) {
+                        this.updatedList()
+                    },
+                    keywords(newValue, oldValue) {
+                        this.updatedList()
+                    },
+                }
+            })
+        </script>
+    </body>
+</html>

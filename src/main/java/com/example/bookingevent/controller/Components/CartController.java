@@ -84,8 +84,12 @@ public class CartController {
             String sql = "select carts.*, events.price as price, events.title as event_title from carts inner join events on carts.event_id = events.id where carts.user_id = ?";
             String user_id = (String) request.getSession().getAttribute("login");
             ArrayList<MyObject> carts = DB.getData(sql, new String[]{user_id}, new String[]{"id", "user_id", "event_id", "quantity", "note", "price", "event_title"});
-            request.setAttribute("carts" , carts);
-            request.getRequestDispatcher("/views/cart.jsp").forward(request, response);
+
+            ArrayList<Cart> cart2 = new ArrayList<>();
+            Cart cart = new Cart(1, 2, 3, 4, 1234, "note");
+            cart2.add(cart);
+            request.setAttribute("carts" , cart2);
+            request.getRequestDispatcher("views/cart.jsp").forward(request, response);
         }
     }
     @WebServlet("/user/delete-cart")

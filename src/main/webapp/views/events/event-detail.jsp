@@ -1,5 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="com.example.bookingevent.database.MyObject" %>
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="com.example.bookingevent.Init.Config" %>
+<%@ page import="com.example.bookingevent.database.DB" %>
+<% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
+<% String user_id = (String) session.getAttribute("login"); %>
+<%MyObject user = DB.getUser(user_id);%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +41,7 @@
 
     <body>
 
-        <jsp:include page="../master/head.jsp"/>
+        <%@ include file="../master/head.jsp" %>
 
 
 
@@ -54,7 +61,7 @@
         <div class="container-fluid py-5">
             <div class="container py-5">
                 <div class="row g-4 mb-5">
-                    <div class="col-md-12" id="eventDetails" data-userid="<%= session.getAttribute("user_id") %>" data-eventid="${event.id}" data-price="${event.price}">
+                    <div class="col-lg-8 col-xl-9" id="eventDetails" data-userid="<%= session.getAttribute("user_id") %>" data-eventid="${event.id}" data-price="${event.price}">
                         <div class="row g-4">
                             <div class="col-lg-12">
                                 <div class="border rounded">
@@ -277,12 +284,12 @@
                             </div>
                         </div>
                     </div>
-                </div>--%>
+                </div>
             </div>
         </div>
         <!-- Single Product End -->
 
-        <jsp:include page="../master/foot.jsp"/>
+        <%@ include file="../master/foot.jsp" %>
 
         <script>
             let quantityValue = 1; // initial value
@@ -311,55 +318,55 @@
                 toastr.warning("<%=language.getString("please_login")%>")
             }
 
-    /*function addToCart() {
-        // Retrieve data values from the HTML
-        const userId = document.getElementById("eventDetails").getAttribute("data-userid");
-        const eventId = document.getElementById("eventDetails").getAttribute("data-eventid");
-        const price = document.getElementById("eventDetails").getAttribute("data-price");
+            /*function addToCart() {
+                // Retrieve data values from the HTML
+                const userId = document.getElementById("eventDetails").getAttribute("data-userid");
+                const eventId = document.getElementById("eventDetails").getAttribute("data-eventid");
+                const price = document.getElementById("eventDetails").getAttribute("data-price");
 
-        function addToCart() {
-            // Retrieve data values from the HTML
-            const userId = document.getElementById("eventDetails").getAttribute("data-userid");
-            const eventId = document.getElementById("eventDetails").getAttribute("data-eventid");
-            const price = document.getElementById("eventDetails").getAttribute("data-price");
+                function addToCart() {
+                    // Retrieve data values from the HTML
+                    const userId = document.getElementById("eventDetails").getAttribute("data-userid");
+                    const eventId = document.getElementById("eventDetails").getAttribute("data-eventid");
+                    const price = document.getElementById("eventDetails").getAttribute("data-price");
 
-            // Use these values as needed (e.g., send them in an AJAX request or construct a URL)
-            console.log("User ID:", userId);
-            console.log("Event ID:", eventId);
-            console.log("Quantity:", quantityValue);
-            console.log("Price:", price);
-        // Add your logic to send the data to the server (e.g., AJAX request or form submission)
-        // Construct the data object
-        const data = {
-            user_id: userId,
-            event_id: eventId,
-            quantity: quantityValue,
-            price: price
-        };
+                    // Use these values as needed (e.g., send them in an AJAX request or construct a URL)
+                    console.log("User ID:", userId);
+                    console.log("Event ID:", eventId);
+                    console.log("Quantity:", quantityValue);
+                    console.log("Price:", price);
+                // Add your logic to send the data to the server (e.g., AJAX request or form submission)
+                // Construct the data object
+                const data = {
+                    user_id: userId,
+                    event_id: eventId,
+                    quantity: quantityValue,
+                    price: price
+                };
 
-        // Use fetch to send a POST request
-        fetch("${pageContext.request.contextPath}/user/add_to_cart", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Successfully added to cart:", data);
-                // Handle the response from the server as needed
-            })
-            .catch(error => {
-                console.error("Error adding to cart:", error);
-                // Handle errors or failed requests
-            });
-    }*/
+                // Use fetch to send a POST request
+                fetch("${pageContext.request.contextPath}/user/add_to_cart", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("Successfully added to cart:", data);
+                        // Handle the response from the server as needed
+                    })
+                    .catch(error => {
+                        console.error("Error adding to cart:", error);
+                        // Handle errors or failed requests
+                    });
+            }*/
 
         </script>
 
