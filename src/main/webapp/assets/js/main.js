@@ -134,18 +134,30 @@
     // Product Quantity
     $('.quantity button').on('click', function () {
         var button = $(this);
-        var oldValue = button.parent().parent().find('input').val();
+        var quantityInput = $('#quantityValue');
+
+        var oldValue = parseFloat(quantityInput.val());
         if (button.hasClass('btn-plus')) {
-            var newVal = parseFloat(oldValue) + 1;
+            var newVal = oldValue + 1;
         } else {
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 0;
-            }
+            newVal = Math.max(oldValue - 1, 0);
         }
-        button.parent().parent().find('input').val(newVal);
+
+        quantityInput.val(newVal);
+
+        // Update current price
+        updateCurrentPrice();
     });
+
+    function updateCurrentPrice() {
+        var quantityValue = parseFloat($('#quantityValue').val());
+        var currentPrice = parseFloat($('input[name="currentPrice"]').val());
+        console.log(quantityValue);
+        console.log(currentPrice);
+        $('#currentPrice').text(quantityValue * currentPrice + 'đ');
+    }
+
+
 
 })(jQuery);
 

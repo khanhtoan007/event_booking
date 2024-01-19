@@ -25,28 +25,30 @@ public class EventController {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-                req.getRequestDispatcher("views/events/shop.jsp").forward(req,resp);
+            req.getRequestDispatcher("views/events/shop.jsp").forward(req,resp);
         }
     }
 
 
-    @WebServlet("/event")
-    public static class EventDetail extends HttpServlet {
-        @Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            EventDAO dao = new EventDAO();
-            int id = Integer.parseInt(request.getParameter("id"));
-//            List<EventPost> eventDetail = dao.getEventPostByID(id);
 
-            EventPost event = new EventPost();
-            event.setTitle("TEST TITLE");
-            event.setLocation("TEST LOCATION");
 
-            System.out.println("Event detail: "+ event);
-            request.setAttribute("eventPost", event);
-            request.getRequestDispatcher("views/events/event-detail.jsp").forward(request,response);
-        }
-    }
+//    @WebServlet("/event")
+//    public static class EventDetail extends HttpServlet {
+//        @Override
+//        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//            EventDAO dao = new EventDAO();
+//            int id = Integer.parseInt(request.getParameter("id"));
+////            List<EventPost> eventDetail = dao.getEventPostByID(id);
+//
+//            EventPost event = new EventPost();
+//            event.setTitle("TEST TITLE");
+//            event.setLocation("TEST LOCATION");
+//
+//            System.out.println("Event detail: "+ event);
+//            request.setAttribute("eventPost", event);
+//            request.getRequestDispatcher("views/events/event-detail.jsp").forward(request,response);
+//        }
+//    }
 
     @WebServlet("/new-event")
     public static class CreateEvent extends HttpServlet {

@@ -1,4 +1,6 @@
 <%@ include file="../master/head.jsp" %>
+
+
 <div class="container-fluid py-5 mb-5 hero-header">
     <div class="container py-5">
         <div class="row g-5 d-flex align-items-center">
