@@ -73,15 +73,14 @@
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input id="quantityValue" type="text" class="form-control form-control-sm text-center border-0" value="<%=cart.get(i).quantity%>">
+                                <input type="text" class="form-control form-control-sm text-center border-0" value="<%=cart.get(i).quantity%>">
                                 <div class="input-group-btn">
                                     <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
-                        </td>
-                        <td><input type="text" readonly name="currentPrice" id="currentPrice" value="<%=cart.get(i).price%>">đ</td>
+                        <td><input type="text" readonly name="currentPrice" id="currentPrice" value="<%=cart.get(i).price%>"></td>
                         <td><%=cart.get(i).note%></td>
                         <td>
                             <div class="col-md-12">
@@ -95,11 +94,35 @@
                 </tbody>
             </table>
         </div>
-        <div class="row g-5">
             <input type="checkbox" id="checkAll">
             <label for="checkAll">Check All</label>
+        <div class="row g-4 justify-content-end">
+            <div class="col-8"></div>
+            <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
+                <div class="bg-light rounded">
+                    <div class="p-4">
+                        <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
+                        <div class="d-flex justify-content-between mb-4">
+                            <h5 class="mb-0 me-4">Amount</h5>
+                            <p class="mb-0">${bill.amount}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-0 me-4">Your Item</h5>
+                            <div class="">
+                                <p class="mb-0">${bill.transfer_context}</p>
+                            </div>
+                        </div>
+                        <p class="mb-0 text-end">${bill.status}</p>
+                    </div>
+                    <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                        <h5 class="mb-0 ps-4 me-4">Total</h5>
+<%--                        <c:set var="totalAmount" value="${bill.amount*bill.price}"/>--%>
+<%--                        <p class="mb-0 pe-4">${totalAmount}</p>--%>
+                    </div>
+                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>
+                </div>
+            </div>
         </div>
-
     </div>
 <%@ include file="/views/master/foot.jsp" %>
 <script>
@@ -117,5 +140,4 @@
             // Checkbox is unchecked
         }
     });
-
 </script>

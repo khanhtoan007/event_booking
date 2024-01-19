@@ -144,6 +144,7 @@
         }
 
         quantityInput.val(newVal);
+        console.log(quantityInput);
 
         // Update current price
         updateCurrentPrice();

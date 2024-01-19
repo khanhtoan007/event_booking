@@ -1,24 +1,16 @@
 package com.example.bookingevent.controller.Components;
 
-import com.example.bookingevent.daos.EventDAO;
+import com.example.bookingevent.daos.BillDAO;
 import com.example.bookingevent.database.DB;
 import com.example.bookingevent.database.MyObject;
-import com.example.bookingevent.models.Cart;
-import com.example.bookingevent.models.EventPost;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.bookingevent.models.Bills;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class CartController {
@@ -26,41 +18,6 @@ public class CartController {
     public static class EventByCategory extends HttpServlet {
         @Override
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            /*ResourceBundle language = (ResourceBundle) req.getAttribute("language");
-            // Set content type to JSON
-            resp.setContentType("application/json");
-
-            // Retrieve JSON data from the request body
-            StringBuilder sb = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(req.getInputStream()))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            }
-
-            // Parse JSON data
-            ObjectMapper objectMapper = new ObjectMapper();
-            Cart cartItem = objectMapper.readValue(sb.toString(), Cart.class);
-
-            // Assuming CartItem class has appropriate fields and a constructor
-            int event_id = cartItem.getId();
-            EventPost event = new EventDAO().getEventPostByID(event_id);
-
-            HttpSession session = req.getSession();
-            int user_id = (int) session.getAttribute("login");
-            int quantity = cartItem.getQuantity();
-            int price = cartItem.getPrice();
-            String note = cartItem.getNote();
-
-            EventDAO eventDAO = new EventDAO();
-            boolean check = eventDAO.addItemToCart(user_id, event_id, quantity, price, note);
-            if (check){
-                req.getSession().setAttribute("mess", "success|" + language.getString("add_to_cart_success"));
-            }else{
-                req.getSession().setAttribute("mess", "success|" + language.getString("reset_password_success"));
-            }
-            resp.sendRedirect(req.getContextPath() + "/event-detail");*/
             ResourceBundle language = (ResourceBundle) req.getAttribute("language");
             String user_id = (String) req.getSession().getAttribute("login");
             String event_id = req.getParameter("event_id");
@@ -84,6 +41,8 @@ public class CartController {
             String sql = "select carts.*, events.price as price, events.title as event_title from carts inner join events on carts.event_id = events.id where carts.user_id = ?";
             String user_id = (String) request.getSession().getAttribute("login");
             ArrayList<MyObject> carts = DB.getData(sql, new String[]{user_id}, new String[]{"id", "user_id", "event_id", "quantity", "note", "price", "event_title"});
+            Bills bills = new BillDAO().getBillByCartID(4);
+            request.setAttribute("bill", bills);
             request.setAttribute("carts" , carts);
             request.getRequestDispatcher("/views/cart.jsp").forward(request, response);
         }

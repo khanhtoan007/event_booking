@@ -134,6 +134,7 @@ public class HomeController {
             int id = Integer.parseInt(req.getParameter("event_id"));
             EventPost eventPosts = new EventDAO().getEventPostByID(id);
             req.setAttribute("event", eventPosts);
+
             req.getRequestDispatcher("views/events/event-detail.jsp").forward(req,resp);
         }
     }
