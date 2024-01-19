@@ -87,7 +87,7 @@ public class HomeController {
 
 
 
-    /*@WebServlet("/search")
+    @WebServlet("/search")
     public static class Search extends HttpServlet{
         @Override
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -122,7 +122,7 @@ public class HomeController {
             req.setAttribute("events_search", events_search);
             req.getRequestDispatcher("views/index.jsp").forward(req,resp);
         }
-    }*/
+    }
 
     @WebServlet("/all-events")
     public static class AllEvents extends HttpServlet{
