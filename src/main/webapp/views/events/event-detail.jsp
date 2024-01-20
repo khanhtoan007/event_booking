@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="border-bottom rounded my-4">
+                                <div class="border-bottom rounded my-4 form-item">
                                     <textarea required name="note" id="note" class="form-control border-0" cols="30" rows="8" placeholder="<%=language.getString("note")%>" spellcheck="false"></textarea>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
                         </nav>
                         <div class="tab-content mb-5">
                             <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                <p>Hiên tại các nhà tổ chức vẫn đang trong quá trình hợp tác cùng doanh nghiệp của chúng tôi, họ sẽ sớm cung cấp thêm sản phẩm trong tương lai. Mong quý khách sẽ tiếp tục uủng hộ dịch vụ của chúng tôi. Xin chân thành cảm ơn quý khách! </p>
+                                <p>Hiên tại các nhà tổ chức vẫn đang trong quá trình hợp tác và phát triển cùng doanh nghiệp của chúng tôi, các nhà tổ sẽ tiếp tục cung cấp nhiều dịch vụ hơn nữa trong tương lai. Mong quý khách sẽ tiếp tục ủng hộ dịch vụ của chúng tôi. Xin chân thành cảm ơn quý khách! </p>
                             </div>
                             <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
                                 <div class="d-flex">

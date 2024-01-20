@@ -47,11 +47,11 @@
             <div class="col-6">
                 <h3 class="mb-5 display-3 text-primary"><%= language.getString("login")%></h3>
                 <form action="${pageContext.request.contextPath}/login" method="post">
-                    <div class="form-group">
+                    <div class="form-group form-item">
                         <label for="email"><%=language.getString("email")%></label>
                         <input required value="<%=request.getAttribute("email") != null ? request.getAttribute("email") : ""%>" type="email" class="form-control" id="email" name="email">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group form-item">
                         <label for="password"><%=language.getString("password")%></label>
                         <input required value="<%=request.getAttribute("password") != null ? request.getAttribute("password") : ""%>" type="password" class="form-control" id="password" name="password">
                     </div>

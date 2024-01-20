@@ -119,7 +119,8 @@
 <%--                        <c:set var="totalAmount" value="${bill.amount*bill.price}"/>--%>
 <%--                        <p class="mb-0 pe-4">${totalAmount}</p>--%>
                     </div>
-                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>
+                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">
+                        <a href="${pageContext.request.contextPath}/user/bill">Proceed Checkout</a></button>
                 </div>
             </div>
         </div>
