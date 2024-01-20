@@ -148,4 +148,15 @@ public class HomeController {
             resp.getWriter().write(gson.toJson(job));
         }
     }
+
+
+    @WebServlet("/about-us")
+    public static class AboutUs extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+            request.getRequestDispatcher("views/about_us.jsp").forward(request,response);
+        }
+
+    }
 }
