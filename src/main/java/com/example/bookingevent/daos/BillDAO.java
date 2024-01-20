@@ -1,8 +1,6 @@
 package com.example.bookingevent.daos;
 import com.example.bookingevent.database.DBContext;
-import com.example.bookingevent.models.Bills;
-import com.example.bookingevent.models.Cart;
-import com.example.bookingevent.models.Category;
+import com.example.bookingevent.models.*;
 import com.example.bookingevent.models.Bills;
 
 
@@ -19,28 +17,52 @@ public class BillDAO {
 
 
 
-    public Bills getBillByCartID(int cart_id) {
+    public Bills getBillByCartID(int user_id) {
         Bills list = new Bills();
-        String query = "select * from bills where cart_id = ?";
+        List<Cart> cartItems;
+        String query = "select * from bills where user_id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            ps.setInt(1,cart_id);
+            ps.setInt(1,user_id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                list = new Bills(
-                        rs.getInt(1),
-                        rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getString(4),
-                        rs.getBoolean(5),
-                        rs.getString(6)
-                );
+                int billId = rs.getInt("id");
+                int amount = rs.getInt("amount");
+                String transfer_content = rs.getString("transfer_content");
+                boolean status = rs.getBoolean("status");
+                String paid_at = rs.getString("paid_at");
+                cartItems = getItemInCartByUserID(user_id);
+                list = new Bills(billId, amount,transfer_content,status,paid_at,cartItems);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
+    }
+
+    private List<Cart> getItemInCartByUserID(int user_id){
+        List<Cart> cartItem = new ArrayList<>();
+        String query = "select * from carts where user_id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1,user_id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                cartItem.add(new Cart(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getString(6)
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cartItem;
     }
 
     public static void main(String[] args) {

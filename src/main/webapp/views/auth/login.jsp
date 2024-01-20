@@ -52,6 +52,7 @@
                         <input required value="<%=request.getAttribute("email") != null ? request.getAttribute("email") : ""%>" type="email" class="form-control" id="email" name="email">
                     </div>
                     <div class="form-group form-item">
+
                         <label for="password"><%=language.getString("password")%></label>
                         <input required value="<%=request.getAttribute("password") != null ? request.getAttribute("password") : ""%>" type="password" class="form-control" id="password" name="password">
                     </div>
