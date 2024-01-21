@@ -80,7 +80,7 @@
                                     </button>
                                 </div>
                             </div>
-                        <td><input type="text" readonly name="currentPrice" id="currentPrice" value="<%=cart.get(i).price%>"></td>
+                        <td><input type="text" disabled readonly name="currentPrice" id="currentPrice" value="<%=cart.get(i).price%>"></td>
                         <td><%=cart.get(i).note%></td>
                         <td>
                             <div class="col-md-12">

@@ -33,4 +33,5 @@ public class MyObject {
     public String note;
     public String event_title;
     public String interested;
+    public String total;
 }

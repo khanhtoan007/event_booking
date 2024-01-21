@@ -128,46 +128,5 @@ public class DB {
         ArrayList<MyObject> users = DB.getData("select users.*, count(carts.id) as count from users left join carts on users.id = carts.user_id where users.id = ? group by users.id, name, email, phone, password, avatar, gender, token, is_verified, role_id", new String[]{id}, new String[]{"id", "name", "email", "phone", "password", "avatar", "gender", "token", "is_verified", "role_id", "count"});
         return users.size() == 0 ? null : users.get(0);
     }
-    public static List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> result = new ArrayList<>();
 
-        // Initialize the combination array with the first combination
-        List<Integer> combination = new ArrayList<>();
-        for (int i = 1; i <= k; i++) {
-            combination.add(i);
-        }
-
-        while (combination.get(0) <= n - k + 1) {
-            // Add a copy of the current combination to the result
-            result.add(new ArrayList<>(combination));
-
-            // Find the rightmost element that can be incremented
-            int index = k - 1;
-            while (index >= 0 && combination.get(index) == n - (k - index) + 1) {
-                index--;
-            }
-
-            // Increment the rightmost element
-            combination.set(index, combination.get(index) + 1);
-
-            // Adjust the elements to the right of the incremented element
-            for (int i = index + 1; i < k; i++) {
-                combination.set(i, combination.get(i - 1) + 1);
-            }
-        }
-
-        return result;
-    }
-    public static void main(String[] args) throws Exception{
-        int n = 4;
-        int k = 2;
-
-        List<List<Integer>> combinations = combine(n, k);
-
-        for (List<Integer> combination : combinations) {
-            System.out.println(combination);
-        }
-
-    }
-    // result  =2
 }
