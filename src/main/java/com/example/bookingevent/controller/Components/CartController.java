@@ -136,7 +136,6 @@ public class CartController {
     public static class DeleteCart extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            ResourceBundle language = (ResourceBundle) req.getAttribute("language");
             String id = req.getParameter("id");
             String sql = "delete from carts where id = ?";
             boolean check = DB.executeUpdate(sql, new String[]{id});
@@ -159,7 +158,42 @@ public class CartController {
             String formattedTime = currentTime.format(formatter);
             String sql = "insert into bills(transfer_content, status, created_at) VALUES (?, 'false', ?)";
             int id = DB.insertGetLastId(sql, new String[]{uuid, formattedTime});
+            if (id > 0){
+                sql = "";
+                String[] vars = new String[]{};
+                for (int i = 0; i < ids.length; i++) {
+                    sql += "update carts set bill_id = " + id +" where id = ?;";
+                }
+                boolean check = DB.executeUpdate(sql, ids);
+                if (check){
+                    resp.sendRedirect(req.getContextPath() + "/");
+                } else {
+                    resp.sendRedirect(req.getContextPath() + "/user/viewCart");
+                }
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/user/viewCart");
+            }
+        }
+    }
 
+    @WebServlet("/payment")
+    public static class Payment extends HttpServlet{
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String bill_id = req.getParameter("bill_id");
+            ResourceBundle language = (ResourceBundle) req.getAttribute("language");
+            ArrayList<MyObject> bills = DB.getData("select * from bills where id = ?", new String[]{bill_id}, new String[]{"amount", "transfer_content", "status", "paid_at", ""});
+            if (bills.size() == 0){
+                req.getSession().setAttribute("mess", "warning|" + language.getString("bill_not_exist"));
+                resp.sendRedirect(req.getContextPath() + "/user/viewCart");
+            } else {
+                MyObject bill = bills.get(0);
+                if (bill.status.equals("1")){
+
+                } else {
+
+                }
+            }
         }
     }
 }
