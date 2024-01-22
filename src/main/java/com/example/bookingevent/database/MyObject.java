@@ -34,4 +34,6 @@ public class MyObject {
     public String event_title;
     public String interested;
     public String total;
+    public String info_type;
+    public String info_value;
 }

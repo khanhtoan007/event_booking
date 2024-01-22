@@ -143,15 +143,16 @@ public class HomeController {
     public static class AllEvents extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            String sql = "select events.*, categories.name as category_name, users.name as username, count(carts.id) as interested\n" +
+            String sql = "select events.*, categories.name as category_name, users.name as username, count(carts.id) as interested, sum(iif(bills.status = 'true', carts.quantity, 0)) as count\n" +
                     "from events\n" +
                     "         inner join categories on events.category_id = categories.id\n" +
                     "         inner join users on events.user_id = users.id\n" +
                     "         left join carts on events.id = carts.event_id\n" +
+                    "         left join bills on carts.bill_id = bills.id\n" +
                     "where events.is_verified = 'true'\n" +
                     "group by users.name, categories.name, events.id, title, description, start_date, end_date, location, events.is_verified,\n" +
                     "         events.user_id, category_id, tickets, events.price, image";
-            String[] fields = new String[]{"id", "title", "description", "start_date", "end_date", "location", "is_verified", "user_id", "category_id", "tickets", "price", "image", "category_name", "username", "interested"};
+            String[] fields = new String[]{"id", "title", "description", "start_date", "end_date", "location", "is_verified", "user_id", "category_id", "tickets", "price", "image", "category_name", "username", "interested", "count"};
             ArrayList<MyObject> events = DB.getData(sql, fields);
             com.google.gson.JsonObject job = new JsonObject();
             ObjectMapper objectMapper = new ObjectMapper();
