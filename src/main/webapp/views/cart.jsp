@@ -219,7 +219,7 @@
                 app2.bills = this.bills
             },
             check_out(){
-
+                axios.get('<%=request.getContextPath()%>/user/bill')
             }
         },
         watch:{

@@ -21,11 +21,11 @@ public class BillController {
     public static class GetBill extends HttpServlet {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//            HttpSession session = req.getSession();
-//            session.getAttribute("cart");
-//            int cart_id = Integer.parseInt(req.getParameter("cart_id"));
-//            Bills bills = new BillDAO().getBillByCartID(4);
-//            req.setAttribute("bill", bills);
+            HttpSession session = req.getSession();
+            session.getAttribute("cart");
+            int cart_id = Integer.parseInt(req.getParameter("cart_id"));
+            Bills bills = new BillDAO().getBillByCartID(4);
+            req.setAttribute("bill", bills);
             req.getRequestDispatcher("/views/events/checkout.jsp").forward(req,resp);
         }
     }

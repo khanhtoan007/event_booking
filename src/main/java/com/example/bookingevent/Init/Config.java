@@ -16,6 +16,7 @@ public class Config {
     public static String db_password = "Minh1234";
     public static String db_name = "event";*/
     public static String app_url = "http://localhost:8080";
+
     public static String context_path = "/event_booking";
     public static String app_name = "Local Xplorer";
     public static String email_address = "tranquangminh116@gmail.com";
