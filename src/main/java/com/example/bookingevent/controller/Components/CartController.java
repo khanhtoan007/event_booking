@@ -189,8 +189,8 @@ public class CartController {
             } else {
                 MyObject bill = bills.get(0);
                 if (bill.status.equals("0")){
-                    ArrayList<MyObject> carts = DB.getData("select carts.id, carts.user_id, event_id, quantity, bill_id, note, events.price as price, events.title as event_title, events.tickets as tickets, sum(quantity * events.price) as amount from carts inner join events on carts.event_id = events.id left join bills on carts.bill_id = bills.id where bill_id = ?\n" +
-                            "group by carts.id, events.title, events.tickets, carts.user_id, event_id, quantity, bill_id, note, events.price", new String[]{bill_id}, new String[]{"id", "user_id", "event_id", "quantity", "note", "price", "event_title", "tickets", "amount"});
+                    ArrayList<MyObject> carts = DB.getData("select carts.id, carts.user_id, event_id, quantity, bill_id, note,events.image, events.price as price, events.title as event_title, events.tickets as tickets, sum(quantity * events.price) as amount from carts inner join events on carts.event_id = events.id left join bills on carts.bill_id = bills.id where bill_id = ?\n" +
+                            "group by carts.id, events.title, events.tickets, carts.user_id, event_id, quantity, bill_id, note, events.price, events.image", new String[]{bill_id}, new String[]{"id", "user_id", "event_id", "quantity", "note","image", "price", "event_title", "tickets", "amount"});
                     int amount = 0;
                     for (int i = 0; i < carts.size(); i++) {
                         amount += Integer.parseInt(carts.get(i).amount);

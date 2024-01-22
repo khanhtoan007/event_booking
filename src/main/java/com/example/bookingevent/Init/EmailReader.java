@@ -19,7 +19,7 @@ import jakarta.mail.search.AndTerm;
 
 public class EmailReader {
         public static void main(String[] args) {
-            /*String host = "imap.gmail.com";
+/*            String host = "imap.gmail.com";
             String username = Config.email_address;
             String password = Config.email_password;
             String specificSender = "support@timo.vn";
