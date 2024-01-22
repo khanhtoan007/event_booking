@@ -26,4 +26,5 @@ public class Config {
     public static String client_id="950893291709-9rqulakhl78cnlejkuofncru62p49epo.apps.googleusercontent.com";
     public static String client_secret="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";
     public static String bank_number = "9021329646765";
+    public static String bank_id = "timo";
 }

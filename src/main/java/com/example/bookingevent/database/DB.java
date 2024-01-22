@@ -130,5 +130,7 @@ public class DB {
     }
 
     public static void main(String[] args) throws Exception{
+        ArrayList<MyObject> bills = DB.getData("select * from bills where id = ?", new String[]{"5"}, new String[]{"amount", "transfer_content", "status", "paid_at"});
+        System.out.println(bills);
     }
 }

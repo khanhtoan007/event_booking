@@ -166,7 +166,7 @@ public class CartController {
                 }
                 boolean check = DB.executeUpdate(sql, ids);
                 if (check){
-                    resp.sendRedirect(req.getContextPath() + "/");
+                    resp.sendRedirect(req.getContextPath() + "/payment?bill_id=" + id);
                 } else {
                     resp.sendRedirect(req.getContextPath() + "/user/viewCart");
                 }
@@ -182,16 +182,26 @@ public class CartController {
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String bill_id = req.getParameter("bill_id");
             ResourceBundle language = (ResourceBundle) req.getAttribute("language");
-            ArrayList<MyObject> bills = DB.getData("select * from bills where id = ?", new String[]{bill_id}, new String[]{"amount", "transfer_content", "status", "paid_at", ""});
+            ArrayList<MyObject> bills = DB.getData("select * from bills where id = ?", new String[]{bill_id}, new String[]{"amount", "transfer_content", "status", "paid_at"});
             if (bills.size() == 0){
                 req.getSession().setAttribute("mess", "warning|" + language.getString("bill_not_exist"));
                 resp.sendRedirect(req.getContextPath() + "/user/viewCart");
             } else {
                 MyObject bill = bills.get(0);
-                if (bill.status.equals("1")){
-
+                if (bill.status.equals("0")){
+                    ArrayList<MyObject> carts = DB.getData("select carts.id, carts.user_id, event_id, quantity, bill_id, note, events.price as price, events.title as event_title, events.tickets as tickets, sum(quantity * events.price) as amount from carts inner join events on carts.event_id = events.id left join bills on carts.bill_id = bills.id where bill_id = ?\n" +
+                            "group by carts.id, events.title, events.tickets, carts.user_id, event_id, quantity, bill_id, note, events.price", new String[]{bill_id}, new String[]{"id", "user_id", "event_id", "quantity", "note", "price", "event_title", "tickets", "amount"});
+                    int amount = 0;
+                    for (int i = 0; i < carts.size(); i++) {
+                        amount += Integer.parseInt(carts.get(i).amount);
+                    }
+                    req.setAttribute("transfer_content", bill.transfer_content);
+                    req.setAttribute("amount", amount);
+                    req.setAttribute("carts", carts);
+                    req.getRequestDispatcher("/views/payment.jsp").forward(req, resp);
                 } else {
-
+                    req.getSession().setAttribute("mess", "warning|" + language.getString("something_wrong"));
+                    resp.sendRedirect(req.getContextPath() + "/user/viewCart");
                 }
             }
         }

@@ -1,7 +1,10 @@
 package com.example.bookingevent.Init;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 
 import com.example.bookingevent.controller.MyWebSocket;
@@ -75,6 +78,7 @@ public class EmailReader {
             AndTerm combinedTerm = new AndTerm(senderTerm, unreadFlagTerm);
             Message[] messages = emailFolder.search(combinedTerm);
             ArrayList<String> transfer_contents = new ArrayList<>();
+            ArrayList<String> paid_ats = new ArrayList<>();
             ArrayList<Integer> set_read = new ArrayList<>();
             for (int i = messages.length - 1; i >= 0; i--) {
                 Message message = messages[i];
@@ -84,17 +88,20 @@ public class EmailReader {
                     String[] arr = text_body.split("\\.");
                     if (arr.length > 7){
                         String transfer_content = arr[7];
+                        String paid_at = convertToSQLServerDatetimeFormat(text_body.split(". Số")[0].split("vào ")[1]);
+                        paid_ats.add(paid_at);
                         transfer_contents.add(transfer_content);
                         set_read.add(i);
                     }
                 }
             }
             String sql = "";
-            String[] vars = new String[transfer_contents.size()];
+            String[] vars = new String[transfer_contents.size() + paid_ats.size()];
             String in_query = "(";
             for (int i = 0; i < transfer_contents.size(); i++) {
-                sql += "update bills set status = 'true' where transfer_content = ?;";
-                vars[i] = transfer_contents.get(i);
+                sql += "update bills set status = 'true', paid_at = ? where transfer_content = ?;";
+                vars[i * 2 ] = paid_ats.get(i);
+                vars[i * 2 + 1] = transfer_contents.get(i);
                 in_query += "'" + transfer_contents.get(i) + "'" + ",";
             }
             in_query += ")";
@@ -163,5 +170,23 @@ public class EmailReader {
         }
 
         return "";
+    }
+    public static String convertToSQLServerDatetimeFormat(String inputDate) {
+        // Define the input and output date formats
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            // Parse the input date string
+            Date date = inputFormat.parse(inputDate);
+
+            // Format the date to the SQL Server datetime format
+            String formattedDate = outputFormat.format(date);
+
+            return formattedDate;
+        } catch (ParseException e) {
+            e.printStackTrace(); // Handle the parsing exception as needed
+            return null;
+        }
     }
 }
