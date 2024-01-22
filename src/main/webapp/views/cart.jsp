@@ -62,7 +62,7 @@
             <template v-for="(value, key) in carts">
                 <tr>
                     <td ><input class="groupCheckbox" id="cart_item" type="checkbox" v-on:change="select2bill" v-model="value.is_checked" ></td>
-                    <td class="col-3"><a :href=" '${pageContext.request.contextPath}/event-detail?event_id=' + value.id">{{value.event_title}}</a> </td>
+                    <td class="col-3"><a :href=" '${pageContext.request.contextPath}/event-detail?event_id=' + value.event_id">{{value.event_title}}</a> </td>
                     <td>{{value.tickets}}</td>
                     <td>
                         <div class="input-group quantity" style="width: 100px;">
