@@ -1,11 +1,8 @@
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.ResourceBundle" %>
 <%@ page import="com.example.bookingevent.Init.Config" %>
-<%@ page import="com.example.bookingevent.database.MyObject" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
-<% ArrayList<MyObject> cart = (ArrayList<MyObject>) request.getAttribute("carts");%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,102 +40,212 @@
 </head>
 
 <body>
-
 <jsp:include page="./master/head.jsp"/>
-
-
-    <div class="container py-5">
-        <div class="row g-5 align-items-center py-5">
-            <h3 class="mb-5 display-3 text-primary mt-5  py-5"><%= language.getString("cart") %></h3>
-            <table class="table">
-                <thead>
+<div class="container py-5" id="app">
+    <div class="row g-5 align-items-center py-5">
+        <h3 class="mb-5 display-3 text-primary mt-5  py-5"><%= language.getString("cart") %></h3>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col" class="col-3"><%=language.getString("title")%></th>
+                <th scope="col"><%=language.getString("quantity")%></th>
+                <th scope="col"><%=language.getString("tickets")%></th>
+                <th scope="col"><%=language.getString("bought_tickets")%></th>
+                <th scope="col"><%=language.getString("current_price")%></th>
+                <th scope="col"><%=language.getString("have2pay")%></th>
+                <th scope="col"><%=language.getString("note")%></th>
+                <th class="text-center" scope="col"><%=language.getString("action")%></th>
+            </tr>
+            </thead>
+            <tbody>
+            <template v-for="(value, key) in carts">
                 <tr>
-                    <th scope="col"></th>
-                    <th scope="col"><%=language.getString("title")%></th>
-                    <th scope="col"><%=language.getString("quantity")%></th>
-                    <th scope="col"><%=language.getString("current_price")%></th>
-                    <th scope="col"><%=language.getString("note")%></th>
-                    <th class="text-center" scope="col"><%=language.getString("action")%></th>
+                    <td ><input class="groupCheckbox" id="cart_item" type="checkbox" v-on:change="select2bill" v-model="value.is_checked" ></td>
+                    <td class="col-3"><a :href=" '${pageContext.request.contextPath}/event-detail?event_id=' + value.id">{{value.event_title}}</a> </td>
+                    <td>{{value.tickets}}</td>
+                    <td>
+                        <div class="input-group quantity" style="width: 100px;">
+                            <div class="input-group-btn">
+                                <button v-on:click="minus(key)" class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <input type="text" class="form-control form-control-sm text-center border-0" :value="value.quantity">
+                            <div class="input-group-btn">
+                                <button v-on:click="plus(key)" class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    <td>{{value.count + '/' + value.tickets}}</td>
+                    <td>{{value.price}}</td>
+                    <td>{{value.have2pay}}</td>
+                    <td>{{value.note}}</td>
+                    <td>
+                        <div class="col-md-12">
+                            <button v-on:click="deleteCart(value.id)" class="btn btn-danger" style="width: 100%">Delete</button>
+                        </div>
+                    </td>
                 </tr>
-                </thead>
-                <tbody>
-                <% for (int i = 0; i < cart.size(); i++) { %>
-                    <tr>
-                        <td ><input class="groupCheckbox" id="cart_item" type="checkbox" value="<%=cart.get(i).id%>"></td>
-                        <td><a href="${pageContext.request.contextPath}/event-detail?event_id=<%=cart.get(i).id%>"><%=cart.get(i).event_title%></a> </td>
-                        <td>
-                            <div class="input-group quantity" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="<%=cart.get(i).quantity%>">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        <td><input type="text" readonly name="currentPrice" id="currentPrice" value="<%=cart.get(i).price%>"></td>
-                        <td><%=cart.get(i).note%></td>
-                        <td>
-                            <div class="col-md-12">
-                                <a href="${pageContext.request.contextPath}/user/delete-cart?id=<%=cart.get(i).id%>">
-                                    <button class="btn btn-danger" style="width: 100%">Delete</button>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                <% } %>
-                </tbody>
-            </table>
-        </div>
-            <input type="checkbox" id="checkAll">
-            <label for="checkAll">Check All</label>
-        <div class="row g-4 justify-content-end">
-            <div class="col-8"></div>
-            <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                <div class="bg-light rounded">
-                    <div class="p-4">
-                        <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
-                        <div class="d-flex justify-content-between mb-4">
-                            <h5 class="mb-0 me-4">Amount</h5>
-                            <p class="mb-0">${bill.amount}</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h5 class="mb-0 me-4">Your Item</h5>
-                            <div class="">
-                                <p class="mb-0">${bill.transfer_context}</p>
-                            </div>
-                        </div>
-                        <p class="mb-0 text-end">${bill.status}</p>
-                    </div>
-                    <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                        <h5 class="mb-0 ps-4 me-4">Total</h5>
-<%--                        <c:set var="totalAmount" value="${bill.amount*bill.price}"/>--%>
-<%--                        <p class="mb-0 pe-4">${totalAmount}</p>--%>
-                    </div>
-                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">
-                        <a href="${pageContext.request.contextPath}/user/bill">Proceed Checkout</a></button>
-                </div>
+            </template>
+            </tbody>
+        </table>
+    </div>
+        <input v-model="is_check_all" type="checkbox" id="checkAll">
+        <label for="checkAll"><%=language.getString("check_all")%></label>
+</div>
+<%@ include file="/views/master/foot.jsp" %>
+<div id="app2" v-if="bills.selected.length !== 0">
+    <div class="container-fluid bg-primary footer fixed-bottom d-flex justify-content-center">
+        <div class="container row m-1">
+            <div class="col-5">
+                <h3>{{ '<%=language.getString("u_have_chosen")%>'.replace('xx', bills.selected.length) }}</h3>
+            </div>
+            <div class="col-5">
+                <h3>{{ '<%=language.getString("total")%>' + bills.total}}</h3>
+            </div>
+            <div class="col-2">
+                <a :href=" '${pageContext.request.contextPath}/user/checkout?cart_ids=' + bills.selected.join(',') ">
+                    <button class="btn-search btn border border-secondary bg-white me-4 ml-2" style="height: 100%;">
+                        <%=language.getString("pay")%>
+                    </button>
+                </a>
             </div>
         </div>
     </div>
-<%@ include file="/views/master/foot.jsp" %>
+</div>
 <script>
-    document.getElementById("checkAll").addEventListener("change", function() {
-        var checkboxes = document.getElementsByClassName("groupCheckbox");
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].checked = this.checked;
+    var app = new Vue({
+        el: "#app",
+        data: {
+            carts: [],
+            events: [],
+            bills: {
+                selected: [],
+                total: 0
+            },
+            is_check_all: false
+        },
+        created() {
+            this.getAllCarts();
+        },
+        methods: {
+            getAllCarts(){
+                axios.get("<%=request.getContextPath()%>/user/get-items-cart")
+                    .then((res)=>{
+                        this.carts = JSON.parse(res.data.carts)
+                        for (let i = 0; i < this.carts.length; i++) {
+                            this.carts[i].have2pay = parseInt(this.carts[i].quantity) * parseInt(this.carts[i].price)
+                            this.carts[i].tickets = '0'
+                            this.carts[i].count = '0'
+                            this.carts[i].is_checked = false
+                            for (let i = 0; i <this.bills.selected.length; i++) {
+                                if (this.bills.selected[i] === this.carts[i].id){
+                                    this.carts[i].is_checked = true
+                                }
+                            }
+                        }
+                        this.select2bill()
+                        this.getEvents();
+                    })
+            },
+            minus(index){
+                this.carts[index].quantity--
+                this.carts[index].have2pay = parseInt(this.carts[index].quantity) * parseInt(this.carts[index].price)
+                this.select2bill()
+                axios.get("<%=request.getContextPath()%>/user/change-cart-quantity?cart_id=" + this.carts[index].id + "&status=minus")
+                    .then((res)=>{
+                        if (res.data.status === false){
+                            toastr.warning(res.data.message)
+                            this.carts[index].quantity++
+                            this.carts[index].have2pay = parseInt(this.carts[index].quantity) * parseInt(this.carts[index].price)
+                            this.select2bill()
+                        }
+                    })
+            },
+            plus(index){
+                this.carts[index].quantity++
+                this.carts[index].have2pay = parseInt(this.carts[index].quantity) * parseInt(this.carts[index].price)
+                this.select2bill()
+                axios.get("<%=request.getContextPath()%>/user/change-cart-quantity?cart_id=" + this.carts[index].id + "&status=plus")
+                    .then((res)=>{
+                        if (res.data.status === false){
+                            toastr.warning(res.data.message)
+                            this.carts[index].quantity--
+                            this.carts[index].have2pay = parseInt(this.carts[index].quantity) * parseInt(this.carts[index].price)
+                            this.select2bill()
+                        }
+                    })
+            },
+            getEvents(){
+                axios.get('<%=request.getContextPath()%>/all-events')
+                    .then((res)=>{
+                        this.events = JSON.parse(res.data.events)
+                        for (let i = 0; i < this.carts.length; i++) {
+                            for (let j = 0; j < this.events.length; j++) {
+                                if (this.carts[i].event_id === this.events[j].id){
+                                    this.carts[i].tickets = this.events[j].tickets
+                                    this.carts[i].count = this.events[j].count
+                                }
+                            }
+                        }
+                    })
+            },
+            deleteCart(id){
+                axios.get("<%=request.getContextPath()%>/user/delete-cart?id=" + id)
+                    .then((res)=>{
+                        if (res.data.status === true){
+                            toastr.success("<%=language.getString("delete_success")%>")
+                            let index2remove = this.bills.selected.indexOf(id)
+                            if (index2remove !== -1){
+                                this.bills.selected.splice(index2remove, 1)
+                            }
+                            this.getAllCarts()
+                        } else {
+                            toastr.error("<%=language.getString("delete_fail")%>")
+                        }
+                    })
+            },
+            select2bill(){
+                this.bills.total = 0
+                this.bills.selected = []
+                for (let i = 0; i < this.carts.length; i++) {
+                    if (this.carts[i].is_checked){
+                        this.bills.total += parseInt(this.carts[i].quantity) * parseInt(this.carts[i].price)
+                        this.bills.selected.push(this.carts[i].id)
+                    }
+                }
+                app2.bills = this.bills
+            },
+            check_out(){
+
+            }
+        },
+        watch:{
+            is_check_all(newValue, oldValue){
+                if (newValue){
+                    for (let i = 0; i < this.carts.length; i++){
+                        this.carts[i].is_checked = true
+                    }
+                } else {
+                    for (let i = 0; i < this.carts.length; i++){
+                        this.carts[i].is_checked = false
+                    }
+                }
+                this.select2bill()
+            }
         }
-    });
-    document.getElementById("cart_item").addEventListener("change", function() {
-        // Handle checkbox change
-        if (this.checked) {
-            // Checkbox is checked
-        } else {
-            // Checkbox is unchecked
-        }
-    });
+    })
+</script>
+<script>
+    var app2 = new Vue({
+        el: "#app2",
+        data:{
+            bills: {
+                selected: [],
+                total: 0
+            },
+        },
+    })
 </script>

@@ -125,49 +125,18 @@ public class DB {
         if (id.equals("")){
             return null;
         }
-        ArrayList<MyObject> users = DB.getData("select users.*, count(carts.id) as count from users left join carts on users.id = carts.user_id where users.id = ? group by users.id, name, email, phone, password, avatar, gender, token, is_verified, role_id", new String[]{id}, new String[]{"id", "name", "email", "phone", "password", "avatar", "gender", "token", "is_verified", "role_id", "count"});
+        ArrayList<MyObject> users = DB.getData("select users.*, count(carts.id) as count from users join carts on users.id = carts.user_id where users.id = ? and bill_id is NULL group by users.id, name, email, phone, password, avatar, gender, token, is_verified, role_id", new String[]{id}, new String[]{"id", "name", "email", "phone", "password", "avatar", "gender", "token", "is_verified", "role_id", "count"});
         return users.size() == 0 ? null : users.get(0);
     }
-    public static List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> result = new ArrayList<>();
-
-        // Initialize the combination array with the first combination
-        List<Integer> combination = new ArrayList<>();
-        for (int i = 1; i <= k; i++) {
-            combination.add(i);
-        }
-
-        while (combination.get(0) <= n - k + 1) {
-            // Add a copy of the current combination to the result
-            result.add(new ArrayList<>(combination));
-
-            // Find the rightmost element that can be incremented
-            int index = k - 1;
-            while (index >= 0 && combination.get(index) == n - (k - index) + 1) {
-                index--;
-            }
-
-            // Increment the rightmost element
-            combination.set(index, combination.get(index) + 1);
-
-            // Adjust the elements to the right of the incremented element
-            for (int i = index + 1; i < k; i++) {
-                combination.set(i, combination.get(i - 1) + 1);
-            }
-        }
-
-        return result;
-    }
     public static void main(String[] args) throws Exception{
-        int n = 4;
-        int k = 2;
-
-        List<List<Integer>> combinations = combine(n, k);
-
-        for (List<Integer> combination : combinations) {
-            System.out.println(combination);
-        }
-
+        String sql = "select events.*, categories.name as category_name, users.name as username, count(carts.id) as interested, sum(iif(carts.bill_id is not null, carts.quantity, 0)) as count\n" +
+                "from events\n" +
+                "         inner join categories on events.category_id = categories.id\n" +
+                "         inner join users on events.user_id = users.id\n" +
+                "         left join carts on events.id = carts.event_id\n" +
+                "where events.is_verified = 'true'\n" +
+                "group by users.name, categories.name, events.id, title, description, start_date, end_date, location, events.is_verified,\n" +
+                "         events.user_id, category_id, tickets, events.price, image";
+        System.out.println(sql);
     }
-    // result  =2
 }

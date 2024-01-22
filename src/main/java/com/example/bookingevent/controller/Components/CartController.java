@@ -4,14 +4,21 @@ import com.example.bookingevent.daos.BillDAO;
 import com.example.bookingevent.database.DB;
 import com.example.bookingevent.database.MyObject;
 import com.example.bookingevent.models.Bills;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class CartController {
     @WebServlet("/user/add_to_cart")
@@ -38,13 +45,91 @@ public class CartController {
     public static class ViewCartServlet extends HttpServlet {
         protected void doGet(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
-            String sql = "select carts.*, events.price as price, events.title as event_title from carts inner join events on carts.event_id = events.id where carts.user_id = ?";
-            String user_id = (String) request.getSession().getAttribute("login");
-            ArrayList<MyObject> carts = DB.getData(sql, new String[]{user_id}, new String[]{"id", "user_id", "event_id", "quantity", "note", "price", "event_title"});
-            Bills bills = new BillDAO().getBillByCartID(4);
-            request.setAttribute("bill", bills);
-            request.setAttribute("carts" , carts);
             request.getRequestDispatcher("/views/cart.jsp").forward(request, response);
+        }
+    }
+    @WebServlet("/user/get-items-cart")
+    public static class GetItemsCart extends HttpServlet{
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String sql = "select carts.id, carts.user_id, event_id, quantity, bill_id, note, events.price as price, events.title as event_title, events.tickets as tickets from carts inner join events on carts.event_id = events.id left join bills on carts.bill_id = bills.id where carts.user_id = ? and bill_id IS NULL";
+            String user_id = (String) req.getSession().getAttribute("login");
+            ArrayList<MyObject> carts = DB.getData(sql, new String[]{user_id}, new String[]{"id", "user_id", "event_id", "quantity", "note", "price", "event_title", "tickets"});
+            com.google.gson.JsonObject job = new JsonObject();
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+            String carts_json_string = objectMapper.writeValueAsString(carts);
+            job.addProperty("carts", carts_json_string);
+            Gson gson = new Gson();
+            resp.getWriter().write(gson.toJson(job));
+        }
+    }
+    @WebServlet("/user/change-cart-quantity")
+    public static class ChangeCartQuantity extends HttpServlet{
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            ResourceBundle language = (ResourceBundle) req.getAttribute("language");
+            String cart_id = req.getParameter("cart_id");
+            String user_id = (String) req.getSession().getAttribute("login");
+            String status = req.getParameter("status");
+            String sql = "SELECT 'quantity' AS info_type, quantity AS info_value\n" +
+                    "FROM carts\n" +
+                    "WHERE id = ?\n" +
+                    "\n" +
+                    "UNION\n" +
+                    "\n" +
+                    "SELECT 'tickets' AS info_type, tickets AS info_value\n" +
+                    "FROM events\n" +
+                    "WHERE id = (SELECT event_id FROM carts WHERE carts.id = ?)\n" +
+                    "\n" +
+                    "UNION\n" +
+                    "\n" +
+                    "SELECT 'bought' AS info_type, SUM(IIF(bill_id IS NULL, 0, quantity)) AS info_value\n" +
+                    "FROM carts\n" +
+                    "WHERE bill_id IS NOT NULL AND event_id = (select event_id from carts where carts.id = ?)";
+            ArrayList<MyObject> result = DB.getData(sql, new String[]{cart_id, cart_id, cart_id} ,new String[]{"info_type", "info_value"});
+            boolean check = false;
+            String message = language.getString("something_wrong");
+            if (result.size() == 3){
+                int quantity = 0;
+                int bought = 0;
+                int tickets = 0;
+                for (int i = 0; i < result.size(); i++) {
+                    if (result.get(i).info_type.equals("quantity")){
+                        quantity = Integer.parseInt(result.get(i).info_value);
+                    }
+                    if (result.get(i).info_type.equals("tickets")){
+                        tickets = Integer.parseInt(result.get(i).info_value);
+                    }
+                    if (result.get(i).info_type.equals("bought")){
+                        bought = result.get(i).info_value == null ? 0 : Integer.parseInt(result.get(i).info_value);
+                    }
+                }
+                if (status.equals("minus")){
+                    if (quantity == 1){
+                        message = language.getString("quantity_cant_lower_than_1");
+                    } else {
+                        sql = "update carts set quantity = quantity - 1 where id = ? and user_id = ?";
+                        check = DB.executeUpdate(sql, new String[]{cart_id, user_id});
+                    }
+
+                }
+                if (status.equals("plus")){
+                    if (quantity + 1 + bought > tickets) {
+                        message = language.getString("out_of_stock");
+                    } else {
+                        sql = "update carts set quantity = quantity + 1 where id = ? and user_id = ?";
+                        check = DB.executeUpdate(sql, new String[]{cart_id, user_id});
+                    }
+
+                }
+            }
+            com.google.gson.JsonObject job = new JsonObject();
+            job.addProperty("status", check);
+            job.addProperty("message", message);
+            Gson gson = new Gson();
+            resp.getWriter().write(gson.toJson(job));
         }
     }
     @WebServlet("/user/delete-cart")
@@ -55,12 +140,26 @@ public class CartController {
             String id = req.getParameter("id");
             String sql = "delete from carts where id = ?";
             boolean check = DB.executeUpdate(sql, new String[]{id});
-            if (check){
-                req.getSession().setAttribute("mess", "success|" + language.getString("delete_success"));
-            } else {
-                req.getSession().setAttribute("mess", "error|" + language.getString("delete_fail"));
-            }
-            resp.sendRedirect(req.getContextPath() + "/user/viewCart");
+            com.google.gson.JsonObject job = new JsonObject();
+            job.addProperty("status", check);
+            Gson gson = new Gson();
+            resp.getWriter().write(gson.toJson(job));
+        }
+    }
+
+    @WebServlet("/user/checkout")
+    public static class Checkout extends HttpServlet{
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String cart_ids = req.getParameter("cart_ids");
+            String[] ids = cart_ids.split(",");
+            String uuid = UUID.randomUUID().toString();
+            LocalDateTime currentTime = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedTime = currentTime.format(formatter);
+            String sql = "insert into bills(transfer_content, status, created_at) VALUES (?, 'false', ?)";
+            int id = DB.insertGetLastId(sql, new String[]{uuid, formattedTime});
+
         }
     }
 }
