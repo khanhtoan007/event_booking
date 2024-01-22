@@ -150,7 +150,7 @@ public class HomeController {
                     "         left join carts on events.id = carts.event_id\n" +
                     "where events.is_verified = 'true'\n" +
                     "group by users.name, categories.name, events.id, title, description, start_date, end_date, location, events.is_verified,\n" +
-                    "         events.user_id, category_id, tickets, price, image";
+                    "         events.user_id, category_id, tickets, events.price, image";
             String[] fields = new String[]{"id", "title", "description", "start_date", "end_date", "location", "is_verified", "user_id", "category_id", "tickets", "price", "image", "category_name", "username", "interested"};
             ArrayList<MyObject> events = DB.getData(sql, fields);
             com.google.gson.JsonObject job = new JsonObject();
