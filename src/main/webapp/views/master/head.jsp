@@ -91,6 +91,7 @@
                             <div class="dropdown d-flex flex-column justify-content-center">
                                 <p class="dropdown-toggle align-items-center m-0 ml-1" id="dropdownMenuButton1" data-bs-toggle="dropdown"><%=user.name%></p>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/tickets"><%=language.getString("bought_product")%></a></li>
                                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/profile"><%=language.getString("profile")%></a></li>
                                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout"><%=language.getString("logout")%></a></li>
                                 </ul>

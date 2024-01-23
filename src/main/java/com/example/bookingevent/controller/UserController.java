@@ -286,4 +286,15 @@ public class UserController {
             resp.sendRedirect(req.getContextPath() + "/user/profile");
         }
     }
+
+
+    @WebServlet("/user/bought-tickets")
+    public static class ViewBoughtTicket extends HttpServlet{
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+            req.getRequestDispatcher("/views/user/bought-ticket.jsp").forward(req,resp);
+        }
+    }
 }

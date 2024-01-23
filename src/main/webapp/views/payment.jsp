@@ -40,67 +40,85 @@
 <body>
 
 <jsp:include page="./master/head.jsp"/>
-<div class="container-fluid py-5 mb-5 hero-header d-flex justify-content-center">
-  <div class="container row py-5 ">
-    <div class="col-md-12 col-lg-6 col-xl-7">
-      <img width="100%" src="https://img.vietqr.io/image/<%=Config.bank_id%>-<%=Config.bank_number%>-print.png?amount=${amount}&addInfo=${transfer_content}&accountName=<%=Config.app_name%>" alt="">
-    </div>
-    <div class="col-md-12 col-lg-6 col-xl-5">
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">Products</th>
-            <th scope="col">Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Total</th>
-          </tr>
-          </thead>
-          <tbody>
-          <c:forEach var="cart" items="${carts}">
-            <tr>
-              <th scope="row">
-                <div class="d-flex align-items-center mt-2">
-                  <img src="${pageContext.request.contextPath}${cart.image}" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
-                </div>
-              </th>
-              <td class="py-5">${cart.event_title}</td>
-              <td class="py-5">${cart.price}đ</td>
-              <td class="py-5">${cart.quantity}</td>
-              <td class="py-5">${cart.amount}đ</td>
-            </tr>
-          </c:forEach>
-          <tr>
-            <th scope="row">
-            </th>
-            <td class="py-5">
-              <p class="mb-0 text-dark text-uppercase py-3">TOTAL</p>
-            </td>
-            <td class="py-5"></td>
-            <td class="py-5"></td>
-            <td class="py-5">
-              <div class="py-3 border-bottom border-top">
-                <p class="mb-0 text-dark">${amount}đ</p>
+
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+  <h1 class="text-center text-white display-6">Checkout</h1>
+  <ol class="breadcrumb justify-content-center mb-0">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+    <li class="breadcrumb-item active text-white">Checkout</li>
+  </ol>
+</div>
+<!-- Single Page Header End -->
+
+
+<div class="container-fluid py-5">
+  <div class="container py-5">
+    <h1 class="mb-4">Billing details</h1>
+    <form action="#">
+      <div class="row g-5">
+        <div class="col-md-12 col-lg-6 col-xl-7">
+          <img width="100%" src="https://img.vietqr.io/image/<%=Config.bank_id%>-<%=Config.bank_number%>-print.png?amount=${amount}&addInfo=${transfer_content}&accountName=<%=Config.app_name%>" alt="">
+        </div>
+        <div class="col-md-12 col-lg-6 col-xl-5">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">Products</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+              </thead>
+              <tbody>
+              <c:forEach var="cart" items="${carts}">
+                <tr>
+                  <th scope="row">
+                    <div class="d-flex align-items-center mt-2">
+                      <img src="${pageContext.request.contextPath}${cart.image}" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
+                    </div>
+                  </th>
+                  <td class="py-5">${cart.event_title}</td>
+                  <td class="py-5">${cart.price}đ</td>
+                  <td class="py-5">${cart.quantity}</td>
+                  <td class="py-5">${cart.amount}đ</td>
+                </tr>
+              </c:forEach>
+              <tr>
+                <th scope="row">
+                </th>
+                <td class="py-5">
+                  <p class="mb-0 text-dark text-uppercase py-3">TOTAL</p>
+                </td>
+                <td class="py-5"></td>
+                <td class="py-5"></td>
+                <td class="py-5">
+                  <div class="py-3 border-bottom border-top">
+                    <p class="mb-0 text-dark">${amount}đ</p>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
+            <div class="col-12">
+              <div class="form-check text-start my-3">
+                <input type="checkbox" class="form-check-input bg-primary border-0" id="Payments-1" name="Payments" value="Payments">
+                <label class="form-check-label" for="Payments-1"><p>I agree to Local Xplorer's <a target="_blank" href="" rel="noopener noreferrer">Terms of Use</a> and <a target="_blank" href="" rel="noopener noreferrer">Information Privacy Policy</a></p>
+                </label>
               </div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
-        <div class="col-12">
-          <div class="form-check text-start my-3">
-            <input type="checkbox" class="form-check-input bg-primary border-0" id="Payments-1" name="Payments" value="Payments">
-            <label class="form-check-label" for="Payments-1"><p>I agree to Local Xplorer's <a target="_blank" href="" rel="noopener noreferrer">Terms of Use</a> and <a target="_blank" href="" rel="noopener noreferrer">Information Privacy Policy</a></p>
-            </label>
+            </div>
+          </div>
+          <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+            <button type="button" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Confirm Payment</button>
           </div>
         </div>
       </div>
-      <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-        <button type="button" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place Order</button>
-      </div>
-    </div>
+    </form>
   </div>
-    </div>
+</div>
 <%@ include file="./master/foot.jsp" %>
