@@ -1,6 +1,7 @@
 <%@ page import="java.util.ResourceBundle" %>
 <%@ page import="com.example.bookingevent.Init.Config" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
 
@@ -85,9 +86,13 @@
                     </div>
                   </th>
                   <td class="py-5">${cart.event_title}</td>
-                  <td class="py-5">${cart.price}đ</td>
+                  <td class="py-5">
+                    <fmt:formatNumber value="${cart.price}" type="currency" currencyCode="VND" maxFractionDigits="0"/>
+                  </td>
                   <td class="py-5">${cart.quantity}</td>
-                  <td class="py-5">${cart.amount}đ</td>
+                  <td class="py-5">
+                    <fmt:formatNumber value="${cart.amount}" type="currency" currencyCode="VND" maxFractionDigits="0"/>
+                  </td>
                 </tr>
               </c:forEach>
               <tr>
@@ -100,7 +105,7 @@
                 <td class="py-5"></td>
                 <td class="py-5">
                   <div class="py-3 border-bottom border-top">
-                    <p class="mb-0 text-dark">${amount}đ</p>
+                    <fmt:formatNumber value="${amount}" type="currency" currencyCode="VND" maxFractionDigits="0"/>
                   </div>
                 </td>
               </tr>

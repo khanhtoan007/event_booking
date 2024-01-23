@@ -79,8 +79,8 @@
                             </div>
                         </div>
                     <td>{{value.count + '/' + value.tickets}}</td>
-                    <td>{{value.price}}</td>
-                    <td>{{value.have2pay}}</td>
+                    <td>{{ formatCurrency(value.price) }}</td>
+                    <td>{{ formatCurrency(value.have2pay) }}</td>
                     <td>{{value.note}}</td>
                     <td>
                         <div class="col-md-12">
@@ -204,6 +204,13 @@
                             toastr.error("<%=language.getString("delete_fail")%>")
                         }
                     })
+            },
+            formatCurrency(value) {
+                const formattedValue = new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND',
+                }).format(value);
+                return formattedValue;
             },
             select2bill(){
                 this.bills.total = 0

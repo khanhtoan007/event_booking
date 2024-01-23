@@ -139,7 +139,9 @@
                                                         <h4>${event.title}</h4>
                                                         <p>${event.content}</p>
                                                         <div class="d-flex justify-content-between flex-lg-wrap">
-                                                            <p class="text-dark fs-5 fw-bold mb-0">${event.price}VND</p>
+                                                            <p class="text-dark fs-5 fw-bold mb-0">
+                                                                <fmt:formatNumber value="${event.price}" type="currency" currencyCode="VND" maxFractionDigits="0"/>
+                                                            </p>
                                                             <a href="${pageContext.request.contextPath}/event-detail?event_id=${event.id}" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
                                                         </div>
                                                     </div>
