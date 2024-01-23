@@ -42,10 +42,13 @@
 <jsp:include page="./master/head.jsp"/>
 <div class="container-fluid py-5 mb-5 hero-header d-flex justify-content-center">
   <div class="container row py-5 ">
-    <div class="col-md-12 col-lg-6 col-xl-7">
+    <% if ((boolean) request.getAttribute("change")) { %>
+      <h1>số lượng đã bị thay đổi.</h1>
+    <% } %>
+    <div class="col-5">
       <img width="100%" src="https://img.vietqr.io/image/<%=Config.bank_id%>-<%=Config.bank_number%>-print.png?amount=${amount}&addInfo=${transfer_content}&accountName=<%=Config.app_name%>" alt="">
     </div>
-    <div class="col-md-12 col-lg-6 col-xl-5">
+    <div class="col-7">
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -62,7 +65,7 @@
             <tr>
               <th scope="row">
                 <div class="d-flex align-items-center mt-2">
-                  <img src="${pageContext.request.contextPath}${cart.image}" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
+                  <img src="${pageContext.request.contextPath}${cart.image}" style="width: 90px; height: 90px;border-radius: 50%; object-fit: cover" alt="">
                 </div>
               </th>
               <td class="py-5">${cart.event_title}</td>
@@ -104,3 +107,26 @@
   </div>
     </div>
 <%@ include file="./master/foot.jsp" %>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data:{
+      socket : new WebSocket((window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host + '${pageContext.request.contextPath}/my-websocket'),
+    },
+    created(){
+      setTimeout(() => {
+        this.socket.send("subscribe:" + '${transfer_content}');
+      }, 2000);
+      this.socket.onmessage = (event) => {
+        const message = JSON.parse(event.data);
+        if (message === true){
+          toastr.success("<%=language.getString("payment_verified")%>")
+          location.href = "<%=request.getContextPath() + "/"%>"
+        }
+      }
+    },
+    methods:{
+
+    }
+  })
+</script>

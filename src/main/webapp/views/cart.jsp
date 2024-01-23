@@ -97,16 +97,16 @@
 </div>
 <%@ include file="/views/master/foot.jsp" %>
 <div id="app2" v-if="bills.selected.length !== 0" class="container">
-    <div class="container-fluid footer fixed-bottom d-flex justify-content-center" style="background-color: #2a63cb;">
+    <div class="container-fluid footer bg-primary fixed-bottom d-flex justify-content-center">
         <div class="container row m-1">
             <div class="col-5">
-                <h3 class="text-success">{{ '<%=language.getString("u_have_chosen")%>'.replace('xx', bills.selected.length) }}</h3>
+                <h3>{{ '<%=language.getString("u_have_chosen")%>'.replace('xx', bills.selected.length) }}</h3>
             </div>
             <div class="col-5">
-                <h3 class="text-success">{{ '<%=language.getString("total")%>' + bills.total}}</h3>
+                <h3>{{ '<%=language.getString("total")%>' + bills.total}}</h3>
             </div>
             <div class="col-2">
-                <a :href=" '${pageContext.request.contextPath}/user/checkout?cart_ids=' + bills.selected.join(',') " class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i>
+                <a :href=" '${pageContext.request.contextPath}/user/checkout?cart_ids=' + bills.selected.join(',') " class="btn bg-white border border-secondary rounded-pill px-3 text-dark"><i class="fa fa-shopping-bag me-2 text-primary"></i>
                         <%=language.getString("pay")%>
                 </a>
             </div>

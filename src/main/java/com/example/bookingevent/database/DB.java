@@ -6,6 +6,8 @@ import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 public class DB {
     public static Connection getConnection() {
         try {
@@ -130,7 +132,8 @@ public class DB {
     }
 
     public static void main(String[] args) throws Exception{
-        ArrayList<MyObject> bills = DB.getData("select * from bills where id = ?", new String[]{"5"}, new String[]{"amount", "transfer_content", "status", "paid_at"});
-        System.out.println(bills);
+        String s = "Blue Tran Dinh Khanh Toan thân mến, Tài khoản Spend Account vừa tăng 10.000 VND vào 22/01/2024 13:36. Số dư hiện tại: 30.000 VND. Mô tả: MBVCB.5131494248.038489.abcdefgh.CT tu 9763416782 TRAN QUANG MINH toi 9021329646765 TRAN DINH KHANH TOAN tai BVBank Timo. Cảm ơn Quý khách đã sử dụng dịch vụ Ngân hàng số Timo! Để được hỗ trợ tốt hơn trong quá trình sử dụng, tham gia ngay: Group Facebook: Cộng đồng ngân hàng số Timo (Offical Group) Zalo Page            : Timo Trân trọng, Timo Team";
+        System.out.println(s.split("tăng ")[1].split(" VND")[0].replace(".", ""));
+        System.out.println(UUID.randomUUID().toString());
     }
 }

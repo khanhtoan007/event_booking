@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
+import java.util.UUID;
 
 import com.example.bookingevent.controller.MyWebSocket;
 import com.example.bookingevent.database.DB;
@@ -79,6 +80,7 @@ public class EmailReader {
             Message[] messages = emailFolder.search(combinedTerm);
             ArrayList<String> transfer_contents = new ArrayList<>();
             ArrayList<String> paid_ats = new ArrayList<>();
+            ArrayList<String> amounts = new ArrayList<>();
             ArrayList<Integer> set_read = new ArrayList<>();
             for (int i = messages.length - 1; i >= 0; i--) {
                 Message message = messages[i];
@@ -87,21 +89,24 @@ public class EmailReader {
                     String text_body = getTextFromMimeMultipart(mimeMultipart);
                     String[] arr = text_body.split("\\.");
                     if (arr.length > 7){
-                        String transfer_content = arr[7];
+                        String transfer_content = addDashesToUUID(arr[7]);
                         String paid_at = convertToSQLServerDatetimeFormat(text_body.split(". Số")[0].split("vào ")[1]);
+                        String amount = text_body.split("tăng ")[1].split(" VND")[0].replace(".", "");
                         paid_ats.add(paid_at);
+                        amounts.add(amount);
                         transfer_contents.add(transfer_content);
                         set_read.add(i);
                     }
                 }
             }
             String sql = "";
-            String[] vars = new String[transfer_contents.size() + paid_ats.size()];
+            String[] vars = new String[transfer_contents.size() + paid_ats.size() + amounts.size()];
             String in_query = "(";
             for (int i = 0; i < transfer_contents.size(); i++) {
-                sql += "update bills set status = 'true', paid_at = ? where transfer_content = ?;";
-                vars[i * 2 ] = paid_ats.get(i);
-                vars[i * 2 + 1] = transfer_contents.get(i);
+                sql += "update bills set status = 'true', paid_at = ? where transfer_content = ? and amount = ?;";
+                vars[i * 3 ] = paid_ats.get(i);
+                vars[i * 3 + 1] = transfer_contents.get(i);
+                vars[i * 3 + 2] = amounts.get(i);
                 in_query += "'" + transfer_contents.get(i) + "'" + ",";
             }
             in_query += ")";
@@ -188,5 +193,14 @@ public class EmailReader {
             e.printStackTrace(); // Handle the parsing exception as needed
             return null;
         }
+    }
+    private static String addDashesToUUID(String uuidString) {
+        String formattedUUID = uuidString.substring(0, 8) + "-"
+                + uuidString.substring(8, 12) + "-"
+                + uuidString.substring(12, 16) + "-"
+                + uuidString.substring(16, 20) + "-"
+                + uuidString.substring(20);
+        UUID uuid = UUID.fromString(formattedUUID);
+        return formattedUUID;
     }
 }
