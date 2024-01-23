@@ -43,7 +43,7 @@
 <div class="container-fluid py-5 mb-5 hero-header d-flex justify-content-center">
   <div class="container row py-5 ">
     <% if ((boolean) request.getAttribute("change")) { %>
-      <h1>số lượng đã bị thay đổi.</h1>
+      <h3 class="text-danger text-center" style="width: 100%">${if_change}</h3>
     <% } %>
     <div class="col-5">
       <img width="100%" src="https://img.vietqr.io/image/<%=Config.bank_id%>-<%=Config.bank_number%>-print.png?amount=${amount}&addInfo=${transfer_content}&accountName=<%=Config.app_name%>" alt="">
