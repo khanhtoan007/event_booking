@@ -60,14 +60,14 @@
         <div class="container-fluid py-5">
             <div class="container py-5">
                 <h1 class="mb-4">Thêm sự kiện mới</h1>
-                <form action="#">
+                <form action="new-event" method="post" enctype="multipart/form-data">
                     <div class="row g-5">
                         <div class="col-md-12 col-lg-12 col-xl-12">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
                                     <div class="form-item w-100">
                                         <label class="form-label my-3">Tiêu đề<sup>*</sup></label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="title" class="form-control" id="title" >
                                     </div>
                                 </div>
                             </div>
@@ -75,60 +75,66 @@
                                 <div class="col-3">
                                     <div class="form-item">
                                         <label class="form-label my-3">Ảnh bìa<sup>*</sup></label>
-                                        <input class="form-control" type="file" id="formFile">
+                                        <input class="form-control" name="image1" type="file" id="formFile">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="form-item">
-                                        <label class="form-label my-3">Ngày bắt đầu<sup>*</sup></label>
-                                        <input type="text" class="form-control">
+                                        <label class="form-label my-3">Giờ bắt đầu hoạt động<sup>*</sup></label>
+                                        <input type="time" class="form-control" id="start_date" name="start_date">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="form-item">
-                                        <label class="form-label my-3">Ngày kết thúc<sup>*</sup></label>
-                                        <input type="text" class="form-control">
+                                        <label class="form-label my-3">Giờ kết thúc<sup>*</sup></label>
+                                        <input type="time" class="form-control" id="end_date" name="end_date">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="form-item">
                                         <label class="form-label my-3">Danh mục<sup>*</sup></label>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                          </select>
+                                        <select class="form-control" name="category" id="category">
+                                            <option selected value="0">Choose one</option>
+                                            <c:forEach items="${cateList}" var="i">
+                                               <option value="${i.category_id}">${i.name}</option>
+                                            </c:forEach>
+                                         </select>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="form-item">
                                 <label class="form-label my-3">Địa chỉ <sup>*</sup></label>
-                                <input type="text" class="form-control" placeholder="Nhập vào địa chỉ">
+                                <input type="text" name="location" class="form-control" placeholder="Nhập vào địa chỉ">
                             </div>
 
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-item">
                                         <label class="form-label my-3">Số vé<sup>*</sup></label>
-                                        <input type="number" class="form-control">
+                                        <input type="number" name="tickets" class="form-control" >
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-item">
                                         <label class="form-label my-3">Giá<sup>*</sup></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Giá vé" aria-label="Giá vé" aria-describedby="basic-addon2">
+                                            <input type="text" name="price" class="form-control" placeholder="Giá vé" aria-label="Giá vé" aria-describedby="basic-addon2">
                                             <span class="input-group-text" id="basic-addon2">VND</span>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-item">
+                                        <label class="form-label my-3">Hình ảnh khác</label>
+                                        <input multiple class="form-control" name="image2" type="file" id="formFile">
                                     </div>
                                 </div>
                             </div>
  
                             <div class="form-item">
                                 <label class="form-label my-3">Nội dung<sup>*</sup></label>
-                                <textarea name="text" class="form-control" spellcheck="false" cols="30" rows="11" placeholder=""></textarea>
+                                <textarea name="content" class="form-control" spellcheck="false" cols="30" rows="11" placeholder=""></textarea>
                             </div>
                         
   
