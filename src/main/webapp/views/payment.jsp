@@ -41,6 +41,7 @@
 
 <jsp:include page="./master/head.jsp"/>
 
+
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Checkout</h1>
@@ -55,7 +56,9 @@
 
 <div class="container-fluid py-5">
   <div class="container py-5">
-    <h1 class="mb-4">Billing details</h1>
+    <% if ((boolean) request.getAttribute("change")) { %>
+    <h1>số lượng đã bị thay đổi.</h1>
+    <% } %>
     <form action="#">
       <div class="row g-5">
         <div class="col-md-12 col-lg-6 col-xl-7">
@@ -120,5 +123,29 @@
       </div>
     </form>
   </div>
-</div>
+    </div>
 <%@ include file="./master/foot.jsp" %>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data:{
+      socket : new WebSocket((window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host + '${pageContext.request.contextPath}/my-websocket'),
+    },
+    created(){
+      setTimeout(() => {
+        this.socket.send("subscribe:" + '${transfer_content}');
+      }, 2000);
+      this.socket.onmessage = (event) => {
+        const message = JSON.parse(event.data);
+        if (message === true){
+          toastr.success("<%=language.getString("payment_verified")%>")
+          location.href = "<%=request.getContextPath() + "/"%>"
+        }
+      }
+    },
+    methods:{
+
+    }
+  })
+</script>
+

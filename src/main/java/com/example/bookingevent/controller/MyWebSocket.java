@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+@ServerEndpoint("/my-websocket")
 public class MyWebSocket {
     private static Map<String, Set<Session>> channels = new HashMap<>();
 

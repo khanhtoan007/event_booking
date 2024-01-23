@@ -1,5 +1,6 @@
 package com.example.bookingevent.controller.Components;
 
+import com.example.bookingevent.Init.EmailReader;
 import com.example.bookingevent.daos.BillDAO;
 import com.example.bookingevent.database.DB;
 import com.example.bookingevent.database.MyObject;
@@ -166,7 +167,7 @@ public class CartController {
                 }
                 boolean check = DB.executeUpdate(sql, ids);
                 if (check){
-                    resp.sendRedirect(req.getContextPath() + "/payment?bill_id=" + id);
+                    resp.sendRedirect(req.getContextPath() + "/user/payment?bill_id=" + id);
                 } else {
                     resp.sendRedirect(req.getContextPath() + "/user/viewCart");
                 }
@@ -176,33 +177,69 @@ public class CartController {
         }
     }
 
-    @WebServlet("/payment")
+    @WebServlet("/user/payment")
     public static class Payment extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String bill_id = req.getParameter("bill_id");
+            String user_id = (String) req.getSession().getAttribute("login");
             ResourceBundle language = (ResourceBundle) req.getAttribute("language");
-            ArrayList<MyObject> bills = DB.getData("select * from bills where id = ?", new String[]{bill_id}, new String[]{"amount", "transfer_content", "status", "paid_at"});
-            if (bills.size() == 0){
+            ArrayList<MyObject> carts = DB.getData("select carts.id, carts.user_id, event_id, quantity, bill_id, note,events.image, events.price as price, events.title as event_title, events.tickets as tickets, transfer_content, sum(quantity * events.price) as amount\n" +
+                    "from carts\n" +
+                    "         inner join bills on carts.bill_id = bills.id\n" +
+                    "         inner join events on carts.event_id = events.id\n" +
+                    "where bills.status = 'false'\n" +
+                    "  and bills.id = ?\n" +
+                    "  and carts.user_id = ?\n" +
+                    "group by carts.id, carts.user_id, event_id, quantity, bill_id, note, events.image, events.price, events.title, events.tickets, transfer_content", new String[]{bill_id, user_id}, new String[]{"id", "user_id", "event_id", "quantity", "note","image", "price", "event_title", "tickets", "amount", "transfer_content"});
+
+            if (carts.size() == 0){
                 req.getSession().setAttribute("mess", "warning|" + language.getString("bill_not_exist"));
                 resp.sendRedirect(req.getContextPath() + "/user/viewCart");
             } else {
-                MyObject bill = bills.get(0);
-                if (bill.status.equals("0")){
-                    ArrayList<MyObject> carts = DB.getData("select carts.id, carts.user_id, event_id, quantity, bill_id, note,events.image, events.price as price, events.title as event_title, events.tickets as tickets, sum(quantity * events.price) as amount from carts inner join events on carts.event_id = events.id left join bills on carts.bill_id = bills.id where bill_id = ?\n" +
-                            "group by carts.id, events.title, events.tickets, carts.user_id, event_id, quantity, bill_id, note, events.price, events.image", new String[]{bill_id}, new String[]{"id", "user_id", "event_id", "quantity", "note","image", "price", "event_title", "tickets", "amount"});
-                    int amount = 0;
-                    for (int i = 0; i < carts.size(); i++) {
-                        amount += Integer.parseInt(carts.get(i).amount);
-                    }
-                    req.setAttribute("transfer_content", bill.transfer_content);
-                    req.setAttribute("amount", amount);
-                    req.setAttribute("carts", carts);
-                    req.getRequestDispatcher("/views/payment.jsp").forward(req, resp);
-                } else {
-                    req.getSession().setAttribute("mess", "warning|" + language.getString("something_wrong"));
-                    resp.sendRedirect(req.getContextPath() + "/user/viewCart");
+                String events_ids = "(";
+                for (int i = 0; i < carts.size(); i++) {
+                    events_ids += "'" + carts.get(i).event_id + "', ";
                 }
+                events_ids += ")";
+                events_ids = EmailReader.replaceLast(events_ids, ",", "");
+                String sql = "select events.*, categories.name as category_name, users.name as username, count(carts.id) as interested, sum(iif(bills.status = 'true', carts.quantity, 0)) as count\n" +
+                        "from events\n" +
+                        "         inner join categories on events.category_id = categories.id\n" +
+                        "         inner join users on events.user_id = users.id\n" +
+                        "         left join carts on events.id = carts.event_id\n" +
+                        "         left join bills on carts.bill_id = bills.id\n" +
+                        "where events.is_verified = 'true' and events.id in x\n" +
+                        "group by users.name, categories.name, events.id, title, description, start_date, end_date, location, events.is_verified,\n" +
+                        "         events.user_id, category_id, tickets, events.price, image";
+                String[] fields = new String[]{"id", "title", "description", "start_date", "end_date", "location", "is_verified", "user_id", "category_id", "tickets", "price", "image", "category_name", "username", "interested", "count"};
+                ArrayList<MyObject> events = DB.getData(sql.replace("x", events_ids), fields);
+                int amount = 0;
+                boolean change = false;
+                sql = "";
+                for (int i = 0; i < carts.size(); i++) {
+                    for (int j = 0; j < events.size(); j++) {
+                        int quantity = Integer.parseInt(carts.get(i).quantity);
+                        int tickets = Integer.parseInt(carts.get(i).tickets);
+                        int bought = Integer.parseInt(events.get(j).count);
+                        if (quantity + bought > tickets){
+                            change = true;
+                            carts.get(i).quantity = String.valueOf(tickets - bought);
+                            sql = "update carts set quantity = " + carts.get(i).quantity +" where id = " + carts.get(i).id + ";";
+                        }
+                    }
+                    amount += Integer.parseInt(carts.get(i).amount);
+                }
+                if (change){
+                    DB.executeUpdate(sql);
+                }
+                DB.executeUpdate("update bills set amount = ? where id = ?", new String[]{String.valueOf(amount), bill_id});
+                req.setAttribute("transfer_content", carts.get(0).transfer_content);
+                System.out.println(carts.get(0).transfer_content);
+                req.setAttribute("amount", amount);
+                req.setAttribute("carts", carts);
+                req.setAttribute("change", change);
+                req.getRequestDispatcher("/views/payment.jsp").forward(req, resp);
             }
         }
     }
