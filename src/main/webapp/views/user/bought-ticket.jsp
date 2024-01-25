@@ -49,11 +49,41 @@
     <li class="breadcrumb-item active text-white">Bought Tickets</li>
   </ol>
 </div>
-
-
-
-
 <!-- Single Page Header End -->
+
+<div class="container py-5" id="app">
+  <div class="row g-5 align-items-center py-5">
+    <h3 class="mb-5 display-3 text-primary mt-5  py-5"><%= language.getString("bought_product") %></h3>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">Products</th>
+          <th scope="col" class="col-3"><%=language.getString("title")%></th>
+          <th scope="col"><%=language.getString("bought_tickets")%></th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${bought_products}" var="cart">
+          <tr>
+            <th scope="row" class="d-flex justify-content-center">
+              <div class="  mt-2">
+                <img src="${pageContext.request.contextPath}${cart.image}" class="img-fluid" style="width:120px; height: 90px;" alt="">
+              </div>
+            </th>
+            <td class="py-5"><a href="">${cart.event_title}</a></td>
+            <td class="py-5">${cart.quantity}</td>
+            <td class="py-5">${cart.start_date}</td>
+            <td class="py-5">${cart.end_date}</td>
+          </tr>
+        </c:forEach>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 
 

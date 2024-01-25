@@ -41,7 +41,7 @@
                 <div class="navbar-nav mx-auto">
                     <a href="${pageContext.request.contextPath}/" class="nav-item nav-link active">Home</a>
                     <a href="${pageContext.request.contextPath}/events" class="nav-item nav-link">Shop</a>
-                    <a href="${pageContext.request.contextPath}/event-detail" class="nav-item nav-link">Shop Detail</a>
+                    <a href="${pageContext.request.contextPath}/views/about_us.jsp" class="nav-item nav-link">About Us</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">
@@ -51,7 +51,7 @@
                             <a href="${pageContext.request.contextPath}/views/404.html" class="dropdown-item">404 Page</a>
                         </div>
                     </div>
-                    <a href="${pageContext.request.contextPath}/views/contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="${pageContext.request.contextPath}/views/contact.jsp" class="nav-item nav-link">Contact</a>
                 </div>
                 <div class="d-flex m-3 me-0">
                         <form class="position-relative me-4 my-auto" action="${pageContext.request.contextPath}/change-language" onchange="submit()" method="post">
@@ -91,7 +91,7 @@
                             <div class="dropdown d-flex flex-column justify-content-center">
                                 <p class="dropdown-toggle align-items-center m-0 ml-1" id="dropdownMenuButton1" data-bs-toggle="dropdown"><%=user.name%></p>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/tickets"><%=language.getString("bought_product")%></a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/bought-tickets"><%=language.getString("bought_product")%></a></li>
                                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/profile"><%=language.getString("profile")%></a></li>
                                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout"><%=language.getString("logout")%></a></li>
                                 </ul>

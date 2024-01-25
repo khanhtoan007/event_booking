@@ -292,8 +292,14 @@ public class UserController {
     public static class ViewBoughtTicket extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
+            String sql = "select carts.id, carts.user_id, event_id,image,events.title as event_title,start_date, end_date, quantity\n" +
+                    "from carts\n" +
+                    "    inner join events on carts.event_id = events.id\n" +
+                    "    left join bills on carts.bill_id = bills.id\n" +
+                    "where carts.user_id = ? and bills.status = 1";
+            String user_id = (String) req.getSession().getAttribute("login");
+            ArrayList<MyObject> carts = DB.getData(sql, new String[]{user_id}, new String[]{"id", "user_id", "event_id","image", "event_title", "start_date", "end_date","quantity"});
+            req.setAttribute("bought_products",carts);
             req.getRequestDispatcher("/views/user/bought-ticket.jsp").forward(req,resp);
         }
     }

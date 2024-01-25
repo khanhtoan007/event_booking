@@ -63,7 +63,7 @@
                 <div class="footer-item">
                     <h4 class="text-light mb-3">Contact</h4>
                     <p>Address: Da Nang</p>
-                    <p>Email: localxplorer@gmail.com</p>
+                    <p>Email: localxplorervn@gmail.com</p>
                     <p>Phone: 0913827180</p>
                     <p>Payment Accepted</p>
                     <img src="${pageContext.request.contextPath}/assets/img/payment.png" class="img-fluid" alt="">

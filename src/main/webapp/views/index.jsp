@@ -104,22 +104,6 @@
                                         <span class="text-dark" style="width: 130px;"><%=language.getString("all_product")%></span>
                                     </a>
                                 </li>
-<%--                                --%>
-<%--                                <li class="nav-item">--%>
-<%--                                    <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">--%>
-<%--                                        <span class="text-dark" style="width: 130px;">Fruits</span>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
-<%--                                <li class="nav-item">--%>
-<%--                                    <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">--%>
-<%--                                        <span class="text-dark" style="width: 130px;">Bread</span>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
-<%--                                <li class="nav-item">--%>
-<%--                                    <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5">--%>
-<%--                                        <span class="text-dark" style="width: 130px;">Meat</span>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
                             </ul>
                         </div>
                     </div>
@@ -211,9 +195,9 @@
         <!-- Vesitable Shop Start-->
         <div class="container-fluid vesitable py-5">
             <div class="container py-5">
-                <h1 class="mb-0">Làng lụa</h1>
-                <div class="owl-carousel vegetable-carousel justify-content-center">
-                    <div class="border border-primary rounded position-relative vesitable-item">
+                <h1 class="mb-5">Làng lụa</h1>
+                <div class="d-flex justify-content-evenly">
+                    <div class="border border-primary rounded position-relative vesitable-item"  style="width: 25%">
                         <div class="vesitable-img">
                             <img src="${pageContext.request.contextPath}/assets/img/langlua/IMG_3077.JPG" class="img-fluid w-100 rounded-top" alt="">
                         </div>
@@ -222,7 +206,35 @@
                             <h4>Làng lụa</h4>
                             <p>Trải nghiệm tham quan làng lụa tại Hội An</p>
                             <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">35000VND</p>
+                                <p class="text-dark fs-5 fw-bold mb-0">35.000VND</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-primary rounded position-relative vesitable-item " style="width: 25%">
+                        <div class="vesitable-img">
+                            <img src="${pageContext.request.contextPath}/assets/img/langlua/IMG_3077.JPG" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Workshop</div>
+                        <div class="p-4 rounded-bottom">
+                            <h4>Làng lụa</h4>
+                            <p>Trải nghiệm tham quan làng lụa tại Hội An</p>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">35.000VND</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-primary rounded position-relative vesitable-item " style="width: 25%">
+                        <div class="vesitable-img">
+                            <img src="${pageContext.request.contextPath}/assets/img/langlua/IMG_3077.JPG" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Workshop</div>
+                        <div class="p-4 rounded-bottom">
+                            <h4>Làng lụa</h4>
+                            <p>Trải nghiệm tham quan làng lụa tại Hội An</p>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">35.000VND</p>
                                 <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                             </div>
                         </div>
@@ -231,6 +243,8 @@
             </div>
         </div>
         <!-- Vesitable Shop End -->
+
+
 
 
 
