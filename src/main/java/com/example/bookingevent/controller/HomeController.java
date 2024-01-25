@@ -32,6 +32,14 @@ public class HomeController {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
                 List<EventPost> eventPosts = new EventDAO().getEvent();
+                for (EventPost event : eventPosts) {
+                    event.setImage(event.getImage().split(", ")[0]);
+                    String content = event.getContent();
+                    if (content.length() > 100) {
+                        event.setContent(content.substring(0, 150) + "...");
+                    }
+                }
+
                 req.setAttribute("listEvent", eventPosts);
                 System.out.println(eventPosts);
                 req.getRequestDispatcher("views/index.jsp").forward(req,resp);
