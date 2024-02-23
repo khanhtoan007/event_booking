@@ -58,7 +58,7 @@
 <div class="container-fluid py-5">
   <div class="container py-5">
     <% if ((boolean) request.getAttribute("change")) { %>
-    <h1>số lượng đã bị thay đổi.</h1>
+      <h3 class="text-danger text-center" style="width: 100%">${if_change}</h3>
     <% } %>
     <form action="#">
       <div class="row g-5">

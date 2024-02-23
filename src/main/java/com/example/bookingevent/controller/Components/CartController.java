@@ -217,28 +217,30 @@ public class CartController {
                 int amount = 0;
                 boolean change = false;
                 sql = "";
+                String if_change = "";
                 for (int i = 0; i < carts.size(); i++) {
                     for (int j = 0; j < events.size(); j++) {
                         int quantity = Integer.parseInt(carts.get(i).quantity);
                         int tickets = Integer.parseInt(carts.get(i).tickets);
                         int bought = Integer.parseInt(events.get(j).count);
-                        if (quantity + bought > tickets){
+                        if (carts.get(i).event_id.equals(events.get(j).id) && quantity + bought > tickets){
                             change = true;
+                            if_change += language.getString("quantity_changed").replace("xx", events.get(j).title).replace("yy", carts.get(i).quantity).replace("zz", String.valueOf(tickets - bought)) + "\n";
                             carts.get(i).quantity = String.valueOf(tickets - bought);
                             sql = "update carts set quantity = " + carts.get(i).quantity +" where id = " + carts.get(i).id + ";";
+                            amount += Integer.parseInt(carts.get(i).quantity) * Integer.parseInt(events.get(j).price);
                         }
                     }
-                    amount += Integer.parseInt(carts.get(i).amount);
                 }
                 if (change){
                     DB.executeUpdate(sql);
                 }
                 DB.executeUpdate("update bills set amount = ? where id = ?", new String[]{String.valueOf(amount), bill_id});
                 req.setAttribute("transfer_content", carts.get(0).transfer_content);
-                System.out.println(carts.get(0).transfer_content);
                 req.setAttribute("amount", amount);
                 req.setAttribute("carts", carts);
                 req.setAttribute("change", change);
+                req.setAttribute("if_change", if_change);
                 req.getRequestDispatcher("/views/payment.jsp").forward(req, resp);
             }
         }

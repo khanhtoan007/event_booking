@@ -88,7 +88,7 @@ public class EmailReader {
                     MimeMultipart mimeMultipart = (MimeMultipart) message.getContent();
                     String text_body = getTextFromMimeMultipart(mimeMultipart);
                     String[] arr = text_body.split("\\.");
-                    if (arr.length > 7){
+                    if (arr.length > 7 || text_body.contains("tăng")){
                         String transfer_content = addDashesToUUID(arr[7]);
                         String paid_at = convertToSQLServerDatetimeFormat(text_body.split(". Số")[0].split("vào ")[1]);
                         String amount = text_body.split("tăng ")[1].split(" VND")[0].replace(".", "");

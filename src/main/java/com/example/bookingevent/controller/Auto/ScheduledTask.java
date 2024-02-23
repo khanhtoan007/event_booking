@@ -13,7 +13,7 @@ public class ScheduledTask implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
         scheduler = Executors.newSingleThreadScheduledExecutor();
         long initialDelay = 0;
-        long period = 30 * 1000; // 30 seconds in milliseconds
+        long period = 30 * 1000; // 10 seconds in milliseconds
         scheduler.scheduleAtFixedRate(new MyScheduledTask(), initialDelay, period,TimeUnit.MILLISECONDS);
     }
 
