@@ -228,16 +228,20 @@ public class CartController {
                             if_change += language.getString("quantity_changed").replace("xx", events.get(j).title).replace("yy", carts.get(i).quantity).replace("zz", String.valueOf(tickets - bought)) + "\n";
                             carts.get(i).quantity = String.valueOf(tickets - bought);
                             sql = "update carts set quantity = " + carts.get(i).quantity +" where id = " + carts.get(i).id + ";";
+                            System.out.println(quantity + tickets + amount + "check");
                             amount += Integer.parseInt(carts.get(i).quantity) * Integer.parseInt(events.get(j).price);
                         }
                     }
                 }
+                System.out.println(amount + "  ==== sau");
                 if (change){
                     DB.executeUpdate(sql);
                 }
+                req.setAttribute("amount", amount);
+
                 DB.executeUpdate("update bills set amount = ? where id = ?", new String[]{String.valueOf(amount), bill_id});
                 req.setAttribute("transfer_content", carts.get(0).transfer_content);
-                req.setAttribute("amount", amount);
+
                 req.setAttribute("carts", carts);
                 req.setAttribute("change", change);
                 req.setAttribute("if_change", if_change);

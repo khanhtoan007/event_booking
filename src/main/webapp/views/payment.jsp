@@ -62,6 +62,9 @@
     <% } %>
     <form action="#">
       <div class="row g-5">
+        <p>
+          ${amount} && ${transfer_content}
+        </p>
         <div class="col-md-12 col-lg-6 col-xl-7">
           <img width="100%" src="https://img.vietqr.io/image/<%=Config.bank_id%>-<%=Config.bank_number%>-print.png?amount=${amount}&addInfo=${transfer_content}&accountName=<%=Config.app_name%>" alt="">
         </div>
