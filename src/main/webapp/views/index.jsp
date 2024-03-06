@@ -115,17 +115,17 @@
                                     <div class="row g-4">
                                         <c:forEach var="event" items="${listEvent}">
                                             <div class="col-md-6 col-lg-4 col-xl-3">
-                                                <div class="rounded position-relative fruite-item">
+                                                <div class="rounded position-relative fruite-item" style="display: flex; flex-direction: column;">
                                                     <div class="fruite-img">
                                                         <img src="images/${event.image}" class="img-fluid w-100 rounded-top" alt="">
                                                     </div>
                                                     <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">${event.category_name}</div>
-                                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-end;">
                                                         <h4>${event.title}</h4>
                                                         <p>${event.content}</p>
-                                                        <div class="d-flex justify-content-between flex-lg-wrap">
+                                                        <div class="d-flex flex-column">
                                                             <p class="text-dark fs-5 fw-bold mb-0">${event.price}VND</p>
-                                                            <a href="${pageContext.request.contextPath}/event?id=${event.id}" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
+                                                            <a href="${pageContext.request.contextPath}/event?id=${event.id}" class="btn border border-secondary rounded-pill px-4 py-1 text-primary align-items-center"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
                                                         </div>
                                                     </div>
                                                 </div>

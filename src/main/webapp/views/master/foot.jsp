@@ -1,4 +1,5 @@
 
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 
 
@@ -33,9 +34,7 @@
         <div class="row g-5">
             <div class="col-lg-3 col-md-6">
                 <div class="footer-item">
-                    <h4 class="text-light mb-3">Why People Like us!</h4>
-                    <p class="mb-4">typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
+                    <p class="mb-4">Nền tảng quản lý và bán vé trải nghiệm Làng nghề truyền thống Hội An hàng đầu Việt Nam!</p>
                     <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
                 </div>
             </div>
