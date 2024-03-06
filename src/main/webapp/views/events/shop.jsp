@@ -128,21 +128,23 @@
                             <div class="col-lg-9">
                                 <div class="row g-4 justify-content-center">
                                     <template v-for="(value, key) in view_list">
-                                        <a :href="'${pageContext.request.contextPath}/event-detail?event_id=' + value.id" class="card-link col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img :src="'${pageContext.request.contextPath}' + value.image" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{value.category_name}}</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>{{value.title}}</h4>
-                                                    <p>{{value.description}}</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%"><%=language.getString("added_by")%>: {{value.username}}</p>
-                                                        <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%">{{ '<%=language.getString("price")%>'.replace('xx', value.price) }}</p>
-                                                        <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%"><%=language.getString("sold")%></p>
-                                                        <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%">{{ '<%=language.getString("interested")%>'.replace('xx', value.interested) }}</p>
-                                                        <a :href="'${pageContext.request.contextPath}/event-detail?event_id=' + value.id" class="btn border border-secondary rounded-pill px-3 text-primary mt-2" style="width: 100%"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
+                                        <a :href="'${pageContext.request.contextPath}/event-detail?event_id=' + value.id" class="col-md-6 col-lg-6 col-xl-4">
+                                            <div  >
+                                                <div class="rounded position-relative fruite-item">
+                                                    <div class="fruite-img">
+                                                        <img :src="'${pageContext.request.contextPath}' + value.image" class="img-fluid w-100 rounded-top" alt="">
+                                                    </div>
+                                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{value.category_name}}</div>
+                                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                        <h4>{{value.title}}</h4>
+                                                        <p>{{value.description}}</p>
+                                                        <div class="d-flex justify-content-between flex-lg-wrap">
+                                                            <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%"><%=language.getString("added_by")%>: {{value.username}}</p>
+                                                            <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%">{{ formatCurrency(value.price) }}</p>
+                                                            <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%">{{ '<%=language.getString("sold")%>'.replace('xx', value.count).replace('yy', value.tickets) }}</p>
+                                                            <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%">{{ '<%=language.getString("interested")%>'.replace('xx', value.interested) }}</p>
+                                                            <a :href="'${pageContext.request.contextPath}/event-detail?event_id=' + value.id" class="btn border border-secondary rounded-pill px-3 text-primary mt-2" style="width: 100%"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -205,6 +207,7 @@
                                 }
                             })
 
+<<<<<<< HEAD
                     },
                     getEvents(){
                         axios.get('<%=request.getContextPath()%>/all-events')
@@ -241,6 +244,39 @@
                         this.view_list = this.events.filter( item => {
                             if (this.keywords !== ''){
                                 if ( this.removeDiacritics(item.title.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase())) || this.removeDiacritics(item.description.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase()))){
+=======
+            },
+            getEvents(){
+                axios.get('<%=request.getContextPath()%>/all-events')
+                    .then((res)=>{
+                        this.events = JSON.parse(res.data.events)
+                        this.view_list = this.events
+                    })
+            },
+            formatCurrency(value) {
+                const formattedValue = new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND',
+                }).format(value);
+                return formattedValue;
+            },
+            removeDiacritics(str){
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            },
+            updatedList(){
+                this.view_list = this.events.filter( item => {
+                    if (this.keywords !== ''){
+                        if ( this.removeDiacritics(item.title.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase())) || this.removeDiacritics(item.description.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase()))){
+                            return true;
+                        }
+                    }
+                    if (this.categories_selection[0] === true){
+                        return true;
+                    } else {
+                        for (let i = 0; i < this.categories_selection.length; i++) {
+                            if (this.categories_selection[i] === true){
+                                if (this.categories[i].id.toString() === item.category_id){
+>>>>>>> Tony
                                     return true;
                                 }
                             }

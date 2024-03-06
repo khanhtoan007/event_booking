@@ -178,7 +178,7 @@
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.1)), url(hero-img.jpg);
+    background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.1));
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -208,7 +208,16 @@
     top: 50%;
     transform: translateY(-50%);
 }
-
+.floating-card {
+    position: fixed;
+    bottom: 20px; /* Adjust the distance from the bottom as needed */
+    right: 20px; /* Adjust the distance from the right as needed */
+    width: 300px; /* Set the width of the card */
+    background-color: #fff; /* Set the background color */
+    border: 1px solid #ddd; /* Add a border */
+    padding: 15px; /* Add some padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a box shadow for a subtle effect */
+}
 .carousel-control-next {
     margin-right: 20px;
 }
@@ -219,11 +228,7 @@
 
 .page-header {
     position: relative;
-<<<<<<< HEAD
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../assets/img/cart-page-header-img.jpg);
-=======
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/Kimmoc.png);
->>>>>>> Tony
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

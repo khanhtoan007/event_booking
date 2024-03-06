@@ -1,9 +1,6 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-
-
-
 <!-- Footer Start -->
 <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
     <div class="container py-5">
@@ -64,7 +61,7 @@
                 <div class="footer-item">
                     <h4 class="text-light mb-3">Contact</h4>
                     <p>Address: Da Nang</p>
-                    <p>Email: localxplorer@gmail.com</p>
+                    <p>Email: localxplorervn@gmail.com</p>
                     <p>Phone: 0913827180</p>
                     <p>Payment Accepted</p>
                     <img src="${pageContext.request.contextPath}/assets/img/payment.png" class="img-fluid" alt="">

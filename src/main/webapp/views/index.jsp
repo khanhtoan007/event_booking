@@ -1,3 +1,5 @@
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="com.example.bookingevent.Init.Config" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="com.example.bookingevent.database.MyObject" %>
@@ -13,7 +15,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Fruitables - Vegetable Website Template</title>
+        <title><%=Config.app_name%></title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -38,6 +40,9 @@
 
         <!-- Template Stylesheet -->
         <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+              integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
     </head>
 
     <body>

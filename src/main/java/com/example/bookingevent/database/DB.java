@@ -6,6 +6,8 @@ import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 public class DB {
     public static Connection getConnection() {
         try {
@@ -125,49 +127,23 @@ public class DB {
         if (id.equals("")){
             return null;
         }
-        ArrayList<MyObject> users = DB.getData("select users.*, count(carts.id) as count from users left join carts on users.id = carts.user_id where users.id = ? group by users.id, name, email, phone, password, avatar, gender, token, is_verified, role_id", new String[]{id}, new String[]{"id", "name", "email", "phone", "password", "avatar", "gender", "token", "is_verified", "role_id", "count"});
+        ArrayList<MyObject> users = DB.getData("select users.*, count(carts.id) as count from users left join carts on users.id = carts.user_id where users.id = ? and bill_id is NULL group by users.id, name, email, phone, password, avatar, gender, token, is_verified, role_id", new String[]{id}, new String[]{"id", "name", "email", "phone", "password", "avatar", "gender", "token", "is_verified", "role_id", "count"});
         return users.size() == 0 ? null : users.get(0);
     }
-    public static List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> result = new ArrayList<>();
 
-        // Initialize the combination array with the first combination
-        List<Integer> combination = new ArrayList<>();
-        for (int i = 1; i <= k; i++) {
-            combination.add(i);
-        }
-
-        while (combination.get(0) <= n - k + 1) {
-            // Add a copy of the current combination to the result
-            result.add(new ArrayList<>(combination));
-
-            // Find the rightmost element that can be incremented
-            int index = k - 1;
-            while (index >= 0 && combination.get(index) == n - (k - index) + 1) {
-                index--;
-            }
-
-            // Increment the rightmost element
-            combination.set(index, combination.get(index) + 1);
-
-            // Adjust the elements to the right of the incremented element
-            for (int i = index + 1; i < k; i++) {
-                combination.set(i, combination.get(i - 1) + 1);
-            }
-        }
-
-        return result;
-    }
     public static void main(String[] args) throws Exception{
-        int n = 4;
-        int k = 2;
-
-        List<List<Integer>> combinations = combine(n, k);
-
-        for (List<Integer> combination : combinations) {
-            System.out.println(combination);
-        }
-
+//        String s = "Blue Tran Dinh Khanh Toan thân mến, Tài khoản Spend Account vừa tăng 10.000 VND vào 22/01/2024 13:36. Số dư hiện tại: 30.000 VND. Mô tả: MBVCB.5131494248.038489.abcdefgh.CT tu 9763416782 TRAN QUANG MINH toi 9021329646765 TRAN DINH KHANH TOAN tai BVBank Timo. Cảm ơn Quý khách đã sử dụng dịch vụ Ngân hàng số Timo! Để được hỗ trợ tốt hơn trong quá trình sử dụng, tham gia ngay: Group Facebook: Cộng đồng ngân hàng số Timo (Offical Group) Zalo Page            : Timo Trân trọng, Timo Team";
+//        System.out.println(s.split("tăng ")[1].split(" VND")[0].replace(".", ""));
+//        System.out.println(UUID.randomUUID().toString());
+        String sql = "select events.*, categories.name as category_name, users.name as username, count(carts.id) as interested, sum(iif(bills.status = 'true', carts.quantity, 0)) as count\n" +
+                "from events\n" +
+                "         inner join categories on events.category_id = categories.id\n" +
+                "         inner join users on events.user_id = users.id\n" +
+                "         left join carts on events.id = carts.event_id\n" +
+                "         left join bills on carts.bill_id = bills.id\n" +
+                "where events.is_verified = 'true'\n" +
+                "group by users.name, categories.name, events.id, title, description, start_date, end_date, location, events.is_verified,\n" +
+                "         events.user_id, category_id, tickets, events.price, image";
+        System.out.println(sql);
     }
-    // result  =2
 }
