@@ -104,22 +104,6 @@
                                         <span class="text-dark" style="width: 130px;"><%=language.getString("all_product")%></span>
                                     </a>
                                 </li>
-<%--                                --%>
-<%--                                <li class="nav-item">--%>
-<%--                                    <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">--%>
-<%--                                        <span class="text-dark" style="width: 130px;">Fruits</span>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
-<%--                                <li class="nav-item">--%>
-<%--                                    <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">--%>
-<%--                                        <span class="text-dark" style="width: 130px;">Bread</span>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
-<%--                                <li class="nav-item">--%>
-<%--                                    <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5">--%>
-<%--                                        <span class="text-dark" style="width: 130px;">Meat</span>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
                             </ul>
                         </div>
                     </div>
@@ -139,7 +123,9 @@
                                                         <h4>${event.title}</h4>
                                                         <p>${event.content}</p>
                                                         <div class="d-flex justify-content-between flex-lg-wrap">
-                                                            <p class="text-dark fs-5 fw-bold mb-0">${event.price}VND</p>
+                                                            <p class="text-dark fs-5 fw-bold mb-0">
+                                                                <fmt:formatNumber value="${event.price}" type="currency" currencyCode="VND" maxFractionDigits="0"/>
+                                                            </p>
                                                             <a href="${pageContext.request.contextPath}/event-detail?event_id=${event.id}" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
                                                         </div>
                                                     </div>
@@ -209,9 +195,9 @@
         <!-- Vesitable Shop Start-->
         <div class="container-fluid vesitable py-5">
             <div class="container py-5">
-                <h1 class="mb-0">Làng lụa</h1>
-                <div class="owl-carousel vegetable-carousel justify-content-center">
-                    <div class="border border-primary rounded position-relative vesitable-item">
+                <h1 class="mb-5">Làng lụa</h1>
+                <div class="d-flex justify-content-evenly">
+                    <div class="border border-primary rounded position-relative vesitable-item"  style="width: 25%">
                         <div class="vesitable-img">
                             <img src="${pageContext.request.contextPath}/assets/img/langlua/IMG_3077.JPG" class="img-fluid w-100 rounded-top" alt="">
                         </div>
@@ -220,7 +206,35 @@
                             <h4>Làng lụa</h4>
                             <p>Trải nghiệm tham quan làng lụa tại Hội An</p>
                             <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">35000VND</p>
+                                <p class="text-dark fs-5 fw-bold mb-0">35.000VND</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-primary rounded position-relative vesitable-item " style="width: 25%">
+                        <div class="vesitable-img">
+                            <img src="${pageContext.request.contextPath}/assets/img/langlua/IMG_3077.JPG" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Workshop</div>
+                        <div class="p-4 rounded-bottom">
+                            <h4>Làng lụa</h4>
+                            <p>Trải nghiệm tham quan làng lụa tại Hội An</p>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">35.000VND</p>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-primary rounded position-relative vesitable-item " style="width: 25%">
+                        <div class="vesitable-img">
+                            <img src="${pageContext.request.contextPath}/assets/img/langlua/IMG_3077.JPG" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Workshop</div>
+                        <div class="p-4 rounded-bottom">
+                            <h4>Làng lụa</h4>
+                            <p>Trải nghiệm tham quan làng lụa tại Hội An</p>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">35.000VND</p>
                                 <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                             </div>
                         </div>
@@ -229,220 +243,6 @@
             </div>
         </div>
         <!-- Vesitable Shop End -->
-
-
-
-
-        <!-- Bestsaler Product Start -->
-            <!--
-<div class="container-fluid py-5">
-<div class="container py-5">
-<div class="text-center mx-auto mb-5" style="max-width: 700px;">
-<h1 class="display-4">Bestseller Products</h1>
-<p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
-</div>
-<div class="row g-4">
-<div class="col-lg-6 col-xl-4">
-<div class="p-4 rounded bg-light">
-<div class="row align-items-center">
-<div class="col-6">
-<img src="${pageContext.request.contextPath}/assets/img/best-product-1.jpg" class="img-fluid rounded-circle w-100" alt="">
-</div>
-<div class="col-6">
-<a href="#" class="h5">Organic Tomato</a>
-<div class="d-flex my-3">
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star"></i>
-</div>
-<h4 class="mb-3">3.12 $</h4>
-<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-6 col-xl-4">
-<div class="p-4 rounded bg-light">
-<div class="row align-items-center">
-<div class="col-6">
-<img src="${pageContext.request.contextPath}/assets/img/best-product-2.jpg" class="img-fluid rounded-circle w-100" alt="">
-</div>
-<div class="col-6">
-<a href="#" class="h5">Organic Tomato</a>
-<div class="d-flex my-3">
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star"></i>
-</div>
-<h4 class="mb-3">3.12 $</h4>
-<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-6 col-xl-4">
-<div class="p-4 rounded bg-light">
-<div class="row align-items-center">
-<div class="col-6">
-<img src="${pageContext.request.contextPath}/assets/img/best-product-3.jpg" class="img-fluid rounded-circle w-100" alt="">
-</div>
-<div class="col-6">
-<a href="#" class="h5">Organic Tomato</a>
-<div class="d-flex my-3">
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star"></i>
-</div>
-<h4 class="mb-3">3.12 $</h4>
-<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-6 col-xl-4">
-<div class="p-4 rounded bg-light">
-<div class="row align-items-center">
-<div class="col-6">
-<img src="${pageContext.request.contextPath}/assets/img/best-product-4.jpg" class="img-fluid rounded-circle w-100" alt="">
-</div>
-<div class="col-6">
-<a href="#" class="h5">Organic Tomato</a>
-<div class="d-flex my-3">
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star"></i>
-</div>
-<h4 class="mb-3">3.12 $</h4>
-<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-6 col-xl-4">
-<div class="p-4 rounded bg-light">
-<div class="row align-items-center">
-<div class="col-6">
-<img src="${pageContext.request.contextPath}/assets/img/best-product-5.jpg" class="img-fluid rounded-circle w-100" alt="">
-</div>
-<div class="col-6">
-<a href="#" class="h5">Organic Tomato</a>
-<div class="d-flex my-3">
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star"></i>
-</div>
-<h4 class="mb-3">3.12 $</h4>
-<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-6 col-xl-4">
-<div class="p-4 rounded bg-light">
-<div class="row align-items-center">
-<div class="col-6">
-<img src="${pageContext.request.contextPath}/assets/img/best-product-6.jpg" class="img-fluid rounded-circle w-100" alt="">
-</div>
-<div class="col-6">
-<a href="#" class="h5">Organic Tomato</a>
-<div class="d-flex my-3">
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star"></i>
-</div>
-<h4 class="mb-3">3.12 $</h4>
-<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-</div>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-lg-6 col-xl-3">
-<div class="text-center">
-<img src="${pageContext.request.contextPath}/assets/img/fruite-item-1.jpg" class="img-fluid rounded" alt="">
-<div class="py-4">
-<a href="#" class="h5">Organic Tomato</a>
-<div class="d-flex my-3 justify-content-center">
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star"></i>
-</div>
-<h4 class="mb-3">3.12 $</h4>
-<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-lg-6 col-xl-3">
-<div class="text-center">
-<img src="${pageContext.request.contextPath}/assets/img/fruite-item-2.jpg" class="img-fluid rounded" alt="">
-<div class="py-4">
-<a href="#" class="h5">Organic Tomato</a>
-<div class="d-flex my-3 justify-content-center">
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star"></i>
-</div>
-<h4 class="mb-3">3.12 $</h4>
-<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-lg-6 col-xl-3">
-<div class="text-center">
-<img src="${pageContext.request.contextPath}/assets/img/fruite-item-3.jpg" class="img-fluid rounded" alt="">
-<div class="py-4">
-<a href="#" class="h5">Organic Tomato</a>
-<div class="d-flex my-3 justify-content-center">
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star"></i>
-</div>
-<h4 class="mb-3">3.12 $</h4>
-<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-lg-6 col-xl-3">
-<div class="text-center">
-<img src="${pageContext.request.contextPath}/assets/img/fruite-item-4.jpg" class="img-fluid rounded" alt="">
-<div class="py-2">
-<a href="#" class="h5">Organic Tomato</a>
-<div class="d-flex my-3 justify-content-center">
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star text-primary"></i>
-<i class="fas fa-star"></i>
-</div>
-<h4 class="mb-3">3.12 $</h4>
-<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
--->
-        <!-- Bestsaler Product End -->
-
 
 
 

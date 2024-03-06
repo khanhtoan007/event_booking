@@ -154,7 +154,7 @@
                                                         <p>{{value.description}}</p>
                                                         <div class="d-flex justify-content-between flex-lg-wrap">
                                                             <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%"><%=language.getString("added_by")%>: {{value.username}}</p>
-                                                            <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%">{{ '<%=language.getString("price")%>'.replace('xx', value.price) }}</p>
+                                                            <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%">{{ formatCurrency(value.price) }}</p>
                                                             <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%">{{ '<%=language.getString("sold")%>'.replace('xx', value.count).replace('yy', value.tickets) }}</p>
                                                             <p class="text-dark fs-5 fw-bold mb-0" style="width: 100%">{{ '<%=language.getString("interested")%>'.replace('xx', value.interested) }}</p>
                                                             <a :href="'${pageContext.request.contextPath}/event-detail?event_id=' + value.id" class="btn border border-secondary rounded-pill px-3 text-primary mt-2" style="width: 100%"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
@@ -229,26 +229,12 @@
                         this.view_list = this.events
                     })
             },
-            check(){
-                // console.log(this.categories_selection)
-                // console.log(this.locations_selection)
-                // console.log(this.keywords)
-                // console.log(this.min_price)
-                // console.log(this.max_price)
-
-                // let temp = ""
-                // for (let i = 0; i < this.categories_selection.length; i++) {
-                //     if (this.categories_selection[i] === true){
-                //         temp += this.categories[i].id.toString() + "|"
-                //     }
-                // }
-
-                // let temp = ""
-                // for (let i = 0; i < this.locations_selection.length; i++) {
-                //     if (this.locations_selection[i] === true){
-                //         temp += this.locations[i].location + "|"
-                //     }
-                // }
+            formatCurrency(value) {
+                const formattedValue = new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND',
+                }).format(value);
+                return formattedValue;
             },
             removeDiacritics(str){
                 return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");

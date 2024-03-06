@@ -36,4 +36,9 @@ public class MyObject {
     public String total;
     public String info_type;
     public String info_value;
+    public String amount;
+    public String transfer_content;
+    public String status;
+    public String paid_at;
+    public String created_at;
 }

@@ -79,8 +79,8 @@
                             </div>
                         </div>
                     <td>{{value.count + '/' + value.tickets}}</td>
-                    <td>{{value.price}}</td>
-                    <td>{{value.have2pay}}</td>
+                    <td>{{ formatCurrency(value.price) }}</td>
+                    <td>{{ formatCurrency(value.have2pay) }}</td>
                     <td>{{value.note}}</td>
                     <td>
                         <div class="col-md-12">
@@ -96,8 +96,8 @@
         <label for="checkAll"><%=language.getString("check_all")%></label>
 </div>
 <%@ include file="/views/master/foot.jsp" %>
-<div id="app2" v-if="bills.selected.length !== 0">
-    <div class="container-fluid bg-primary footer fixed-bottom d-flex justify-content-center">
+<div id="app2" v-if="bills.selected.length !== 0" class="container">
+    <div class="container-fluid footer bg-primary fixed-bottom d-flex justify-content-center">
         <div class="container row m-1">
             <div class="col-5">
                 <h3>{{ '<%=language.getString("u_have_chosen")%>'.replace('xx', bills.selected.length) }}</h3>
@@ -106,10 +106,8 @@
                 <h3>{{ '<%=language.getString("total")%>' + bills.total}}</h3>
             </div>
             <div class="col-2">
-                <a :href=" '${pageContext.request.contextPath}/user/checkout?cart_ids=' + bills.selected.join(',') ">
-                    <button class="btn-search btn border border-secondary bg-white me-4 ml-2" style="height: 100%;">
+                <a :href=" '${pageContext.request.contextPath}/user/checkout?cart_ids=' + bills.selected.join(',') " class="btn bg-white border border-secondary rounded-pill px-3 text-dark"><i class="fa fa-shopping-bag me-2 text-primary"></i>
                         <%=language.getString("pay")%>
-                    </button>
                 </a>
             </div>
         </div>
@@ -206,6 +204,13 @@
                             toastr.error("<%=language.getString("delete_fail")%>")
                         }
                     })
+            },
+            formatCurrency(value) {
+                const formattedValue = new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND',
+                }).format(value);
+                return formattedValue;
             },
             select2bill(){
                 this.bills.total = 0
