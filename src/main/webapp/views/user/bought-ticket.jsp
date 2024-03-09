@@ -39,7 +39,7 @@
 
 <body>
 
-<jsp:include page="../master/head.jsp"/>
+<%@ include file="../master/head.jsp" %>
 
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">

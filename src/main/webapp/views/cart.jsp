@@ -46,7 +46,7 @@
 </head>
 
 <body>
-<jsp:include page="./master/head.jsp"/>
+<%@ include file="./master/head.jsp" %>
 <div class="container py-5" id="app">
     <div class="row g-5 align-items-center py-5">
         <h3 class="mb-5 display-3 text-primary mt-5  py-5"><%= language.getString("cart") %></h3>
