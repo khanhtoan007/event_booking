@@ -137,38 +137,41 @@
                     <!-- Cart  -->
                     <div class="col-lg-4 col-xl-3 mx-auto" >
                         <div class="bg-light rounded border border-dark d-flex flex-column align-items-center" style="position: sticky; top: 120px; z-index: 99;">
-                            <div class="m-3">
-                                <h4 class="fw-bold mb-3 mt-3 ml-2 border-bottom border-secondary pb-4 text-left">${eventPost.title}</h4>
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="far fa-clock me-2"></i>
-                                    <span>${eventPost.start_date} - ${eventPost.end_date}</span>
-                                </div>
-                                <div class="d-flex align-items-start mb-2 border-bottom border-secondary pb-4 text-left">
-                                    <i class="fas fa-map-marker-alt me-2 mt-1"></i>
-                                    <span>${eventPost.location}</span>
-                                </div>
-                    
-                                <div class="d-flex justify-content-center align-items-center flex-column">
-                                    <h5 class="fw-bold mb-3">${eventPost.price} VND</h5>
-                    
-                                    <div class="input-group quantity mb-3" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
+                            <form action="${pageContext.request.contextPath}/user/add_to_cart" method="post">
+                                <input type="text" name="event_id" value="${eventPost.id}">
+                                <div class="m-3">
+                                    <h4 class="fw-bold mb-3 mt-3 ml-2 border-bottom border-secondary pb-4 text-left">${eventPost.title}</h4>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="far fa-clock me-2"></i>
+                                        <span>${eventPost.start_date} - ${eventPost.end_date}</span>
                                     </div>
-                    
-                                    <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-2 mt-3 text-danger align-items-center"><i class="fas fa-ticket-alt me-2 text-danger"></i> Mua ngay</a>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-3 text-primary align-items-center"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
+                                    <div class="d-flex align-items-start mb-2 border-bottom border-secondary pb-4 text-left">
+                                        <i class="fas fa-map-marker-alt me-2 mt-1"></i>
+                                        <span>${eventPost.location}</span>
+                                    </div>
+                        
+                                    <div class="d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="fw-bold mb-3">${eventPost.price} VND</h5>
+                        
+                                        <div class="input-group quantity mb-3" style="width: 100px;">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                        
+                                        <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-2 mt-3 text-danger align-items-center"><i class="fas fa-ticket-alt me-2 text-danger"></i> Mua ngay</a>
+                                        <button type="submit" class="btn border border-secondary rounded-pill px-4 py-2 mb-3 text-primary align-items-center"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

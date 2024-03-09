@@ -1,8 +1,12 @@
-<%@ page import="java.util.ResourceBundle" %>
-<%@ page import="com.example.bookingevent.Init.Config" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="com.example.bookingevent.database.MyObject" %>
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="com.example.bookingevent.Init.Config" %>
+<%@ page import="com.example.bookingevent.database.DB" %>
 <% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
+<% String user_id = (String) session.getAttribute("login"); %>
+<%MyObject user = DB.getUser(user_id);%>
 
 
 <!DOCTYPE html>
