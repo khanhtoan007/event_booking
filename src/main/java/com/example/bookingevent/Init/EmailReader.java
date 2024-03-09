@@ -1,3 +1,4 @@
+
 package com.example.bookingevent.Init;
 
 import java.io.IOException;
@@ -204,3 +205,4 @@ public class EmailReader {
         return formattedUUID;
     }
 }
+

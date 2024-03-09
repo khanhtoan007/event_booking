@@ -1,11 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="com.example.bookingevent.database.MyObject" %>
 <%@ page import="java.util.ResourceBundle" %>
 <%@ page import="com.example.bookingevent.Init.Config" %>
+<%@ page import="com.example.bookingevent.database.DB" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
-
+<% String user_id = (String) session.getAttribute("login"); %>
+<%MyObject user = DB.getUser(user_id);%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title><%=Config.app_name%></title>
@@ -37,25 +40,9 @@
 
 <body>
 
-<jsp:include page="../master/head.jsp"/>
-        <!-- Modal Search Start -->
-        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content rounded-0">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body d-flex align-items-center">
-                        <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal Search End -->
+<%@ include file="../master/head.jsp" %>
+
+
 
 
         <!-- Single Page Header start -->
@@ -115,13 +102,13 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <h4 class="mb-2"><%=language.getString("min_price")%></h4>
-                                            <input v-model="min_price" type="range" class="form-range w-100" id="rangeInput_min" name="rangeInput_min" min="30000" max="100000" value="30000">
-                                            <input v-model="min_price" class="form-control" type="number" id="amount_min" name="amount_min" min="30000" max="100000" value="30000">
+                                            <input v-model="min_price" type="range" class="form-range w-100" id="rangeInput_min" name="rangeInput_min" min="30000" max="1000000" value="30000">
+                                            <input v-model="min_price" class="form-control" type="number" id="amount_min" name="amount_min" min="30000" max="1000000" value="30000">
                                         </div>
                                         <div class="mb-3">
                                             <h4 class="mb-2"><%=language.getString("max_price")%></h4>
-                                            <input v-model="max_price" type="range" class="form-range w-100" id="rangeInput_max" name="rangeInput_max" min="30000" max="100000" value="30000">
-                                            <input v-model="max_price" class="form-control" id="amount_max" name="amount_max" min="30000" max="100000" type="text" value="30000">
+                                            <input v-model="max_price" type="range" class="form-range w-100" id="rangeInput_max" name="rangeInput_max" min="30000" max="1000000" value="30000">
+                                            <input v-model="max_price" class="form-control" id="amount_max" name="amount_max" min="30000" max="1000000" type="text" value="30000">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -172,140 +159,142 @@
             </div>
         </div>
         <!-- Fruits Shop End-->
-<%@ include file="../master/foot.jsp" %>
-<script>
-    var app = new Vue({
-        el: "#app",
-        data: {
-            categories: [],
-            categories_selection: [],
-            locations_selection: [],
-            min_price: 0,
-            max_price: 0,
-            keywords: '',
-            locations: [],
-            events: [],
-            view_list: []
-        },
-        created() {
-            this.getCategories()
-            this.getLocations()
-            this.getEvents()
-        },
-        methods: {
-            getCategories(){
-                axios.get('<%=request.getContextPath()%>/get-categories')
-                    .then((res)=>{
-                        this.categories = JSON.parse(res.data.categories)
-                        let sum = 0;
-                        for (let i = 0; i < this.categories.length; i++) {
-                            sum += parseInt(this.categories[i].count)
-                        }
-                        this.categories.unshift({id: "0", name: "<%=language.getString("all_cate")%>", count: sum.toString()})
-                        for (let i = 0; i < this.categories.length; i++) {
-                            this.categories_selection[i] = false
-                        }
-                    })
+        <%@ include file="../master/foot.jsp" %>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                categories: [],
+                categories_selection: [],
+                locations_selection: [],
+                min_price: 0,
+                max_price: 0,
+                keywords: '',
+                locations: [],
+                events: [],
+                view_list: []
             },
-            getLocations(){
-                axios.get('<%=request.getContextPath()%>/get-locations')
-                    .then((res)=>{
-                        this.locations = JSON.parse(res.data.locations)
-                        let sum = 0;
-                        for (let i = 0; i < this.locations.length; i++) {
-                            sum += parseInt(this.locations[i].count)
-                        }
-                        this.locations.unshift({location: "<%=language.getString("all_locations")%>", count: sum})
-                        for (let i = 0; i < this.locations.length; i++) {
-                            this.locations_selection[i] = false
-                        }
-                    })
+            created() {
+                this.getCategories()
+                this.getLocations()
+                this.getEvents()
+            },
+            methods: {
+                getCategories(){
+                    axios.get('<%=request.getContextPath()%>/get-categories')
+                        .then((res)=>{
+                            this.categories = JSON.parse(res.data.categories)
+                            let sum = 0;
+                            for (let i = 0; i < this.categories.length; i++) {
+                                sum += parseInt(this.categories[i].count)
+                            }
+                            this.categories.unshift({id: "0", name: "<%=language.getString("all_cate")%>", count: sum.toString()})
+                            for (let i = 0; i < this.categories.length; i++) {
+                                this.categories_selection[i] = false
+                            }
+                        })
+                },
+                getLocations(){
+                    axios.get('<%=request.getContextPath()%>/get-locations')
+                        .then((res)=>{
+                            this.locations = JSON.parse(res.data.locations)
+                            let sum = 0;
+                            for (let i = 0; i < this.locations.length; i++) {
+                                sum += parseInt(this.locations[i].count)
+                            }
+                            this.locations.unshift({location: "<%=language.getString("all_locations")%>", count: sum})
+                            for (let i = 0; i < this.locations.length; i++) {
+                                this.locations_selection[i] = false
+                            }
+                        })
 
-            },
-            getEvents(){
-                axios.get('<%=request.getContextPath()%>/all-events')
-                    .then((res)=>{
-                        this.events = JSON.parse(res.data.events)
-                        this.view_list = this.events
+                },
+                getEvents(){
+                    axios.get('<%=request.getContextPath()%>/all-events')
+                        .then((res)=>{
+                            this.events = JSON.parse(res.data.events)
+                            this.view_list = this.events
+                        })
+                },
+                formatCurrency(value) {
+                    const formattedValue = new Intl.NumberFormat('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND',
+                    }).format(value);
+                    return formattedValue;
+                },
+                removeDiacritics(str){
+                    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                },
+                updatedList(){
+                    this.view_list = this.events.filter( item => {
+                        if (this.keywords !== ''){
+                            if ( this.removeDiacritics(item.title.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase())) || this.removeDiacritics(item.description.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase()))){
+                                return true;
+                            }
+                        }
+                        if (this.categories_selection[0] === true){
+                            return true;
+                        } else {
+                            for (let i = 0; i < this.categories_selection.length; i++) {
+                                if (this.categories_selection[i] === true){
+                                    if (this.categories[i].id.toString() === item.category_id){
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                        if (this.locations_selection[0] === true){
+                            return true;
+                        } else {
+                            for (let i = 0; i < this.locations_selection.length; i++) {
+                                if (this.locations_selection[i] === true){
+                                    if (this.locations[i].location === item.location){
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                        let temp_min = parseInt(this.min_price)
+                        let temp_max = parseInt(this.max_price)
+                        if (temp_min !== 0 && temp_max !== 0){
+                            if (temp_min < parseInt(item.price) && temp_max > parseInt(item.price)){
+                                return true;
+                            }
+                        } else {
+                            if (temp_min !== 0){
+                                if (temp_min < parseInt(item.price)){
+                                    return true
+                                }
+                            }
+                            if (temp_max !== 0){
+                                if (temp_max > parseInt(item.price)){
+                                    return true
+                                }
+                            }
+                        }
+                        return false
                     })
+                }
             },
-            formatCurrency(value) {
-                const formattedValue = new Intl.NumberFormat('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND',
-                }).format(value);
-                return formattedValue;
-            },
-            removeDiacritics(str){
-                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            },
-            updatedList(){
-                this.view_list = this.events.filter( item => {
-                    if (this.keywords !== ''){
-                        if ( this.removeDiacritics(item.title.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase())) || this.removeDiacritics(item.description.toLowerCase()).includes(this.removeDiacritics(this.keywords.toLowerCase()))){
-                            return true;
-                        }
-                    }
-                    if (this.categories_selection[0] === true){
-                        return true;
-                    } else {
-                        for (let i = 0; i < this.categories_selection.length; i++) {
-                            if (this.categories_selection[i] === true){
-                                if (this.categories[i].id.toString() === item.category_id){
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                    if (this.locations_selection[0] === true){
-                        return true;
-                    } else {
-                        for (let i = 0; i < this.locations_selection.length; i++) {
-                            if (this.locations_selection[i] === true){
-                                if (this.locations[i].location === item.location){
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                    let temp_min = parseInt(this.min_price)
-                    let temp_max = parseInt(this.max_price)
-                    if (temp_min !== 0 && temp_max !== 0){
-                        if (temp_min < parseInt(item.price) && temp_max > parseInt(item.price)){
-                            return true;
-                        }
-                    } else {
-                        if (temp_min !== 0){
-                            if (temp_min < parseInt(item.price)){
-                                return true
-                            }
-                        }
-                        if (temp_max !== 0){
-                            if (temp_max > parseInt(item.price)){
-                                return true
-                            }
-                        }
-                    }
-                    return false
-                })
+            watch: {
+                categories_selection(newValue, oldValue) {
+                    this.updatedList()
+                },
+                locations_selection(newValue, oldValue) {
+                    this.updatedList()
+                },
+                min_price(newValue, oldValue) {
+                    this.updatedList()
+                },
+                max_price(newValue, oldValue) {
+                    this.updatedList()
+                },
+                keywords(newValue, oldValue) {
+                    this.updatedList()
+                },
             }
-        },
-        watch: {
-            categories_selection(newValue, oldValue) {
-                this.updatedList()
-            },
-            locations_selection(newValue, oldValue) {
-                this.updatedList()
-            },
-            min_price(newValue, oldValue) {
-                this.updatedList()
-            },
-            max_price(newValue, oldValue) {
-                this.updatedList()
-            },
-            keywords(newValue, oldValue) {
-                this.updatedList()
-            },
-        }
-    })
-</script>
+        })
+    </script>
+    </body>
+</html>

@@ -42,7 +42,7 @@
 
 <body>
 
-<jsp:include page="./master/head.jsp"/>
+<%@ include file="./master/head.jsp" %>
 
 <!-- Banner Section Start-->
 <div class="container-fluid banner bg-secondary my-5 py-5">
@@ -150,6 +150,6 @@
 <!-- Contact End -->
 
 
-<%@ include file="./master/foot.jsp" %>
+<%@ include file="/views/master/foot.jsp" %>
 
 

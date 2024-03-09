@@ -259,7 +259,7 @@ public class EventDAO {
         EventDAO dao = new EventDAO();
 
 //        System.out.println(dao.addItemToCart(2,2,3,30000,"new cart"));
-        System.out.println(dao.getEvent());
+        System.out.println(dao.getEventPostByID(1));
     }
 
 }

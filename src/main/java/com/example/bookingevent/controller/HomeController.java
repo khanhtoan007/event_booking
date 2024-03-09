@@ -12,13 +12,13 @@ import com.google.gson.JsonObject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HomeController {
@@ -31,10 +31,18 @@ public class HomeController {
     public static class Home extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-                List<EventPost> eventPosts = new EventDAO().getEvent();
-                req.setAttribute("listEvent", eventPosts);
-                System.out.println(eventPosts);
-                req.getRequestDispatcher("views/index.jsp").forward(req,resp);
+            List<EventPost> eventPosts = new EventDAO().getEvent();
+            for (EventPost event : eventPosts) {
+                event.setImage(event.getImage().split(", ")[0]);
+                String content = event.getContent();
+                if (content.length() > 100) {
+                    event.setContent(content.substring(0, 150) + "...");
+                }
+            }
+
+            req.setAttribute("listEvent", eventPosts);
+//            System.out.println(eventPosts);
+            req.getRequestDispatcher("views/index.jsp").forward(req,resp);
         }
     }
 
@@ -131,11 +139,60 @@ public class HomeController {
     public static class EventDetail extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            EventDAO dao = new EventDAO();
+            List<String> images ;
             int id = Integer.parseInt(req.getParameter("event_id"));
-            EventPost eventPosts = new EventDAO().getEventPostByID(id);
-            req.setAttribute("event", eventPosts);
 
+            EventPost eventDetail = dao.getEventPostByID(id);
+            images = Arrays.asList(eventDetail.getImage().split(", "));
+
+            req.setAttribute("event", eventDetail);
+            req.setAttribute("otherImages", images);
             req.getRequestDispatcher("views/events/event-detail.jsp").forward(req,resp);
+        }
+        private String getStringImages(String variableName, HttpServletRequest request) throws ServletException, IOException {
+            Part anhBia = null;
+            List<Part> otherImages = new ArrayList<>();
+            List<String> result = new ArrayList<>();
+
+            //Upload Image
+            String realPath = request.getServletContext().getRealPath("/images");
+            System.out.println("Real path: " + realPath );  //Print real path
+            if (!Files.exists(Paths.get(realPath)))
+            {
+                Files.createDirectory(Paths.get(realPath));
+            }
+
+            for (Part part : request.getParts()) {
+                if (part.getName().equals("image1")) {
+                    anhBia = part;
+                }
+                if (part.getName().equals("image2")) {
+                    otherImages.add(part);
+                }
+            }
+
+            if (anhBia != null && !otherImages.isEmpty())
+            {
+                String fileName = Paths.get(anhBia.getSubmittedFileName()).getFileName().toString();
+                result.add(fileName);
+                for (Part image : otherImages) {
+                    fileName = Paths.get(image.getSubmittedFileName()).getFileName().toString();
+                    result.add(fileName);
+                }
+            }
+            else if ( anhBia== null && !otherImages.isEmpty())
+            {
+                //Khi them su kien, anh bia ko dc null
+            }
+            else if (anhBia != null && otherImages.isEmpty())
+            {
+                String fileName = Paths.get(anhBia.getSubmittedFileName()).getFileName().toString();
+                result.add(fileName);
+            }
+
+            // Trả về kết quả
+            return String.join(", ", result);
         }
     }
 

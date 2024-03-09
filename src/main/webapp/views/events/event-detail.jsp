@@ -41,31 +41,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
           integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <!-- Fancyboxt -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 </head>
 
 <body>
-
-    <jsp:include page="../master/head.jsp"/>
-<!-- Modal Search Start -->
-<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content rounded-0">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body d-flex align-items-center">
-                <div class="input-group w-75 mx-auto d-flex">
-                    <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal Search End -->
-
-
+        <%@ include file="../master/head.jsp" %>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
     <h1 class="text-center text-white display-6">Shop Detail</h1>
@@ -78,178 +61,210 @@
 <!-- Single Page Header End -->
 
 
-<!-- Single Product Start -->
-<div class="container-fluid py-5 mt-5">
-    <div class="container py-5">
-        <div class="row g-4 mb-5">
-            <div class="col-md-12" id="eventDetails" data-userid="<%= session.getAttribute("user_id") %>" data-eventid="${event.id}" data-price="${event.price}">
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="border rounded">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}${event.image}" class="img-fluid rounded" alt="Image">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <form action="${pageContext.request.contextPath}/user/add_to_cart" method="post">
-                            <h4 class="fw-bold mb-3">${event.title}</h4>
-                            <p class="mb-3"><%=language.getString("category")%>: ${event.category_name}</p>
-                            <h5 class="fw-bold mb-3">${event.price} VND</h5>
-                            <div class="d-flex mb-4">
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p class="mb-4">${event.content}</p>
-                            <div class="input-group quantity mb-5" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button type='button' class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="decrementQuantity()">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input required type="text" name="quantity" id="quantityValue" class="form-control form-control-sm text-center border-0" value="1">
-                                <div class="input-group-btn">
-                                    <button type='button' class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="incrementQuantity()" >
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="border-bottom rounded my-4 form-item">
-                                    <textarea required name="note" id="note" class="form-control border-0" cols="30" rows="8" placeholder="<%=language.getString("note")%>" spellcheck="false"></textarea>
-                                </div>
-                            </div>
-                            <%--                                <a onclick="addToCart()" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>--%>
-                            <%String s = "type='button' onclick=please_login()";%>
-                            <input type="hidden" name="event_id" value="${event.id}">
-                            <button <%=user_id == null ? s : "type='submit'"%> class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> <%=language.getString("add2cart")%></button>
-                        </form>
-                    </div>
-                    <div class="col-lg-12">
-                        <nav>
-                            <div class="nav nav-tabs mb-3">
-                                <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
-                                        id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
-                                        aria-controls="nav-about" aria-selected="true">Description</button>
-                                <button class="nav-link border-white border-bottom-0" type="button" role="tab"
-                                        id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
-                                        aria-controls="nav-mission" aria-selected="false">Reviews</button>
-                            </div>
-                        </nav>
-                        <div class="tab-content mb-5">
-                            <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                <p>Hiên tại các nhà tổ chức vẫn đang trong quá trình hợp tác và phát triển cùng doanh nghiệp của chúng tôi, các nhà tổ sẽ tiếp tục cung cấp nhiều dịch vụ hơn nữa trong tương lai. Mong quý khách sẽ tiếp tục ủng hộ dịch vụ của chúng tôi. Xin chân thành cảm ơn quý khách! </p>
-                            </div>
-                            <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                <div class="d-flex">
-                                    <img src="${pageContext.request.contextPath}/assets/img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                    <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <h5>Jason Smith</h5>
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <p>Cần nhiều sự kiện hơn </p>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="${pageContext.request.contextPath}/assets/img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                    <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <h5>Sam Peters</h5>
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <p class="text-dark">Fine!! </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="nav-vision" role="tabpanel">
-                                <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
-                                    amet diam et eos labore. 3</p>
-                                <p class="mb-0">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                                    Clita erat ipsum et lorem et sit</p>
-                            </div>
-                        </div>
-                    </div>
-                    <form action="#">
-                        <h4 class="mb-5 fw-bold">Leave a Reply</h4>
+        <!-- Single Product Start -->
+        <div class="container-fluid py-5">
+            <div class="container py-5">
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-8 col-xl-9" id="eventDetails" data-userid="<%= session.getAttribute("user_id") %>" data-eventid="${event.id}" data-price="${event.price}">
                         <div class="row g-4">
-                            <div class="col-lg-6">
-                                <div class="border-bottom rounded">
-                                    <input type="text" class="form-control border-0 me-4" placeholder="Yur Name *">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="border-bottom rounded">
-                                    <input type="email" class="form-control border-0" placeholder="Your Email *">
+                            <div class="col-lg-12">
+                                <div class="border rounded">
+                                    <img src="images/${otherImages.get(0)}" class="img-fluid rounded" style="max-height: 390px;" alt="Image">
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="border-bottom rounded my-4">
-                                    <textarea name="" id="" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
+                                <h4 class="fw-bold mb-3">${event.title}</h4>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="far fa-clock me-2"></i>
+                                    <h6>Khung giờ hoạt động: ${event.start_date} - ${event.end_date}</h6>
+                                </div>
+                                <div class="d-flex align-items-start mb-2 text-left">
+                                    <i class="fas fa-map-marker-alt me-2 mt-1"></i>
+                                    <h6>${event.location}</h6>
+                                </div>
+                                <div class="d-flex align-items-start mb-2 text-left" style="padding-left: 20px;">
+                                    <p></p>
                                 </div>
                             </div>
+
                             <div class="col-lg-12">
-                                <div class="d-flex justify-content-between py-3 mb-5">
-                                    <div class="d-flex align-items-center">
-                                        <p class="mb-0 me-3">Please rate:</p>
-                                        <div class="d-flex align-items-center" style="font-size: 12px;">
-                                            <i class="fa fa-star text-muted"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
+                                <nav>
+                                    <div class="nav nav-tabs mb-3">
+                                        <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
+                                                id="nav-ticket-tab" data-bs-toggle="tab" data-bs-target="#nav-ticket"
+                                                aria-controls="nav-ticket" aria-selected="true">Thông tin vé</button>
+                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                                                id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
+                                                aria-controls="nav-about" aria-selected="true">Giới thiệu</button>
+                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                                                id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
+                                                aria-controls="nav-mission" aria-selected="false">Đánh giá</button>
                                     </div>
-                                    <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</a>
+                                </nav>
+                                <div class="tab-content mb-5">
+                                    <div class="tab-pane active" id="nav-ticket" role="tabpanel" aria-labelledby="nav-ticket-tab">
+                                        <p>${event.content}</p>
+                                    </div>
+                                    <div class="tab-pane" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                                        <div class="row text-center text-lg-start">
+                                            <c:forEach items="${otherImages}" var="i" begin="1">
+                                                <div class="col-lg-3 col-md-4 col-6">
+                                                    <a href="images/${i}"  data-fancybox="gallery" class="d-block mb-4 h-100">
+                                                        <img class="img-fluid img-thumbnail" src="images/${i}" style="max-height: 150px; width: -webkit-fill-available;">
+                                                    </a>
+                                                </div>
+                                            </c:forEach>
+                                            <!-- <div class="col-lg-3 col-md-4 col-6">
+                                                <a href="https://source.unsplash.com/aob0ukAYfuI/400x300" data-fancybox="gallery" class="d-block mb-4 h-100">
+                                                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt="">
+                                                </a>
+                                            </div> -->
+                                        </div>
+
+                                        <p>${event.content} </p>
+
+                                    </div>
+                                    <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Cart  -->
+                    <div class="col-lg-4 col-xl-3 mx-auto" >
+                        <div class="bg-light rounded border border-dark d-flex flex-column align-items-center" style="position: sticky; top: 120px; z-index: 99;">
+                            <form action="${pageContext.request.contextPath}/user/add_to_cart" method="post">
+
+                                <div class="m-3">
+                                    <h4 class="fw-bold mb-3 mt-3 ml-2 border-bottom border-secondary pb-4 text-left">${event.title}</h4>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="far fa-clock me-2"></i>
+                                        <span>${event.start_date} - ${event.end_date}</span>
+                                    </div>
+                                    <div class="d-flex align-items-start mb-2 border-bottom border-secondary pb-4 text-left">
+                                        <i class="fas fa-map-marker-alt me-2 mt-1"></i>
+                                        <span>${event.location}</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="fw-bold mb-3">${event.price} VND</h5>
+
+                                        <div class="input-group quantity mb-3" style="width: 100px;">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-2 mt-3 text-danger align-items-center"><i class="fas fa-ticket-alt me-2 text-danger"></i> Mua ngay</a>
+                                        <button type="submit" class="btn border border-secondary rounded-pill px-4 py-2 mb-3 text-primary align-items-center"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="fw-bold mb-0">Các sự kiện khác</h1>
+                <div class="vesitable">
+                    <div class="owl-carousel vegetable-carousel justify-content-center">
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <img src="assets/img/Xplorer/LangLua.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
+                            </div>
+                            <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div> -->
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Làng lụa </h4>
+                                <p>8:00 - 21:00, từ thứ 2 đến Chủ nhật</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">50.000 - 299.000 VND</p>
+                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <img src="assets/img/Xplorer/KimBong.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
+                            </div>
+                            <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div> -->
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Làng mộc Kim Bồng</h4>
+                                <p>Cả ngày, từ thứ 2 đến Chủ nhật</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">Miễn phí</p>
+                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <img src="assets/img/Xplorer/TraQueOrganic.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
+                            </div>
+                            <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div> -->
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Tra que Organic Cooking class</h4>
+                                <p>8h00 - 17h00</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">650.000 VND</p>
+                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <img src="assets/img/Xplorer/ThanhHa.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
+                            </div>
+                            <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div> -->
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Làng gốm Thanh Hà</h4>
+                                <p>8h30-16h30</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">30.000 - 50.000 VND</p>
+                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- Single Product End -->
+        <!-- Single Product End -->
 
-<script>
-    let quantityValue = 1; // initial value
+        <script>
+            let quantityValue = 1; // initial value
 
-    function incrementQuantity() {
-        quantityValue++;
-        updateQuantityDisplay();
-    }
+            function incrementQuantity() {
+                quantityValue++;
+                updateQuantityDisplay();
+            }
 
-    function decrementQuantity() {
-        if (quantityValue > 1) {
-            quantityValue--;
-            updateQuantityDisplay();
-        }
-    }
+            function decrementQuantity() {
+                if (quantityValue > 1) {
+                    quantityValue--;
+                    updateQuantityDisplay();
+                }
+            }
 
-    function updateQuantityDisplay() {
-        document.getElementById("quantityValue").innerText = quantityValue;
-    }
-    function please_login(){
-        toastr.warning("<%=language.getString("please_login")%>")
-    }
-</script>
+            function updateQuantityDisplay() {
+                document.getElementById("quantityValue").innerText = quantityValue;
+            }
+
+            function updateQuantityDisplay() {
+                document.getElementById("quantityValue").innerText = quantityValue;
+            }
+
+            function please_login(){
+                toastr.warning("<%=language.getString("please_login")%>")
+            }
+        </script>
 
 <%@ include file="../master/foot.jsp" %>

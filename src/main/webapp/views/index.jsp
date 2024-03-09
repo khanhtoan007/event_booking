@@ -2,11 +2,16 @@
 <%@ page import="com.example.bookingevent.Init.Config" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="com.example.bookingevent.database.MyObject" %>
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="com.example.bookingevent.Init.Config" %>
+<%@ page import="com.example.bookingevent.database.DB" %>
 <% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
+<% String user_id = (String) session.getAttribute("login"); %>
+<%MyObject user = DB.getUser(user_id);%>
 
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <title><%=Config.app_name%></title>
@@ -40,8 +45,8 @@
     </head>
 
     <body>
-    
-        <jsp:include page="./master/head.jsp"/>
+
+        <%@ include file="./master/head.jsp" %>
 
 
         <!-- Hero Start -->
@@ -89,7 +94,6 @@
 
 
 
-        <!-- Fruits Shop Start-->
         <div class="container-fluid fruite py-5">
             <div class="container py-5">
                 <div class="tab-class text-center">
@@ -114,19 +118,17 @@
                                     <div class="row g-4">
                                         <c:forEach var="event" items="${listEvent}">
                                             <div class="col-md-6 col-lg-4 col-xl-3">
-                                                <div class="rounded position-relative fruite-item">
+                                                <div class="rounded position-relative fruite-item" style="display: flex; flex-direction: column;">
                                                     <div class="fruite-img">
-                                                        <img src="${pageContext.request.contextPath}${event.image}" class="img-fluid w-100 rounded-top" alt="">
+                                                        <img src="images/${event.image}" class="img-fluid w-100 rounded-top" alt="">
                                                     </div>
                                                     <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">${event.category_name}</div>
-                                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-end;">
                                                         <h4>${event.title}</h4>
                                                         <p>${event.content}</p>
-                                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                                            <p class="text-dark fs-5 fw-bold mb-0">
-                                                                <fmt:formatNumber value="${event.price}" type="currency" currencyCode="VND" maxFractionDigits="0"/>
-                                                            </p>
-                                                            <a href="${pageContext.request.contextPath}/event-detail?event_id=${event.id}" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
+                                                        <div class="d-flex flex-column">
+                                                            <p class="text-dark fs-5 fw-bold mb-0">${event.price}VND</p>
+                                                            <a href="${pageContext.request.contextPath}/event?id=${event.id}" class="btn border border-secondary rounded-pill px-4 py-1 text-primary align-items-center"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -137,113 +139,10 @@
                             </div>
                         </div>
                     </div>
-                </div>      
+                </div>
             </div>
         </div>
         <!-- Fruits Shop End-->
-
-
-        <!-- Featurs Start -->
-        <div class="container-fluid service py-5">
-            <div class="container py-5">
-                <div class="row g-4 justify-content-center">
-                    <div class="col-md-6 col-lg-4" >
-                        <a href="#">
-                            <div class="service-item bg-secondary rounded border border-secondary" style="height: 440px">
-                                <img src="${pageContext.request.contextPath}/assets/img/langgom.jpg" class="img-fluid rounded-top w-100" alt="">
-                                <div class="px-4 rounded-bottom">
-                                    <div class="service-content bg-primary text-center p-4 rounded">
-                                        <h5 class="text-white">Daily Event</h5>
-                                        <h3 class="mb-0">5% OFF</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 col-lg-4" >
-                        <a href="#">
-                            <div class="service-item bg-dark rounded border border-dark" style="height: 440px">
-                                <img src="${pageContext.request.contextPath}/assets/img/langgom.jpg" class="img-fluid rounded-top w-100" alt="">
-                                <div class="px-4 rounded-bottom">
-                                    <div class="service-content bg-light text-center p-4 rounded">
-                                        <h5 class="text-primary">Reputation</h5>
-                                        <h3 class="mb-0">Free to use</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 col-lg-4" >
-                        <a href="#">
-                            <div class="service-item bg-primary rounded border border-primary" style="height: 440px">
-                                <img src="${pageContext.request.contextPath}/avatars/langgom.jpg" class="img-fluid rounded-top w-100" alt="">
-                                <div class="px-4 rounded-bottom">
-                                    <div class="service-content bg-secondary text-center p-4 rounded">
-                                        <h5 class="text-white">Exotic Event</h5>
-                                        <h3 class="mb-0">Alway Up to Date</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Featurs End -->
-
-
-        <!-- Vesitable Shop Start-->
-        <div class="container-fluid vesitable py-5">
-            <div class="container py-5">
-                <h1 class="mb-5">Làng lụa</h1>
-                <div class="d-flex justify-content-evenly">
-                    <div class="border border-primary rounded position-relative vesitable-item"  style="width: 25%">
-                        <div class="vesitable-img">
-                            <img src="${pageContext.request.contextPath}/assets/img/langlua/IMG_3077.JPG" class="img-fluid w-100 rounded-top" alt="">
-                        </div>
-                        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Workshop</div>
-                        <div class="p-4 rounded-bottom">
-                            <h4>Làng lụa</h4>
-                            <p>Trải nghiệm tham quan làng lụa tại Hội An</p>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">35.000VND</p>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="border border-primary rounded position-relative vesitable-item " style="width: 25%">
-                        <div class="vesitable-img">
-                            <img src="${pageContext.request.contextPath}/assets/img/langlua/IMG_3077.JPG" class="img-fluid w-100 rounded-top" alt="">
-                        </div>
-                        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Workshop</div>
-                        <div class="p-4 rounded-bottom">
-                            <h4>Làng lụa</h4>
-                            <p>Trải nghiệm tham quan làng lụa tại Hội An</p>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">35.000VND</p>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="border border-primary rounded position-relative vesitable-item " style="width: 25%">
-                        <div class="vesitable-img">
-                            <img src="${pageContext.request.contextPath}/assets/img/langlua/IMG_3077.JPG" class="img-fluid w-100 rounded-top" alt="">
-                        </div>
-                        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Workshop</div>
-                        <div class="p-4 rounded-bottom">
-                            <h4>Làng lụa</h4>
-                            <p>Trải nghiệm tham quan làng lụa tại Hội An</p>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">35.000VND</p>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Vesitable Shop End -->
-
 
 
         <!-- Tastimonial Start -->
@@ -336,4 +235,6 @@
 
 
 
-<%@ include file="/views/master/foot.jsp" %>
+        <%@ include file="/views/master/foot.jsp" %>
+    </body>
+</html>
