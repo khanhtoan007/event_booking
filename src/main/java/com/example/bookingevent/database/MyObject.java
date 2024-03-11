@@ -41,4 +41,6 @@ public class MyObject {
     public String status;
     public String paid_at;
     public String created_at;
+    public String bill_id;
+    public String first_image;
 }

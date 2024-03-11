@@ -57,7 +57,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="position-relative">
-                    <img src="./assets/img/Xplorer/logo.png" class="img-fluid w-100 rounded" alt="">
+                    <img src="../assets/img/Xplorer/logo.png" class="img-fluid w-100 rounded" alt="">
                 </div>
             </div>
         </div>

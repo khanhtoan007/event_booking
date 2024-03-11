@@ -5,6 +5,7 @@ import com.example.bookingevent.database.DB;
 import com.example.bookingevent.database.MyObject;
 import com.example.bookingevent.models.Category;
 import com.example.bookingevent.models.EventPost;
+import com.example.bookingevent.models.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -39,9 +40,7 @@ public class HomeController {
                     event.setContent(content.substring(0, 150) + "...");
                 }
             }
-
             req.setAttribute("listEvent", eventPosts);
-//            System.out.println(eventPosts);
             req.getRequestDispatcher("views/index.jsp").forward(req,resp);
         }
     }
@@ -140,7 +139,7 @@ public class HomeController {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             EventDAO dao = new EventDAO();
-            List<String> images ;
+            List<String> images = new ArrayList<String>();
             int id = Integer.parseInt(req.getParameter("event_id"));
 
             EventPost eventDetail = dao.getEventPostByID(id);
@@ -150,6 +149,61 @@ public class HomeController {
             req.setAttribute("otherImages", images);
             req.getRequestDispatcher("views/events/event-detail.jsp").forward(req,resp);
         }
+    }
+
+    @MultipartConfig
+    @WebServlet("/new-event")
+    public static class CreateEvent extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("utf-8");
+
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+//            if ( user == null)
+            if ( 1==0)
+                response.sendRedirect("login");
+            else {
+
+                EventDAO dao = new EventDAO();
+                ArrayList<Category> list = dao.getAllCategory();
+                System.out.println("Category list: " + list);
+
+                request.setAttribute("cateList", list);
+
+                request.getRequestDispatcher("views/events/create-event.jsp").forward(request, response);
+            }
+        }
+
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("utf-8");
+
+            String title = request.getParameter("title");
+            String description = request.getParameter("content");
+            String start_date = request.getParameter("start_date");
+            String end_date = request.getParameter("end_date");
+            String location = request.getParameter("location");
+            String is_verified = "1";
+            String author = request.getParameter("author");
+            String tickets = request.getParameter("tickets");
+            String price = request.getParameter("price");
+            String image = getStringImages("", request);
+            String category = request.getParameter("category");
+
+            System.out.println("title: "+  title);
+            System.out.println("content: "+  description);
+            System.out.println("start_date: "+  start_date);
+            System.out.println("end_date: "+  end_date);
+            System.out.println("location: "+  location);
+            System.out.println("is_verified: "+  is_verified);
+            System.out.println("author: "+  author);
+            System.out.println("image: "+  image);
+            System.out.println("category: "+  category);
+        }
+
         private String getStringImages(String variableName, HttpServletRequest request) throws ServletException, IOException {
             Part anhBia = null;
             List<Part> otherImages = new ArrayList<>();
@@ -194,13 +248,16 @@ public class HomeController {
             // Trả về kết quả
             return String.join(", ", result);
         }
+
     }
 
     @WebServlet("/all-events")
     public static class AllEvents extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            String sql = "select events.*, categories.name as category_name, users.name as username, count(carts.id) as interested, sum(iif(bills.status = 'true', carts.quantity, 0)) as count\n" +
+            String sql = "select events.*, categories.name as category_name, users.name as username, count(carts.id) as interested," +
+                    " sum(iif(bills.status = 'true', carts.quantity, 0)) as count, " +
+                    " LEFT(events.image, CHARINDEX(',', events.image + ',') - 1) AS first_image\n" +
                     "from events\n" +
                     "         inner join categories on events.category_id = categories.id\n" +
                     "         inner join users on events.user_id = users.id\n" +
@@ -209,7 +266,7 @@ public class HomeController {
                     "where events.is_verified = 'true'\n" +
                     "group by users.name, categories.name, events.id, title, description, start_date, end_date, location, events.is_verified,\n" +
                     "         events.user_id, category_id, tickets, events.price, image";
-            String[] fields = new String[]{"id", "title", "description", "start_date", "end_date", "location", "is_verified", "user_id", "category_id", "tickets", "price", "image", "category_name", "username", "interested", "count"};
+            String[] fields = new String[]{"id", "title", "description", "start_date", "end_date", "location", "is_verified", "user_id", "category_id", "tickets", "price", "image", "category_name", "username", "interested", "count", "first_image"};
             ArrayList<MyObject> events = DB.getData(sql, fields);
             com.google.gson.JsonObject job = new JsonObject();
             ObjectMapper objectMapper = new ObjectMapper();
@@ -219,6 +276,19 @@ public class HomeController {
             job.addProperty("events", events_json_string);
             Gson gson = new Gson();
             resp.getWriter().write(gson.toJson(job));
+        }
+        private String extractFirstImageUrl(String images) {
+            // Split the images string into an array
+            String[] imageArray = images.split(",\\s*");
+
+            // Check if there is at least one image
+            if (imageArray.length > 0) {
+                // Return the first image URL
+                return imageArray[0].trim();
+            } else {
+                // Return a default value or handle the case when no images are available
+                return "";
+            }
         }
     }
 }

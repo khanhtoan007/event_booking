@@ -1,9 +1,8 @@
 <%@ page import="java.util.ResourceBundle" %>
-<%@ page import="com.example.bookingevent.Init.Config" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="com.example.bookingevent.database.MyObject" %>
-<%@ page import="java.util.ResourceBundle" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ page import="com.example.bookingevent.Init.Config" %>
 <%@ page import="com.example.bookingevent.database.DB" %>
 <% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
@@ -65,15 +64,15 @@
                         <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
                             <div class="carousel-inner" role="listbox">
                                 <div class="carousel-item active rounded">
-                                    <img src="${pageContext.request.contextPath}/assets/img/Longdenhungan.png" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                                    <img src="https://i.ibb.co/SrZgY9r/IMG-3109.jpg" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
                                     <a href="#" class="btn px-4 py-2 text-white rounded">Workshop</a>
                                 </div>
                                 <div class="carousel-item rounded">
-                                    <img src="${pageContext.request.contextPath}/assets/img/Kimmoc.png" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                                    <img src="https://i.ibb.co/wc1Xgfj/IMG-3110.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
                                     <a href="#" class="btn px-4 py-2 text-white rounded">Handmade</a>
                                 </div>
                                 <div class="carousel-item rounded">
-                                    <img src="${pageContext.request.contextPath}/assets/img/Tra%20que%20organic.png" class="img-fluid w-100 h-100 rounded" alt="Third slide">
+                                    <img src="https://i.ibb.co/C0nhPPP/IMG-3098.jpg" class="img-fluid w-100 h-100 rounded" alt="Third slide">
                                     <a href="#" class="btn px-4 py-2 text-white rounded">Handmade</a>
                                 </div>
                             </div>
@@ -127,8 +126,8 @@
                                                         <h4>${event.title}</h4>
                                                         <p>${event.content}</p>
                                                         <div class="d-flex flex-column">
-                                                            <p class="text-dark fs-5 fw-bold mb-0">${event.price}VND</p>
-                                                            <a href="${pageContext.request.contextPath}/event?id=${event.id}" class="btn border border-secondary rounded-pill px-4 py-1 text-primary align-items-center"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
+                                                            <p class="text-dark fs-5 fw-bold mb-0"><fmt:formatNumber value="${event.price}" type="currency" currencyCode="VND" maxFractionDigits="0"/></p>
+                                                            <a href="${pageContext.request.contextPath}/event-detail?event_id=${event.id}" class="btn border border-secondary rounded-pill px-4 py-1 text-primary align-items-center"><i class="fa fa-shopping-bag me-2 text-primary"></i><%=language.getString("view_details")%></a>
                                                         </div>
                                                     </div>
                                                 </div>

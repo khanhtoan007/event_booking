@@ -36,6 +36,9 @@
 
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+          integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 
 <body>
@@ -133,7 +136,7 @@
                                             <div  >
                                                 <div class="rounded position-relative fruite-item">
                                                     <div class="fruite-img">
-                                                        <img :src="'${pageContext.request.contextPath}' + value.image" class="img-fluid w-100 rounded-top" alt="">
+                                                        <img :src="'${pageContext.request.contextPath}/images/' + value.first_image" class="img-fluid w-100 rounded-top" alt="">
                                                     </div>
                                                     <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{value.category_name}}</div>
                                                     <div class="p-4 border border-secondary border-top-0 rounded-bottom">

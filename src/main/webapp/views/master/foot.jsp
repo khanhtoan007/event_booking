@@ -129,4 +129,8 @@
     if (info !== ""){
         toastr.info(info, "Info")
     }
+    // toastr.error("test error", "Error")
+    // toastr.success("test success", "Success")
+    // toastr.warning("test warning", "Warning")
+    // toastr.info("test info", "Info")
 </script>

@@ -27,6 +27,7 @@ public class AllRouteFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         if (request.getSession().getAttribute("mess") != null){
+            System.out.println(request.getSession().getAttribute("mess") + " at all route filter");
             String session_mess = (String) request.getSession().getAttribute("mess");
             request.setAttribute(session_mess.split("\\|")[0], session_mess.split("\\|")[1]);
             request.getSession().removeAttribute("mess");

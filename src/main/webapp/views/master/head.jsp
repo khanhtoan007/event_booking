@@ -48,9 +48,9 @@
                     <a href="${pageContext.request.contextPath}/user/viewCart" class="position-relative me-4 my-auto">
                         <i class="fa fa-shopping-bag fa-2x"></i>
                         <% if (user != null) { %>
-                        <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;"><%=user.count%></span>
+                            <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;"><%=user.count%></span>
                         <% } else { %>
-                        <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">0</span>
+                            <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">0</span>
                         <% } %>
                     </a>
                     <% if (user == null) { %>
@@ -74,6 +74,7 @@
                     <div class="mx-2 dropdown d-flex flex-column justify-content-center">
                         <p class="dropdown-toggle align-items-center m-0 ml-1" id="dropdownMenuButton1" data-bs-toggle="dropdown"><%=user.name%></p>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/bills"><%=language.getString("bills")%></a></li>
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/bought-tickets"><%=language.getString("bought_product")%></a></li>
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/profile"><%=language.getString("profile")%></a></li>
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout"><%=language.getString("logout")%></a></li>

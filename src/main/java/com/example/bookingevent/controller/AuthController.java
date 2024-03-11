@@ -154,26 +154,30 @@ public class AuthController {
             String password = req.getParameter("password");
             ArrayList<MyObject> user = DB.getData("select * from users where email = ?", new String[]{email}, new String[]{"id", "password", "role_id", "is_verified"});
             if (user.size() == 0){
+                System.out.println("sai mail");
                 req.setAttribute("email", email);
                 req.setAttribute("password", password);
-                req.setAttribute("warning", language.getString("login_fail"));
-                req.getRequestDispatcher("/views/auth/login.jsp").forward(req, resp);
+                req.getSession().setAttribute("mess", "warning|" + language.getString("login_fail"));
+                resp.sendRedirect(req.getContextPath() + "/login");
             } else {
                 if (user.get(0).is_verified.equals("0")){
+                    System.out.println("chua verify");
                     req.setAttribute("email", email);
                     req.setAttribute("password", password);
-                    req.setAttribute("warning", language.getString("not_verified"));
-                    req.getRequestDispatcher("/views/auth/login.jsp").forward(req, resp);
+                    req.getSession().setAttribute("mess", "warning|" + language.getString("not_verified"));
+                    resp.sendRedirect(req.getContextPath() + "/login");
                 } else {
                     if (BCrypt.checkpw(password, user.get(0).password)){
+                        System.out.println("login ok");
                         req.getSession().setAttribute("mess", "success|" + language.getString("login_success"));
                         req.getSession().setAttribute("login", user.get(0).id);
                         resp.sendRedirect(req.getContextPath() + "/");
                     } else {
+                        System.out.println("sai mk");
                         req.setAttribute("email", email);
                         req.setAttribute("password", password);
-                        req.setAttribute("warning", language.getString("login_fail"));
-                        req.getRequestDispatcher("/views/auth/login.jsp").forward(req, resp);
+                        req.getSession().setAttribute("mess", "warning|" + language.getString("login_fail"));
+                        resp.sendRedirect(req.getContextPath() + "/login");
                     }
                 }
             }

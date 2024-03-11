@@ -45,7 +45,8 @@
 
 <body>
 
-<jsp:include page="../master/head.jsp"/>
+<%@ include file="../master/head.jsp" %>
+
 
 
 <div class="container-fluid py-5 mb-5 hero-header">

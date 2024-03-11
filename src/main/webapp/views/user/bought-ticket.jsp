@@ -1,8 +1,12 @@
+<%@ page import="com.example.bookingevent.database.MyObject" %>
 <%@ page import="java.util.ResourceBundle" %>
 <%@ page import="com.example.bookingevent.Init.Config" %>
+<%@ page import="com.example.bookingevent.database.DB" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
+<% String user_id = (String) session.getAttribute("login"); %>
+<%MyObject user = DB.getUser(user_id);%>
 
 
 <!DOCTYPE html>
@@ -35,11 +39,14 @@
 
   <!-- Template Stylesheet -->
   <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 
 <body>
 
-<jsp:include page="../master/head.jsp"/>
+<%@ include file="../master/head.jsp" %>
 
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
@@ -70,10 +77,10 @@
           <tr>
             <th scope="row" class="d-flex justify-content-center">
               <div class="  mt-2">
-                <img src="${pageContext.request.contextPath}${cart.image}" class="img-fluid" style="width:120px; height: 90px;" alt="">
+                <img src="${pageContext.request.contextPath}/${cart.image}" class="img-fluid" style="width:120px; height: 90px;" alt="">
               </div>
             </th>
-            <td class="py-5"><a href="">${cart.event_title}</a></td>
+            <td class="py-5"><a href="${pageContext.request.contextPath}/event-detail?event_id=${cart.event_id}">${cart.event_title}</a></td>
             <td class="py-5">${cart.quantity}</td>
             <td class="py-5">${cart.start_date}</td>
             <td class="py-5">${cart.end_date}</td>

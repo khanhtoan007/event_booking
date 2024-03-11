@@ -1,9 +1,13 @@
+<%@ page import="com.example.bookingevent.database.MyObject" %>
 <%@ page import="java.util.ResourceBundle" %>
 <%@ page import="com.example.bookingevent.Init.Config" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.example.bookingevent.database.DB" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
+<% String user_id = (String) session.getAttribute("login"); %>
+<%MyObject user = DB.getUser(user_id);%>
 
 
 <!DOCTYPE html>
@@ -43,14 +47,14 @@
 
 <body>
 
-<jsp:include page="./master/head.jsp"/>
+<%@ include file="./master/head.jsp" %>
 
 
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Checkout</h1>
   <ol class="breadcrumb justify-content-center mb-0">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/homepage">Home</a></li>
     <li class="breadcrumb-item"><a href="#">Pages</a></li>
     <li class="breadcrumb-item active text-white">Checkout</li>
   </ol>
@@ -65,9 +69,6 @@
     <% } %>
     <form action="#">
       <div class="row g-5">
-        <p>
-          ${amount} && ${transfer_content}
-        </p>
         <div class="col-md-12 col-lg-6 col-xl-7">
           <img width="100%" src="https://img.vietqr.io/image/<%=Config.bank_id%>-<%=Config.bank_number%>-print.png?amount=${amount}&addInfo=${transfer_content}&accountName=<%=Config.app_name%>" alt="">
         </div>
@@ -88,7 +89,7 @@
                 <tr>
                   <th scope="row">
                     <div class="d-flex align-items-center mt-2">
-                      <img src="${pageContext.request.contextPath}${cart.image}" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
+                      <img src="${pageContext.request.contextPath}/${cart.image}" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
                     </div>
                   </th>
                   <td class="py-5">${cart.event_title}</td>
@@ -135,7 +136,7 @@
     </form>
   </div>
     </div>
-<%@ include file="./master/foot.jsp" %>
+<%@ include file="/views/master/foot.jsp" %>
 <script>
   var app = new Vue({
     el: "#app",

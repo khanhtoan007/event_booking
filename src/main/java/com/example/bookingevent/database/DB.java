@@ -127,7 +127,7 @@ public class DB {
         if (id.equals("")){
             return null;
         }
-        ArrayList<MyObject> users = DB.getData("select users.*, count(carts.id) as count from users left join carts on users.id = carts.user_id where users.id = ? and bill_id is NULL group by users.id, name, email, phone, password, avatar, gender, token, is_verified, role_id", new String[]{id}, new String[]{"id", "name", "email", "phone", "password", "avatar", "gender", "token", "is_verified", "role_id", "count"});
+        ArrayList<MyObject> users = DB.getData("select users.*, (select count(id) from carts where user_id = ? and bill_id is null) as count from users where id = ?;", new String[]{id, id}, new String[]{"id", "name", "email", "phone", "password", "avatar", "gender", "token", "is_verified", "role_id", "count"});
         return users.size() == 0 ? null : users.get(0);
     }
 

@@ -2,7 +2,14 @@
 <%@ page import="com.example.bookingevent.Init.Config" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="com.example.bookingevent.database.MyObject" %>
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="com.example.bookingevent.Init.Config" %>
+<%@ page import="com.example.bookingevent.database.DB" %>
 <% ResourceBundle language = (ResourceBundle) request.getAttribute("language");%>
+<% String user_id = (String) session.getAttribute("login"); %>
+<%MyObject user = DB.getUser(user_id);%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,12 +40,12 @@
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+          integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 
 <body>
-<jsp:include page="./master/head.jsp"/>
+<%@ include file="master/head.jsp" %>
 <div class="container py-5" id="app">
     <div class="row g-5 align-items-center py-5">
         <h3 class="mb-5 display-3 text-primary mt-5  py-5"><%= language.getString("cart") %></h3>
@@ -94,6 +101,7 @@
         <label for="checkAll"><%=language.getString("check_all")%></label>
 </div>
 <%@ include file="/views/master/foot.jsp" %>
+</body>
 <div id="app2" v-if="bills.selected.length !== 0" class="container">
     <div class="container-fluid footer bg-primary fixed-bottom d-flex justify-content-center">
         <div class="container row m-1">
@@ -252,4 +260,5 @@
         },
     })
 </script>
+</html>
 

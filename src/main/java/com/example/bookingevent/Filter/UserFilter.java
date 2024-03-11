@@ -15,11 +15,11 @@ public class UserFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         String user_id = (String) req.getSession().getAttribute("login");
         ResourceBundle language = (ResourceBundle) req.getAttribute("language");
-//        if (user_id != null){
-//            filterChain.doFilter(req, resp);
-//        } else {
-//            req.getSession().setAttribute("mess", "warning|" + language.getString("please_login"));
-//            resp.sendRedirect(req.getContextPath() + "/login");
-//        }
+        if (user_id != null){
+            filterChain.doFilter(req, resp);
+        } else {
+            req.getSession().setAttribute("mess", "warning|" + language.getString("please_login"));
+            resp.sendRedirect(req.getContextPath() + "/login");
+        }
     }
 }

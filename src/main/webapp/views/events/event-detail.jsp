@@ -154,20 +154,21 @@
 
                                         <div class="input-group quantity mb-3" style="width: 100px;">
                                             <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                                <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="decrementQuantity()">
                                                     <i class="fa fa-minus"></i>
                                                 </button>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                                            <input required type="text" name="quantity" id="quantityValue" class="form-control form-control-sm text-center border-0" value="1">
                                             <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                                <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="incrementQuantity()">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
                                             </div>
                                         </div>
-
+                                        <%String s = "type='button' onclick=please_login()";%>
+                                        <input type="hidden" name="event_id" value="${event.id}">
                                         <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-2 mt-3 text-danger align-items-center"><i class="fas fa-ticket-alt me-2 text-danger"></i> Mua ngay</a>
-                                        <button type="submit" class="btn border border-secondary rounded-pill px-4 py-2 mb-3 text-primary align-items-center"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</button>
+                                        <button class="btn border border-secondary rounded-pill px-4 py-2 mb-3 text-primary align-items-center" <%=user_id == null ? s : "type='submit'"%><i class="fa fa-shopping-bag me-2 text-primary"></i> <%=language.getString("add2cart")%></button>
                                     </div>
                                 </div>
                             </form>
@@ -257,11 +258,6 @@
             function updateQuantityDisplay() {
                 document.getElementById("quantityValue").innerText = quantityValue;
             }
-
-            function updateQuantityDisplay() {
-                document.getElementById("quantityValue").innerText = quantityValue;
-            }
-
             function please_login(){
                 toastr.warning("<%=language.getString("please_login")%>")
             }
