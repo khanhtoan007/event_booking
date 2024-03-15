@@ -180,7 +180,7 @@
                     <div class="owl-carousel vegetable-carousel justify-content-center">
                         <div class="border border-primary rounded position-relative vesitable-item">
                             <div class="vesitable-img">
-                                <img src="assets/img/Xplorer/LangLua.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
+                                <img src="https://i.ibb.co/hZN0xbh/LangLua.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
                             </div>
                             <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div> -->
                             <div class="p-4 pb-0 rounded-bottom">
@@ -194,7 +194,7 @@
                         </div>
                         <div class="border border-primary rounded position-relative vesitable-item">
                             <div class="vesitable-img">
-                                <img src="assets/img/Xplorer/KimBong.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
+                                <img src="https://i.ibb.co/8dQzzk9/KimBong.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
                             </div>
                             <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div> -->
                             <div class="p-4 pb-0 rounded-bottom">
@@ -208,7 +208,7 @@
                         </div>
                         <div class="border border-primary rounded position-relative vesitable-item">
                             <div class="vesitable-img">
-                                <img src="assets/img/Xplorer/TraQueOrganic.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
+                                <img src="https://i.ibb.co/12R3ZTR/Tra-Que-Organic.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
                             </div>
                             <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div> -->
                             <div class="p-4 pb-0 rounded-bottom">
@@ -222,7 +222,7 @@
                         </div>
                         <div class="border border-primary rounded position-relative vesitable-item">
                             <div class="vesitable-img">
-                                <img src="assets/img/Xplorer/ThanhHa.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
+                                <img src="https://i.ibb.co/MgZRr54/ThanhHa.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
                             </div>
                             <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div> -->
                             <div class="p-4 pb-0 rounded-bottom">

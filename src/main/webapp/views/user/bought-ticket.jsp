@@ -77,7 +77,7 @@
           <tr>
             <th scope="row" class="d-flex justify-content-center">
               <div class="  mt-2">
-                <img src="${pageContext.request.contextPath}/${cart.image}" class="img-fluid" style="width:120px; height: 90px;" alt="">
+                <img src="${pageContext.request.contextPath}/images/${cart.first_image}" class="img-fluid" style="width:120px; height: 90px;" alt="">
               </div>
             </th>
             <td class="py-5"><a href="${pageContext.request.contextPath}/event-detail?event_id=${cart.event_id}">${cart.event_title}</a></td>

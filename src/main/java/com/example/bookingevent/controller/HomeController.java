@@ -277,18 +277,5 @@ public class HomeController {
             Gson gson = new Gson();
             resp.getWriter().write(gson.toJson(job));
         }
-        private String extractFirstImageUrl(String images) {
-            // Split the images string into an array
-            String[] imageArray = images.split(",\\s*");
-
-            // Check if there is at least one image
-            if (imageArray.length > 0) {
-                // Return the first image URL
-                return imageArray[0].trim();
-            } else {
-                // Return a default value or handle the case when no images are available
-                return "";
-            }
-        }
     }
 }
