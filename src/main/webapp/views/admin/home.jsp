@@ -42,6 +42,9 @@
           integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
           <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
+
+    <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 
 </head>
 
@@ -73,7 +76,7 @@
     <div class="row g-5 align-items-center py-5">
       <h3 class="mb-5 display-3 text-primary mt-5  py-5">Lịch sử thanh toán</h3>
       <div class="table-responsive">
-        <table class="table table-striped table-bordered justify-content-center">
+        <table id="myTable" class="table table-striped table-bordered justify-content-center">
           <thead>
           <tr>
             <th scope="col">Bill ID</th>
@@ -106,46 +109,47 @@
   </div>
 
 
-  <script>
-      const labelse=[];
-      const money=[];
+<%@ include file="/views/master/foot.jsp" %>
+<script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+    const labelse=[];
+    const money=[];
 
-      <c:choose>
-      <c:when test="${empty chartjs}">
-      // Handle case when chartjs is null or empty
-      labelse.push('No data available');
-      money.push(0); // Or any default value you want to use
-      </c:when>
-      <c:otherwise>
-      <c:forEach var="chartjs" items="${chartjs}">
-      labelse.push('<c:out value="${chartjs.title}" />');
-      money.push('<c:out value="${chartjs.total}" />');
-      </c:forEach>
-      </c:otherwise>
-      </c:choose>
-      const backgroundColors = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 206, 86)', 'rgb(75, 192, 192)', 'rgb(153, 102, 255)', 'rgb(255, 159, 64)'];
+    <c:choose>
+    <c:when test="${empty chartjs}">
+    // Handle case when chartjs is null or empty
+    labelse.push('No data available');
+    money.push(0); // Or any default value you want to use
+    </c:when>
+    <c:otherwise>
+    <c:forEach var="chartjs" items="${chartjs}">
+    labelse.push('<c:out value="${chartjs.title}" />');
+    money.push('<c:out value="${chartjs.total}" />');
+    </c:forEach>
+    </c:otherwise>
+    </c:choose>
+    const backgroundColors = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 206, 86)', 'rgb(75, 192, 192)', 'rgb(153, 102, 255)', 'rgb(255, 159, 64)'];
 
 
-      const data = {
-      labels: labelse,
-      datasets: [{
-        label: 'Số tiền vé đã bán',
-        data: money,
-        backgroundColor: backgroundColors.slice(0, labelse.length),
-        hoverOffset: 4
-      }]
+    const data = {
+        labels: labelse,
+        datasets: [{
+            label: 'Số tiền vé đã bán',
+            data: money,
+            backgroundColor: backgroundColors.slice(0, labelse.length),
+            hoverOffset: 4
+        }]
     };
 
     const ctx = document.getElementById('myChart');
 
     new Chart(ctx, {
-      type: 'doughnut',
-      data: data
+        type: 'doughnut',
+        data: data
     });
-  </script>
-
-
-
-<%@ include file="/views/master/foot.jsp" %>
+</script>
 </body>
 </html>

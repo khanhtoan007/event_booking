@@ -146,7 +146,7 @@
     created(){
       setTimeout(() => {
         this.socket.send("subscribe:" + '${transfer_content}');
-      }, 2000);
+      }, 1000);
       this.socket.onmessage = (event) => {
         const message = JSON.parse(event.data);
         if (message === true){
