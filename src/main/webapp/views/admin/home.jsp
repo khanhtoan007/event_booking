@@ -63,7 +63,7 @@
   <!-- Single Page Header End -->
 
   <div class="container py-5">
-
+      <h3 class="mb-5 display-3 text-primary mt-5  py-5">Thống kê doanh thu</h3>
     <div style="width: 600px; margin: 0 auto;">
       <canvas id="myChart"></canvas>
     </div>
@@ -71,65 +71,35 @@
   
   <div class="container py-5" id="app">
     <div class="row g-5 align-items-center py-5">
-      <h3 class="mb-5 display-3 text-primary mt-5  py-5">Tất cả đơn hàng</h3>
+      <h3 class="mb-5 display-3 text-primary mt-5  py-5">Lịch sử thanh toán</h3>
       <div class="table-responsive">
         <table class="table table-striped table-bordered justify-content-center">
           <thead>
           <tr>
-            <th scope="col">User</th>
-            <th scope="col">Event</th>
-            <th scope="col" class="col-3"><%=language.getString("current_price")%></th>
+            <th scope="col">Bill ID</th>
+            <th scope="col">Username</th>
+            <th scope="col" class="col-3">Product's Name</th>
             <th scope="col"><%=language.getString("quantity")%></th>
             <th scope="col"><%=language.getString("amount")%></th>
+            <th scope="col">Paid At</th>
           </tr>
           </thead>
           <tbody>
-            <!-- Remove this comment to import data to table -->
-          <!-- <c:forEach items="${bills}" var="bill">
+           <c:forEach items="${statistic}" var="bill">
             <tr>
-            <td class="py-5">Hieu</td>
+            <td class="py-5">${bill.id}</td>
+            <td class="py-5">${bill.name}</td>
             <td class="py-5">
-              <a href="${pageContext.request.contextPath}/event-detail?event_id=${bill.event_id}">Lang gom</a>
+              <a href="${pageContext.request.contextPath}/event-detail?event_id=${bill.event_id}">${bill.title}</a>
             </td>
+            <td class="py-5">${bill.quantity}</td>
             <td class="py-5">
-              <fmt:formatNumber value="50000" type="currency" currencyCode="VND" maxFractionDigits="0"/>
+              <fmt:formatNumber value="${bill.amount}" type="currency" currencyCode="VND" maxFractionDigits="0"/>
             </td>
-            <td class="py-5">2</td>
-            <td class="py-5">
-              <fmt:formatNumber value="100000" type="currency" currencyCode="VND" maxFractionDigits="0"/>
-            </td>
+            <td class="py-5">${bill.paid_at}</td>
           </tr>
-          </c:forEach> -->
-
-              <tr>
-                <td class="py-5">Hieu</td>
-                <td class="py-5">
-                  <a href="${pageContext.request.contextPath}/event-detail?event_id=${bill.event_id}">Lang gom</a>
-                </td>
-                <td class="py-5">
-                  <fmt:formatNumber value="50000" type="currency" currencyCode="VND" maxFractionDigits="0"/>
-                </td>
-                <td class="py-5">2</td>
-                <td class="py-5">
-                  <fmt:formatNumber value="100000" type="currency" currencyCode="VND" maxFractionDigits="0"/>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="py-5">Hieu</td>
-                <td class="py-5">
-                  <a href="${pageContext.request.contextPath}/event-detail?event_id=${bill.event_id}">Lang gom</a>
-                </div>
-                <td class="py-5">
-                  <fmt:formatNumber value="50000" type="currency" currencyCode="VND" maxFractionDigits="0"/>
-                </td>
-                <td class="py-5">2</td>
-                <td class="py-5">
-                  <fmt:formatNumber value="100000" type="currency" currencyCode="VND" maxFractionDigits="0"/>
-                </td>
-              </tr>
+          </c:forEach>
             </tbody>
-
         </table>
       </div>
     </div>
@@ -137,31 +107,37 @@
 
 
   <script>
+      const labelse=[];
+      const money=[];
 
-    const data = {
-      labels: [
-        'Làng gốm',
-        'Làng rau',
-        'Lồng đèn',
-        'Làng mộc',
-        'Làng lụa'
-      ],
+      <c:choose>
+      <c:when test="${empty chartjs}">
+      // Handle case when chartjs is null or empty
+      labelse.push('No data available');
+      money.push(0); // Or any default value you want to use
+      </c:when>
+      <c:otherwise>
+      <c:forEach var="chartjs" items="${chartjs}">
+      labelse.push('<c:out value="${chartjs.title}" />');
+      money.push('<c:out value="${chartjs.total}" />');
+      </c:forEach>
+      </c:otherwise>
+      </c:choose>
+      const backgroundColors = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 206, 86)', 'rgb(75, 192, 192)', 'rgb(153, 102, 255)', 'rgb(255, 159, 64)'];
+
+
+      const data = {
+      labels: labelse,
       datasets: [{
         label: 'Số tiền vé đã bán',
-        data: [300, 50, 100, 200, 70],
-        backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)',
-          'rgb(75, 192, 192)',
-          'rgb(201, 203, 207)'
-        ],
+        data: money,
+        backgroundColor: backgroundColors.slice(0, labelse.length),
         hoverOffset: 4
       }]
     };
 
     const ctx = document.getElementById('myChart');
-  
+
     new Chart(ctx, {
       type: 'doughnut',
       data: data

@@ -135,15 +135,23 @@ public class DB {
 //        String s = "Blue Tran Dinh Khanh Toan thân mến, Tài khoản Spend Account vừa tăng 10.000 VND vào 22/01/2024 13:36. Số dư hiện tại: 30.000 VND. Mô tả: MBVCB.5131494248.038489.abcdefgh.CT tu 9763416782 TRAN QUANG MINH toi 9021329646765 TRAN DINH KHANH TOAN tai BVBank Timo. Cảm ơn Quý khách đã sử dụng dịch vụ Ngân hàng số Timo! Để được hỗ trợ tốt hơn trong quá trình sử dụng, tham gia ngay: Group Facebook: Cộng đồng ngân hàng số Timo (Offical Group) Zalo Page            : Timo Trân trọng, Timo Team";
 //        System.out.println(s.split("tăng ")[1].split(" VND")[0].replace(".", ""));
 //        System.out.println(UUID.randomUUID().toString());
-        String sql = "select bills.id, carts.user_id, events.title, carts.quantity,bills.amount , bills.paid_at\n" +
-                "    from bills\n" +
-                "        left join carts  on bills.id = carts.bill_id\n" +
-                "        left join events on carts.event_id = events.id\n" +
-                "    where bills.status = 'true'";
-
-        ArrayList<MyObject> statistics = DB.getData(sql, new String[]{"id","user_id", "title", "quantity", "amount", "paid_at"});
-        System.out.println(statistics);
-//        System.out.println(DB.getData(sql, new String[]{"id","user_id", "title", "quantity", "amount", "paid_at"}));
+        String chart = "SELECT\n" +
+                "    events.title,\n" +
+                "    SUM(amount) AS total\n" +
+                "FROM\n" +
+                "    bills\n" +
+                "        LEFT JOIN\n" +
+                "    carts ON bills.id = carts.bill_id\n" +
+                "        LEFT JOIN\n" +
+                "    events ON carts.event_id = events.id\n" +
+                "        LEFT JOIN\n" +
+                "    users ON carts.user_id = users.id\n" +
+                "WHERE\n" +
+                "        bills.status = 'true'\n" +
+                "GROUP BY\n" +
+                "    events.title;";
+        ArrayList<MyObject> chartjs = DB.getData(chart, new String[]{ "title", "total"});
+        System.out.println(chartjs);
 
     }
 }

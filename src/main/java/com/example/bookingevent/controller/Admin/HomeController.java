@@ -32,15 +32,32 @@ public class HomeController {
     public static class AdminHome extends HttpServlet{
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-            String sql = "select bills.id, carts.user_id, events.title, carts.quantity,bills.amount , bills.paid_at\n" +
-                    "    from bills\n" +
+            String sql = "select  bills.id, carts.user_id,users.name ,carts.event_id , events.title, carts.quantity, amount , bills.paid_at\n" +
+                    "from bills\n" +
                     "        left join carts  on bills.id = carts.bill_id\n" +
                     "        left join events on carts.event_id = events.id\n" +
-                    "    where bills.status = 'true'";
+                    "        left join users on carts.user_id = users.id\n" +
+                    "where bills.status = 'true'\n" +
+                    "group by bills.id, carts.user_id, users.name, carts.event_id, events.title, carts.quantity, amount, bills.paid_at";
 
-            ArrayList<MyObject> statistics = DB.getData(sql, new String[]{"id","user_id", "title", "quantity", "amount", "paid_at"});
-            System.out.println(statistics);
+            String chart = "SELECT\n" +
+                    "    events.title,\n" +
+                    "    SUM(amount) AS total\n" +
+                    "FROM\n" +
+                    "    bills\n" +
+                    "        LEFT JOIN\n" +
+                    "    carts ON bills.id = carts.bill_id\n" +
+                    "        LEFT JOIN\n" +
+                    "    events ON carts.event_id = events.id\n" +
+                    "        LEFT JOIN\n" +
+                    "    users ON carts.user_id = users.id\n" +
+                    "WHERE\n" +
+                    "        bills.status = 'true'\n" +
+                    "GROUP BY\n" +
+                    "    events.title;";
+            ArrayList<MyObject> chartjs = DB.getData(chart, new String[]{ "title", "total"});
+            ArrayList<MyObject> statistics = DB.getData(sql, new String[]{"id", "user_id", "name","event_id", "title", "quantity", "amount", "paid_at"});
+            req.setAttribute("chartjs", chartjs);
             req.setAttribute("statistic", statistics);
             req.getRequestDispatcher("/views/admin/home.jsp").forward(req,resp);
         }
