@@ -47,11 +47,81 @@
 
 <%@ include file="../master/head.jsp" %>
 
-<div class="container py-5" id="app">
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6"><%= language.getString("bills") %></h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+      <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/homepage">Home</a></li>
+      <li class="breadcrumb-item active text-white"><%= language.getString("bills") %></li>
+    </ol>
+  </div>
+  <!-- Single Page Header End -->
+  
+  <div class="container py-5" id="app">
     <div class="row g-5 align-items-center py-5">
-        <h3 class="mb-5 display-3 text-primary mt-5  py-5">Hello mfs</h3>
+      <h3 class="mb-5 display-3 text-primary mt-5  py-5"><%= language.getString("bills") %></h3>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered justify-content-center">
+          <thead>
+          <tr>
+            <th scope="col">User</th>
+            <th scope="col">Event</th>
+            <th scope="col" class="col-3"><%=language.getString("current_price")%></th>
+            <th scope="col"><%=language.getString("quantity")%></th>
+            <th scope="col"><%=language.getString("amount")%></th>
+          </tr>
+          </thead>
+          <tbody>
+            <!-- Remove this comment to import data to table -->
+          <!-- <c:forEach items="${bills}" var="bill">
+            <tr>
+            <td class="py-5">Hieu</td>
+            <td class="py-5">
+              <a href="${pageContext.request.contextPath}/event-detail?event_id=${bill.event_id}">Lang gom</a>
+            </td>
+            <td class="py-5">
+              <fmt:formatNumber value="50000" type="currency" currencyCode="VND" maxFractionDigits="0"/>
+            </td>
+            <td class="py-5">2</td>
+            <td class="py-5">
+              <fmt:formatNumber value="100000" type="currency" currencyCode="VND" maxFractionDigits="0"/>
+            </td>
+          </tr>
+          </c:forEach> -->
+
+              <tr>
+                <td class="py-5">Hieu</td>
+                <td class="py-5">
+                  <a href="${pageContext.request.contextPath}/event-detail?event_id=${bill.event_id}">Lang gom</a>
+                </td>
+                <td class="py-5">
+                  <fmt:formatNumber value="50000" type="currency" currencyCode="VND" maxFractionDigits="0"/>
+                </td>
+                <td class="py-5">2</td>
+                <td class="py-5">
+                  <fmt:formatNumber value="100000" type="currency" currencyCode="VND" maxFractionDigits="0"/>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="py-5">Hieu</td>
+                <td class="py-5">
+                  <a href="${pageContext.request.contextPath}/event-detail?event_id=${bill.event_id}">Lang gom</a>
+                </div>
+                <td class="py-5">
+                  <fmt:formatNumber value="50000" type="currency" currencyCode="VND" maxFractionDigits="0"/>
+                </td>
+                <td class="py-5">2</td>
+                <td class="py-5">
+                  <fmt:formatNumber value="100000" type="currency" currencyCode="VND" maxFractionDigits="0"/>
+                </td>
+              </tr>
+            </tbody>
+
+        </table>
+      </div>
     </div>
-</div>
+  </div>
 
 
 
