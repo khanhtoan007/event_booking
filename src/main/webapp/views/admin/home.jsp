@@ -41,11 +41,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
           integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
 
 <%@ include file="../master/head.jsp" %>
+
+
+
 
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
@@ -56,10 +61,17 @@
     </ol>
   </div>
   <!-- Single Page Header End -->
+
+  <div class="container py-5">
+
+    <div style="width: 600px; margin: 0 auto;">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
   
   <div class="container py-5" id="app">
     <div class="row g-5 align-items-center py-5">
-      <h3 class="mb-5 display-3 text-primary mt-5  py-5"><%= language.getString("bills") %></h3>
+      <h3 class="mb-5 display-3 text-primary mt-5  py-5">Tất cả đơn hàng</h3>
       <div class="table-responsive">
         <table class="table table-striped table-bordered justify-content-center">
           <thead>
@@ -124,7 +136,37 @@
   </div>
 
 
+  <script>
 
+    const data = {
+      labels: [
+        'Làng gốm',
+        'Làng rau',
+        'Lồng đèn',
+        'Làng mộc',
+        'Làng lụa'
+      ],
+      datasets: [{
+        label: 'Số tiền vé đã bán',
+        data: [300, 50, 100, 200, 70],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(201, 203, 207)'
+        ],
+        hoverOffset: 4
+      }]
+    };
+
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: data
+    });
+  </script>
 
 
 
