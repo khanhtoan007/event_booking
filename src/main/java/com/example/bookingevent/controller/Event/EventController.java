@@ -30,4 +30,19 @@ public class EventController {
     }
 
 
+    @WebServlet("/post-comments")
+    @MultipartConfig(
+            fileSizeThreshold = 1024 * 1024, // 1 MB
+            maxFileSize = 1024 * 1024 * 10,      // 10 MB
+            maxRequestSize = 1024 * 1024 * 10  // 10 MB
+    )
+    public static class UserComments extends HttpServlet {
+        @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+        }
+    }
+
+
 }

@@ -33,6 +33,7 @@ public class BillController {
                     "                            inner join bills on carts.bill_id = bills.id\n" +
                     "                            inner join events on carts.event_id = events.id\n" +
                     "                     and carts.user_id = ?\n" +
+                    "                   where status = 'false'\n" +
                     "                   group by carts.id, carts.user_id, event_id, quantity, bill_id, events.price, events.title, transfer_content, bills.status";
             ArrayList<MyObject> bills = DB.getData(sql, new String[]{user_id}, new String[]{"id", "user_id", "event_id", "quantity","bill_id", "price", "event_title", "amount", "transfer_content", "status"});
             if (bills.size() ==0){
@@ -40,6 +41,7 @@ public class BillController {
                 resp.sendRedirect(req.getContextPath() + "/homepage");
             }else {
                 req.setAttribute("bills", bills);
+                req.getSession().setAttribute("mess","success|"+ language.getString("inform_bill"));
                 req.getRequestDispatcher("/views/user/bills.jsp").forward(req, resp);
             }
         }

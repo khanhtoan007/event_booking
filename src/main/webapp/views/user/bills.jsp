@@ -99,6 +99,7 @@
   </div>
 </div>
 
-
-
 <%@ include file="../master/foot.jsp" %>
+
+</body>
+</html>

@@ -271,14 +271,14 @@ public class CartController {
             String bill_id = req.getParameter("bill_id");
             String user_id = (String) req.getSession().getAttribute("login");
             ResourceBundle language = (ResourceBundle) req.getAttribute("language");
-            ArrayList<MyObject> carts = DB.getData("select carts.id, carts.user_id, event_id, quantity, bill_id,events.image, events.price as price, events.title as event_title, events.tickets as tickets, transfer_content, sum(quantity * events.price) as amount\n" +
-                    "from carts\n" +
-                    "         inner join bills on carts.bill_id = bills.id\n" +
-                    "         inner join events on carts.event_id = events.id\n" +
-                    "where bills.status = 'false'\n" +
-                    "  and bills.id = ?\n" +
-                    "  and carts.user_id = ?\n" +
-                    "group by carts.id, carts.user_id, event_id, quantity, bill_id, events.image, events.price, events.title, events.tickets, transfer_content", new String[]{bill_id, user_id}, new String[]{"id", "user_id", "event_id", "quantity","image", "price", "event_title", "tickets", "amount", "transfer_content"});
+            ArrayList<MyObject> carts = DB.getData("select carts.id, carts.user_id, event_id, quantity, bill_id,LEFT(events.image, CHARINDEX(',', events.image + ',') - 1) AS first_image, events.price as price, events.title as event_title, events.tickets as tickets, transfer_content, sum(quantity * events.price) as amount\n" +
+                    "                    from carts\n" +
+                    "                             inner join bills on carts.bill_id = bills.id\n" +
+                    "                             inner join events on carts.event_id = events.id\n" +
+                    "                    where bills.status = 'false'\n" +
+                    "                      and bills.id = ?\n" +
+                    "                      and carts.user_id = ?\n" +
+                    "                    group by carts.id, carts.user_id, event_id, quantity, bill_id, events.image, events.price, events.title, events.tickets, transfer_content", new String[]{bill_id, user_id}, new String[]{"id", "user_id", "event_id", "quantity","first_image", "price", "event_title", "tickets", "amount", "transfer_content"});
 
             if (carts.size() == 0){
                 req.getSession().setAttribute("mess", "warning|" + language.getString("bill_not_exist"));

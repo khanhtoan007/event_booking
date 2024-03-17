@@ -33,6 +33,15 @@ public class HomeController {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+            String sql = "select bills.id, carts.user_id, events.title, carts.quantity,bills.amount , bills.paid_at\n" +
+                    "    from bills\n" +
+                    "        left join carts  on bills.id = carts.bill_id\n" +
+                    "        left join events on carts.event_id = events.id\n" +
+                    "    where bills.status = 'true'";
+
+            ArrayList<MyObject> statistics = DB.getData(sql, new String[]{"id","user_id", "title", "quantity", "amount", "paid_at"});
+            System.out.println(statistics);
+            req.setAttribute("statistic", statistics);
             req.getRequestDispatcher("/views/admin/home.jsp").forward(req,resp);
         }
     }

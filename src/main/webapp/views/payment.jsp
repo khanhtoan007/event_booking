@@ -89,7 +89,7 @@
                 <tr>
                   <th scope="row">
                     <div class="d-flex align-items-center mt-2">
-                      <img src="${pageContext.request.contextPath}/${cart.image}" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
+                      <img src="${pageContext.request.contextPath}/images/${cart.first_image}" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
                     </div>
                   </th>
                   <td class="py-5">${cart.event_title}</td>
@@ -129,7 +129,7 @@
             </div>
           </div>
           <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-            <button type="button" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Confirm Payment</button>
+            <button type="button" id="loadingButton" onclick="showLoading()" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Confirm Payment</button>
           </div>
         </div>
       </div>
@@ -159,5 +159,9 @@
 
     }
   })
+  function showLoading() {
+    document.getElementById("loadingButton").disabled = true;
+    document.getElementById("loadingButton").innerText = "Loading...";
+  }
 </script>
 

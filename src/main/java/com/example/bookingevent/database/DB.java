@@ -135,15 +135,15 @@ public class DB {
 //        String s = "Blue Tran Dinh Khanh Toan thân mến, Tài khoản Spend Account vừa tăng 10.000 VND vào 22/01/2024 13:36. Số dư hiện tại: 30.000 VND. Mô tả: MBVCB.5131494248.038489.abcdefgh.CT tu 9763416782 TRAN QUANG MINH toi 9021329646765 TRAN DINH KHANH TOAN tai BVBank Timo. Cảm ơn Quý khách đã sử dụng dịch vụ Ngân hàng số Timo! Để được hỗ trợ tốt hơn trong quá trình sử dụng, tham gia ngay: Group Facebook: Cộng đồng ngân hàng số Timo (Offical Group) Zalo Page            : Timo Trân trọng, Timo Team";
 //        System.out.println(s.split("tăng ")[1].split(" VND")[0].replace(".", ""));
 //        System.out.println(UUID.randomUUID().toString());
-        String sql = "select events.*, categories.name as category_name, users.name as username, count(carts.id) as interested, sum(iif(bills.status = 'true', carts.quantity, 0)) as count\n" +
-                "from events\n" +
-                "         inner join categories on events.category_id = categories.id\n" +
-                "         inner join users on events.user_id = users.id\n" +
-                "         left join carts on events.id = carts.event_id\n" +
-                "         left join bills on carts.bill_id = bills.id\n" +
-                "where events.is_verified = 'true'\n" +
-                "group by users.name, categories.name, events.id, title, description, start_date, end_date, location, events.is_verified,\n" +
-                "         events.user_id, category_id, tickets, events.price, image";
-        System.out.println(sql);
+        String sql = "select bills.id, carts.user_id, events.title, carts.quantity,bills.amount , bills.paid_at\n" +
+                "    from bills\n" +
+                "        left join carts  on bills.id = carts.bill_id\n" +
+                "        left join events on carts.event_id = events.id\n" +
+                "    where bills.status = 'true'";
+
+        ArrayList<MyObject> statistics = DB.getData(sql, new String[]{"id","user_id", "title", "quantity", "amount", "paid_at"});
+        System.out.println(statistics);
+//        System.out.println(DB.getData(sql, new String[]{"id","user_id", "title", "quantity", "amount", "paid_at"}));
+
     }
 }

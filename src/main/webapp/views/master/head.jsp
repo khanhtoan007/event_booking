@@ -74,6 +74,9 @@
                     <div class="mx-2 dropdown d-flex flex-column justify-content-center">
                         <p class="dropdown-toggle align-items-center m-0 ml-1" id="dropdownMenuButton1" data-bs-toggle="dropdown"><%=user.name%></p>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <% if (user.role_id.equals("3")) { %>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/home">Admin Page</a></li>
+                            <% } %>
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/bills"><%=language.getString("bills")%></a></li>
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/bought-tickets"><%=language.getString("bought_product")%></a></li>
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/profile"><%=language.getString("profile")%></a></li>
