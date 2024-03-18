@@ -48,7 +48,7 @@
 <%@ include file="./master/head.jsp" %>
 
         <!-- Single Page Header start -->
-        <div class="container-fluid page-header py-5">
+        <div class="container-fluid page-header py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/images/IMG_3098.JPG);">
             <h1 class="text-center text-white display-6">Contact</h1>
             <ol class="breadcrumb justify-content-center mb-0">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
