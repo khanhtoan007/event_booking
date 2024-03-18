@@ -187,8 +187,8 @@
                                 <h4>Làng lụa </h4>
                                 <p>8:00 - 21:00, từ thứ 2 đến Chủ nhật</p>
                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <p class="text-dark fs-5 fw-bold">50.000 - 299.000 VND</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
+                                    <p class="text-dark fs-5 fw-bold">299.000 VND</p>
+                                    <a href="${pageContext.request.contextPath}/event-detail?event_id=16" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Xem chi tiết</a>
                                 </div>
                             </div>
                         </div>
@@ -202,7 +202,7 @@
                                 <p>Cả ngày, từ thứ 2 đến Chủ nhật</p>
                                 <div class="d-flex justify-content-between flex-lg-wrap">
                                     <p class="text-dark fs-5 fw-bold">Miễn phí</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
+                                    <a href="${pageContext.request.contextPath}/event-detail?event_id=1" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Xem chi tiết</a>
                                 </div>
                             </div>
                         </div>
@@ -216,7 +216,7 @@
                                 <p>8h00 - 17h00</p>
                                 <div class="d-flex justify-content-between flex-lg-wrap">
                                     <p class="text-dark fs-5 fw-bold">650.000 VND</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
+                                    <a href="${pageContext.request.contextPath}/event-detail?event_id=12" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Xem chi tiết</a>
                                 </div>
                             </div>
                         </div>
@@ -227,10 +227,25 @@
                             <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div> -->
                             <div class="p-4 pb-0 rounded-bottom">
                                 <h4>Làng gốm Thanh Hà</h4>
-                                <p>8h30-16h30</p>
+                                <p>8h30 - 16h30</p>
                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <p class="text-dark fs-5 fw-bold">30.000 - 50.000 VND</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
+                                    <p class="text-dark fs-5 fw-bold">50.000 VND</p>
+                                    <a href="${pageContext.request.contextPath}/event-detail?event_id=15" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <!-- update src img cho ni cho t voi -->
+                                <img src="" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
+                            </div>
+                            <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div> -->
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Lồng đèn Hội An</h4>
+                                <p>8h30 - 16h30</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">100.000 VND</p>
+                                    <a href="${pageContext.request.contextPath}/event-detail?event_id=11" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Xem chi tiết</a>
                                 </div>
                             </div>
                         </div>
