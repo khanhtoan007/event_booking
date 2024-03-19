@@ -141,7 +141,8 @@
   var app = new Vue({
     el: "#app",
     data:{
-      socket : new WebSocket((window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host + '${pageContext.request.contextPath}/my-websocket'),
+      <%--socket : new WebSocket((window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host + '${pageContext.request.contextPath}/my-websocket'),--%>
+      socket : new WebSocket((window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host),
     },
     created(){
       setTimeout(() => {
@@ -162,6 +163,10 @@
   function showLoading() {
     document.getElementById("loadingButton").disabled = true;
     document.getElementById("loadingButton").innerText = "Loading...";
+    setTimeout(()=>{
+      toastr.success("<%=language.getString("payment_verified")%>")
+      location.href = "<%=request.getContextPath() + "/"%>"
+    },1500)
   }
 </script>
 

@@ -10,7 +10,7 @@ public class Config {
     public static String db_name = "EventBooking";
 
     public static String app_url = "http://localhost:8080";
-    public static String context_path = "/event_booking";
+    public static String context_path = "event_booking";
     public static String app_name = "Local Xplorer";
     public static String email_address = "trandinhkhanhtoan31@gmail.com";
     public static String email_password = "vyjwkyiossneirpd";

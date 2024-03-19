@@ -237,10 +237,8 @@
                         </div>
                         <div class="border border-primary rounded position-relative vesitable-item">
                             <div class="vesitable-img">
-                                <!-- update src img cho ni cho t voi -->
-                                <img src="" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
+                                <img src="https://i.ibb.co/162P8W1/Long-Den-Hung-An.png" class="img-fluid rounded-top" style="width: 303px; height: 242px;" alt="">
                             </div>
-                            <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div> -->
                             <div class="p-4 pb-0 rounded-bottom">
                                 <h4>Lồng đèn Hội An</h4>
                                 <p>8h30 - 16h30</p>
