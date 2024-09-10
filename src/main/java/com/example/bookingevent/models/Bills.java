@@ -16,5 +16,4 @@ public class Bills {
     private boolean status;
     private String paid_at;
     private List<Cart> item;
-
 }

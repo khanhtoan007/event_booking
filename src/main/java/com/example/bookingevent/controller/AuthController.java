@@ -294,7 +294,7 @@ public class AuthController {
                 String salt = BCrypt.gensalt();
                 String hashed_password = BCrypt.hashpw(password, salt);
                 String sql = "insert into users(name, email, phone, password, avatar, gender, is_verified, role_id) values (?, ?, ?, ?, ?, ?, 'true', 1)";
-                int created_user_id = DB.insertGetLastId(sql, new String[]{name, email, phone, hashed_password, avatar, gender});
+                int created_user_id = DB.   insertGetLastId(sql, new String[]{name, email, phone, hashed_password, avatar, gender});
                 if (created_user_id != 0){
                     req.getSession().setAttribute("login", String.valueOf(created_user_id));
                     req.getSession().setAttribute("mess", "success|" + language.getString("login_success"));

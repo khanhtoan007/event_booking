@@ -135,23 +135,17 @@ public class DB {
 //        String s = "Blue Tran Dinh Khanh Toan thân mến, Tài khoản Spend Account vừa tăng 10.000 VND vào 22/01/2024 13:36. Số dư hiện tại: 30.000 VND. Mô tả: MBVCB.5131494248.038489.abcdefgh.CT tu 9763416782 TRAN QUANG MINH toi 9021329646765 TRAN DINH KHANH TOAN tai BVBank Timo. Cảm ơn Quý khách đã sử dụng dịch vụ Ngân hàng số Timo! Để được hỗ trợ tốt hơn trong quá trình sử dụng, tham gia ngay: Group Facebook: Cộng đồng ngân hàng số Timo (Offical Group) Zalo Page            : Timo Trân trọng, Timo Team";
 //        System.out.println(s.split("tăng ")[1].split(" VND")[0].replace(".", ""));
 //        System.out.println(UUID.randomUUID().toString());
-        String chart = "SELECT\n" +
-                "    events.title,\n" +
-                "    SUM(amount) AS total\n" +
-                "FROM\n" +
-                "    bills\n" +
-                "        LEFT JOIN\n" +
-                "    carts ON bills.id = carts.bill_id\n" +
-                "        LEFT JOIN\n" +
-                "    events ON carts.event_id = events.id\n" +
-                "        LEFT JOIN\n" +
-                "    users ON carts.user_id = users.id\n" +
-                "WHERE\n" +
-                "        bills.status = 'true'\n" +
-                "GROUP BY\n" +
-                "    events.title;";
-        ArrayList<MyObject> chartjs = DB.getData(chart, new String[]{ "title", "total"});
-        System.out.println(chartjs);
+        String chart = "\n" +
+                "select  carts.user_id, quantity, bill_id,LEFT(events.image, CHARINDEX(',', events.image + ',') - 1) AS first_image, events.price as price, events.title as event_title, sum(quantity * events.price) as amount\n" +
+                "                                        from carts\n" +
+                "                                                 inner join bills on carts.bill_id = bills.id\n" +
+                "                                                 inner join events on carts.event_id = events.id\n" +
+                "                                        where bills.status = 'true'\n" +
+                "                                          and bills.id = 76\n" +
+                "                                          and carts.user_id = 17\n" +
+                "                                        group by  carts.user_id,  quantity, bill_id, events.image, events.price, events.title";
+        ArrayList<MyObject> items = DB.getData(chart, new String[]{ "user_id", "quantity", "bill_id", "first_image", "price", "event_title", "amount"});
+        System.out.println(items);
 
     }
 }
